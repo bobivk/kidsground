@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Начална страница</title>
+    <script src="https://kit.fontawesome.com/4d3f93d2d2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/registration.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-box">
+            <h1 id="title">Вход</h1>
+            <form id="registration-form">
+                <div class="input-group">
+                    <div class="input-field" id="nameField">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="username" placeholder="Потребителско име">
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="text" name="email" placeholder="Имейл">
+                    </div>
+                    <div class="error" id="email-error"></div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Парола" oninput="checkPassword()">
+                        <div class="error" id="password-length-error"></div>
+                    </div>
+                        
+                    <div class="error" id="password-numbers-error"></div>
+                    <div class="error" id="password-uppercase-error"></div>
+                    <div class="error" id="password-lowercase-error"></div>
+                    <div class="password-check">
+                        <div id="check0" class="disable password-check-field">
+                            <i class="fa fa-check-circle"></i> <span> Дължина поне 6 символа.</span>
+                        </div>
+                        <div id="check1" class="disable password-check-field">
+                            <i class="fa fa-check-circle"></i> <span> Дължина най-много 10 символа.</span>
+                        </div>
+                        <div id="check2" class="disable password-check-field">
+                            <i class="fa fa-check-circle"></i> <span> Съдържа малки букви.</span>
+                        </div>
+                        <div id="check3" class="disable password-check-field">
+                            <i class="fa fa-check-circle"></i> <span> Съдържа главни букви.</span>
+                        </div>
+                        <div id="check4" class="disable password-check-field">
+                            <i class="fa fa-check-circle"></i> <span> Съдържа цифри.</span>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="btn-field">
+                    <button type="button" class="disable" id="signUpBtn">Регистрирай ме</button>
+                    <button type="button" id="signInBtn">Вход</button>
+                </div>
+                <h4 class="wrong-credentials" id="wrong-credentials-msg">Грешен имейл или парола.</h4>
+                <div class="registration-success" id="registration-success">
+                    <h4>Успешна регистрация!</h4>
+                    <h4>Моля, влезте в профила си.</h4>
+                </div>
+            </form>
+            <div class="error" id="username-exists-error">Потребител с това име или email вече съществува.</div>
+            <div class="error" id="email-exists-error"></div>
+        </div>
+    </div>
+
+</body>
+<script src="../js/users/register.js"></script>
+
+</html>
