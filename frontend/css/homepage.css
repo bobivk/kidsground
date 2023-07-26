@@ -67,6 +67,12 @@
     padding-right: 1rem;
 }
 
+.site-logo {
+    height:5%;
+    width:5%;
+    object-fit: cover
+}
+
 #nav-toggle:checked+.sidebar {
     cursor: pointer;
     width: 70px;
@@ -173,6 +179,15 @@ main {
     padding: 2rem 1.5rem;
     background: #f1f5f9;
     min-height: calc(100vh - 90px);
+}
+
+.title-page {
+    box-sizing: border-box;
+    background-image: url("../../resources/background.jpg");
+    background-position: center;
+    width: 100%;
+    height: 100vh; 
+    background-size: cover;
 }
 
 .tiles {

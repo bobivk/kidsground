@@ -12,26 +12,6 @@
 </head>
 
 <body>
-    <input type="checkbox" id="nav-toggle">
-    <div class="sidebar">
-        <div class="sidebar-brand">
-            <h2><span class="lab la-accusoft"></span> <span>Проекти</span></h2>
-        </div>
-
-        <div class="sidebar-menu">
-            <ul>
-                <li class="list active">
-                    <a href="#" ><span class="las la-igloo"></span>
-                        <span>Табло</span></a>
-                </li>
-                <li class="list">
-                    <a href="http://localhost/FunctionalRequirements/frontend/html/functional-requirements.html"><span class="las la-question"></span>
-                        <span>Площадки</span></a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
     <div class="main-content">
         <header>
             <h2>
@@ -49,84 +29,75 @@
                 <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
                 <div>
                     <h4 id="userName"></h4>
-                    <small id="userRole"></small>
                     <button id="logout-btn" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Изход</button>
                 </div>
             </div>
+            <img class="site-logo" src="../../resources/logo  site.png" alt="site logo">
         </header>
 
         <main>
-            <div class="tiles">
+            <div class="title-page">
+                <div class="main-text">
+                    <h4>Нека открием</h4>
+                    <span class="title-text">
+                        <h3 class="detskite">Детските</h3>
+                        <h3 class="ploshtadki">площадки</h3>
+                    </div>
+                    <h4>на Пловдив заедно!</h4>
+                </div>
+                <div class="subtitle">
+                    <h5>Участвай и ти в създаването на единна карта на детските площадки на град Пловдив!</h5>
+                </div>
+            </div>
+            <div class="map-page">
+                <h3 class="map-title">Играта е най-добрият метод за учене</h3>
+                <p>Детските площадки са места, където децата развиват важни физически и социални умения, необходими за придобиване на самочувствие, координация и развитие на критично мислене.</p>
                 <div class="single-tile">
                     <div>
-                        <h1 id="numberOfProjects"></h1>
-                        <span>Проекти</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard-list"></span>
+                        <h1 id="numberOfPlaygrounds"></h1>
+                        <span>детски площадки</span>
                     </div>
                 </div>
-
-                <div class="single-tile">
-                    <div>
-                        <h1 id="numberOfFuncRequirements"></h1>
-                        <span>Функционални изисквания</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard-list"></span>
-                    </div>
+                <div class="map-view">
+                    <img src="../../resources/map_temp.jpeg" alt="map">
                 </div>
-
-                <div class="single-tile">
-                    <div>
-                        <h1 id="numberOfNonFuncRequirements"></h1>
-                        <span>Нефункционални изисквания</span>
-                    </div>
-                    <div>
-                        <span class="las la-clipboard-list"></span>
-                    </div>
-                </div>
+                <button onclick="openPlaygroundForm()"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
             </div>
 
             <div class="recent-grid">
-                <div class="projects">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3> Проекти </h3>
-                            <div class="card-header-btns">
-                                <button onclick="openProjectForm()"> <i class="fa-regular fa-square-plus"></i> Добави проект</button>
-                                <button id="import-btn" onclick="openImportModal()"> <i class="fa-solid fa-upload"></i> Импорт</button>
-                                <button id="export-projects-btn"> <i class="fa-solid fa-download"></i> Експорт</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
                 <div id="modal">
                     <div id="add-project-modal">
-                        <h2>Добави проект</h2>
+                        <h2>Добави площадка</h2>
                         <div>
                             <form id="project-form" class="form-container">
                                 
-                                <label class="form-label" for="number">Номер:</label>
-                                <input type="text" class="project-input project-input-text" placeholder="Номер на темата" name="number" required>
+                                <label class="form-label" for="number">1. Име:</label>
+                                <input type="text" class="project-input project-input-text" placeholder="Номер на темата" name="number">
                                 
-                                <label class="form-label" for="name">Тема:</label>
-                                <input type="text" class="project-input project-input-text" placeholder="Тема на проекта" name="name" required>
+                                <label class="form-label" for="second-question">2. За каква възрастова група е подходяща площадката?</label>
+                                <input type="radio" class="project-input project-input-radio" id="under-1" name="status" value="under-1">
+                                <label for="under-1">Под 1г.</label>
+                                <input type="radio" class="project-input project-input-radio" id="1-3years" name="status" value="1-3years">
+                                <label for="1-3years">1-3г.</label>
+                                <input type="radio" class="project-input project-input-radio" id="3-6years" name="status" value="3-6years">
+                                <label for="3-6years">3-6г.</label>
+                                <input type="radio" class="project-input project-input-radio" id="6-12years" name="status" value="6-12years">
+                                <label for="6-12years">6-12г.</label>
+                                <input type="radio" class="project-input project-input-radio" id="other-years" name="status" value="other-years">
+                                <label for="other-years">Друго</label>
+                                
+                                <label class="form-label" for="second-question">3. Какво е местоположението на детската площадка?</label>
+                                <input type="radio" class="project-input project-input-radio" id="boulevard" name="status" value="завършен">
+                                <label for="boulevard">До голям булевард</label>
+                                <input type="radio" class="project-input project-input-radio" id="park" name="status" value="завършен">
+                                <label for="park">В парк или градинка</label>
+                                <input type="radio" class="project-input project-input-radio" id="apartments" name="status" value="завършен">
+                                <label for="apartments">В междублоково пространство</label>
+                                <input type="radio" class="project-input project-input-radio" id="other-place" name="status" value="завършен">
+                                <label for="other-place">Друго</label>
 
-                                <label class="form-label" for="description">Описание:</label>
-                                <textarea type="text" class="project-input project-input-text" placeholder="Подробно описание на проекта" name="description" required rows="10" cols="20"></textarea>
-
-                                <label class="form-label" for="status">Статус:</label>
-                                <input type="radio" class="project-input project-input-radio" id="not-started" name="status" value="незапочнат" required>
-                                <label for="not-started">незапочнат</label>
-
-                                <input type="radio" class="project-input project-input-radio" id="draft" name="status" value="чернова" required>
-                                <label for="draft">чернова</label>
-
-                                <input type="radio" class="project-input project-input-radio" id="finished" name="status" value="завършен" required>
-                                <label for="finished">завършен</label>
+                                <label class="form-label" for="description">4. Допълнително описание:</label>
+                                <textarea type="text" class="project-input project-input-text" name="description" rows="10" cols="20"></textarea>
 
                                 <div class="add-project-btns">
                                     <button id="add-project-btn" type="submit" class="btn"><i class="fa-solid fa-plus"></i> Добави</button>
@@ -136,23 +107,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="modal-import-project">
-                    <div id="import-modal">
-                        <h2>Импорт на проекти</h2>
-                        <div>
-                            <h4>Изберете .csv файл с проекти:</h4>
-                            <form id="import-form" action="" method="post" enctype="multipart/form-data">
-                                <input type="file" id="project-import-file"/>
-                                <div class="import-modal-btns">
-                                    <button id="import-chosen-file-btn"> <i class="fa-solid fa-upload"></i> Импорт</button>
-                                    <button id="cancel-import-btn" type="button" class="btn cancel" onclick="closeImportModal()"><i class="fa-solid fa-xmark"></i> Затвори</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
         </main>
         </div>
 </body>
