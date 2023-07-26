@@ -80,6 +80,10 @@ signInBtn.addEventListener('click', (event) => {
         .then(response => {
             if (response.status == 404) {
                 document.getElementById("wrong-credentials-msg").style.display = "block";
+                document.getElementById("wrong-credentials-msg").style.backgroundColor = "#eaeaea";
+                document.getElementById("wrong-credentials-msg").style.borderRadius = "15px";
+                document.getElementById("wrong-credentials-msg").style.maxWidth = "50%";
+                document.getElementById("wrong-credentials-msg").style.padding = "15px";
                 //грешен email или парола.
             } else if(response.status == 200) {
                 location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
