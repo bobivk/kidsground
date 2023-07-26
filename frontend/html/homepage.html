@@ -14,22 +14,21 @@
 <body>
     <div class="main-content">
         <header>
-            <h2>
-                <label for="nav-toggle">
-                    <span class="las la-bars"></span>
-                </label> Меню
-            </h2>
-            <div class="search-wrapper">
-                <span class="las la-search"></span>
-                <input id="search" placeholder="Търсене" type="search" class="form-control search-input" data-table="projects-table">
+            <div class="home-wrapper">                
+                <div> Начало </div>
             </div>
-
-            <div class="user-wrapper">
-                <!-- <i class="fa-solid fa-user-gear"></i> for admin user something in JS to change icon depending on role? -->
-                <i class="fa-solid fa-user-graduate" id="accountIcon"></i>
+            <div class="map-wrapper">
+                <div> Карта </div>
+            </div>
+            <div class="about-us-wrapper">
+                <div> За прокета</div>
+            </div>
+            <div class="logout-wrapper">
                 <div>
-                    <h4 id="userName"></h4>
-                    <button id="logout-btn" onclick="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Изход</button>
+                    <!-- when it says "Вход" -> <i class="fa-solid fa-user"></i> ? -->
+                    <!-- <i class="fa-solid fa-arrow-right-from-bracket"></i> Изход -->
+                    <!-- <button id="logout-btn" onclick="logout()">Вход</button> -->
+                    Вход
                 </div>
             </div>
             <img class="site-logo" src="../../resources/logo  site.png" alt="site logo">
@@ -38,30 +37,43 @@
         <main>
             <div class="title-page">
                 <div class="main-text">
-                    <h4>Нека открием</h4>
+                    <h2>Нека открием</h2>
                     <span class="title-text">
-                        <h3 class="detskite">Детските</h3>
-                        <h3 class="ploshtadki">площадки</h3>
-                    </div>
-                    <h4>на Пловдив заедно!</h4>
+                        <h1 class="detskite">Детските </h1> 
+                        <h1 class="ploshtadki">площадки </h1>
+                    </span>
+                    <h2>на Пловдив заедно!</h2>
                 </div>
+
                 <div class="subtitle">
-                    <h5>Участвай и ти в създаването на единна карта на детските площадки на град Пловдив!</h5>
+                    <h3>Участвай и ти в създаването </h3>
+                    <h3>на единна карта на детските </h3>
+                    <h3>площадки на град Пловдив!</h3>
                 </div>
             </div>
             <div class="map-page">
-                <h3 class="map-title">Играта е най-добрият метод за учене</h3>
-                <p>Детските площадки са места, където децата развиват важни физически и социални умения, необходими за придобиване на самочувствие, координация и развитие на критично мислене.</p>
-                <div class="single-tile">
-                    <div>
-                        <h1 id="numberOfPlaygrounds"></h1>
-                        <span>детски площадки</span>
+                <div class="map-page-text">
+                    <h2 class="map-title">Играта е</h2>
+                    <h2 class="map-title">най-добрият</h2>
+                    <h2 class="map-title-last">метод за учене!</h2>
+                    <p class="main-text">Детските площадки са места, </p>
+                    <p class="main-text">където децата развиват важни</p>
+                    <p class="main-text">физически и социални умения, </p>
+                    <p class="main-text">необходими за придобиване на </p>
+                    <p class="main-text">самочувствие, координация и </p>
+                    <p class="main-text">развитие на критично мислене.</p>
+                
+                    <div class="number-of-playgrounds">
+                        <div>
+                            <h1 id="numberOfPlaygrounds">3 928</h1>
+                            <span>детски площадки</span>
+                        </div>
                     </div>
                 </div>
                 <div class="map-view">
                     <img src="../../resources/map_temp.jpeg" alt="map">
+                    <button onclick="openPlaygroundForm()"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
                 </div>
-                <button onclick="openPlaygroundForm()"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
             </div>
 
             <div class="recent-grid">

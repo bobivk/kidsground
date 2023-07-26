@@ -29,7 +29,7 @@ signUpBtn.addEventListener('click', (event) => {
     });
 
     if (isEmailValid(data.email) && isPasswordValid(data.password)) {
-        fetch('http://localhost/FunctionalRequirements/backend/api/users/register-user.php', {
+        fetch('http://localhost/kidsground/backend/api/users/register-user.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ signInBtn.addEventListener('click', (event) => {
         data[field.name] = field.value;
     });
 
-    fetch("http://localhost/FunctionalRequirements/backend/api/users/login.php", {
+    fetch("http://localhost/kidsground/backend/api/users/login.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ signInBtn.addEventListener('click', (event) => {
                 document.getElementById("wrong-credentials-msg").style.padding = "15px";
                 //грешен email или парола.
             } else if(response.status == 200) {
-                location = 'http://localhost/FunctionalRequirements/frontend/html/homepage.html';
+                location = 'http://localhost/kidsground/frontend/html/homepage.html';
             }
         });
     event.preventDefault();
@@ -171,5 +171,5 @@ function checkPassword() {
 }
 
 function logout() {
-    location = "http://localhost/FunctionalRequirements/frontend/html/register.html";
+    location = "http://localhost/kidsground/frontend/html/register.html";
 }
