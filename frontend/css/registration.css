@@ -1,7 +1,22 @@
+@font-face {
+    font-family: 'Plovdiv Script';
+    src: url('../../resources/PlovdivTypeface-Fonts/PlovdivTypeface-Fonts/OTF/PlovdivSans.otf');
+    font-weight: light;
+    font-style: normal;
+}
+
+
+:root {
+    --main-color: #CDEAEE;
+    --color-dark: #1D2231;
+    --text-grey: #506463;
+    --text-on-dark-background: #FCFCFC;
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Plovdiv Script', 'PlovdivSans';
     box-sizing: border-box;
     background-image: url("../../resources/background.jpg");
     background-position: center;
@@ -36,7 +51,10 @@ body {
 .form-box h1 {
     font-size: 30px;
     margin-bottom: 60px;
-    color: #62BEC9;
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+    border-radius: 15px;
+    padding: 1%;
     position: relative;
 }
 
@@ -85,9 +103,8 @@ input {
 .btn-field button {
     margin-top: 20%;
     flex-basis: 48%;
-    background-color: #eaeaea;
-    font-weight: bold;
-    color: #62BEC9;
+    background-color: var(--text-grey);
+    color: #CDEAEE;
     height: 50px;
     width: 100%;
     border-radius: 15px;
@@ -98,8 +115,8 @@ input {
 }
 
 button:hover {
-    background-color: #62BEC9;
-    color: #fff;
+    background-color: #CDEAEE;
+    color: var(--text-grey);
 }
 
 .input-group {
@@ -111,8 +128,10 @@ button:hover {
     color: #555;
 }
 
-.error {
-    color:#62BEC9;
+.error {   
+    border-radius: 15px;
+    background-color: var(--text-grey);
+    color: #CDEAEE;
 }
 
 .password-check {
@@ -129,20 +148,21 @@ button:hover {
 
 .registration-success {
     display:none;
-    color:#62BEC9;
+    color:#CDEAEE;
 }
 
 #wrong-credentials-msg {
     display: none;
-    color: #62BEC9;
+    color: #CDEAEE;
 }
 
 #username-exists-error {
     display:none;
-    color:#62BEC9;
+    color: #CDEAEE;
+    /* color:#62BEC9; */
     margin-top: 2rem;
 }
 
 #logout-btn{
-    border:#62BEC9 2px solid;
+    border:#CDEAEE 2px solid;
 }

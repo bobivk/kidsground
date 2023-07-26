@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'Plovdiv Script';
     src: url('../../resources/PlovdivTypeface-Fonts/PlovdivTypeface-Fonts/OTF/PlovdivSans.otf');
-    font-weight: normal;
+    font-weight: light;
     font-style: normal;
 }
 
 :root {
-    --main-color: #62BEC9;
+    --main-color: #CDEAEE;
     --color-dark: #1D2231;
     --text-grey: #506463;
     --text-on-dark-background: #FCFCFC;
@@ -167,6 +167,7 @@ header label span {
 .home-wrapper, 
 .map-wrapper, 
 .about-us-wrapper {
+    font-weight: bold;
     display: flex;
     align-items: center;
     text-align: center;
@@ -225,15 +226,20 @@ main {
 
 
 .map-view img {
-    width: 700px;
+    width: 600px;
 }
 
  
 .map-title,
 .map-title-last,
+.map-page-main-text,
 .number-of-playgrounds {
     padding-right: 3rem;
     text-align: right;
+}
+
+.map-page-main-text {
+    text-align: justify;
 }
 
 .map-title,
@@ -242,14 +248,38 @@ main {
 }
 
 .map-title-last {
-    padding-bottom: 7%;
+    padding-bottom: 20%;
 }
 
 .number-of-playgrounds {
-    padding-top: 7%;
-    font-size: 30px;
+    padding-top: 15%;
+    font-size: 70px;
+    font-weight: bold;
 }
 
+.number-of-playgrounds-text {
+    margin-top: 0%;
+    font-size: medium;
+    font-weight: normal;
+}
+
+.add-playground-btn {
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+    height: 50px;
+    width: 50%;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+    font-family: 'Plovdiv Script', 'PlovdivSans';
+}
+
+.add-playground-btn i {
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+}
 
 /* ////////////////////////////////////////////////////// */
 
