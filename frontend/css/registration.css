@@ -25,10 +25,10 @@ body {
     width: 90%;
     max-width: 450px;
     position: relative;
-    top: 50%;
+    top: 10%;
     left: 50%;
-    transform: translate(-50%, 25%); 
-    background: #270047;
+    transform: translate(-50%, 2%);
+    background: transparent;
     padding: 50px 60px 70px;
     text-align: center;
 }
@@ -36,7 +36,7 @@ body {
 .form-box h1 {
     font-size: 30px;
     margin-bottom: 60px;
-    color: #fff;
+    color: #62BEC9;
     position: relative;
 }
 
@@ -87,7 +87,7 @@ input {
     flex-basis: 48%;
     background-color: #eaeaea;
     font-weight: bold;
-    color: #270047;
+    color: #62BEC9;
     height: 50px;
     width: 100%;
     border-radius: 15px;
@@ -98,7 +98,7 @@ input {
 }
 
 button:hover {
-    background-color: #6601B0;
+    background-color: #62BEC9;
     color: #fff;
 }
 
@@ -112,7 +112,7 @@ button:hover {
 }
 
 .error {
-    color:#eaeaea;
+    color:#62BEC9;
 }
 
 .password-check {
@@ -129,20 +129,20 @@ button:hover {
 
 .registration-success {
     display:none;
-    color:#eaeaea;
+    color:#62BEC9;
 }
 
 #wrong-credentials-msg {
     display: none;
-    color: #eaeaea;
+    color: #62BEC9;
 }
 
 #username-exists-error {
     display:none;
-    color:#eaeaea;
+    color:#62BEC9;
     margin-top: 2rem;
 }
 
 #logout-btn{
-    border:#270047 2px solid;
+    border:#62BEC9 2px solid;
 }
