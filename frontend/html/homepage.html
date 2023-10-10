@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="map-view">
-                    <img src="../../resources/map_temp.jpeg" alt="map">
+                    <div id="map"></div>
                     <button onclick="openPlaygroundForm()" class="add-playground-btn"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
                 </div>
             </div>
@@ -122,7 +122,12 @@
         </main>
         </div>
 </body>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbVV04b50sVLWUYtMDVfEIuPnoFPU_mas&callback=initMap">
+    </script>
 <script src="../js/homepage.js" defer></script>
 <script src="../js/project.js" defer></script>
 <script src="../js/TableCsvExporter.js" defer></script>
+<script src="../js/map.js"></script>
+
 </html>

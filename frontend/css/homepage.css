@@ -17,13 +17,20 @@
 
 * {
     padding: 0;
-    background: #FCFCFC;
+    /* background: #FCFCFC; */
     margin: 0;
     box-sizing: border-box;
     list-style-type: none;
     text-decoration: none;
     position: relative;
 }
+
+#map {
+    width: 100%;
+    height: 100%;
+    background: rgba(252, 252, 252, 0);
+    margin-bottom: 30px;
+  }
 
 /* .sidebar {
     width: 345px;
@@ -225,8 +232,8 @@ main {
 }
 
 
-.map-view img {
-    width: 600px;
+.map-view{
+    width: 60%;
 }
 
  
