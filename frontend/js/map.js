@@ -24,6 +24,8 @@ function showCurrentLocation() {
               marker = new google.maps.Marker({
                   position: currentLocation,
                   map: map,
+                  draggable: true,
+                  icon: "../../resources/playground.png",
                   title: "Your Location"
               });
           }
