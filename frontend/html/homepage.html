@@ -50,6 +50,7 @@
                     <h3>на единна карта на детските </h3>
                     <h3>площадки на град Пловдив!</h3>
                 </div>
+                <img class="background-img" src="../../resources/background.jpg" />
             </div>
             <div class="map-page">
                 <div class="map-page-text">
@@ -71,6 +72,7 @@
                     </div>
                 </div>
                 <div class="map-view">
+                    <button onclick="showCurrentLocation()">Покажи моята локация</button>
                     <div id="map"></div>
                     <button onclick="openPlaygroundForm()" class="add-playground-btn"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
                 </div>
@@ -123,7 +125,7 @@
         </div>
 </body>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbVV04b50sVLWUYtMDVfEIuPnoFPU_mas&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbVV04b50sVLWUYtMDVfEIuPnoFPU_mas&region=BG&language=bg&callback=initMap">
     </script>
 <script src="../js/homepage.js" defer></script>
 <script src="../js/project.js" defer></script>

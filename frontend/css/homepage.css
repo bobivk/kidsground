@@ -199,6 +199,7 @@ main {
 
 .main-text,
 .subtitle {
+    z-index: 2;
     padding-left: 3%;
     padding-bottom: 3%;
 }
@@ -215,13 +216,17 @@ main {
     color: #FECD1B;
 }
 
+.background-img {
+    margin-top: -60vh;
+    position: relative;
+    width: 99vw;
+    object-fit: contain;
+}
+
 .title-page {
-    box-sizing: border-box;
-    background-image: url("../../resources/background.jpg");
-    background-position: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
     width: 100%;
-    height: 110vh;
-    background-size: cover;
 }
 
 .map-page {
