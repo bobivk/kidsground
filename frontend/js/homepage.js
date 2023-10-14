@@ -1,12 +1,6 @@
 function openPlaygroundForm() {
-    document.getElementById("modal").style.display = "block";
+    location = "./playgroundForm.html"
 }
-
-function closeForm() {
-    document.getElementById("project-form").reset();
-    document.getElementById("modal").style.display = "none";
-}
-
 
 function openImportModal() {
     document.getElementById("modal-import-project").style.display = "block";
@@ -17,33 +11,33 @@ function closeImportModal() {
     document.getElementById("modal-import-project").style.display = "none";
 }
 
-document.getElementById("project-form").addEventListener('submit', (event) => {
-    const fields = document.querySelectorAll(".project-input");
-    const data = {};
-    fields.forEach(field => {
-        data[field.name] = field.value;
-    });
-    const form = document.getElementById("project-form");
-    const checked = form.querySelector('input[name=status]:checked');
-    data["status"] = checked.value;
-    fetch("http://localhost/kidsground/backend/api/playground/save-project.php", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then((response) => {
-            if (response.status == 403 || response.status == 401) {
-                alert("Нужни са администраторски права за извършване на това действие.");
-            }
-            response.json();
-        })
-        .then((responseJson) => {
-            closeForm();
-            //success message
-        })
-});
+// document.getElementById("project-form").addEventListener('submit', (event) => {
+//     const fields = document.querySelectorAll(".project-input");
+//     const data = {};
+//     fields.forEach(field => {
+//         data[field.name] = field.value;
+//     });
+//     const form = document.getElementById("project-form");
+//     const checked = form.querySelector('input[name=status]:checked');
+//     data["status"] = checked.value;
+//     fetch("http://localhost/kidsground/backend/api/playground/save-project.php", {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify(data)
+//         })
+//         .then((response) => {
+//             if (response.status == 403 || response.status == 401) {
+//                 alert("Нужни са администраторски права за извършване на това действие.");
+//             }
+//             response.json();
+//         })
+//         .then((responseJson) => {
+//             closeForm();
+//             //success message
+//         })
+// });
 
 let projectsTableBody = document.getElementById("project-table-body");
 
