@@ -77,50 +77,6 @@
                     <button onclick="openPlaygroundForm()" class="add-playground-btn"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
                 </div>
             </div>
-
-            <div class="recent-grid">
-                <div id="modal">
-                    <div id="add-project-modal">
-                        <h2>Добави площадка</h2>
-                        <div>
-                            <form id="project-form" class="form-container">
-                                
-                                <label class="form-label" for="number">1. Име:</label>
-                                <input type="text" class="project-input project-input-text" placeholder="Номер на темата" name="number">
-                                
-                                <label class="form-label" for="second-question">2. За каква възрастова група е подходяща площадката?</label>
-                                <input type="radio" class="project-input project-input-radio" id="under-1" name="status" value="under-1">
-                                <label for="under-1">Под 1г.</label>
-                                <input type="radio" class="project-input project-input-radio" id="1-3years" name="status" value="1-3years">
-                                <label for="1-3years">1-3г.</label>
-                                <input type="radio" class="project-input project-input-radio" id="3-6years" name="status" value="3-6years">
-                                <label for="3-6years">3-6г.</label>
-                                <input type="radio" class="project-input project-input-radio" id="6-12years" name="status" value="6-12years">
-                                <label for="6-12years">6-12г.</label>
-                                <input type="radio" class="project-input project-input-radio" id="other-years" name="status" value="other-years">
-                                <label for="other-years">Друго</label>
-                                
-                                <label class="form-label" for="second-question">3. Какво е местоположението на детската площадка?</label>
-                                <input type="radio" class="project-input project-input-radio" id="boulevard" name="status" value="завършен">
-                                <label for="boulevard">До голям булевард</label>
-                                <input type="radio" class="project-input project-input-radio" id="park" name="status" value="завършен">
-                                <label for="park">В парк или градинка</label>
-                                <input type="radio" class="project-input project-input-radio" id="apartments" name="status" value="завършен">
-                                <label for="apartments">В междублоково пространство</label>
-                                <input type="radio" class="project-input project-input-radio" id="other-place" name="status" value="завършен">
-                                <label for="other-place">Друго</label>
-
-                                <label class="form-label" for="description">4. Допълнително описание:</label>
-                                <textarea type="text" class="project-input project-input-text" name="description" rows="10" cols="20"></textarea>
-
-                                <div class="add-project-btns">
-                                    <button id="add-project-btn" type="submit" class="btn"><i class="fa-solid fa-plus"></i> Добави</button>
-                                    <button id="cancel-add-project-btn" type="button" class="btn cancel" onclick="closeForm()"><i class="fa-solid fa-xmark"></i> Затвори</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
         </main>
         </div>
 </body>
