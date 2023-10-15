@@ -16,8 +16,18 @@
 
 body {
     width: 70%;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 textarea {
     width: 50%;
+}
+
+#playground-name {
+    width: 50%
+}
+
+.question {
+    margin: 2%;
 }

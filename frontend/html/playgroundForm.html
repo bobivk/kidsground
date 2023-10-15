@@ -18,42 +18,56 @@
         <div>
             <form id="playground-form" class="form-container">
                 
-                <label class="form-label" for="name-question">1. Име:</label>
-                <input type="text" class="project-input project-input-text" placeholder="Име на площадката, ако има такова." name="name">
-                
-                <div id="age-group-question">
+                <div class="question">
+                    <label class="form-label" for="name-question">1. Име:</label>
+                    <input id="playground-name" type="text" class="project-input project-input-text" placeholder="Име на площадката, ако има такова." name="name">
+                </div>
+
+                <div class="question" id="age-group-question">
                     <label class="form-label" for="second-question">2. За каква възрастова група е подходяща площадката?</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="under-1" name="age-group" value="under-1">
                     <label for="under-1">Под 1г.</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="1-3years" name="age-group" value="1-3years">
                     <label for="1-3years">1-3г.</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="3-6years" name="age-group" value="3-6years">
                     <label for="3-6years">3-6г.</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="6-12years" name="age-group" value="6-12years">
                     <label for="6-12years">6-12г.</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="other-years" name="age-group" value="other-years">
                     <label for="other-years">Друго</label>
+                    <br>
                 </div>
 
-                <div id="location-question">
+                <div class="question" id="location-question">
                     <label class="form-label" for="second-question">3. Какво е местоположението на детската площадка?</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="boulevard" name="location" value="завършен">
                     <label for="boulevard">До голям булевард</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="park" name="location" value="завършен">
                     <label for="park">В парк или градинка</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="apartments" name="location" value="завършен">
                     <label for="apartments">В междублоково пространство</label>
+                    <br>
                     <input type="radio" class="project-input project-input-radio" id="other-place" name="location" value="завършен">
                     <label for="other-place">Друго</label>
+                    <br>
                 </div>
 
-                <div id="description-question"></div>
+                <div class="question" id="description-question">
                 <label class="form-label" for="description">4. Допълнително описание:</label>
+                <br>
                 <textarea type="text" class="project-input project-input-text" name="description" rows="10" cols="20"></textarea>
+                </div>
 
 
-
-                <div class="map-view">
+                <div class="question" class="map-view">
                     <h4>Посочете на картата мястото на площадката</h4>
                     <button onclick="showCurrentLocation()">Покажи моята локация</button>
                     <div id="map"></div>
