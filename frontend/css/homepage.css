@@ -320,10 +320,6 @@ form textarea {
         padding-right: 1.5rem;
         font-size: 6.3px;
     }
-    #map {
-        width: 100%;
-        height: 80%;
-    }
 }
 
 @media only screen and (max-width: 380px) {
