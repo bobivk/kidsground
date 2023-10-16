@@ -5,3 +5,29 @@
     font-style: normal;
 }
 
+:root {
+    --main-color: #CDEAEE;
+    --color-dark: #1D2231;
+    --text-grey: #506463;
+    --text-on-dark-background: #FCFCFC;
+    font-family: 'Plovdiv Script', 'PlovdivSans';
+    color: var(--text-grey);
+}
+
+body {
+    width: 70%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+textarea {
+    width: 50%;
+}
+
+#playground-name {
+    width: 50%
+}
+
+.question {
+    margin: 2%;
+}
