@@ -94,7 +94,7 @@ main {
 .background-img {
     margin-top: -60vh;
     position: relative;
-    width: 99vw;
+    width: 100vw;
     object-fit: contain;
 }
 
@@ -112,16 +112,16 @@ main {
 }
 
 
-.map-view{
+/* .map-view{
     width: 60%;
-}
+} */
 
  
 .map-title,
 .map-title-last,
 .map-page-main-text,
 .number-of-playgrounds {
-    padding-right: 3rem;
+    padding-right: 2rem;
     text-align: right;
 }
 
@@ -153,14 +153,15 @@ main {
 .add-playground-btn {
     background-color: #CDEAEE;
     color: var(--text-grey);
-    height: 50px;
-    width: 50%;
+    height: 5vh;
+    width: 50vw;
     border-radius: 15px;
     border: 0;
     outline: 0;
     cursor: pointer;
     transition: background 1s;
     font-family: 'Plovdiv Script', 'PlovdivSans';
+    margin-bottom: 20px;
 }
 
 .add-playground-btn i {
@@ -299,11 +300,78 @@ form textarea {
 }
 
 @media only screen and (max-width: 560px) {
+    .logout-wrapper div,
+    .home-wrapper div,
+    .about-us-wrapper div, 
+    .map-wrapper div {
+        font-size: 14px;
+        padding: .2rem 0.7rem;
+    }
+    .map-title,
+    .map-title-last {
+        font-size: 14px;
+    }
+    .number-of-playgrounds {
+        padding-top: 15%;
+        font-size: 30px;
+        font-weight: bold;
+    }
     .tiles {
         grid-template-columns: 100%;
     }
+    .add-playground-btn {
+        font-size: 8px;
+        width: 63vw;
+        margin-right: 2px;
+        height: 4vh;
+    }
+    .map-page-main-text {
+        padding-right: 1.5rem;
+        font-size: 6.3px;
+    }
+    #map {
+        width: 100%;
+        height: 80%;
+    }
 }
 
+@media only screen and (max-width: 380px) {
+    .map-title,
+    .map-title-last {
+        font-size: 12px;
+    }
+
+    .map-page-main-text {
+        font-size: 6px;
+    }
+}
+
+/*Galaxy fold...*/
+@media only screen and (max-width: 280px) {
+
+    .logout-wrapper div,
+    .home-wrapper div,
+    .about-us-wrapper div, 
+    .map-wrapper div {
+        font-size: 10.8px;
+        padding: .1rem 0.5rem;
+    }
+
+    .map-title,
+    .map-title-last {
+        font-size: 10px;
+    }
+
+    .map-page-main-text {
+        font-size: 5px;
+    }
+    .number-of-playgrounds {
+        padding-top: 15%;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+}
 
 /* make table rows interactive */
 
@@ -340,15 +408,22 @@ li a .active-hover {
 }
 
 
-@media only screen and (max-height: 1180px) {
+@media only screen and (max-height: 1368px) {
     .background-img {
         margin-top: -20vh;
     }
 }
+
 
 @media only screen and (max-height: 960px) {
     .background-img {
         margin-top: -10vh;
     }
     
+}
+
+@media only screen and (max-height: 1368px) and (min-width: 1024px) {
+    .background-img {
+        margin-top: -48vh;
+    }
 }
