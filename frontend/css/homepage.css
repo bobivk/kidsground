@@ -103,6 +103,7 @@ main {
 
 .map-title,
 .map-title-last {
+    font-size: 60px;
     color: #F24630;
 }
 
@@ -111,13 +112,12 @@ main {
 }
 
 .number-of-playgrounds {
-    padding-top: 15%;
+    margin-right: 2vw;
     font-size: 70px;
     font-weight: bold;
 }
 
 .number-of-playgrounds-text {
-    margin-top: 0%;
     font-size: medium;
     font-weight: normal;
 }
@@ -285,7 +285,6 @@ form textarea {
         font-size: 14px;
     }
     .number-of-playgrounds {
-        padding-top: 15%;
         font-size: 30px;
         font-weight: bold;
     }
@@ -323,7 +322,7 @@ form textarea {
     .about-us-wrapper div, 
     .map-wrapper div {
         font-size: 10.8px;
-        padding: .1rem 0.5rem;
+        padding: 0.1rem 0.4rem;
     }
 
     .map-title,
@@ -335,7 +334,6 @@ form textarea {
         font-size: 5px;
     }
     .number-of-playgrounds {
-        padding-top: 15%;
         font-size: 20px;
         font-weight: bold;
     }

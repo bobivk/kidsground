@@ -17,3 +17,15 @@
         height: 60vh;
     }
 }
+
+.map-page-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#map-text {
+    flex-direction: column;
+    margin-left: 2vw;
+    margin-bottom: 2vw;
+}
