@@ -96,29 +96,10 @@ main {
     width: 100%;
 }
 
-.map-page {
-    padding: 3%;
-    padding-top: 5%;
-    display: flex;
-    flex-direction: row;
-}
-
-
-/* .map-view{
-    width: 60%;
-} */
-
-.map-title,
-.map-title-last,
-.map-page-main-text,
-.number-of-playgrounds {
-    padding-right: 2rem;
-    text-align: right;
-}
-
+/* 
 .map-page-main-text {
     text-align: justify;
-}
+} */
 
 .map-title,
 .map-title-last {
@@ -143,9 +124,10 @@ main {
 
 .add-playground-btn {
     background-color: #CDEAEE;
+    margin-top: 15px;
     color: var(--text-grey);
     height: 5vh;
-    width: 5vw;
+    width: 15vw;
     border-radius: 15px;
     border: 0;
     outline: 0;

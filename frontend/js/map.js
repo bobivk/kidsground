@@ -50,7 +50,7 @@ function showCurrentLocation() {
                   position: currentLocation,
                   map: map,
                   draggable: true,
-                  icon: "../../resources/playground.png",
+                  icon: "../../resources/user_location.png",
                   title: "Your Location"
               });
           }
