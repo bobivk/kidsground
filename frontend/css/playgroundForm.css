@@ -11,13 +11,23 @@
     --text-grey: #506463;
     --text-on-dark-background: #FCFCFC;
     font-family: 'Plovdiv Script', 'PlovdivSans';
+    line-height: 1.8;
     color: var(--text-grey);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    position: relative;
 }
 
 .site-logo {
     right: 0;
-    /* height: 6.5%;
-    width: 6.5%; */
+    height: 6.5%;
+    width: 6.5%;
     object-fit: cover;
     margin-right: 3%;
     margin-left: 10%;
@@ -34,10 +44,26 @@ header{
     height: 10vh;
 }
 
+.logout-wrapper, 
+.home-wrapper, 
+.map-wrapper, 
+.about-us-wrapper {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+main {
+    margin-top: 140px;
+    min-height: calc(100vh - 90px);
+}
+
 body {
     width: 90%;
     margin-left: 10%;
     margin-right: 10%;
+    margin-top: 20%;
 }
 
 textarea {
@@ -65,4 +91,15 @@ button {
 .question {
     margin-top: 2%;
     margin-bottom: 2%;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.text-input {
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.09);
+    border-radius: 10px;
 }

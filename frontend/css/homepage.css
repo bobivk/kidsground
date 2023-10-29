@@ -43,7 +43,6 @@ header{
     height: 10vh;
 }
 
-
 .logout-wrapper, 
 .home-wrapper, 
 .map-wrapper, 
@@ -109,6 +108,30 @@ main {
 
 .map-title-last {
     padding-bottom: 20%;
+}
+
+.text-with-counter{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background: linear-gradient(to right, 
+                                transparent 0%, 
+                                transparent calc(50% - 0.81px), 
+                                black calc(50% - 0.8px), 
+                                black calc(50% + 0.8px), 
+                                transparent calc(50% + 0.81px), 
+                                transparent 100%);
+}
+
+#igrata {
+    flex-direction: column;
+    margin-left: 2vw;
+    margin-bottom: 2vw;
+    justify-content: right;
+}
+
+#igrata-inner {
+    justify-content: right;
 }
 
 .number-of-playgrounds {
