@@ -112,7 +112,7 @@ main {
 
 .text-with-counter{
     display: flex;
-    justify-content: left;
+    justify-content: space-around;
     align-items: center;
     background: linear-gradient(to right, 
                                 transparent 0%, 
@@ -125,19 +125,14 @@ main {
 
 #igrata {
     flex-direction: column;
-    margin-left: 2vw;
+    margin-left: 1vw;
     margin-bottom: 2vw;
-    justify-content: right;
-}
-
-#igrata-inner {
-    justify-content: right;
 }
 
 .number-of-playgrounds {
-    margin-right: 2vw;
     font-size: 70px;
     font-weight: bold;
+    margin-right: 10vw;
 }
 
 .number-of-playgrounds-text {
@@ -150,7 +145,7 @@ main {
     margin-top: 15px;
     color: var(--text-grey);
     height: 5vh;
-    width: 15vw;
+    width: 20vw;
     border-radius: 15px;
     border: 0;
     outline: 0;
@@ -293,6 +288,16 @@ form textarea {
         display: none;
     }
 
+    .map-title,
+    .map-title-last {
+        font-size: 40px;
+        color: #F24630;
+    }
+
+    .number-of-playgrounds {
+        margin-right: 13vw;
+    }
+
 }
 
 @media only screen and (max-width: 560px) {
@@ -310,6 +315,7 @@ form textarea {
     .number-of-playgrounds {
         font-size: 30px;
         font-weight: bold;
+        margin-right: 0vw;
     }
     .tiles {
         grid-template-columns: 100%;
