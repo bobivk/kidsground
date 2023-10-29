@@ -14,14 +14,48 @@
     color: var(--text-grey);
 }
 
+.site-logo {
+    right: 0;
+    /* height: 6.5%;
+    width: 6.5%; */
+    object-fit: cover;
+    margin-right: 3%;
+    margin-left: 10%;
+}
+
+header{
+    background: #FCFCFC;
+    position: fixed;
+    display: inline-flex;
+    justify-content: right;
+    z-index: 100;
+    top: 0;
+    width: 100%;
+    height: 10vh;
+}
+
 body {
-    width: 70%;
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 90%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 textarea {
     width: 50%;
+}
+
+button {
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+    height: 5vh;
+    width: 50vw;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+    font-family: 'Plovdiv Script', 'PlovdivSans';
+    margin-bottom: 20px;
 }
 
 #playground-name {
@@ -29,5 +63,6 @@ textarea {
 }
 
 .question {
-    margin: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
