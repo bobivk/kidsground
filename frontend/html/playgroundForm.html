@@ -129,11 +129,11 @@
                 <br>
                 <textarea type="text" class="text-input" name="description" rows="10" cols="20"></textarea>
                 </div>
-
+            </form>
 
                 <div class="question" class="map-view">
                     <h4>Посочете на картата мястото на площадката</h4>
-                    <button onclick="showCurrentLocation()">Покажи моята локация</button>
+                    <button onclick="showCurrentLocationPlayground()">Покажи моята локация</button>
                     <div id="map"></div>
                 </div>
 
@@ -141,7 +141,6 @@
                     <button id="add-playground-btn" type="submit" class="btn"><i class="fa-solid fa-plus"></i> Добави</button>
                     <button id="cancel-add-playground-btn" type="button" class="btn cancel" onclick="closeForm()"><i class="fa-solid fa-xmark"></i> Назад</button>
                 </div>
-            </form>
         </div>
     </div>
 </body>
@@ -150,3 +149,4 @@
     </script>
 <script src="../js/map.js"></script>
 <script src="../js/playgroundForm.js"></script>
+<script src="../js/createPlayground.js"></script>
