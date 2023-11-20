@@ -166,3 +166,79 @@ button:hover {
 #logout-btn{
     border:#CDEAEE 2px solid;
 }
+
+@media only screen and (max-width: 960px) {
+    .input-field {
+        font-size: 20px;
+    }
+
+    .btn-field {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .input-field {
+        font-size: 20px;
+    }
+
+    .btn-field {
+        font-size: 20px;
+    }
+
+}
+
+@media only screen and (max-width: 560px) {
+    .input-field {
+        font-size: 20px;
+    }
+
+    .btn-field {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    .input-field {
+        font-size: 20px;
+    }
+
+    .btn-field {
+        font-size: 6px;
+    }
+}
+
+/*Galaxy fold...*/
+@media only screen and (max-width: 280px) {
+
+    .input-field {
+        font-size: 20px;
+    }
+
+    .btn-field {
+        font-size: 20px;
+    }
+
+    .logout-wrapper div,
+    .home-wrapper div,
+    .about-us-wrapper div, 
+    .map-wrapper div {
+        font-size: 10.8px;
+        padding: 0.1rem 0.4rem;
+    }
+
+    .map-title,
+    .map-title-last {
+        font-size: 10px;
+    }
+
+    .map-page-main-text {
+        font-size: 5px;
+    }
+    .number-of-playgrounds {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+}

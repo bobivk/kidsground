@@ -5,6 +5,10 @@
     font-style: normal;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
     --main-color: #CDEAEE;
     --color-dark: #1D2231;
@@ -227,14 +231,10 @@ tr td:last-child {
     border-radius: 5px;
 }
 
-#add-project-btn,
-#cancel-add-project-btn,
 .logout-wrapper div,
 .home-wrapper div,
 .about-us-wrapper div, 
-.map-wrapper div,
-#import-chosen-file-btn,
-#cancel-import-btn {
+.map-wrapper div {
     background-color: #FCFCFC;
     color: var(--text-grey);
     padding: .5rem 1rem;
@@ -243,14 +243,10 @@ tr td:last-child {
     font-size: 20px;
 }
 
-#add-project-btn:hover,
-#cancel-add-project-btn:hover,
 .logout-wrapper div:hover,
 .home-wrapper div:hover,
 .map-wrapper div:hover,
-.about-us-wrapper div:hover,
-#import-chosen-file-btn:hover,
-#cancel-import-btn:hover {
+.about-us-wrapper div:hover {
     transition: background 1s;
     color: #62BEC9;
 }
