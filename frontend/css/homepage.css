@@ -419,3 +419,30 @@ li a .active-hover {
         margin-top: -48vh;
     }
 }
+
+/* what? why? how? */
+.columns-3 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.columns-3 > * {
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .columns-3 > * {
+        width:calc(100% / 3);
+     }
+}
+
+.bg-green {
+  background-color: #D0DEAE;
+}
+.bg-red {
+    background-color: #EFB39B;
+}
+.bg-yellow {
+    background-color: #F3DFAC;
+}
