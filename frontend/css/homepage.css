@@ -61,7 +61,6 @@ header{
     margin-right: 0.5rem;
 }
 
-
 main {
     margin-top: 140px;
     min-height: calc(100vh - 90px);
@@ -467,54 +466,20 @@ li a .active-hover {
   border-radius: 10px;
 }
 
-.left-outer-column {
-    background-color: #D0DEAE;
-}
-
-.middle-outer-column {
-    background-color: #EFB39B;
-}
-
-.right-outer-column {
-    background-color: #F3DFAC;
-}
-
-.left-inner-column,
-.middle-inner-column, 
-.right-inner-column {
+/* Style for the inner rectangle */
+.inner {
     width: 60%; /* Adjusted size for the inner rectangle */
-    height: 70px; /* Adjusted size for the inner rectangle */
+    height: 40%; /* Adjusted size for the inner rectangle */
+    background-color: #f0f0f0;
     position: absolute;
-    top: 0; /* Aligns the inner rectangle at the top */
+    top: 10%; /* Aligns the inner rectangle at the top */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Aligns content at the top */
-    color: white;
-    font-size: 30px;
-    border-radius: 10px;
   }
-
-.left-inner-column {
-    background-color: #A3C939;
-}
-
-.middle-inner-column {
-    background-color: #EF452D;
-}
-
-.right-inner-column {
-    background-color: #FEC91B;
-}
-  
-  /* Text style for the outer paragraphs */
-  .outer-text {
-    margin-top: 70px; /* Margin below the inner rectangle */
-    text-align: justify;
-    max-width: 100%; /* Ensures text doesn't exceed the outer rectangle */
-    /* overflow: hidden; Hides text that exceeds the max width */
-    /* text-overflow: ellipsis; Shows ellipsis for overflowed text */
-    /* white-space: nowrap; Prevents text from wrapping */
+  .text {
+    margin-top: 20px; /* Margin below the inner rectangle */
+    text-align: center;
   }
-
