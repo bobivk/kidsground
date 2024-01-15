@@ -43,8 +43,8 @@
     background-color: #CDEAEE;
     margin-top: 15px;
     color: var(--text-grey);
-    height: 5vh;
-    width: 20vw;
+    height: 10vh;
+    width: 28vw;
     border-radius: 15px;
     border: 0;
     outline: 0;
@@ -62,10 +62,15 @@
     display: flex;
     padding: 20px;
   }
+
+  .map-page-main-text {
+    font-size: 20px;
+  }
   
   .add-playground-btn {
     display: flex;
     justify-content: center;
+    padding: 20px;
     margin-top: 10px; /* Add some margin if needed */
   }
   
@@ -80,15 +85,23 @@
   }
   
   .text-with-counter{
-    display: flex;
     flex-direction: column;
     text-align: end;
     margin-left: 23vw;
   }
   
   @media only screen and (max-width: 1280px) {
-    .text-with-counter{
-      display: none;
+    .text-with-counter {
+        margin-left: 0vw;
+        order: 2;
+        text-align: center;
+    }
+    #map-text {
+        flex-direction: column;
+        align-items: center;
+    }
+    #map-wrapper {
+        order: 1;
     }
   }
   
