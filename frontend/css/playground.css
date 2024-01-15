@@ -44,11 +44,71 @@ input#file-upload-button {
 
 .playground-text {
     margin-top: 10vh;
+    font-size: large;
 }
+
+.playground-text p {
+    margin-top: 10vh;
+    font-size: 30px;
+}
+
 
 .btn-label {
     margin-top: 10px;
     font-size: 16px;
     color: #333;
     margin-left: 8.2vw;
+}
+
+body
+{
+    background-image: url("../../resources/kidsground site proportion_-1.png");
+    background-size: cover;
+    background-color: rgba(255,255,255,0.1);
+}
+
+
+body {
+    width: 90%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 20%;
+}
+
+textarea {
+    width: 50%;
+}
+
+button {
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+    height: 5vh;
+    width: 50vw;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+    font-family: 'Plovdiv Script', 'PlovdivSans';
+    margin-bottom: 20px;
+}
+
+#playground-name {
+    width: 50%
+}
+
+.question {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.text-input {
+    padding:10px;
+    border:0;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.09);
+    border-radius: 10px;
 }

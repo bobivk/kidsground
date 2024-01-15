@@ -22,7 +22,7 @@
                 <div> <a href="#map"> Карта </a> </div>
             </div>
             <div class="about-us-wrapper">
-                <div> За проекта</div>
+                <div><a href="#about-us"> За проекта </a></div>
             </div>
             <div class="logout-wrapper">
                 <div>
@@ -55,9 +55,11 @@
             </div>
             <div class="map-page">
                 <div class="map-view">
-                    <button onclick="openPlaygroundForm()" class="add-playground-btn"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
                     <div id="map"></div>
+                    <span>
                     <button onclick="showCurrentLocation()" class="add-playground-btn">Покажи моята локация</button>
+                    <button onclick="openPlaygroundForm()" class="add-playground-btn"> <i class="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button>
+                </span>
                 </div>
                 <div class="text-with-counter">
                     <div id="igrata">
@@ -81,12 +83,12 @@
             </div>
 
             <!-- what? why? how? -->
-            <div class="container">
+            <div id="about-us" class="container">
                 <div class="left-outer-column">
                   <div class="left-inner-column">
                     <p>Какво?</p>
                   </div>
-                  <p class="text"> 
+                  <p class="outer-text"> 
                     KIDSground е инициатива 
                     за създаване на дигитална 
                     карта на всички известни 
@@ -104,7 +106,7 @@
                   <div class="middle-inner-column">
                     <p>Защо?</p>
                   </div>
-                  <p class="text"> 
+                  <p class="outer-text"> 
                     Липсва единна карта на 
                     града, която да отразява
                     всички детски площадки, 
@@ -122,7 +124,7 @@
                   <div class="right-inner-column">
                     <p>Как?</p>
                   </div>
-                  <p class="text"> 
+                  <p class="outer-text"> 
                     Отвори картата, 
                     отбележи площадка и 
                     отговори на краткия 
