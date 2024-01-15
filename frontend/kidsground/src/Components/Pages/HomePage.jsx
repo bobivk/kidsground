@@ -1,4 +1,5 @@
 import '../../static/stylesheets/styles.css'
+import '../../static/stylesheets/main.css'
 import { Map } from '../Common/Map'
 
 export const HomePage = () => {
