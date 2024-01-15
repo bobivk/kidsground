@@ -1,0 +1,151 @@
+.background-img {
+    margin-top: -60vh;
+    width: 100vw;
+    object-fit: contain;
+    z-index: 1;
+    margin-left: -0.4vw;
+  }
+  
+  .main-text,
+  .subtitle {
+    font-weight: normal;
+    position: relative;
+    z-index: 2;
+    padding-left: 3%;
+  }
+  
+    .subtitle {
+        font-size: 20px;
+    }
+
+  .title-text {
+    display: inline-flex;
+  }
+  
+  .title-text .detskite {
+    color: #F24630;
+    padding-right: 0.5vw;
+  }
+  
+  .title-text .ploshtadki {
+    color: #FECD1B;
+  }
+  
+  .main-text h2, .main-text h1 {
+    margin: 0;  /* or padding: 0; */
+  }
+  
+  .title-text {
+    margin-bottom: 10px; /* Adjust the value as needed */
+  }
+  
+  button {
+    background-color: #CDEAEE;
+    margin-top: 15px;
+    color: var(--text-grey);
+    height: 5vh;
+    width: 20vw;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+    margin-bottom: 20px;
+  }
+  
+  button i {
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+  }
+  
+  #map-text{
+    display: flex;
+    padding: 20px;
+  }
+  
+  .add-playground-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* Add some margin if needed */
+  }
+  
+  .map-title, .map-title-last {
+    font-size: 32px;
+    color: #F24630;
+  }
+  
+  #numberOfPlaygrounds {
+    font-size: 70px;
+    font-weight: bold;
+  }
+  
+  .text-with-counter{
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+    margin-left: 23vw;
+  }
+  
+  @media only screen and (max-width: 1280px) {
+    .text-with-counter{
+      display: none;
+    }
+  }
+  
+  @media only screen and (max-width: 450px) {
+    button{
+      font-size: 9px;
+    }
+    .subtitle {
+        font-size: 14px;
+    }
+  }
+  
+  @media only screen and (max-height: 1368px) {
+    .background-img {
+        margin-top: -60vh;
+    }
+  }
+  
+  
+  @media only screen and (max-height: 960px) {
+    .background-img {
+        margin-top: -10vh;
+    }
+    
+  }
+  
+  @media only screen and (max-height: 1368px) and (max-width: 1024px) {
+    .background-img {
+        margin-top: -20vh;
+    }
+  }
+  
+  @media only screen and (max-height: 800px) and (max-width: 1024px) {
+    .background-img {
+        margin-top: -48vh;
+    }
+  }
+  
+  @media only screen and (max-height: 800px) {
+    .background-img {
+        margin-top: -18vh;
+    }
+  }
+  
+  /*Galaxy fold...*/
+  @media only screen and (max-width: 280px) {
+    .background-img {
+      margin-top: -10vh;
+  }
+    .main-text {
+      font-size: 10px;
+    }
+    .subtitle{
+      font-size: 8px;
+    }
+    button {
+      font-size: 6px;
+    }
+  }
+  

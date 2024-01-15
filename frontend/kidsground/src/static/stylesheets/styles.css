@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Plovdiv Sans';
+    src: local('Plovdiv Sans'), url('../fonts/PlovdivTypeface-Fonts/PlovdivTypeface-Fonts/OTF/PlovdivSans.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --main-color: #CDEAEE;
+    --color-dark: #1D2231;
+    --text-grey: #506463;
+    --text-on-dark-background: #FCFCFC;
+    font-family: 'Plovdiv Sans';
+    color: var(--text-grey);
+}
+
+.page {
+  position: relative;
+  top: 15vh;
+  overflow-x: hidden;
+}
