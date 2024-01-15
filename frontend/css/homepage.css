@@ -99,10 +99,11 @@ main {
     width: 100%;
 }
 
-/* 
+
 .map-page-main-text {
-    text-align: justify;
-} */
+    font-size: 22px;
+    margin-top: 2%;
+}
 
 .map-title,
 .map-title-last {
