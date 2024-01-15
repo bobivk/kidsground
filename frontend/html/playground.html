@@ -40,96 +40,34 @@
     <div class="playground-content">
         <div class="upload-btn-wrapper">
             <button class="btn"></button>
-            <input type="file" name="myfile" />
+            <input type="file" name="myfile" accept="image/*"/>
             <p class="btn-label">Добави снимки</p>
         </div>
 
         <div class="playground-text">
             <h1>Площадка "Дъга"</h1>
-
-            <div class="question" id="age-group-question">
-                <label class="form-label" for="second-question">2. За каква възрастова група е подходяща площадката?</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="under-1" name="age-group" value="under-1">
-                <label for="under-1">Под 1г.</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="1-3years" name="age-group" value="1-3years">
-                <label for="1-3years">1-3г.</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="3-6years" name="age-group" value="3-6years">
-                <label for="3-6years">3-6г.</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="6-12years" name="age-group" value="6-12years">
-                <label for="6-12years">6-12г.</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="other-years" name="age-group" value="other-years">
-                <label for="other-years">Друго</label>
-                <br>
+            <div class="age">
+                <span><i class="fa-solid fa-child"></i>За деца между 3 и 6 години.</span>
             </div>
-
-            <div class="question" id="location-question">
-                <label class="form-label" for="third-question">3. Какво е местоположението на детската площадка?</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="boulevard" name="location" value="До голям булевард">
-                <label for="boulevard">До голям булевард</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="park" name="location" value="В парк или градинка">
-                <label for="park">В парк или градинка</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="apartments" name="location" value="В междублоково пространство">
-                <label for="apartments">В междублоково пространство</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="other-place" name="location" value="Друго">
-                <label for="other-place">Друго</label>
-                <br>
+            <div class="location">
+                <span><i class="fa-solid fa-tree-city"></i>В парк или градинка</span>
             </div>
-
-            <div class="question" id="shade-question">
-                <label class="form-label" for="second-question">4. Има ли сенчести зони?</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="tree-shade" name="location" value="естествена">
-                <label for="tree-shade">Да, естествена сянка от дървета</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="fake-shade" name="location" value="изкуствена">
-                <label for="fake-shade">Да, изкуствена сянка от съоръжение</label>
-                <br>
-                <input type="radio" class="project-input project-input-radio" id="no-shade" name="location" value="няма">
-                <label for="no-shade">Не, няма сянка</label>
-                <br>
+            <div class="shade">
+                <span><i class="fa-solid fa-tree"></i>Естествена сянка от дървета</span>
             </div>
-
-            <div class="question" id="transport-question">
-                <label class="form-label" for="second-question">5. Какъв е транспортният достъп?</label>
-                <br>
-                <input type="checkbox" class="project-input" id="free-parking" name="location" value="Свободно паркиране">
-                <label for="free-parking">Свободно паркиране</label>
-                <br>
-                <input type="checkbox" class="project-input" id="fake-shade" name="location" value="Платено паркиране">
-                <label for="paid-parking">Платено паркиране</label>
-                <br>
-                <input type="checkbox" class="project-input" id="no-shade" name="location" value="Велоалея">
-                <label for="cycle">Велоалея</label>
-                <br>
-                <input type="checkbox" class="project-input" id="no-shade" name="location" value="Само пешеходен">
-                <label for="pedestrian">Само пешеходен</label>
-                <br>
+            <div class="transport">
+                <span>Транспорт</span>
+                <span><i class="fas fa-bus"></i>Автобус 15</span>
+                <span><i class="fa-solid fa-square-parking"></i>Свободно паркиране</span>
+                <span><i class="fa-solid fa-person-biking"></i>Велоалея</span>
             </div>
-
-            <div class="question" id="shade-question">
-                <label class="form-label" for="second-question">6. Има ли ограда</label>
-                <br>
-                <input type="radio" class="project-input" id="yes" name="location" value="Да">
-                <label for="no">Да</label>
-                <br>
-                <input type="radio" class="project-input" id="fake-shade" name="location" value="Не">
-                <label for="no">Не</label>
-                <br>
+            <div class="fence">
+                <span>
+                    <img class="icon" src="../../resources/icons/fence.png">Оградена
+                </span>
             </div>
-
-            <div class="question" id="description-question">
-            <label class="form-label" for="description">9. Допълнително описание:</label>
-            <br>
-            <textarea type="text" class="text-input" name="description" rows="10" cols="20"></textarea>
+            <div class="description">
+                <p>Площадката има люлка, пързалка и катерушка. Съораженията са от пластмаса и без остри ръбове. Настилката е от мек гумен материал.</p>
             </div>
         </div>
     </div>
