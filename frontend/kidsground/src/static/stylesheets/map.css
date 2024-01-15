@@ -1,0 +1,38 @@
+#google-map {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.button-overlay {
+    position: absolute;
+    bottom: 10px;
+    z-index: 1000;
+  }
+  
+  #map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #map-wrapper {
+    flex: 1;
+    padding: 20px; /* Add some padding for better spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+@media only screen and (max-width: 1280px) {
+    #map-wrapper{
+        margin-left: -5vw;
+        align-items: center;
+    }
+  }
+
+@media only screen and (max-width: 450px) {
+    #map-wrapper{
+        margin-left: -12vw;
+    }
+  }

@@ -413,11 +413,11 @@ li a .active-hover {
     
 }
 
-@media only screen and (max-height: 1368px) and (min-width: 1024px) {
+/* @media only screen and (max-height: 1368px) and (min-width: 1024px) {
     .background-img {
-        margin-top: -48vh;
+        margin-top: -40vh;
     }
-}
+} */
 
 /* what? why? how? */
 /* .columns-3 {

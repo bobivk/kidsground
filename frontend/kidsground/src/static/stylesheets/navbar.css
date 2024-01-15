@@ -1,0 +1,58 @@
+.logout-wrapper, 
+.home-wrapper, 
+.map-wrapper, 
+.about-us-wrapper {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+nav {
+    background: #FCFCFC;
+    position: fixed;
+    display: inline-flex;
+    justify-content: right;
+    z-index: 100;
+    top: 0;
+    width: 100vw;
+    height: 10vh;
+    font-size: 20px
+}
+
+.site-logo {
+    margin-right: 3vw;
+    margin-left: 7vw;
+    height: 10vh;
+}
+
+a {
+    padding: .5rem 1rem;
+    border: none;
+    font-size: 20px;
+    text-decoration: none;
+    color: var(--text-grey);
+}
+
+a:hover {
+    color: #62BEC9;
+}
+
+@media only screen and (max-width: 720px) {
+    a {
+        font-size: 12px;
+        padding: 0
+    }
+    .home-wrapper{
+        padding-top: 17.3px;
+    }
+}
+/*Galaxy fold...*/
+@media only screen and (max-width: 280px) {
+    a {
+        font-size: 8px;
+    }
+    .home-wrapper{
+        padding-top: 22px;
+    }
+}
