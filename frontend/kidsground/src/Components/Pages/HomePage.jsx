@@ -44,7 +44,7 @@ export const HomePage = () => {
                     <div id="map">
                         <Map/>
                         <div className="add-playground-btn">
-                            <button onClick="openPlaygroundForm()"> <i className="fa-regular fa-square-plus"></i> Добави площадка</button>
+                            <button onClick="openPlaygroundForm()"> <i className="fa-regular fa-square-plus"></i> Добавете детска площадка</button>
                         </div>
                 </div>
             </div>
