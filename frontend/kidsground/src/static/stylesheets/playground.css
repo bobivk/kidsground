@@ -47,12 +47,6 @@ input#file-upload-button {
     font-size: large;
 }
 
-.playground-text p {
-    margin-top: 10vh;
-    font-size: 30px;
-}
-
-
 .btn-label {
     margin-top: 10px;
     font-size: 16px;
@@ -62,21 +56,9 @@ input#file-upload-button {
 
 body
 {
-    background-image: url("../../resources/kidsground site proportion_-1.png");
+    /* background-image: url("../../resources/kidsground site proportion_-1.png"); */
     background-size: cover;
     background-color: rgba(255,255,255,0.1);
-}
-
-
-body {
-    width: 90%;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 20%;
-}
-
-textarea {
-    width: 50%;
 }
 
 button {
@@ -97,10 +79,6 @@ button {
     width: 50%
 }
 
-.question {
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
 
 .form-label {
   font-weight: bold;
@@ -113,7 +91,12 @@ button {
     border-radius: 10px;
 }
 
-.icon {
-    height: 4%;
-    width: 4%;
+.fence-icon {
+    height: 2%;
+    width: 2%;
+}
+
+.picture-slider {
+    height: 30%;
+    width:100%;
 }

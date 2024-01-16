@@ -71,6 +71,7 @@ main {
     z-index: 2;
     padding-left: 3%;
     padding-bottom: 3%;
+    font-size: 22px;
 }
 
 .title-text h1 {
@@ -98,10 +99,11 @@ main {
     width: 100%;
 }
 
-/* 
+
 .map-page-main-text {
-    text-align: justify;
-} */
+    font-size: 22px;
+    margin-top: 2%;
+}
 
 .map-title,
 .map-title-last {
@@ -213,22 +215,6 @@ tr td:last-child {
     background: #735c86;
 }
 
-#project-form {
-    margin-top: 2rem;
-}
-
-
-.project-input-text {
-    width: 100%;
-    padding-top: 1%;
-    padding-bottom: 1%;
-    padding-left: 1%;
-    margin: 0% 5% 2% 0%;
-    font-size: 15px;
-    box-sizing: border-box;
-    border: 3px solid #222;
-    border-radius: 5px;
-}
 
 .logout-wrapper div,
 .home-wrapper div,
@@ -466,20 +452,54 @@ li a .active-hover {
   border-radius: 10px;
 }
 
-/* Style for the inner rectangle */
-.inner {
+.left-outer-column {
+    background-color: #D0DEAE;
+}
+
+.middle-outer-column {
+    background-color: #EFB39B;
+}
+
+.right-outer-column {
+    background-color: #F3DFAC;
+}
+
+.left-inner-column,
+.middle-inner-column, 
+.right-inner-column {
     width: 60%; /* Adjusted size for the inner rectangle */
-    height: 40%; /* Adjusted size for the inner rectangle */
-    background-color: #f0f0f0;
+    height: 70px; /* Adjusted size for the inner rectangle */
     position: absolute;
-    top: 10%; /* Aligns the inner rectangle at the top */
+    top: 0; /* Aligns the inner rectangle at the top */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: flex-start; /* Aligns content at the top */
+    color: white;
+    font-size: 30px;
+    border-radius: 10px;
   }
-  .text {
-    margin-top: 20px; /* Margin below the inner rectangle */
+
+.left-inner-column {
+    background-color: #A3C939;
+}
+
+.middle-inner-column {
+    background-color: #EF452D;
+}
+
+.right-inner-column {
+    background-color: #FEC91B;
+}
+  
+  /* Text style for the outer paragraphs */
+  .outer-text {
+    margin-top: 100px; /* Margin below the inner rectangle */
     text-align: center;
+    font-size: 16;
+    max-width: 100%; /* Ensures text doesn't exceed the outer rectangle */
+    /* overflow: hidden; Hides text that exceeds the max width */
+    /* text-overflow: ellipsis; Shows ellipsis for overflowed text */
+    /* white-space: nowrap; Prevents text from wrapping */
   }
