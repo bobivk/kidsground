@@ -18,4 +18,5 @@
   position: relative;
   top: 15vh;
   overflow-x: hidden;
+  overflow-y: hidden;
 }

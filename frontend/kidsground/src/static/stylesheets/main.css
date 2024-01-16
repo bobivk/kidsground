@@ -72,6 +72,10 @@
     justify-content: center;
     padding: 20px;
     margin-top: 10px; /* Add some margin if needed */
+    width: 40vw;
+    font-size: 28px;
+    padding-bottom: 14px;
+    align-items: center;
   }
   
   .map-title, .map-title-last {
@@ -89,6 +93,78 @@
     text-align: end;
     margin-left: 23vw;
   }
+
+  /* Style for the container */
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 15%;
+  margin: 50px 100px;
+}
+
+/* Style for the outer rectangle */
+.left-outer-column,
+.middle-outer-column,
+.right-outer-column {
+  width: 15vw;
+  position: relative;
+  padding: 20px;
+  color: black;
+  border-radius: 10px;
+}
+
+.left-outer-column {
+    background-color: #D0DEAE;
+}
+
+.middle-outer-column {
+    background-color: #EFB39B;
+}
+
+.right-outer-column {
+    background-color: #F3DFAC;
+}
+
+.left-inner-column,
+.middle-inner-column, 
+.right-inner-column {
+    width: 60%; /* Adjusted size for the inner rectangle */
+    height: 70px; /* Adjusted size for the inner rectangle */
+    position: absolute;
+    top: 0; /* Aligns the inner rectangle at the top */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Aligns content at the top */
+    color: white;
+    font-size: 30px;
+    border-radius: 10px;
+  }
+
+.left-inner-column {
+    background-color: #A3C939;
+}
+
+.middle-inner-column {
+    background-color: #EF452D;
+}
+
+.right-inner-column {
+    background-color: #FEC91B;
+}
+  
+  /* Text style for the outer paragraphs */
+  .outer-text {
+    margin-top: 100px; /* Margin below the inner rectangle */
+    text-align: center;
+    font-size: 16;
+    max-width: 100%; /* Ensures text doesn't exceed the outer rectangle */
+    /* overflow: hidden; Hides text that exceeds the max width */
+    /* text-overflow: ellipsis; Shows ellipsis for overflowed text */
+    /* white-space: nowrap; Prevents text from wrapping */
+  }
+
   
   @media only screen and (max-width: 1280px) {
     .text-with-counter {
@@ -102,6 +178,9 @@
     }
     #map-wrapper {
         order: 1;
+    }
+    .add-playground-btn {
+      width: 60vw;
     }
   }
   

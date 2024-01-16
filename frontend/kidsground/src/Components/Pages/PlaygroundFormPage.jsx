@@ -2,7 +2,7 @@ import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/playground.css'
 import { Map } from '../Common/Map'
 
-export const PlaygroundPage = () => {
+export const PlaygroundFormPage = () => {
     return(
     <div id="page">
         <div id="add-playground">

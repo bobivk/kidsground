@@ -8,6 +8,9 @@
     position: absolute;
     bottom: 10px;
     z-index: 1;
+    width: 40vw;
+    background-color: white;
+    font-size: 28px;
   }
   
   #map {
@@ -27,5 +30,8 @@
 @media only screen and (max-width: 1280px) {
     #map-wrapper{
         align-items: center;
+    }
+    .button-overlay{
+      width: 60vw;
     }
   }

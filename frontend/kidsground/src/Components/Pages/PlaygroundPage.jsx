@@ -26,25 +26,25 @@ export const PlaygroundPage = () => {
         
                 <div class="playground-text">
                     <h1>Площадка "Дъга"</h1>
-                    <div class="age">
-                        <span><ChildIcon/> деца между 3 и 6 години.</span>
+                    <div id="age" class="card">
+                        <span><ChildIcon class="icon"/> деца между 3 и 6 години.</span>
                     </div>
-                    <div class="location">
-                        <span><ParkIcon/>В парк или градинка</span>
+                    <div id="location" class="card">
+                        <span><ParkIcon class="icon"/>В парк или градинка</span>
                     </div>
-                    <div class="shade">
-                        <span><TreeIcon/>Естествена сянка от дървета</span>
+                    <div id="shade" class="card">
+                        <span><TreeIcon class="icon"/>Естествена сянка от дървета</span>
                     </div>
-                    <div class="transport">
-                        <span>Транспорт</span>
-                        <span><BusIcon/>Автобус 15</span>
-                        <span><ParkingIcon/>Свободно паркиране</span>
-                        <span><BikeIcon/>Велоалея</span>
+                    <div id="transport" class="card">
+                        <span class="card">Транспорт</span> <br/>
+                        <span class="card"><BusIcon class="icon"/>Автобус 15</span>
+                        <span class="card"><ParkingIcon class="icon"/>Свободно паркиране</span>
+                        <span class="card"><BikeIcon class="icon"/>Велоалея</span>
                     </div>
-                    <div class="fence">
-                        <span><FenceIcon class="fence-icon"/>Оградена</span>
+                    <div id="fence" class="card">
+                        <span><FenceIcon id="fence-icon" class="icon" height="2.5vh" width = "2.5vw"/>Оградена</span>
                     </div>
-                    <div class="description">
+                    <div id="description">
                         <p>Площадката има люлка, пързалка и катерушка. Съораженията са от пластмаса и без остри ръбове. Настилката е от мек гумен материал.</p>
                     </div>
                 </div>

@@ -35,7 +35,7 @@ export const HomePage = () => {
                     </div>
                     <div className="number-of-playgrounds">
                         <div>
-                            <div id="numberOfPlaygrounds">3 928</div>
+                            <div id="numberOfPlaygrounds">3928</div>
                             <div className="number-of-playgrounds-text">детски площадки</div>
                         </div>
                     </div>
@@ -43,12 +43,68 @@ export const HomePage = () => {
                 <div id="map-wrapper">
                     <div id="map">
                         <Map/>
-                        <div className="add-playground-btn">
-                            <button onClick="openPlaygroundForm()"> <i className="fa-regular fa-square-plus"></i> Добавете детска площадка</button>
+                        <div >
+                            <button onClick="openPlaygroundForm()" className="add-playground-btn"> <i className="fa-regular fa-square-plus"></i> Добавете детска площадка</button>
                         </div>
                 </div>
             </div>
             </div>
+            <div id="about-us" class="container">
+                <div class="left-outer-column">
+                  <div class="left-inner-column">
+                    <p>Какво?</p>
+                  </div>
+                  <p class="outer-text"> 
+                    KIDSground е инициатива 
+                    за създаване на дигитална 
+                    карта на всички известни 
+                    и неизвестни детски 
+                    площадки в град Пловдив, 
+                    като по този начин 
+                    стимулира изграждането 
+                    на единна онлайн 
+                    платформа с вида, 
+                    местоположението и състоянието 
+                    на детските площадки в
+                    града.</p>
+                </div>
+                <div class="middle-outer-column">
+                  <div class="middle-inner-column">
+                    <p>Защо?</p>
+                  </div>
+                  <p class="outer-text"> 
+                    Липсва единна карта на 
+                    града, която да отразява
+                    всички детски площадки, 
+                    тяхното състояние, 
+                    налични съоръжения и 
+                    проблеми свързани с тях. 
+                    Дигиталното картиране 
+                    на детските площадки ще 
+                    даде ясна представа за 
+                    районите в града, където 
+                    такива липсват или са 
+                    крайно недостатъчни.</p>
+                </div>
+                <div class="right-outer-column">
+                  <div class="right-inner-column">
+                    <p>Как?</p>
+                  </div>
+                  <p class="outer-text"> 
+                    Отвори картата, 
+                    отбележи площадка и 
+                    отговори на краткия 
+                    въпросник. Така би 
+                    допринесъл за изграждане 
+                    на подробна и полезна 
+                    информационна 
+                    платформа в реално време
+                    за детските площадки в 
+                    града, благодарение на 
+                    колективната дейност и 
+                    мобилизация.</p>
+                </div>
+              </div>
         </div>
         
     )
