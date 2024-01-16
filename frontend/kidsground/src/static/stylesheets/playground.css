@@ -71,7 +71,6 @@ button {
     outline: 0;
     cursor: pointer;
     transition: background 1s;
-    font-family: 'Plovdiv Script', 'PlovdivSans';
     margin-bottom: 20px;
 }
 
