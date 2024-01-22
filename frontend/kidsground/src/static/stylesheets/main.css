@@ -98,8 +98,7 @@
 .container {
   display: flex;
   justify-content: center;
-  gap: 15%;
-  margin: 50px 100px;
+  gap: 30px;
 }
 
 /* Style for the outer rectangle */
@@ -111,6 +110,7 @@
   padding: 20px;
   color: black;
   border-radius: 10px;
+  margin-bottom: 2vh;
 }
 
 .left-outer-column {
@@ -128,15 +128,15 @@
 .left-inner-column,
 .middle-inner-column, 
 .right-inner-column {
-    width: 60%; /* Adjusted size for the inner rectangle */
+    width: 65%; /* Adjusted size for the inner rectangle */
     height: 70px; /* Adjusted size for the inner rectangle */
-    position: absolute;
+    position: relative;
     top: 0; /* Aligns the inner rectangle at the top */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Aligns content at the top */
+    align-items: center; /* Aligns content at the top */
     color: white;
     font-size: 30px;
     border-radius: 10px;
@@ -156,7 +156,7 @@
   
   /* Text style for the outer paragraphs */
   .outer-text {
-    margin-top: 100px; /* Margin below the inner rectangle */
+    margin-top: 30px; /* Margin below the inner rectangle */
     text-align: center;
     font-size: 16;
     max-width: 100%; /* Ensures text doesn't exceed the outer rectangle */
@@ -184,7 +184,27 @@
     }
   }
   
+  @media only screen and (max-width: 800px) {
+    .left-inner-column,
+    .middle-inner-column, 
+    .right-inner-column {
+      width: 85%; /* Adjusted size for the inner rectangle */
+  }
+}
+
   @media only screen and (max-width: 450px) {
+    .add-playground-btn{
+      font-size: 14px;
+    }
+    .container{
+      flex-direction: column;
+      align-items: center;
+    }
+    .left-outer-column,
+    .middle-outer-column,
+    .right-outer-column {
+      width: 75vw;
+    }
     button{
       font-size: 9px;
     }
