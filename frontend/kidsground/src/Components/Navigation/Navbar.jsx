@@ -19,7 +19,7 @@ export const Navbar = () => {
                     {/* <!-- when it says "Вход" -> <i class="fa-solid fa-user"></i> ? -->
                     <!-- <i class="fa-solid fa-arrow-right-from-bracket"></i> Изход -->
                     <!-- <button id="logout-btn" onclick="logout()">Вход</button> --> */}
-                     <Link to="/"><a> Вход </a></Link>
+                     <Link to="/login"><a> Вход </a></Link>
                 </div>
             </div>
             <Link to="/"><img className="site-logo" src="logo_site.png" alt="site logo" /></Link>

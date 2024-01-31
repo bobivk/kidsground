@@ -11,18 +11,10 @@
     position: relative;
 } 
 
-#nameField {
-    max-height: 0;
-}
-
 .form-box {
     border-radius: 20px;
     width: 90%;
     max-width: 450px;
-    position: relative;
-    top: 10%;
-    left: 50%;
-    transform: translate(-50%, 2%);
     background: transparent;
     padding: 50px 60px 70px;
     text-align: center;
@@ -118,12 +110,7 @@ button:hover {
     width: 90%;
     padding-left: 0.75%;
     margin: 0.1% 5.5% 0.1% 5.5%;
-    color: #555;
     text-align: justify;
-}
-
-.password-check div.disable {
-    display: none;
 }
 
 .registration-success {
@@ -145,6 +132,10 @@ button:hover {
 
 #logout-btn{
     border:#CDEAEE 2px solid;
+}
+
+#checkIcon {
+    margin-top: 2px;
 }
 
 @media only screen and (max-width: 960px) {
