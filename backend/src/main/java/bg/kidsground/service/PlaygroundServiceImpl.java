@@ -14,12 +14,12 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     private PlaygroundRepository playgroundRepository;
 
     @Override
-    public void savePlayground(Playground playground) {
+    public void savePlayground(final Playground playground) {
         this.playgroundRepository.save(playground);
     }
 
     @Override
-    public Playground getById(Long id) {
+    public Playground getById(final Long id) {
         return this.playgroundRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
 }

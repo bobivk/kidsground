@@ -9,7 +9,7 @@ public class AppRestEndpoints {
             public static final String ADD_PLAYGROUND = PLAYGROUND_ROOT + "/add";
 
             public class By {
-                public static final String ID = PLAYGROUND_ROOT + "/:{id}";
+                public static final String ID = PLAYGROUND_ROOT + "/{id}";
             }
         }
     }
