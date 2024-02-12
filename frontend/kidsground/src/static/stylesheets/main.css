@@ -63,18 +63,18 @@
     padding: 20px;
   }
 
-  .map-page-main-text {
+  .map-page-main-text,
+  .number-of-playgrounds-text {
     font-size: 20px;
   }
   
   .add-playground-btn {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 5%;
     margin-top: 10px; /* Add some margin if needed */
     width: 40vw;
-    font-size: 28px;
-    padding-bottom: 14px;
+    font-size: 30px;
     align-items: center;
     box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.7);
   }
@@ -85,11 +85,11 @@
   }
   
   #numberOfPlaygrounds {
-    font-size: 70px;
+    font-size: 100px;
     font-weight: bold;
   }
   
-  .text-with-counter{
+  .text-with-counter {
     flex-direction: column;
     text-align: end;
     margin-left: 23vw;

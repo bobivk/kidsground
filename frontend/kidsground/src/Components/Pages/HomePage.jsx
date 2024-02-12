@@ -45,7 +45,7 @@ export const HomePage = () => {
                     <div id="map">
                         <Map/>
                         <div >
-                            <Link to="/add"><button className="add-playground-btn"> <i className="fa-regular fa-square-plus"></i> Добави детска площадка</button></Link>
+                            <Link to="/add"><button className="add-playground-btn"> <i className="fa-regular fa-square-plus"></i> ДОБАВЕТЕ ДЕТСКА ПЛОЩАДКА</button></Link>
                         </div>
                 </div>
             </div>

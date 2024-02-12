@@ -40,3 +40,23 @@
 .choice input {
     width: 2vw;
 }
+
+.add-playground-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
+
+#add-playground-btn,
+#cancel-add-playground-btn {
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+    height: 7vh;
+    width: 20vw;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+}
