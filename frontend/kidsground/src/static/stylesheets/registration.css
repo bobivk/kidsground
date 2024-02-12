@@ -5,13 +5,22 @@
     --text-on-dark-background: #FCFCFC;
 }
 
-.container {
-    background-position: center;
+.register-container {
+    margin-left: -1vw;
+    width: 102vw;
+    height: 84vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../background.jpg");
+    background-position: 0 100vh;
     background-size: cover;
     position: relative;
 } 
 
 .form-box {
+    position: relative;
+    top: -20vh;
     border-radius: 20px;
     width: 90%;
     max-width: 450px;

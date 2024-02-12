@@ -5,6 +5,10 @@
     font-style: normal;
 }
 
+* {
+  font-family: 'Plovdiv Sans';
+}
+
 :root {
     --main-color: #CDEAEE;
     --color-dark: #1D2231;
@@ -14,9 +18,24 @@
     color: var(--text-grey);
 }
 
+html {
+  overflow-x: hidden;
+}
+
 .page {
+  z-index: 2;
   position: relative;
   top: 15vh;
   overflow-x: hidden;
   overflow-y: hidden;
+}
+
+.background {
+  overflow-x: hidden;
+  margin-left: -1vw;
+  width: 102vw;
+  background-image: url("../playgroundFormBackground.png");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: contain;
 }

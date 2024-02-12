@@ -10,6 +10,7 @@ export const Map = () => {
 
     const [marker, setMarker] = useState(null);
     const [map, setMap] = useState(null);
+    const [selectedMapType, setSelectedMapType] = useState('roadmap');
     const onMapLoad = (map) => {
         setMap(map);
     };
@@ -47,9 +48,22 @@ export const Map = () => {
         libraries,
     });
 
+    const handleMapTypeChange = (mapType) => {
+        if (map) {
+          map.setMapTypeId(mapType);
+          setSelectedMapType(mapType);
+        }
+    };
+
+    const mapTypes = [
+        { label: 'Map View', value: 'roadmap' },
+        { label: 'Satellite View', value: 'satellite' },
+    ];
+
     const [mapContainerStyle, setMapContainerStyle] = useState({
-        width: '50vw',
+        width: '70vw',
         height: '70vh',
+        // controlSize: '200px'
       });
 
       useEffect(() => {
@@ -59,11 +73,13 @@ export const Map = () => {
             setMapContainerStyle({
               width: '100vw',
               height: '50vh', // Adjust the height as needed for smaller screens
+            //   controlSize: '200px'
             });
           } else {
             setMapContainerStyle({
-                width: '50vw',
+                width: '70vw',
                 height: '70vh',
+                // controlSize: '200px'
             });
           }
           if (map) {
@@ -93,15 +109,25 @@ export const Map = () => {
 
     return (
         <div id="google-map">
-        <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={17}
-            center={plovdiv}
-            onLoad={onMapLoad}
-        >
-            {marker && <Marker position={marker.position} />}
-        </GoogleMap>
-        <button onClick={showCurrentLocation} className="button-overlay">Покажи моята локация</button>
+            <div id="map-type">
+                <select id="selector" value={selectedMapType} onChange={(e) => handleMapTypeChange(e.target.value)}>
+                {mapTypes.map((type) => (
+                    <option style={{fontFamily: "sans-serif"}} key={type.value} value={type.value}>
+                    {type.label}
+                    </option>
+                ))}
+                </select>
+            </div>
+            <GoogleMap
+                options={{controlSize: 1}}
+                mapContainerStyle={mapContainerStyle}
+                zoom={17}
+                center={plovdiv}
+                onLoad={onMapLoad}
+            >
+                {marker && <Marker position={marker.position} />}
+            </GoogleMap>
+            <button onClick={showCurrentLocation} className="button-overlay">Покажи моята локация</button>
         </div>
     );
 };

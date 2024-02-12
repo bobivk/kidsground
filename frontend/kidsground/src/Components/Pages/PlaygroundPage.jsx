@@ -9,8 +9,14 @@ import { ReactComponent as ParkingIcon } from '../../static/icons/square-parking
 import { ReactComponent as BikeIcon } from '../../static/icons/person-biking-solid.svg'
 
 import { Map } from '../Common/Map'
+import { useEffect } from 'react'
 
 export const PlaygroundPage = () => {
+
+    useEffect(() => {
+            window.scrollTo(0, 0)
+    }, [])
+
     return(
         <div className="page">
             <div className="picture-slider">

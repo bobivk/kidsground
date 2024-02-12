@@ -2,8 +2,14 @@ import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/main.css'
 import { Map } from '../Common/Map'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export const HomePage = () => {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return(
         <div className="page">
             <div className="main-text">

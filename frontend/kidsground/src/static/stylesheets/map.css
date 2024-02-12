@@ -19,13 +19,26 @@
     flex-direction: column;
     align-items: center;
   }
-  
+
+  #map-type {
+    position: absolute;
+    z-index: 1;
+    bottom: 68.7vh; 
+    left: 0vw 
+  }
+
+  #selector {
+    border-radius: 0px;
+    font-family: sans-serif;
+    width: 300px;
+  }
+
   #map-wrapper {
     flex: 1;
     padding: 20px; /* Add some padding for better spacing */
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: center;
 }
 
 @media only screen and (max-width: 1280px) {
@@ -35,8 +48,21 @@
     .button-overlay{
       width: 60vw;
     }
+
+    #map-type {
+      position: absolute;
+      z-index: 1;
+      bottom: 49.7vh; 
+      left: 1.5vw 
+    }
+  
+    #selector {
+      border-radius: 0px;
+      font-family: sans-serif;
+      width: 300px;
+    }
   }
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 540px) {
     .button-overlay{
       font-size: 14px;
     }

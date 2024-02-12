@@ -1,8 +1,7 @@
 import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/playgroundForm.css'
-import background from "../../static/playgroundFormBackground.png";
 import { Map } from '../Common/Map'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export const PlaygroundFormPage = () => {
 
@@ -28,6 +27,10 @@ export const PlaygroundFormPage = () => {
     const [otherAgeText, setOtherAgeText] = useState("");
     const [otherLocationText, setOtherLocationText] = useState("");
 
+
+    useEffect(() => {
+            window.scrollTo(0, 0)
+    }, [])
 
     const resetFocus = () => {
         setIsOtherAgeFocused(false);
@@ -169,11 +172,7 @@ export const PlaygroundFormPage = () => {
     }
 
     return(
-    <div className="page" style={{backgroundImage: `url(${background})`,
-                                  backgroundPosition: 'center',
-                                  backgroundSize: 'cover',
-                                  backgroundRepeat: 'no-repeat',
-                                  height: "100%"}}>
+    <div className="page background">
         <div id="add-playground">
             <form id="playground-form" className="form-container">
             <h2 style={{textAlign:"center"}}>Добави площадка</h2>
@@ -446,14 +445,16 @@ export const PlaygroundFormPage = () => {
                 <textarea type="text" onChange={changeDescription} className="text-input" name="description" rows="10" cols="20"></textarea>
                 </div>
                 <div>
-                    <h4>Посочете на картата мястото на площадката</h4>
-                    <div id="map">
-                        <Map/>
+                    <div>
+                        <h4>Посочете на картата мястото на площадката</h4>
+                        <div id="map">
+                            <Map/>
+                        </div>
                     </div>
-                </div>
-                <div className="add-playground-btns">
-                    <button id="add-playground-btn" type="submit" className="btn"><i className="fa-solid fa-plus"></i> Добави</button>
-                    <button id="cancel-add-playground-btn" type="button" className="btn cancel" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button>
+                    <div className="add-playground-btns" >
+                        <button id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
+                        <button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button>
+                    </div>
                 </div>
             </form>
         </div>

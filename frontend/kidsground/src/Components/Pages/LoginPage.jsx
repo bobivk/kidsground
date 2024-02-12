@@ -3,6 +3,7 @@ import '../../static/stylesheets/registration.css'
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { ReactComponent as CheckIcon } from '../../static/icons/circle-check-solid.svg'
+import { useEffect } from 'react';
 
 export const LoginPage = () => {
 
@@ -53,6 +54,10 @@ export const LoginPage = () => {
         }
         event.preventDefault();
     };
+
+    useEffect(() => {
+            window.scrollTo(0, 0)
+    }, [])
 
     const signIn = (event) => {
         if (!switcher) {
@@ -173,7 +178,7 @@ export const LoginPage = () => {
 
     if(switcher) {
         return(
-            <div className="container page">
+            <div className="register-container page">
                 <div className="form-box">
                     <h1 id="title">Вход</h1>
                     <form id="registration-form">
@@ -205,7 +210,7 @@ export const LoginPage = () => {
             </div>)
     } else {
         return(
-            <div className="container page">
+            <div className="register-container page">
                 <div className="form-box">
                     <h1 id="title">Регистрация</h1>
                     <form id="registration-form">
