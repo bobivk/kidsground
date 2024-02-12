@@ -195,7 +195,6 @@ export const PlaygroundFormPage = () => {
 
                 <div class="question">
                     <h4>Посочете на картата мястото на площадката</h4>
-                    <button onclick="showCurrentLocationPlayground()">Покажи моята локация</button>
                     <div id="map">
                         <Map/>
                     </div>
