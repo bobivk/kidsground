@@ -17,12 +17,22 @@
 #playground-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    
 }
 
 .question {
     display: flex;
     flex-direction: column;
+    border: 1px solid var(--text-grey);
+    border-radius: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.choice {
+    display: flex;
+    flex-direction: row;
 }
 
 .choice input {
