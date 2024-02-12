@@ -1,9 +1,13 @@
 import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/playgroundForm.css'
 import { Map } from '../Common/Map'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 export const PlaygroundFormPage = () => {
+
+    const ageRef = useRef(null);
+    const facilityRef = useRef(null);
+    const locationRef = useRef(null);
 
     const [name, setName] = useState("");
     const [ageGroup, setAgeGroup] = useState("");
@@ -15,24 +19,59 @@ export const PlaygroundFormPage = () => {
     const [toys, setToys] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [description, setDescription] = useState("");
+    const [isNameFocused, setIsNameFocused] = useState(false);
+    const [isOtherAgeFocused, setIsOtherAgeFocused] = useState(false);
+    const [isOtherFacilityFocused, setIsOtherFacilityFocused] = useState(false);
+    const [isOtherLocationFocused, setIsOtherLocationFocused] = useState(false);
+    const [otherFacilityText, setOtherFacilityText] = useState("");
+    const [otherAgeText, setOtherAgeText] = useState("");
+    const [otherLocationText, setOtherLocationText] = useState("");
+
+
+    const resetFocus = () => {
+        setIsOtherAgeFocused(false);
+        setIsOtherFacilityFocused(false);
+        setIsOtherLocationFocused(false);
+    }
 
     const changeName = (event) => {
         setName(event.target.value);
     }
 
     const changeAgeGroup = (event) => {
+        resetFocus();
         setAgeGroup(event.target.value);
     }
 
+    const otherChangeAgeGroup = (event) => {
+        resetFocus();
+        setIsOtherAgeFocused(true)
+        ageRef.current.focus();
+        setAgeGroup(event.target.value);
+    }
+
+
     const changeLocation = (event) => {
+        resetFocus();
         setLocation(event.target.value);
     }
 
+
+    const otherChangeLocation = (event) => {
+        resetFocus();
+        setIsOtherLocationFocused(true)
+        locationRef.current.focus();
+        setAgeGroup(event.target.value);
+    }
+
+
     const changeShaded = (event) => {
+        resetFocus();
         setShaded(event.target.value);
     }
 
     const changeTransport = (event) => {
+        resetFocus();
         const value = event.target.value;
 
         if (!Array.isArray(transport)) {
@@ -50,14 +89,17 @@ export const PlaygroundFormPage = () => {
     }
 
     const changeIsFenced = (event) => {
+        resetFocus();
         setIsFenced(event.target.value);
     }
 
     const changeFloor = (event) => {
+        resetFocus();
         setFloor(event.target.value);
     }
 
     const changeToys = (event) => {
+        resetFocus();
         const value = event.target.value;
         if (!Array.isArray(toys)) {
             setToys([]);
@@ -76,6 +118,7 @@ export const PlaygroundFormPage = () => {
     }
 
     const changeFacilities = (event) => {
+        resetFocus();
         const value = event.target.value;
         if (!Array.isArray(facilities)) {
             setFacilities([]);
@@ -92,7 +135,35 @@ export const PlaygroundFormPage = () => {
         }
     }
 
+
+    const otherChangeFacilities = (event) => {
+        resetFocus();
+        setIsOtherFacilityFocused(true)
+        facilityRef.current.focus();
+        const value = event.target.value;
+        if (!Array.isArray(facilities)) {
+            setFacilities([]);
+            return;
+        }
+
+        const index = facilities.indexOf(value);
+        
+        if (index !== -1) {
+            const newFacilities = facilities.filter(facility => facility !== value);
+            facilityRef.current.blur();
+            setIsOtherFacilityFocused(false);
+            setFacilities(newFacilities);
+        } else {
+            setFacilities([...facilities, value]);
+        }
+
+        console.log(facilities);
+
+    }
+
+
     const changeDescription = (event) => {
+        resetFocus();
         setDescription(event.target.value);
     }
 
@@ -104,7 +175,7 @@ export const PlaygroundFormPage = () => {
                 <div className="question" id="name-question">
                     <label className="form-label" for="name-question">1. Име:</label>
                     <br/>
-                    <input onChange={changeName} id="playground-name" type="text" className="text-input" placeholder="Име на площадката, ако има такова." name="name"/>
+                    <input onChange={changeName} id="playground-name-input" type="text" onFocus={() => {resetFocus(); setIsNameFocused(true)}} onBlur={() => setIsNameFocused(false)} className={isNameFocused ? 'text-input focused' : 'text-input'} placeholder="Име на площадката, ако има такова." name="name"/>
                 </div>
 
                 <div className="question" id="age-group-question">
@@ -131,8 +202,9 @@ export const PlaygroundFormPage = () => {
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="other-years" name="age-group" value="other-years"/>
+                        <input type="radio" onChange={otherChangeAgeGroup} className="playground-input playground-input-radio" id="other-years" name="age-group" value={otherAgeText}/>
                         <label for="other-years">Друго</label>
+                        <input onClick={otherChangeAgeGroup} onFocus={() => {setIsOtherAgeFocused(true)}} className={isOtherAgeFocused ? 'focused' : ''} type="text" ref={ageRef} id="other-years-text" />
                     </div>
                     <br/>
                 </div>
@@ -156,8 +228,9 @@ export const PlaygroundFormPage = () => {
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="other-place" name="location" value="other-place"/>
+                        <input type="radio" onChange={otherChangeLocation} className="playground-input playground-input-radio" id="other-place" name="location" value={otherLocationText}/>
                         <label for="other-place">Друго</label>
+                        <input onClick={otherChangeLocation} onFocus={() => {setIsOtherLocationFocused(true)}} className={isOtherLocationFocused ? 'focused' : ''} type="text" ref={locationRef} id="other-location-text" />
                     </div>
                     <br/>
                 </div>
@@ -330,33 +403,34 @@ export const PlaygroundFormPage = () => {
                     <label className="form-label" for="facilities-question">9. Други съоражения?</label>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="wc" name="facilities" value="wc"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="wc" name="facilities" value="wc"/>
                         <label for="wc">Тоалетна</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="cafe" name="facilities" value="cafe"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="cafe" name="facilities" value="cafe"/>
                         <label for="cafe">Барче / кафене</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="bin" name="facilities" value="bin"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="bin" name="facilities" value="bin"/>
                         <label for="bin">Koшче за боклук</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="fountain" name="facilities" value="fountain"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="fountain" name="facilities" value="fountain"/>
                         <label for="fountain">Чешма</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="bench" name="facilities" value="bench"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="bench" name="facilities" value="bench"/>
                         <label for="bench">Пейка</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="bench" name="facilities" value="bench"/>
+                        <input type="checkbox" onChange={otherChangeFacilities}  className="playground-input" id="bench" name="facilities" value={otherFacilityText}/>
                         <label for="others">Друго</label>
+                        <input onClick={otherChangeFacilities} onFocus={() => {setIsOtherFacilityFocused(true)}} className={isOtherFacilityFocused ? 'focused' : ''} type="text" ref={facilityRef} id="other-facilities-text" />
                     </div>
                     <br/>
                 </div>

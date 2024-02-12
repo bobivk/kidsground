@@ -185,7 +185,7 @@
     }
   }
   
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 912px) {
     .left-inner-column,
     .middle-inner-column, 
     .right-inner-column {
@@ -193,7 +193,7 @@
   }
 }
 
-  @media only screen and (max-width: 450px) {
+  @media only screen and (max-width: 540px) {
     .add-playground-btn{
       font-size: 14px;
     }
@@ -250,7 +250,7 @@
   @media only screen and (max-width: 280px) {
     .background-img {
       margin-top: -10vh;
-  }
+    }
     .main-text {
       font-size: 10px;
     }
