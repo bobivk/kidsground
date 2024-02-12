@@ -45,7 +45,7 @@ export const HomePage = () => {
                     <div id="map">
                         <Map/>
                         <div >
-                            <Link to="/add"><button className="add-playground-btn"> <i className="fa-regular fa-square-plus"></i> Добавете детска площадка</button></Link>
+                            <Link to="/add"><button className="add-playground-btn"> <i className="fa-regular fa-square-plus"></i> Добави детска площадка</button></Link>
                         </div>
                 </div>
             </div>
@@ -74,8 +74,7 @@ export const HomePage = () => {
                     <p>Защо?</p>
                   </div>
                   <p className="outer-text"> 
-                    Липсва единна карта на 
-                    града, която да отразява
+                    Липсва единна карта, която да отразява
                     всички детски площадки, 
                     тяхното състояние, 
                     налични съоръжения и 

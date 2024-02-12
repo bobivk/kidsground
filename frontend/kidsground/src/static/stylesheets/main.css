@@ -76,6 +76,7 @@
     font-size: 28px;
     padding-bottom: 14px;
     align-items: center;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.7);
   }
   
   .map-title, .map-title-last {
