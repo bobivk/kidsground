@@ -236,7 +236,7 @@ tr td:last-child {
     color: #62BEC9;
 }
 
-.project-input:hover {
+.playground-input:hover {
     border: 3px solid #735c86;
 }
 

@@ -1,6 +1,7 @@
 import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/main.css'
 import { Map } from '../Common/Map'
+import { Link } from 'react-router-dom'
 
 export const HomePage = () => {
     return(
@@ -44,7 +45,7 @@ export const HomePage = () => {
                     <div id="map">
                         <Map/>
                         <div >
-                            <button onClick="openPlaygroundForm()" className="add-playground-btn"> <i className="fa-regular fa-square-plus"></i> Добавете детска площадка</button>
+                            <Link to="/add"><button className="add-playground-btn"> <i className="fa-regular fa-square-plus"></i> Добавете детска площадка</button></Link>
                         </div>
                 </div>
             </div>

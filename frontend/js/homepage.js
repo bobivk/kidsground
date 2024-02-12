@@ -12,7 +12,7 @@ function closeImportModal() {
 }
 
 // document.getElementById("project-form").addEventListener('submit', (event) => {
-//     const fields = document.querySelectorAll(".project-input");
+//     const fields = document.querySelectorAll(".playground-input");
 //     const data = {};
 //     fields.forEach(field => {
 //         data[field.name] = field.value;
