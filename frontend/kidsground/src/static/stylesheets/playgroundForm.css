@@ -11,6 +11,7 @@
 #add-playground {
     display: flex;
     justify-content: center;
+    opacity: none;
 }
 
 #playground-form {
@@ -84,6 +85,7 @@ input[type="checkbox"]:checked::before {
 .choice {
     display: flex;
     flex-direction: row;
+    background-color: EFB39B;
 }
 
 #other-years-text {
@@ -136,6 +138,26 @@ input[type="checkbox"]:checked::before {
 
 #other-location-text.focused {
     border-bottom-width: 3px; /* Increase border size when focused */
+}
+
+.add-playground-btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+}
+
+#add-playground-btn,
+#cancel-add-playground-btn {
+    background-color: #CDEAEE;
+    color: var(--text-grey);
+    height: 7vh;
+    width: 20vw;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
 }
 
 @media only screen and (max-width: 1280px) {

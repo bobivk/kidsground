@@ -1,5 +1,6 @@
 import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/playgroundForm.css'
+import background from "../../static/playgroundFormBackground.png";
 import { Map } from '../Common/Map'
 import { useState, useRef } from 'react'
 
@@ -168,7 +169,11 @@ export const PlaygroundFormPage = () => {
     }
 
     return(
-    <div className="page">
+    <div className="page" style={{backgroundImage: `url(${background})`,
+                                  backgroundPosition: 'center',
+                                  backgroundSize: 'cover',
+                                  backgroundRepeat: 'no-repeat',
+                                  height: "100%"}}>
         <div id="add-playground">
             <form id="playground-form" className="form-container">
             <h2 style={{textAlign:"center"}}>Добави площадка</h2>
