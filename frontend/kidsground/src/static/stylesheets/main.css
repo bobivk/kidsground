@@ -14,9 +14,9 @@
     padding-left: 3%;
   }
   
-    .subtitle {
-        font-size: 20px;
-    }
+  .subtitle {
+    font-size: 20px;
+  }
 
   .title-text {
     display: inline-flex;
@@ -99,18 +99,20 @@
 .container {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 15%;
+  background-color: #EDEDED;
+  padding: 5%;
 }
 
 /* Style for the outer rectangle */
 .left-outer-column,
 .middle-outer-column,
 .right-outer-column {
-  width: 15vw;
+  width: 18vw;
   position: relative;
-  padding: 20px;
+  margin-top: 0;
   color: black;
-  border-radius: 10px;
+  border-radius: 20px;
   margin-bottom: 2vh;
 }
 
@@ -134,6 +136,8 @@
     position: relative;
     top: 0; /* Aligns the inner rectangle at the top */
     left: 50%;
+    padding-top: 0;
+    padding-bottom: 35%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
@@ -157,8 +161,9 @@
   
   /* Text style for the outer paragraphs */
   .outer-text {
-    margin-top: 30px; /* Margin below the inner rectangle */
+    margin-top: 20px; /* Margin below the inner rectangle */
     text-align: center;
+    padding: 20px;
     font-size: 16;
     max-width: 100%; /* Ensures text doesn't exceed the outer rectangle */
     /* overflow: hidden; Hides text that exceeds the max width */

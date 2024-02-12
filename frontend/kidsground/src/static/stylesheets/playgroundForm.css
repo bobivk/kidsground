@@ -12,6 +12,7 @@
 #add-playground {
     display: flex;
     justify-content: center;
+    opacity: none;
 }
 
 #playground-form {
@@ -33,6 +34,7 @@
 .choice {
     display: flex;
     flex-direction: row;
+    background-color: EFB39B;
 }
 
 .choice input {
