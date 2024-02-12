@@ -50,12 +50,12 @@ export const HomePage = () => {
                 </div>
             </div>
             </div>
-            <div id="about-us" class="container">
-                <div class="left-outer-column">
-                  <div class="left-inner-column">
+            <div id="about-us" className="container">
+                <div className="left-outer-column">
+                  <div className="left-inner-column">
                     <p>Какво?</p>
                   </div>
-                  <p class="outer-text"> 
+                  <p className="outer-text"> 
                     KIDSground е инициатива 
                     за създаване на дигитална 
                     карта на всички известни 
@@ -69,11 +69,11 @@ export const HomePage = () => {
                     на детските площадки в
                     града.</p>
                 </div>
-                <div class="middle-outer-column">
-                  <div class="middle-inner-column">
+                <div className="middle-outer-column">
+                  <div className="middle-inner-column">
                     <p>Защо?</p>
                   </div>
-                  <p class="outer-text"> 
+                  <p className="outer-text"> 
                     Липсва единна карта на 
                     града, която да отразява
                     всички детски площадки, 
@@ -87,11 +87,11 @@ export const HomePage = () => {
                     такива липсват или са 
                     крайно недостатъчни.</p>
                 </div>
-                <div class="right-outer-column">
-                  <div class="right-inner-column">
+                <div className="right-outer-column">
+                  <div className="right-inner-column">
                     <p>Как?</p>
                   </div>
-                  <p class="outer-text"> 
+                  <p className="outer-text"> 
                     Отвори картата, 
                     отбележи площадка и 
                     отговори на краткия 
