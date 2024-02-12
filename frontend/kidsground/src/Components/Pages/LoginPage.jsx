@@ -173,30 +173,30 @@ export const LoginPage = () => {
 
     if(switcher) {
         return(
-            <div class="container page">
-                <div class="form-box">
+            <div className="container page">
+                <div className="form-box">
                     <h1 id="title">Вход</h1>
                     <form id="registration-form">
-                        <div class="input-group">
-                            <div class="input-field">
-                                <i class="fa-solid fa-envelope"></i>
+                        <div className="input-group">
+                            <div className="input-field">
+                                <i className="fa-solid fa-envelope"></i>
                                 <input type="text" name="email" placeholder="Имейл"/>
                             </div>
-                            <div class="error" id="email-error"></div>
+                            <div className="error" id="email-error"></div>
     
-                            <div class="input-field">
-                                <i class="fa-solid fa-lock"></i>
+                            <div className="input-field">
+                                <i className="fa-solid fa-lock"></i>
                                 <input type="password" id="password" name="password" placeholder="Парола" oninput="checkPassword()"/>
-                                <div class="error" id="password-length-error"></div>
+                                <div className="error" id="password-length-error"></div>
                             </div>
                         </div>
     
-                        <div class="btn-field">
-                            <button type="button" class="disable" id="signUpBtn" onClick={signUp}>Регистрирай ме</button>
+                        <div className="btn-field">
+                            <button type="button" className="disable" id="signUpBtn" onClick={signUp}>Регистрирай ме</button>
                             <button type="button" id="signInBtn" onClick={signIn}>Вход</button>
                         </div>
-                        <h4 class="wrong-credentials" id="wrong-credentials-msg">Грешен имейл или парола.</h4>
-                        <div class="registration-success" id="registration-success">
+                        <h4 className="wrong-credentials" id="wrong-credentials-msg">Грешен имейл или парола.</h4>
+                        <div className="registration-success" id="registration-success">
                             <h4>Успешна регистрация!</h4>
                             <h4>Моля, влезте в профила си.</h4>
                         </div>
@@ -205,62 +205,62 @@ export const LoginPage = () => {
             </div>)
     } else {
         return(
-            <div class="container page">
-                <div class="form-box">
+            <div className="container page">
+                <div className="form-box">
                     <h1 id="title">Регистрация</h1>
                     <form id="registration-form">
-                        <div class="input-group">
-                            <div class="input-field" id="nameField">
-                                <i class="fa-solid fa-user"></i>
+                        <div className="input-group">
+                            <div className="input-field" id="nameField">
+                                <i className="fa-solid fa-user"></i>
                                 <input type="text" name="username" placeholder="Потребителско име"/>
                             </div>
     
-                            <div class="input-field">
-                                <i class="fa-solid fa-envelope"></i>
+                            <div className="input-field">
+                                <i className="fa-solid fa-envelope"></i>
                                 <input type="text" name="email" placeholder="Имейл"/>
                             </div>
-                            <div class="error" id="email-error"></div>
+                            <div className="error" id="email-error"></div>
     
-                            <div class="input-field">
-                                <i class="fa-solid fa-lock"></i>
+                            <div className="input-field">
+                                <i className="fa-solid fa-lock"></i>
                                 <input type="password" id="password" name="password" placeholder="Парола" onChange={checkPassword}/>
-                                <div class="error" id="password-length-error"></div>
+                                <div className="error" id="password-length-error"></div>
                             </div>
                                 
-                            <div class="error" id="password-numbers-error"></div>
-                            <div class="error" id="password-uppercase-error"></div>
-                            <div class="error" id="password-lowercase-error"></div>
-                            <div class="password-check">
-                                <div id="check0" style={{color: check0}} class="password-check-field">
+                            <div className="error" id="password-numbers-error"></div>
+                            <div className="error" id="password-uppercase-error"></div>
+                            <div className="error" id="password-lowercase-error"></div>
+                            <div className="password-check">
+                                <div id="check0" style={{color: check0}} className="password-check-field">
                                     <CheckIcon style={{fill : check0}} id="checkIcon"/><span> Дължина поне 6 символа.</span>
                                 </div>
-                                <div id="check1" style={{color: check1}} class="password-check-field">
+                                <div id="check1" style={{color: check1}} className="password-check-field">
                                     <CheckIcon style={{fill: check1}} id="checkIcon"/><span> Дължина най-много 10 символа.</span>
                                 </div>
-                                <div id="check2" style={{color: check2}} class="password-check-field">
+                                <div id="check2" style={{color: check2}} className="password-check-field">
                                     <CheckIcon style={{fill: check2}} id="checkIcon"/><span> Съдържа малки букви.</span>
                                 </div>
-                                <div id="check3" style={{color: check3}} class="password-check-field">
+                                <div id="check3" style={{color: check3}} className="password-check-field">
                                     <CheckIcon style={{fill: check3}} id="checkIcon"/><span> Съдържа главни букви.</span>
                                 </div>
-                                <div id="check4" style={{color: check4}} class="password-check-field">
+                                <div id="check4" style={{color: check4}} className="password-check-field">
                                     <CheckIcon style={{fill: check4}} id="checkIcon"/><span> Съдържа цифри.</span>
                                 </div>
                             </div>
                             
                         </div>
     
-                        <div class="btn-field">
+                        <div className="btn-field">
                             <button type="button" id="signUpBtn" onClick={signUp}>Регистрирай ме</button>
-                            <button type="button" className="disable" id="signInBtn" onClick={signIn}>Вход</button>
+                            <button type="button" classNameName="disable" id="signInBtn" onClick={signIn}>Вход</button>
                         </div>
-                        <div class="registration-success" id="registration-success">
+                        <div className="registration-success" id="registration-success">
                             <h4>Успешна регистрация!</h4>
                             <h4>Моля, влезте в профила си.</h4>
                         </div>
                     </form>
-                    <div class="error" id="username-exists-error">Потребител с това име или email вече съществува.</div>
-                    <div class="error" id="email-exists-error"></div>
+                    <div className="error" id="username-exists-error">Потребител с това име или email вече съществува.</div>
+                    <div className="error" id="email-exists-error"></div>
                 </div>
             </div>)
     }
