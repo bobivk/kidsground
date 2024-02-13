@@ -1,6 +1,7 @@
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import { useState, useEffect } from 'react';
 import '../../static/stylesheets/map.css'
+import {ReactComponent as Terrain} from "../../static/icons/layers_8.svg"
 
 const libraries = ['places'];
 
@@ -48,10 +49,15 @@ export const Map = () => {
         libraries,
     });
 
-    const handleMapTypeChange = (mapType) => {
+    const handleMapTypeChange = () => {
         if (map) {
-          map.setMapTypeId(mapType);
-          setSelectedMapType(mapType);
+            if(map.getMapTypeId() === 'roadmap') {
+                map.setMapTypeId('satellite');
+                setSelectedMapType('satellite');
+            } else {
+                map.setMapTypeId('roadmap');
+                setSelectedMapType('roadmap');
+            }
         }
     };
 
@@ -109,17 +115,9 @@ export const Map = () => {
 
     return (
         <div id="google-map">
-            <div id="map-type">
-                <select id="selector" value={selectedMapType} onChange={(e) => handleMapTypeChange(e.target.value)}>
-                {mapTypes.map((type) => (
-                    <option style={{fontFamily: "sans-serif"}} key={type.value} value={type.value}>
-                    {type.label}
-                    </option>
-                ))}
-                </select>
-            </div>
+            <Terrain id="terrain" onClick={handleMapTypeChange} />
             <GoogleMap
-                options={{controlSize: 1}}
+                options={{controlSize: 0}}
                 mapContainerStyle={mapContainerStyle}
                 zoom={17}
                 center={plovdiv}

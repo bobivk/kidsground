@@ -41,6 +41,25 @@
     align-items: center;
 }
 
+  #terrain {
+    z-index: 2;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    position: absolute;
+    top: 5vh;
+    right: 0.5vw;
+    fill: var(--text-grey);
+    background: none rgb(255, 255, 255);
+    padding: 5px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+  }
+
+.gm-style-mtc {
+  display: none; /* Adjust height as needed */
+}
+
 @media only screen and (max-width: 1280px) {
     #map-wrapper{
         align-items: center;
@@ -49,21 +68,28 @@
       width: 60vw;
     }
 
-    #map-type {
-      position: absolute;
-      z-index: 1;
-      bottom: 49.7vh; 
-      left: 1.5vw 
-    }
-  
     #selector {
       border-radius: 0px;
       font-family: sans-serif;
       width: 300px;
     }
+
+    #terrain {
+      right: 1vw;
+    }
   }
 @media only screen and (max-width: 912px) {
     .button-overlay{
       font-size: 14px;
+    }
+    #terrain {
+      right: 1.5vw;
+    }
+  }
+
+  @media only screen and (max-width: 540px) {
+    #terrain {
+      top: 7vh;
+      right: 3vw;
     }
   }
