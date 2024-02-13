@@ -45,6 +45,7 @@ export const PlaygroundFormPage = () => {
     const changeAgeGroup = (event) => {
         resetFocus();
         setAgeGroup(event.target.value);
+        console.log(ageGroup);
     }
 
     const otherChangeAgeGroup = (event) => {
@@ -52,8 +53,12 @@ export const PlaygroundFormPage = () => {
         setIsOtherAgeFocused(true)
         ageRef.current.focus();
         setAgeGroup(event.target.value);
+        console.log(ageGroup);
     }
-
+    
+    const otherChangeAgeGroupText = (event) => {
+        setOtherAgeText(event.target.value)
+    }
 
     const changeLocation = (event) => {
         resetFocus();
@@ -65,9 +70,13 @@ export const PlaygroundFormPage = () => {
         resetFocus();
         setIsOtherLocationFocused(true)
         locationRef.current.focus();
-        setAgeGroup(event.target.value);
+        setLocation(event.target.value);
+        console.log(location);
     }
 
+    const otherChangeLocationText = (event) => {
+        setOtherLocationText(event.target.value)
+    }
 
     const changeShaded = (event) => {
         resetFocus();
@@ -165,6 +174,10 @@ export const PlaygroundFormPage = () => {
 
     }
 
+    const otherChangeFacilitiesText = (event) => {
+        setOtherFacilityText(event.target.value);
+    }
+
 
     const changeDescription = (event) => {
         resetFocus();
@@ -208,7 +221,7 @@ export const PlaygroundFormPage = () => {
                     <div className="choice">
                         <input type="radio" onChange={otherChangeAgeGroup} className="playground-input playground-input-radio" id="other-years" name="age-group" value={otherAgeText}/>
                         <label for="other-years">Друго</label>
-                        <input onClick={otherChangeAgeGroup} onFocus={() => {setIsOtherAgeFocused(true)}} className={isOtherAgeFocused ? 'focused' : ''} type="text" ref={ageRef} id="other-years-text" />
+                        <input onClick={otherChangeAgeGroupText} onChange={otherChangeAgeGroupText} onFocus={() => {setIsOtherAgeFocused(true)}} className={isOtherAgeFocused ? 'focused' : ''} type="text" ref={ageRef} id="other-years-text" />
                     </div>
                     <br/>
                 </div>
@@ -234,7 +247,7 @@ export const PlaygroundFormPage = () => {
                     <div className="choice">
                         <input type="radio" onChange={otherChangeLocation} className="playground-input playground-input-radio" id="other-place" name="location" value={otherLocationText}/>
                         <label for="other-place">Друго</label>
-                        <input onClick={otherChangeLocation} onFocus={() => {setIsOtherLocationFocused(true)}} className={isOtherLocationFocused ? 'focused' : ''} type="text" ref={locationRef} id="other-location-text" />
+                        <input type="text" onClick={otherChangeLocation} onChange={otherChangeLocationText} onFocus={() => {setIsOtherLocationFocused(true)}} className={isOtherLocationFocused ? 'focused' : ''} ref={locationRef} id="other-location-text" />
                     </div>
                     <br/>
                 </div>
@@ -434,7 +447,7 @@ export const PlaygroundFormPage = () => {
                     <div className="choice">
                         <input type="checkbox" onChange={otherChangeFacilities}  className="playground-input" id="bench" name="facilities" value={otherFacilityText}/>
                         <label for="others">Друго</label>
-                        <input onClick={otherChangeFacilities} onFocus={() => {setIsOtherFacilityFocused(true)}} className={isOtherFacilityFocused ? 'focused' : ''} type="text" ref={facilityRef} id="other-facilities-text" />
+                        <input type="text" onClick={otherChangeFacilities} onChange={otherChangeFacilitiesText} onFocus={() => {setIsOtherFacilityFocused(true)}} className={isOtherFacilityFocused ? 'focused' : ''}  ref={facilityRef} id="other-facilities-text" />
                     </div>
                     <br/>
                 </div>

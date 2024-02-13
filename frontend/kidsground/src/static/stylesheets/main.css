@@ -133,16 +133,15 @@
 .middle-inner-column, 
 .right-inner-column {
     width: 65%; /* Adjusted size for the inner rectangle */
-    height: 70px; /* Adjusted size for the inner rectangle */
+    height: 30%; /* Adjusted size for the inner rectangle */
     position: relative;
     top: 0; /* Aligns the inner rectangle at the top */
     left: 50%;
     padding-top: 0;
-    padding-bottom: 35%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    align-items: center; /* Aligns content at the top */
+    align-items: center;
     color: white;
     font-size: 30px;
     border-radius: 10px;
@@ -250,6 +249,12 @@
   @media only screen and (max-height: 800px) {
     .background-img {
         margin-top: -18vh;
+    }
+  }
+
+  @media only screen and (max-width: 430px) {
+    .background-img {
+        margin-top: -12vh;
     }
   }
   
