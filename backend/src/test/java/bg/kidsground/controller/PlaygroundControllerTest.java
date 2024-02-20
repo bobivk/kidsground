@@ -12,6 +12,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.NoSuchElementException;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -66,5 +69,17 @@ public class PlaygroundControllerTest {
                 .andExpect(jsonPath("$.name").value(name));
 
         verify(playgroundService).getById(id);
+    }
+
+    @Test
+    public void testPlaygroundNotFound() throws Exception {
+        Long nonExistingId = 99999999999999999L;
+
+        when(playgroundService.getById(nonExistingId)).thenThrow(new NoSuchElementException());
+
+        mockMvc.perform(get(AppRestEndpoints.V1.Playground.By.ID, nonExistingId))
+                .andExpect(status().isNotFound());
+
+        verify(playgroundService).getById(nonExistingId);
     }
 }
