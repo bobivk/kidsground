@@ -36,7 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20vw;
+    width: 75vw;
     height: 20vh;
     background-color: rgb(213, 213, 213);
     border-radius: 12px;
@@ -58,7 +58,7 @@
 #input-wrapper {
     opacity: 0;
     position: absolute;
-    width: 19%;
+    width: 74.5%;
     height: 84.9%;
     border-radius: 12px;
     cursor: pointer;
@@ -73,9 +73,20 @@ input#file-upload-button {
     cursor: pointer;
 }
 
-.playground-text {
-    margin-top: 10vh;
+#info-card {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: center;
+    margin-top: 20px;
     font-size: large;
+    margin-bottom: 20px;
+}
+
+.playground-text {
+    background-color: #CDEAEE;
+    padding: 12px;
+    border-radius: 12px;
 }
 
 .btn-label {
@@ -91,17 +102,16 @@ body
     background-color: rgba(255,255,255,0.1);
 }
 
+.image-gallery-left-nav, .image-gallery-right-nav {
+    padding: 0;
+}
+
+.image-gallery-play-button {
+    display: none;
+}
+
 button {
-    background-color: #CDEAEE;
-    color: var(--text-grey);
-    height: 5vh;
-    width: 50vw;
-    border-radius: 15px;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
     transition: background 1s;
-    margin-bottom: 20px;
 }
 
 #playground-name {

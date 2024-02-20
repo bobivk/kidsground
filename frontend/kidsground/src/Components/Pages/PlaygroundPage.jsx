@@ -14,6 +14,15 @@ import { useEffect } from 'react'
 
 export const PlaygroundPage = () => {
 
+    const images = [
+        {
+            original: "./pictures/stefan_genev.png"
+        },
+        {
+            original: "./pictures/stefan_genev.png"
+        }
+    ]
+
     useEffect(() => {
             window.scrollTo(0, 0)
     }, [])
@@ -21,7 +30,7 @@ export const PlaygroundPage = () => {
     return(
         <div className="page">
             <div className="picture-slider">
-                <img className="playground-picture" src="./pictures/stefan_genev.png"/>
+                <ImageGallery items={images}/>
             </div>
 
             <div className="playground-content">
@@ -34,29 +43,30 @@ export const PlaygroundPage = () => {
                         <input id='input-wrapper' type="file" name="myfile" accept="image/*"/>
                     </div>
                 </div>
-        
-                <div className="playground-text">
-                    <h1>Площадка "Дъга"</h1>
-                    <div id="age" className="card">
-                        <span><ChildIcon className="icon"/> деца между 3 и 6 години.</span>
-                    </div>
-                    <div id="location" className="card">
-                        <span><ParkIcon className="icon"/>В парк или градинка</span>
-                    </div>
-                    <div id="shade" className="card">
-                        <span><TreeIcon className="icon"/>Естествена сянка от дървета</span>
-                    </div>
-                    <div id="transport" className="card">
-                        <span className="card">Транспорт</span> <br/>
-                        <span className="card"><BusIcon className="icon"/>Автобус 15</span>
-                        <span className="card"><ParkingIcon className="icon"/>Свободно паркиране</span>
-                        <span className="card"><BikeIcon className="icon"/>Велоалея</span>
-                    </div>
-                    <div id="fence" className="card">
-                        <span><FenceIcon id="fence-icon" className="icon" height="2.5vh" width = "2.5vw"/>Оградена</span>
-                    </div>
-                    <div id="description">
-                        <p>Площадката има люлка, пързалка и катерушка. Съораженията са от пластмаса и без остри ръбове. Настилката е от мек гумен материал.</p>
+                <div id="info-card">
+                    <div className="playground-text">
+                        <h1>Площадка "Дъга"</h1>
+                        <div id="age" className="card">
+                            <span><ChildIcon className="icon"/> деца между 3 и 6 години.</span>
+                        </div>
+                        <div id="location" className="card">
+                            <span><ParkIcon className="icon"/>В парк или градинка</span>
+                        </div>
+                        <div id="shade" className="card">
+                            <span><TreeIcon className="icon"/>Естествена сянка от дървета</span>
+                        </div>
+                        <div id="transport" className="card">
+                            <span className="card">Транспорт</span> <br/>
+                            <span className="card"><BusIcon className="icon"/>Автобус 15</span>
+                            <span className="card"><ParkingIcon className="icon"/>Свободно паркиране</span>
+                            <span className="card"><BikeIcon className="icon"/>Велоалея</span>
+                        </div>
+                        <div id="fence" className="card">
+                            <span><FenceIcon id="fence-icon" className="icon" height="2.5vh" width = "2.5vw"/>Оградена</span>
+                        </div>
+                        <div id="description">
+                            <p>Площадката има люлка, пързалка и катерушка. Съораженията са от пластмаса и без остри ръбове. Настилката е от мек гумен материал.</p>
+                        </div>
                     </div>
                 </div>
                 <div id="map">

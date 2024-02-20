@@ -39,20 +39,6 @@
     margin-bottom: 10px; /* Adjust the value as needed */
   }
   
-  button {
-    background-color: #CDEAEE;
-    margin-top: 15px;
-    color: var(--text-grey);
-    height: 10vh;
-    width: 28vw;
-    border-radius: 15px;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-    transition: background 1s;
-    margin-bottom: 20px;
-  }
-  
   button i {
     background-color: #CDEAEE;
     color: var(--text-grey);
@@ -71,13 +57,21 @@
   
   .add-playground-btn {
     display: flex;
+    width: 39.8vw;
+    color: var(--text-grey);
     justify-content: center;
-    padding: 5%;
     margin-top: 10px; /* Add some margin if needed */
-    width: 40vw;
     font-size: 30px;
     align-items: center;
+    background-color: #CDEAEE;
     box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.7);
+    cursor: pointer;
+    transition: background 1s;
+    margin-top: 15px;
+    border-radius: 15px;
+    border: 0;
+    outline: 0;
+    margin-bottom: 20px;
   }
   
   .map-title, .map-title-last {
