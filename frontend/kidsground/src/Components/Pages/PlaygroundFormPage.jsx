@@ -8,7 +8,7 @@ export const PlaygroundFormPage = () => {
 
     const [name, setName] = useState("");
     const [ageGroup, setAgeGroup] = useState("");
-    const [location, setLocation] = useState("");
+    const [environment, setenvironment] = useState("");
     const [shaded, setShaded] = useState("");
     const [transport, setTransport] = useState([]);
     const [isFenced, setIsFenced] = useState(true);
@@ -25,8 +25,8 @@ export const PlaygroundFormPage = () => {
         setAgeGroup(event.target.value);
     }
 
-    const changeLocation = (event) => {
-        setLocation(event.target.value);
+    const changeEnvironment = (event) => {
+        setenvironment(event.target.value);
     }
 
     const changeShaded = (event) => {
@@ -115,54 +115,50 @@ export const PlaygroundFormPage = () => {
                 <div className="question" id="age-group-question">
                     <label className="form-label" for="age-group-question">2. За каква възрастова група е подходяща площадката?</label>
                     <br/>
+                    <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="under-1" name="age-group" value="under-1"/>
-                        <label for="under-1">Под 1г.</label>
+                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="zero_to_three" name="age_group" value="zero_to_three"/>
+                        <label for="zero_to_three">0-3г.</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="1-3years" name="age-group" value="1-3years"/>
-                        <label for="1-3years">1-3г.</label>
+                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_six" name="age_group" value="three_to_six"/>
+                        <label for="three_to_six">3-6г.</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="3-6years" name="age-group" value="3-6years"/>
-                        <label for="3-6years">3-6г.</label>
+                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="six_to_twelve" name="age_group" value="six_to_twelve"/>
+                        <label for="six_to_twelve">6-12г.</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="6-12years" name="age-group" value="6-12years"/>
-                        <label for="6-12years">6-12г.</label>
-                    </div>
-                    <br/>
-                    <div className="choice">
-                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="other-years" name="age-group" value="other-years"/>
-                        <label for="other-years">Друго</label>
+                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="twelve_plus" name="age_group" value="twelve_plus"/>
+                        <label for="twelve_plus">Друго</label>
                     </div>
                     <br/>
                 </div>
 
-                <div className="question" id="location-question">
-                    <label className="form-label" for="location-question">3. Какво е местоположението на детската площадка?</label>
+                <div className="question" id="environment-question">
+                    <label className="form-label" for="environment-question">3. Какво е местоположението на детската площадка?</label>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="boulevard" name="location" value="boulevard"/>
+                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="boulevard" name="environment" value="boulevard"/>
                         <label for="boulevard">До голям булевард</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="park" name="location" value="park"/>
+                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="park" name="environment" value="park"/>
                         <label for="park">В парк или градинка</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="apartments" name="location" value="apartments"/>
+                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="apartments" name="environment" value="apartments"/>
                         <label for="apartments">В междублоково пространство</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="other-place" name="location" value="other-place"/>
-                        <label for="other-place">Друго</label>
+                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="other-place" name="environment" value="other"/>
+                        <label for="other">Друго</label>
                     </div>
                     <br/>
                 </div>
