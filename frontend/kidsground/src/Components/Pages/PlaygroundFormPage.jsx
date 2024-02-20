@@ -1,10 +1,13 @@
 import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/playgroundForm.css'
-import background from "../../static/playgroundFormBackground.png";
 import { Map } from '../Common/Map'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export const PlaygroundFormPage = () => {
+
+    const ageRef = useRef(null);
+    const facilityRef = useRef(null);
+    const locationRef = useRef(null);
 
     const [name, setName] = useState("");
     const [ageGroup, setAgeGroup] = useState("");
@@ -16,24 +19,73 @@ export const PlaygroundFormPage = () => {
     const [toys, setToys] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [description, setDescription] = useState("");
+    const [isNameFocused, setIsNameFocused] = useState(false);
+    const [isOtherAgeFocused, setIsOtherAgeFocused] = useState(false);
+    const [isOtherFacilityFocused, setIsOtherFacilityFocused] = useState(false);
+    const [isOtherLocationFocused, setIsOtherLocationFocused] = useState(false);
+    const [otherFacilityText, setOtherFacilityText] = useState("");
+    const [otherAgeText, setOtherAgeText] = useState("");
+    const [otherLocationText, setOtherLocationText] = useState("");
+
+
+    useEffect(() => {
+            window.scrollTo(0, 0)
+    }, [])
+
+    const resetFocus = () => {
+        setIsOtherAgeFocused(false);
+        setIsOtherFacilityFocused(false);
+        setIsOtherLocationFocused(false);
+    }
 
     const changeName = (event) => {
         setName(event.target.value);
     }
 
     const changeAgeGroup = (event) => {
+        resetFocus();
         setAgeGroup(event.target.value);
+        console.log(ageGroup);
     }
 
-    const changeEnvironment = (event) => {
-        setenvironment(event.target.value);
+    const otherChangeAgeGroup = (event) => {
+        resetFocus();
+        setIsOtherAgeFocused(true)
+        ageRef.current.focus();
+        setAgeGroup(event.target.value);
+        console.log(ageGroup);
+    }
+    
+    const otherChangeAgeGroupText = (event) => {
+        setOtherAgeText(event.target.value)
+    }
+
+    const changeLocation = (event) => {
+        resetFocus();
+        setLocation(event.target.value);
+    }
+
+
+    const otherChangeLocation = (event) => {
+        resetFocus();
+        setIsOtherLocationFocused(true)
+        locationRef.current.focus();
+        setLocation(event.target.value);
+        console.log(location);
+    }
+
+    const otherChangeLocationText = (event) => {
+        setOtherLocationText(event.target.value)
+>>>>>>> 6237be210c6fb5c65cca252c3227bac67be00bd6
     }
 
     const changeShaded = (event) => {
+        resetFocus();
         setShaded(event.target.value);
     }
 
     const changeTransport = (event) => {
+        resetFocus();
         const value = event.target.value;
 
         if (!Array.isArray(transport)) {
@@ -51,14 +103,17 @@ export const PlaygroundFormPage = () => {
     }
 
     const changeIsFenced = (event) => {
+        resetFocus();
         setIsFenced(event.target.value);
     }
 
     const changeFloor = (event) => {
+        resetFocus();
         setFloor(event.target.value);
     }
 
     const changeToys = (event) => {
+        resetFocus();
         const value = event.target.value;
         if (!Array.isArray(toys)) {
             setToys([]);
@@ -77,6 +132,7 @@ export const PlaygroundFormPage = () => {
     }
 
     const changeFacilities = (event) => {
+        resetFocus();
         const value = event.target.value;
         if (!Array.isArray(facilities)) {
             setFacilities([]);
@@ -93,23 +149,51 @@ export const PlaygroundFormPage = () => {
         }
     }
 
+
+    const otherChangeFacilities = (event) => {
+        resetFocus();
+        setIsOtherFacilityFocused(true)
+        facilityRef.current.focus();
+        const value = event.target.value;
+        if (!Array.isArray(facilities)) {
+            setFacilities([]);
+            return;
+        }
+
+        const index = facilities.indexOf(value);
+        
+        if (index !== -1) {
+            const newFacilities = facilities.filter(facility => facility !== value);
+            facilityRef.current.blur();
+            setIsOtherFacilityFocused(false);
+            setFacilities(newFacilities);
+        } else {
+            setFacilities([...facilities, value]);
+        }
+
+        console.log(facilities);
+
+    }
+
+    const otherChangeFacilitiesText = (event) => {
+        setOtherFacilityText(event.target.value);
+    }
+
+
     const changeDescription = (event) => {
+        resetFocus();
         setDescription(event.target.value);
     }
 
     return(
-    <div className="page" style={{backgroundImage: `url(${background})`,
-                                  backgroundPosition: 'center',
-                                  backgroundSize: 'cover',
-                                  backgroundRepeat: 'no-repeat',
-                                  height: "100%"}}>
+    <div className="page background">
         <div id="add-playground">
             <form id="playground-form" className="form-container">
             <h2 style={{textAlign:"center"}}>Добави площадка</h2>
                 <div className="question" id="name-question">
                     <label className="form-label" for="name-question">1. Име:</label>
                     <br/>
-                    <input onChange={changeName} id="playground-name" type="text" className="text-input" placeholder="Име на площадката, ако има такова." name="name"/>
+                    <input onChange={changeName} id="playground-name-input" type="text" onFocus={() => {resetFocus(); setIsNameFocused(true)}} onBlur={() => setIsNameFocused(false)} className={isNameFocused ? 'text-input focused' : 'text-input'} placeholder="Име на площадката, ако има такова." name="name"/>
                 </div>
 
                 <div className="question" id="age-group-question">
@@ -132,8 +216,9 @@ export const PlaygroundFormPage = () => {
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="twelve_plus" name="age_group" value="twelve_plus"/>
-                        <label for="twelve_plus">Друго</label>
+                        <input type="radio" onChange={otherChangeAgeGroup} className="playground-input playground-input-radio" id="other-years" name="age-group" value={otherAgeText}/>
+                        <label for="other-years">Друго</label>
+                        <input onClick={otherChangeAgeGroupText} onChange={otherChangeAgeGroupText} onFocus={() => {setIsOtherAgeFocused(true)}} className={isOtherAgeFocused ? 'focused' : ''} type="text" ref={ageRef} id="other-years-text" />
                     </div>
                     <br/>
                 </div>
@@ -157,8 +242,9 @@ export const PlaygroundFormPage = () => {
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="other-place" name="environment" value="other"/>
-                        <label for="other">Друго</label>
+                        <input type="radio" onChange={otherChangeLocation} className="playground-input playground-input-radio" id="other-place" name="location" value={otherLocationText}/>
+                        <label for="other-place">Друго</label>
+                        <input type="text" onClick={otherChangeLocation} onChange={otherChangeLocationText} onFocus={() => {setIsOtherLocationFocused(true)}} className={isOtherLocationFocused ? 'focused' : ''} ref={locationRef} id="other-location-text" />
                     </div>
                     <br/>
                 </div>
@@ -331,33 +417,34 @@ export const PlaygroundFormPage = () => {
                     <label className="form-label" for="facilities-question">9. Други съоражения?</label>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="wc" name="facilities" value="wc"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="wc" name="facilities" value="wc"/>
                         <label for="wc">Тоалетна</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="cafe" name="facilities" value="cafe"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="cafe" name="facilities" value="cafe"/>
                         <label for="cafe">Барче / кафене</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="bin" name="facilities" value="bin"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="bin" name="facilities" value="bin"/>
                         <label for="bin">Koшче за боклук</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="fountain" name="facilities" value="fountain"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="fountain" name="facilities" value="fountain"/>
                         <label for="fountain">Чешма</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="bench" name="facilities" value="bench"/>
+                        <input type="checkbox" onChange={changeFacilities} className="playground-input" id="bench" name="facilities" value="bench"/>
                         <label for="bench">Пейка</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="bench" name="facilities" value="bench"/>
+                        <input type="checkbox" onChange={otherChangeFacilities}  className="playground-input" id="bench" name="facilities" value={otherFacilityText}/>
                         <label for="others">Друго</label>
+                        <input type="text" onClick={otherChangeFacilities} onChange={otherChangeFacilitiesText} onFocus={() => {setIsOtherFacilityFocused(true)}} className={isOtherFacilityFocused ? 'focused' : ''}  ref={facilityRef} id="other-facilities-text" />
                     </div>
                     <br/>
                 </div>
@@ -368,14 +455,16 @@ export const PlaygroundFormPage = () => {
                 <textarea type="text" onChange={changeDescription} className="text-input" name="description" rows="10" cols="20"></textarea>
                 </div>
                 <div>
-                    <h4>Посочете на картата мястото на площадката</h4>
-                    <div id="map">
-                        <Map/>
+                    <div>
+                        <h4>Посочете на картата мястото на площадката</h4>
+                        <div id="map">
+                            <Map/>
+                        </div>
                     </div>
-                </div>
-                <div className="add-playground-btns">
-                    <button id="add-playground-btn" type="submit" className="btn"><i className="fa-solid fa-plus"></i> Добави</button>
-                    <button id="cancel-add-playground-btn" type="button" className="btn cancel" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button>
+                    <div className="add-playground-btns" >
+                        <button id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
+                        <button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button>
+                    </div>
                 </div>
             </form>
         </div>
