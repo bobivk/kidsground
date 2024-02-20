@@ -7,6 +7,7 @@ import { ReactComponent as TreeIcon } from '../../static/icons/tree-solid.svg'
 import { ReactComponent as ParkIcon } from '../../static/icons/tree-city-solid.svg'
 import { ReactComponent as ParkingIcon } from '../../static/icons/square-parking-solid.svg'
 import { ReactComponent as BikeIcon } from '../../static/icons/person-biking-solid.svg'
+import ImageGallery from "react-image-gallery";
 
 import { Map } from '../Common/Map'
 import { useEffect } from 'react'
@@ -24,10 +25,14 @@ export const PlaygroundPage = () => {
             </div>
 
             <div className="playground-content">
-                <div className="upload-btn-wrapper">
-                    <button className="btn"></button>
-                    <input type="file" name="myfile" accept="image/*"/>
-                    <p className="btn-label">Добави снимки</p>
+                <div id="input-upload-wrapper">
+                    <div id="upload-wrapper">
+                        <label className="upload-btn-wrapper">
+                            <button className="btn">+</button>
+                            <p className="btn-label">Добави снимки</p>
+                        </label>
+                        <input id='input-wrapper' type="file" name="myfile" accept="image/*"/>
+                    </div>
                 </div>
         
                 <div className="playground-text">
