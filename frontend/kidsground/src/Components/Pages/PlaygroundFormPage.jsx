@@ -11,7 +11,7 @@ export const PlaygroundFormPage = () => {
 
     const [name, setName] = useState("");
     const [ageGroup, setAgeGroup] = useState("");
-    const [environment, setenvironment] = useState("");
+    const [environment, setEnvironment] = useState("");
     const [shaded, setShaded] = useState("");
     const [transport, setTransport] = useState([]);
     const [isFenced, setIsFenced] = useState(true);
@@ -76,7 +76,6 @@ export const PlaygroundFormPage = () => {
 
     const otherChangeLocationText = (event) => {
         setOtherLocationText(event.target.value)
->>>>>>> 6237be210c6fb5c65cca252c3227bac67be00bd6
     }
 
     const changeShaded = (event) => {

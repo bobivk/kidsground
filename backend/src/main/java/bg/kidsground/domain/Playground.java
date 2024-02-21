@@ -3,6 +3,8 @@ package bg.kidsground.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Playground {
 
@@ -17,6 +19,20 @@ public class Playground {
     @JsonProperty("age_group")
     @Enumerated(EnumType.STRING)
     private AgeGroup ageGroup;
+
+    @JsonProperty("has_fence")
+    private boolean hasFence;
+
+    @JsonProperty("floor_type")
+    private FloorType floorType;
+
+    @JsonProperty("toys")
+    private List<String> toys;
+
+    @JsonProperty("facilities")
+    private List<String> facilities;
+
+    private GeoAddress
 
     public Long getId() {
         return id;
