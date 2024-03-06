@@ -67,6 +67,7 @@
     box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.7);
     cursor: pointer;
     transition: background 1s;
+    padding: 20px;
     margin-top: 15px;
     border-radius: 15px;
     border: 0;

@@ -241,14 +241,6 @@ button:hover {
         font-size: 20px;
     }
 
-    .logout-wrapper div,
-    .home-wrapper div,
-    .about-us-wrapper div, 
-    .map-wrapper div {
-        font-size: 10.8px;
-        padding: 0.1rem 0.4rem;
-    }
-
     .number-of-playgrounds {
         font-size: 20px;
         font-weight: bold;
