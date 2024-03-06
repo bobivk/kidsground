@@ -20,9 +20,19 @@ public class PlaygroundController {
         this.playgroundService.savePlayground(playground);
     }
 
+    @PutMapping(path = AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
+    public void updatePlayground(@RequestBody final Playground playground) {
+        this.playgroundService.updatePlayground(playground);
+    }
+
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)
     public Playground getById(@PathVariable final Long id) {
         return this.playgroundService.getById(id);
+    }
+
+    @DeleteMapping(path = AppRestEndpoints.V1.Playground.By.ID)
+    public Playground deleteByID(@PathVariable final Long id) {
+        return this.playgroundService.deleteById(id);
     }
 
     @ResponseBody
