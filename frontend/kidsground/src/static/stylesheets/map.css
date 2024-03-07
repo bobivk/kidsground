@@ -104,11 +104,11 @@
 
 @media only screen and (max-width: 540px) {
   #terrain {
-    top: 7vh;
+    top: 3vh;
     right: 3vw;
   }
   #location {
-    bottom: 22vh;
+    bottom: 23vh;
     right: 3vw;
   }
 }

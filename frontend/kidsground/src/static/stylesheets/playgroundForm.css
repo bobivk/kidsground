@@ -163,6 +163,7 @@ input[type="checkbox"]:checked::before {
 
 @media only screen and (max-width: 1280px) {
     #playground-form {
+        margin-left: -4vw;
         width: 94vw;
     }
 }

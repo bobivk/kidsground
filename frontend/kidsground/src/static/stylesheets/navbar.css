@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    padding: 9px;
+    padding: 5px;
 }
 nav {
     background: #FCFCFC;
@@ -44,7 +44,7 @@ a:hover {
         padding: 0
     }
     .home-wrapper{
-        padding-top: 17.3px;
+        padding-top: 11.3px;
     }
 }
 /*Galaxy fold...*/
