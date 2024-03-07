@@ -84,7 +84,7 @@ input {
 }
 
 .btn-field button {
-    margin-top: 20%;
+    margin-top: 12vh;
     flex-basis: 48%;
     background-color: var(--text-grey);
     color: #CDEAEE;
@@ -120,6 +120,8 @@ button:hover {
 .password-check {
     width: 90%;
     padding-left: 0.75%;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
     margin: 0.1% 5.5% 0.1% 5.5%;
     text-align: justify;
 }
@@ -160,25 +162,19 @@ button:hover {
         overflow-y: hidden;
         background-position: 0 50vh; 
     } 
-    .input-field {
-        font-size: 20px;
-    }
 
     .btn-field {
         font-size: 20px;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
     .register-container {
         background-position: 0 50vh; 
     } 
 
     .form-box {
         top: -5vh;
-    }
-    .input-field {
-        font-size: 20px;
     }
 
     .btn-field {
@@ -193,9 +189,6 @@ button:hover {
         height: 80vh;
         background-position: 0 45vh; 
     } 
-    .input-field {
-        font-size: 20px;
-    }
 
     .btn-field {
         font-size: 30px;
@@ -207,7 +200,14 @@ button:hover {
         width: 98vw;
         height: 70vh;
         background-position: 0 45vh; 
-    } 
+    }
+    .password-check {
+        font-size: 14px;
+    }
+
+    .btn-field button{
+        margin-top: 10vh;
+    }
 }
 
 @media only screen and (max-width: 380px) {
@@ -222,20 +222,18 @@ button:hover {
     }
 
     .input-field {
-        font-size: 20px;
+        max-height: 45px;
     }
+
 
     .btn-field {
         font-size: 6px;
     }
+
 }
 
 /*Galaxy fold...*/
 @media only screen and (max-width: 280px) {
-
-    .input-field {
-        font-size: 20px;
-    }
 
     .btn-field {
         font-size: 20px;
@@ -244,6 +242,10 @@ button:hover {
     .number-of-playgrounds {
         font-size: 20px;
         font-weight: bold;
+    }
+
+    .password-check {
+        font-size: 12px;
     }
 
 }
