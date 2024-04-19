@@ -2,10 +2,12 @@ package bg.kidsground.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 public class Playground {
 
     @Id
@@ -26,13 +28,26 @@ public class Playground {
     @JsonProperty("floor_type")
     private FloorType floorType;
 
+    @JsonProperty("shade_type")
+    private ShadeType shadeType;
+
+    @JsonProperty("environment")
+    private String environment;
+
+    @JsonProperty("transport")
+    private List<String> transport;
+
     @JsonProperty("toys")
     private List<String> toys;
 
     @JsonProperty("facilities")
     private List<String> facilities;
 
-    private GeoAddress
+    @JsonProperty("image_links")
+    private List<String> imageLinks;
+
+    @JsonProperty("coordinates")
+    private Coordinates coordinates;
 
     public Long getId() {
         return id;

@@ -22,4 +22,14 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     public Playground getById(final Long id) {
         return this.playgroundRepository.findById(id).orElseThrow(NoSuchElementException::new);
     }
+
+    @Override
+    public void updatePlayground(Playground playground) {
+        return this.playgroundRepository.update(playground);
+    }
+
+    @Override
+    public Playground deleteById(Long id) {
+        return null;
+    }
 }
