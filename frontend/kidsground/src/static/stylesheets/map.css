@@ -3,33 +3,74 @@
     display: flex;
     justify-content: center;
 }
-
-.button-overlay {
-    position: absolute;
-    bottom: 10px;
-    z-index: 1;
-    width: 40vw;
-    background-color: white;
-    font-size: 28px;
-    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.7);
-    margin-top: 15px;
-    border-radius: 15px;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-  }
   
-  #map {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+#map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  #map-type {
-    position: absolute;
-    z-index: 1;
-    bottom: 68.7vh; 
-    left: 0vw 
+#map-type {
+  position: absolute;
+  z-index: 1;
+  bottom: 68.7vh; 
+  left: 0vw 
+}
+
+#selector {
+  border-radius: 0px;
+  font-family: sans-serif;
+  width: 300px;
+}
+
+#map-wrapper {
+  flex: 1;
+  padding: 20px; /* Add some padding for better spacing */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#location, #terrain {
+  position: absolute;
+  z-index: 2;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  fill: #666666;
+  stroke: #666666;
+  background: none rgb(255, 255, 255);
+  padding: 5px;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
+
+#terrain {
+  top: 5vh;
+  right: 0.5vw;
+}
+
+#location {
+  bottom: 15vh;
+  right: 0.5vw;
+}
+
+#terrain:hover {
+  fill: #333333;
+}
+
+#location:hover {
+  fill: #333333;
+  stroke: #333333;
+}
+
+.gm-style-mtc {
+  display: none; /* Adjust height as needed */
+}
+
+@media only screen and (max-width: 1280px) {
+  #map-wrapper{
+      align-items: center;
   }
 
   #selector {
@@ -38,67 +79,53 @@
     width: 300px;
   }
 
-  #map-wrapper {
-    flex: 1;
-    padding: 20px; /* Add some padding for better spacing */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  #location, #terrain {
+    right: 1vw;
+  }
 }
 
-  #terrain {
-    z-index: 2;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-    position: absolute;
-    top: 5vh;
-    right: 0.5vw;
-    fill: var(--text-grey);
-    background: none rgb(255, 255, 255);
-    padding: 5px;
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-  }
-
-  #terrain:hover {
-    fill: rgb(75, 75, 75);
-  }
-
-.gm-style-mtc {
-  display: none; /* Adjust height as needed */
-}
-
-@media only screen and (max-width: 1280px) {
-    #map-wrapper{
-        align-items: center;
-    }
-    .button-overlay{
-      width: 60vw;
-    }
-
-    #selector {
-      border-radius: 0px;
-      font-family: sans-serif;
-      width: 300px;
-    }
-
-    #terrain {
-      right: 1vw;
-    }
-  }
 @media only screen and (max-width: 912px) {
-    .button-overlay{
-      font-size: 14px;
-    }
-    #terrain {
-      right: 1.5vw;
-    }
+  #location, #terrain {
+    right: 1.5vw;
   }
+}
 
-  @media only screen and (max-width: 540px) {
-    #terrain {
-      top: 7vh;
-      right: 3vw;
-    }
+@media only screen and (max-width: 820px) {
+  #location {
+    bottom: 17vh;
   }
+}
+
+@media only screen and (max-width: 768px) {
+  #location {
+    bottom: 20vh;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  #terrain {
+    top: 3vh;
+    right: 3vw;
+  }
+  #location {
+    bottom: 23vh;
+    right: 3vw;
+  }
+}
+
+@media only screen and (max-width: 376px) {
+  #location {
+    bottom: 28vh;
+    right: 3vw;
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  #terrain {
+    top: 8vh;
+    right: 4vw;
+  }
+  #location {
+    right: 4vw;
+  }
+}

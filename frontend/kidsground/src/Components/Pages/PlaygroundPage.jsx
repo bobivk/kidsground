@@ -49,7 +49,7 @@ export const PlaygroundPage = () => {
                         <div id="age" className="card">
                             <span><ChildIcon className="icon"/> деца между 3 и 6 години.</span>
                         </div>
-                        <div id="location" className="card">
+                        <div id="playgroundLocation" className="card">
                             <span><ParkIcon className="icon"/>В парк или градинка</span>
                         </div>
                         <div id="shade" className="card">

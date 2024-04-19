@@ -2,6 +2,7 @@ import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import { useState, useEffect } from 'react';
 import '../../static/stylesheets/map.css'
 import {ReactComponent as Terrain} from "../../static/icons/layers_8.svg"
+import {ReactComponent as Location} from "../../static/icons/location.svg"
 
 const libraries = ['places'];
 
@@ -23,25 +24,25 @@ export const Map = () => {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                
+    
                 if (marker) {
                     console.log("here");
+                    console.log(currentLocation);
                     marker.setPosition(currentLocation);
                 } else {
                     console.log("there");
-                    setMarker(new window.google.maps.Marker({
+                    const newMarker = new window.google.maps.Marker({
                         position: currentLocation,
-                        icon: {
-                            url:require("../../static/user_location.png"),
-                            scaledSize: new window.google.maps.Size(32, 32)
-                        },
-                        title: "Your Location"
-                    }));
+                        title: "Your Location",
+                        draggable: true // Ensure the marker is draggable
+                    })
+
+                    setMarker(newMarker);
+                    
                 }
                 map.panTo(currentLocation);
             })
         }
-        
     }
 
     const { isLoaded, loadError } = useLoadScript({
@@ -60,11 +61,6 @@ export const Map = () => {
             }
         }
     };
-
-    const mapTypes = [
-        { label: 'Map View', value: 'roadmap' },
-        { label: 'Satellite View', value: 'satellite' },
-    ];
 
     const [mapContainerStyle, setMapContainerStyle] = useState({
         width: '70vw',
@@ -123,9 +119,12 @@ export const Map = () => {
                 center={plovdiv}
                 onLoad={onMapLoad}
             >
-                {marker && <Marker position={marker.position} />}
+                {marker && <Marker draggable={true} icon= {{
+                            url: (require("../../static/user_location.png")),
+                            scaledSize: new window.google.maps.Size(32, 32)
+                        }} position={marker.position} />}
             </GoogleMap>
-            <button onClick={showCurrentLocation} className="button-overlay">Покажи моята локация</button>
+            <Location onClick={showCurrentLocation} id="location"/>
         </div>
     );
 };

@@ -11,7 +11,7 @@ export const PlaygroundFormPage = () => {
 
     const [name, setName] = useState("");
     const [ageGroup, setAgeGroup] = useState("");
-    const [environment, setEnvironment] = useState("");
+    const [location, setLocation] = useState("");
     const [shaded, setShaded] = useState("");
     const [transport, setTransport] = useState([]);
     const [isFenced, setIsFenced] = useState(true);
@@ -226,17 +226,17 @@ export const PlaygroundFormPage = () => {
                     <label className="form-label" for="environment-question">3. Какво е местоположението на детската площадка?</label>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="boulevard" name="environment" value="boulevard"/>
+                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="boulevard" name="environment" value="boulevard"/>
                         <label for="boulevard">До голям булевард</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="park" name="environment" value="park"/>
+                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="park" name="environment" value="park"/>
                         <label for="park">В парк или градинка</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="radio" onChange={changeEnvironment} className="playground-input playground-input-radio" id="apartments" name="environment" value="apartments"/>
+                        <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="apartments" name="environment" value="apartments"/>
                         <label for="apartments">В междублоково пространство</label>
                     </div>
                     <br/>

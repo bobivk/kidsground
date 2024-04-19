@@ -1,6 +1,7 @@
 import '../../static/stylesheets/navbar.css'
 import '../../static/stylesheets/styles.css'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import { HashLink } from 'react-router-hash-link';
 
 export const Navbar = () => {
     return (
@@ -10,7 +11,7 @@ export const Navbar = () => {
             </div>
             <div className="map-wrapper">
                 {/* bug found if on login page clicking this wont take you anywhere */}
-                <div> <a href="#map"> Карта </a> </div>
+                <div> <HashLink to="/#map"> Карта </HashLink> </div>
             </div>
             <div className="about-us-wrapper">
                 <div><a>За проекта</a></div>

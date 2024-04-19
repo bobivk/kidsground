@@ -36,9 +36,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 75vw;
+    width: 15vw;
     height: 20vh;
-    background-color: rgb(213, 213, 213);
     border-radius: 12px;
 }   
 
@@ -58,14 +57,14 @@
 #input-wrapper {
     opacity: 0;
     position: absolute;
-    width: 74.5%;
+    width: 15%;
     height: 84.9%;
     border-radius: 12px;
     cursor: pointer;
 }
 
 #upload-wrapper:hover {
-    background-color: rgb(169, 169, 169);
+    background-color: rgb(213, 213, 213);
     cursor: pointer;
 }
 
