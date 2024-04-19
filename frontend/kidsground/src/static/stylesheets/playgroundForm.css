@@ -149,6 +149,8 @@ input[type="checkbox"]:checked::before {
 
 #add-playground-btn,
 #cancel-add-playground-btn {
+    margin-top: 12px;
+    margin-bottom: 12px;
     background-color: #CDEAEE;
     color: var(--text-grey);
     height: 7vh;

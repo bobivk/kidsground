@@ -12,9 +12,20 @@ export const Map = () => {
 
     const [marker, setMarker] = useState(null);
     const [map, setMap] = useState(null);
+    const [markersLoaded, setMarkersLoaded] = useState(false)
     const [selectedMapType, setSelectedMapType] = useState('roadmap');
+    const fakePlaygrounds = [{id: 1, name: "pencho", ageGroup: "zero_to_three", hasFence: false, floorType: "grass", shadeType:"trees", environment:"park", toys: [], facilities: [], imageLinks: [], coordinates: {lat: 42.1354, lng:24.7453}}, {id: 2, name: "pencho", ageGroup: "three_to_six", hasFence: false, floorType: "grass", shadeType:"trees", environment:"park", toys: [], facilities: [], imageLinks: [], coordinates: {lat: 42.1354, lng:24.8453}}]
     const onMapLoad = (map) => {
+        fakePlaygrounds.forEach((playground) => {
+            const newMarker = new window.google.maps.Marker({
+                position: playground.coordinates,
+                title: playground.name,
+                draggable: false, // Ensure the marker is draggable
+            })
+        })
+        setMarkersLoaded(true);
         setMap(map);
+        
     };
 
     const showCurrentLocation = () => {
@@ -119,6 +130,15 @@ export const Map = () => {
                 center={plovdiv}
                 onLoad={onMapLoad}
             >
+                {markersLoaded && fakePlaygrounds.map((playground) => (
+                    <Marker 
+                        key={playground.id}
+                        icon = {{
+                            url: (require(`../../static/${playground.ageGroup}.png`)).default,
+                            scaledSize: new window.google.maps.Size(32, 32)
+                        }}
+                        position={playground.coordinates}
+                    />))}
                 {marker && <Marker draggable={true} icon= {{
                             url: (require("../../static/user_location.png")),
                             scaledSize: new window.google.maps.Size(32, 32)
