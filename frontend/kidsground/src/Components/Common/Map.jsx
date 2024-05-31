@@ -14,18 +14,9 @@ export const Map = () => {
     const [map, setMap] = useState(null);
     const [markersLoaded, setMarkersLoaded] = useState(false)
     const [selectedMapType, setSelectedMapType] = useState('roadmap');
-    const fakePlaygrounds = [{id: 1, name: "pencho", ageGroup: "zero_to_three", hasFence: false, floorType: "grass", shadeType:"trees", environment:"park", toys: [], facilities: [], imageLinks: [], coordinates: {lat: 42.1354, lng:24.7453}}, {id: 2, name: "pencho", ageGroup: "three_to_six", hasFence: false, floorType: "grass", shadeType:"trees", environment:"park", toys: [], facilities: [], imageLinks: [], coordinates: {lat: 42.1354, lng:24.8453}}]
+    const [playgrounds, setPlaygrounds] = useState([])
     const onMapLoad = (map) => {
-        fakePlaygrounds.forEach((playground) => {
-            const newMarker = new window.google.maps.Marker({
-                position: playground.coordinates,
-                title: playground.name,
-                draggable: false, // Ensure the marker is draggable
-            })
-        })
-        setMarkersLoaded(true);
         setMap(map);
-        
     };
 
     const showCurrentLocation = () => {
@@ -79,7 +70,19 @@ export const Map = () => {
         // controlSize: '200px'
       });
 
+    
+    const fetchData = async () => {
+
+        //FETCH тук
+        const receivedItems = await fetch("fake-url")
+        const receivedItemsJSON = await receivedItems.json()
+        setPlaygrounds(receivedItemsJSON)
+    }
+
       useEffect(() => {
+
+        fetchData();
+        setMarkersLoaded(true);
         const handleResize = () => {
           // Update mapContainerStyle based on screen size
           if (window.innerWidth <= 1280) {
@@ -110,7 +113,7 @@ export const Map = () => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-      }, [])
+      }, [fakePlaygrounds, map])
 
     if (loadError) {
         return <div>Error loading maps</div>;
@@ -130,11 +133,11 @@ export const Map = () => {
                 center={plovdiv}
                 onLoad={onMapLoad}
             >
-                {markersLoaded && fakePlaygrounds.map((playground) => (
+                {playgrounds.map((playground) => (
                     <Marker 
                         key={playground.id}
                         icon = {{
-                            url: (require(`../../static/${playground.ageGroup}.png`)).default,
+                            url: (require(`../../static/${playground.ageGroup}.png`)),
                             scaledSize: new window.google.maps.Size(32, 32)
                         }}
                         position={playground.coordinates}
