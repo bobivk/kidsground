@@ -113,7 +113,7 @@ export const Map = () => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-      }, [fakePlaygrounds, map])
+      }, [playgrounds, map])
 
     if (loadError) {
         return <div>Error loading maps</div>;
