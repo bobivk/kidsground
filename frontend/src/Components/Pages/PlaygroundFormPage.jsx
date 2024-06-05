@@ -195,6 +195,16 @@ export const PlaygroundFormPage = () => {
         console.log(facilities)
     }
 
+    const createPlayground = async () => {
+        const data = {name, ageGroup, location, shaded, floor, isFenced, facilities, transport, toys}
+        await fetch("http://3.79.99.23:8009/v1/playgrounds/add", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    } 
 
 
     const changeDescription = (event) => {
@@ -473,7 +483,7 @@ export const PlaygroundFormPage = () => {
                         </div>
                     </div>
                     <div className="add-playground-btns" >
-                        <button disabled={add} id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
+                        <button onclick={createPlayground} disabled={add} id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
                         <button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button>
                     </div>
                 </div>

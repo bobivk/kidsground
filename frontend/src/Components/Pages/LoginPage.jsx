@@ -18,16 +18,16 @@ export const LoginPage = () => {
     const [check3, setCheck3] = useState("#555");
     const [check4, setCheck4] = useState("#555");
 
-        const signUp =(event) => {
+        const signUp = async (event) => {
         if (switcher) {
             //if clicked while disabled, enable
             switchToSignUp();
             return;
         }
         //if enabled, try register
-        const data = {};
+        const data = {username, email, password};
         if (isEmailValid(data.email) && isPasswordValid(data.password)) {
-            fetch('http://localhost/kidsground/backend/api/users/register-user.php', {
+            await fetch('http://3.79.99.23:8009/kidsground/backend/api/users/register-user.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -59,20 +59,20 @@ export const LoginPage = () => {
             window.scrollTo(0, 0)
     }, [])
 
-    const signIn = (event) => {
+    const signIn = async (event) => {
         if (!switcher) {
             //if clicked while disabled, enable
             switchToSignIn();
             return;
         }
-        const data = {};
+        const data = {username, password};
         const fields = document.querySelectorAll('input');
 
         fields.forEach(field => {
             data[field.name] = field.value;
         });
 
-        fetch("http://localhost/kidsground/backend/api/users/login.php", {
+        await fetch("http://3.79.99.23:8009/kidsground/backend/api/users/login.php", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

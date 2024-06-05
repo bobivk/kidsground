@@ -72,9 +72,7 @@ export const Map = () => {
 
     
     const fetchData = async () => {
-
-        //FETCH тук
-        const receivedItems = await fetch("fake-url")
+        const receivedItems = await fetch("http://3.79.99.23:8009/v1/playgrounds/all")
         const receivedItemsJSON = await receivedItems.json()
         setPlaygrounds(receivedItemsJSON)
     }
