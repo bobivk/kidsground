@@ -72,9 +72,9 @@ export const Map = () => {
 
     
     const fetchData = async () => {
-        const receivedItems = await fetch("http://3.79.99.23:8009/v1/playgrounds/all")
-        const receivedItemsJSON = await receivedItems.json()
-        setPlaygrounds(receivedItemsJSON)
+        // const receivedItems = await fetch("http://3.79.99.23:8009/v1/playgrounds/all")
+        // const receivedItemsJSON = await receivedItems.json()
+        // setPlaygrounds(receivedItemsJSON)
     }
 
       useEffect(() => {
