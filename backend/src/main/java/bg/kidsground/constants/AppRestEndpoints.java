@@ -7,6 +7,8 @@ public class AppRestEndpoints {
             public static final String PLAYGROUND_ROOT = V1_ROOT + "/playground";
 
             public static final String ADD_PLAYGROUND = PLAYGROUND_ROOT + "/add";
+            public static final String COUNT = PLAYGROUND_ROOT + "/count";
+            public static final String GET_ALL = PLAYGROUND_ROOT + "/all";
 
             public class By {
                 public static final String ID = PLAYGROUND_ROOT + "/{id}";

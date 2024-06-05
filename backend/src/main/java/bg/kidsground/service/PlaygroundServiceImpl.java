@@ -3,8 +3,10 @@ package bg.kidsground.service;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.repository.PlaygroundRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -24,8 +26,18 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
-    public void updatePlayground(Playground playground) {
-        return this.playgroundRepository.update(playground);
+    public List<Playground> getAll() {
+        return this.playgroundRepository.findAll();
+    }
+
+    @Override
+    public Integer getCount() {
+        return Math.toIntExact(this.playgroundRepository.count());
+    }
+
+    @Override
+    public Playground updatePlayground(final Playground playground) {
+        return this.playgroundRepository.save(playground);
     }
 
     @Override

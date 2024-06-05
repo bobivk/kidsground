@@ -3,13 +3,15 @@ package bg.kidsground.domain;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-@Data
-public class Coordinates {
+import java.io.Serializable;
 
-    @JsonProperty("latitude")
+@Data
+public class Coordinates implements Serializable {
+
+    @JsonProperty("lat")
     private double latitude;
 
-    @JsonProperty("longitude")
+    @JsonProperty("lng")
     private double longitude;
 
 }
