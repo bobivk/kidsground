@@ -26,11 +26,21 @@ export const PlaygroundFormPage = () => {
     const [otherFacilityText, setOtherFacilityText] = useState("");
     const [otherAgeText, setOtherAgeText] = useState("");
     const [otherLocationText, setOtherLocationText] = useState("");
+    const [add, setAdd] = useState(true)
 
+    const enableAdd = () => {
+        console.log(name !== "" && ageGroup !== "" && location !== "" && shaded  !== null && floor !== "" && isFenced !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0);
+        if(name !== "" && ageGroup !== "" && location !== "" && shaded  !== null && floor !== "" && isFenced !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0) {
+            setAdd(false);
+        } else {
+            setAdd(true);
+        }
+        
+    }
 
     useEffect(() => {
-            window.scrollTo(0, 0)
-    }, [])
+            enableAdd();
+    }, [enableAdd])
 
     const resetFocus = () => {
         setIsOtherAgeFocused(false);
@@ -184,6 +194,7 @@ export const PlaygroundFormPage = () => {
         }
         console.log(facilities)
     }
+
 
 
     const changeDescription = (event) => {
@@ -462,7 +473,7 @@ export const PlaygroundFormPage = () => {
                         </div>
                     </div>
                     <div className="add-playground-btns" >
-                        <button id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
+                        <button disabled={add} id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
                         <button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button>
                     </div>
                 </div>
