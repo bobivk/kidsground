@@ -184,6 +184,9 @@
     .add-playground-btn {
       width: 60vw;
     }
+    .detskite {
+      margin-right: 10px !important;
+    }
   }
   
   @media only screen and (max-width: 912px) {

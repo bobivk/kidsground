@@ -7,7 +7,7 @@ export const Navbar = () => {
     return (
         <nav>
             <div className="home-wrapper">                
-                    <Link to="/"><div> <a> Начало </a> </div></Link>
+                    <Link to="/" refresh="true"><div> <a> Начало </a> </div></Link>
             </div>
             <div className="map-wrapper">
                 {/* bug found if on login page clicking this wont take you anywhere */}
