@@ -21,7 +21,7 @@ export const Map = () => {
 
     const showCurrentLocation = () => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
+            navigator.geolocation.getCurrentPosition( (position) => {
                 var currentLocation = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
@@ -43,6 +43,23 @@ export const Map = () => {
                     
                 }
                 map.panTo(currentLocation);
+            }, (error) => {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        alert("User denied the request for Geolocation. Please enable location services for this site in your browser settings.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        alert("Location information is unavailable.");
+                        break;
+                    case error.TIMEOUT:
+                        alert("The request to get user location timed out.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        alert("An unknown error occurred.");
+                        break;
+                    default:
+                        alert("Unknown issue");
+                }
             })
         }
     }
@@ -146,6 +163,7 @@ export const Map = () => {
                         }} position={marker.position} />}
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location"/>
+            <button onClick={showCurrentLocation}>test</button>
         </div>
     );
 };
