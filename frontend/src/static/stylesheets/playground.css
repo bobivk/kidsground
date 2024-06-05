@@ -46,6 +46,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border: 1px solid #75a2a8;
+    filter: drop-shadow(0 0 1rem rgb(178, 178, 178));
 }
 
 #upload-wrapper:hover .btn {

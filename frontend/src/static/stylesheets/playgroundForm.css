@@ -152,11 +152,13 @@ input[type="checkbox"]:checked::before {
     margin-top: 12px;
     margin-bottom: 12px;
     background-color: #CDEAEE;
+    border: 1px solid #75a2a8;
+    filter: drop-shadow(0 0 1rem rgb(178, 178, 178));
+    font-size: 18px;
     color: var(--text-grey);
     height: 7vh;
     width: 20vw;
     border-radius: 15px;
-    border: 0;
     outline: 0;
     cursor: pointer;
     transition: background 1s;

@@ -257,7 +257,7 @@ export const LoginPage = () => {
     
                         <div className="btn-field">
                             <button type="button" id="signUpBtn" onClick={signUp}>Регистрирай ме</button>
-                            <button type="button" classNameName="disable" id="signInBtn" onClick={signIn}>Вход</button>
+                            <button type="button" className="disable" id="signInBtn" onClick={signIn}>Вход</button>
                         </div>
                         <div className="registration-success" id="registration-success">
                             <h4>Успешна регистрация!</h4>

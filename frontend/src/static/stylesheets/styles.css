@@ -32,7 +32,7 @@ html {
 
 #add-playground-btn:disabled {
   cursor: not-allowed;
-  background-color: #cdeaee74;
+  background-color: #cdeaeeb6;
 }
 
 .background {

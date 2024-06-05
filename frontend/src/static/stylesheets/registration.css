@@ -88,10 +88,11 @@ input {
     flex-basis: 48%;
     background-color: var(--text-grey);
     color: #CDEAEE;
+    border: 1px solid #75a2a8;
+    filter: drop-shadow(0 0 1rem rgb(178, 178, 178));
     height: 50px;
     width: 100%;
     border-radius: 15px;
-    border: 0;
     outline: 0;
     cursor: pointer;
     transition: background 1s;

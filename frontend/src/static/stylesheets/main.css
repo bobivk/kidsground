@@ -64,13 +64,13 @@
     font-size: 30px;
     align-items: center;
     background-color: #CDEAEE;
-    box-shadow: 1px 1px 5px 1px rgba(0,0,0,0.7);
+    border: 1px solid #75a2a8;
+    filter: drop-shadow(0 0 1rem rgb(178, 178, 178));
     cursor: pointer;
     transition: background 1s;
     padding: 20px;
     margin-top: 15px;
     border-radius: 15px;
-    border: 0;
     outline: 0;
     margin-bottom: 20px;
   }

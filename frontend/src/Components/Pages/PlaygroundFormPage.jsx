@@ -389,7 +389,7 @@ export const PlaygroundFormPage = () => {
                     <br/>
                     <div className="choice">
                         <input type="checkbox" onChange={changeToys} className="playground-input" id="balance-beam" name="swings" value="balance-beam"/>
-                        <label for="balance-beam">Съоражение за катерене и баланс</label>
+                        <label for="balance-beam">Съоръжение за катерене и баланс</label>
                     </div>
                     <br/>
                     <div className="choice">
@@ -399,7 +399,7 @@ export const PlaygroundFormPage = () => {
                     <br/>
                     <div className="choice">
                         <input type="checkbox" onChange={changeToys} className="playground-input" id="dynamic" name="swings" value="dynamic"/>
-                        <label for="dynamic">Динамични съоражения за игра (батут, въжен "тролей")</label>
+                        <label for="dynamic">Динамични съоръжения за игра (батут, въжен "тролей")</label>
                     </div>
                     <br/>
                     <div className="choice">
@@ -424,7 +424,7 @@ export const PlaygroundFormPage = () => {
                     <br/>
                     <div className="choice">
                         <input type="checkbox" onChange={changeToys} className="playground-input" id="sandbox" name="swings" value="sandbox"/>
-                        <label for="sandbox">Пясъчник и съоражения за игра с пясък</label>
+                        <label for="sandbox">Пясъчник и съоръжения за игра с пясък</label>
                     </div>
                     <br/>
                     <div className="choice">
@@ -435,7 +435,7 @@ export const PlaygroundFormPage = () => {
                 </div>
 
                 <div className="question" id="facilities-question">
-                    <label className="form-label" for="facilities-question">9. Други съоражения?</label>
+                    <label className="form-label" for="facilities-question">9. Други съоръжения?</label>
                     <br/>
                     <div className="choice">
                         <input type="checkbox" onChange={changeFacilities} className="playground-input" id="wc" name="facilities" value="wc"/>
