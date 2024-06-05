@@ -6,10 +6,10 @@ import lombok.Data;
 @Data
 public class Coordinates {
 
-    @JsonProperty("latitude")
+    @JsonProperty("lat")
     private double latitude;
 
-    @JsonProperty("longitude")
+    @JsonProperty("lng")
     private double longitude;
 
 }
