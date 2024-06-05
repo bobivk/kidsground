@@ -5,6 +5,7 @@ import bg.kidsground.domain.Playground;
 import bg.kidsground.service.PlaygroundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -22,8 +23,8 @@ public class PlaygroundController {
     }
 
     @PutMapping(path = AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
-    public void updatePlayground(@RequestBody final Playground playground) {
-        this.playgroundService.updatePlayground(playground);
+    public ResponseEntity<Playground> updatePlayground(@RequestBody final Playground playground) {
+        return ResponseEntity.ok(this.playgroundService.updatePlayground(playground));
     }
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)

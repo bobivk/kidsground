@@ -9,7 +9,7 @@ public interface PlaygroundService {
     Playground getById(final Long id);
 
 
-    void updatePlayground(Playground playground);
+    Playground updatePlayground(Playground playground);
 
     Playground deleteById(Long id);
 }

@@ -24,8 +24,8 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
-    public void updatePlayground(Playground playground) {
-        return this.playgroundRepository.update(playground);
+    public Playground updatePlayground(Playground playground) {
+        return this.playgroundRepository.save(playground);
     }
 
     @Override
