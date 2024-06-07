@@ -112,7 +112,6 @@ export const Map = ({onCoordinatesChange}) => {
 
         fetchData();
         getCurrentPosition();
-        showCurrentLocation();
         setMarkersLoaded(true);
         const handleResize = () => {
           // Update mapContainerStyle based on screen size
@@ -131,6 +130,7 @@ export const Map = ({onCoordinatesChange}) => {
           }
           if (map) {
             window.google.maps.event.trigger(map, 'resize');
+            showCurrentLocation()
           }
         };
     
@@ -144,7 +144,7 @@ export const Map = ({onCoordinatesChange}) => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-      }, [playgrounds, map])
+      }, [playgrounds, map, marker, showCurrentLocation])
 
     if (loadError) {
         return <div>Error loading maps</div>;
