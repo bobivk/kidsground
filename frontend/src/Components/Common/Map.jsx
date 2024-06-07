@@ -43,7 +43,7 @@ export const Map = ({onCoordinatesChange}) => {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                
+
                 const newMarker = new window.google.maps.Marker({
                     position: currentLocation,
                     title: "Your Location",
@@ -112,6 +112,7 @@ export const Map = ({onCoordinatesChange}) => {
 
         fetchData();
         getCurrentPosition();
+        showCurrentLocation();
         setMarkersLoaded(true);
         const handleResize = () => {
           // Update mapContainerStyle based on screen size
