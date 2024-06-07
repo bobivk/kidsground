@@ -49,7 +49,7 @@ export const HomePage = () => {
                 </div>
                 <div id="map-wrapper">
                     <div id="map">
-                        <Map/>
+                        <Map onCoordinatesChange={()=> {}}/>
                         <div >
                             <Link to="/add"><button className="add-playground-btn add"> <i className="fa-regular fa-square-plus"></i>Добави детска площадка</button></Link>
                         </div>
