@@ -153,7 +153,7 @@ export const Map = ({onCoordinatesChange}) => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-      }, [playgrounds, map, marker])
+      }, [playgrounds, map, marker, showCurrentLocation])
 
     if (loadError) {
         return <div>Error loading maps</div>;
