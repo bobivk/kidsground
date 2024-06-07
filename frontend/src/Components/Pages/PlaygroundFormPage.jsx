@@ -39,6 +39,7 @@ export const PlaygroundFormPage = () => {
     }
 
     useEffect(() => {
+        
             enableAdd();
     }, [enableAdd])
 
@@ -339,22 +340,22 @@ export const PlaygroundFormPage = () => {
                     <br/>
                     <div className="choice">
                         <input type="radio" onChange={changeFloor} className="playground-input" id="grass" name="floor" value="grass"/>
-                        <label for="asphalt">Тревна настилка</label>
+                        <label for="grass">Тревна настилка</label>
                     </div>
                     <br/>
                     <div className="choice">
                         <input type="radio" onChange={changeFloor} className="playground-input" id="rubber" name="floor" value="rubber"/>
-                        <label for="asphalt">Ударопоглъщаща гумена настилка</label>
+                        <label for="rubber">Ударопоглъщаща гумена настилка</label>
                     </div>
                     <br/>
                     <div className="choice">
                         <input type="radio" onChange={changeFloor} className="playground-input" id="mulch" name="floor" value="mulch"/>
-                        <label for="asphalt">Стърготини (мулч)</label>
+                        <label for="mulch">Стърготини (мулч)</label>
                     </div>
                     <br/>
                     <div className="choice">
                         <input type="radio" onChange={changeFloor} className="playground-input" id="dirt" name="floor" value="dirt"/>
-                        <label for="asphalt">Без настилка (пръст)</label>
+                        <label for="dirt">Без настилка (пръст)</label>
                     </div>
                     <br/>
                 </div>

@@ -48,7 +48,7 @@ input[type="radio"]:checked::before {
     content: '';
     width: 10px; /* Adjust size of inner circle */
     height: 10px; /* Adjust size of inner circle */
-    background-color: #CDEAEE; /* Change color of inner circle */
+    background-color: #4a8f9b; /* Change color of inner circle */
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -74,7 +74,7 @@ input[type="checkbox"]:checked::before {
     content: '';
     width: 10px; /* Adjust size of inner circle */
     height: 10px; /* Adjust size of inner circle */
-    background-color: #CDEAEE; /* Change color of inner circle */
+    background-color: #4a8f9b; /* Change color of inner circle */
     position: absolute;
     top: 50%;
     left: 50%;

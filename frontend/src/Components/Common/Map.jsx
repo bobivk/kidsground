@@ -163,7 +163,6 @@ export const Map = () => {
                         }} position={marker.position} />}
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location"/>
-            <button onClick={showCurrentLocation}>test</button>
         </div>
     );
 };

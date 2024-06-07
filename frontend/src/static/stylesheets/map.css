@@ -51,8 +51,8 @@
 }
 
 #location {
-  bottom: 15vh;
-  right: 0.5vw;
+  bottom: 4vh;
+  right: 2.5vw;
 }
 
 #terrain:hover {
@@ -104,11 +104,11 @@
 
 @media only screen and (max-width: 540px) {
   #terrain {
-    top: 3vh;
+    top: 5vh;
     right: 3vw;
   }
   #location {
-    bottom: 28vh;
+    bottom: 27vh;
     right: 3vw;
   }
 }
