@@ -153,7 +153,7 @@ export const Map = ({onCoordinatesChange}) => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-      }, [playgrounds, map, marker, showCurrentLocation])
+      }, [playgrounds, map])
 
     if (loadError) {
         return <div>Error loading maps</div>;
@@ -167,7 +167,7 @@ export const Map = ({onCoordinatesChange}) => {
         <div id="google-map">
             <Terrain id="terrain" onClick={handleMapTypeChange} />
             <GoogleMap
-                options={{controlSize: 0}}
+                options={{controlSize: 0, gestureHandling: "greedy"}}
                 mapContainerStyle={mapContainerStyle}
                 zoom={17}
                 center={currentPosition}
