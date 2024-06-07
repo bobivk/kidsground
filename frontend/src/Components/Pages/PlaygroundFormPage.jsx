@@ -26,22 +26,21 @@ export const PlaygroundFormPage = () => {
     const [otherFacilityText, setOtherFacilityText] = useState("");
     const [otherAgeText, setOtherAgeText] = useState("");
     const [otherLocationText, setOtherLocationText] = useState("");
+    const [coordinates, setCoordinates] = useState({});
     const [add, setAdd] = useState(true)
 
-    const enableAdd = () => {
-        console.log(name !== "" && ageGroup !== "" && location !== "" && shaded  !== null && floor !== "" && isFenced !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0);
-        if(name !== "" && ageGroup !== "" && location !== "" && shaded  !== null && floor !== "" && isFenced !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0) {
+    useEffect(() => {
+        // Scroll to the top of the page when the component mounts
+        window.scrollTo(0, 0);
+      }, []);
+
+    useEffect(() => {
+        if(ageGroup !== "" && location !== "" && shaded  !== null && floor !== "" && isFenced !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0 && coordinates.lat !== undefined) {
             setAdd(false);
         } else {
             setAdd(true);
         }
-        
-    }
-
-    useEffect(() => {
-        
-            enableAdd();
-    }, [enableAdd])
+    }, [add, ageGroup, facilities.length, floor, isFenced, location, shaded, toys.length, transport.length, coordinates])
 
     const resetFocus = () => {
         setIsOtherAgeFocused(false);
@@ -197,6 +196,9 @@ export const PlaygroundFormPage = () => {
     }
 
     const createPlayground = async () => {
+        if(name === "") {
+            setName(`${coordinates[0]}, ${coordinates[1]}`);
+        }
         const data = {name, ageGroup, location, shaded, floor, isFenced, facilities, transport, toys}
         await fetch("http://3.79.99.23:8009/v1/playgrounds/add", {
             method: 'POST',
@@ -211,6 +213,10 @@ export const PlaygroundFormPage = () => {
     const changeDescription = (event) => {
         resetFocus();
         setDescription(event.target.value);
+    }
+
+    const changeCoordinates = (newCoords) => {
+        setCoordinates(newCoords);
     }
 
     return(
@@ -300,17 +306,17 @@ export const PlaygroundFormPage = () => {
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="paid-parking" name="transport" value="paid-parking"/>
+                        <input type="checkbox" onChange={changeTransport} className="playground-input" id="paid-parking" name="transport" value="paid-parking"/>
                         <label for="paid-parking">Платено паркиране</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="bike-lane" name="transport" value="bike-lane"/>
+                        <input type="checkbox" onChange={changeTransport} className="playground-input" id="bike-lane" name="transport" value="bike-lane"/>
                         <label for="bike-lane">Велоалея</label>
                     </div>
                     <br/>
                     <div className="choice">
-                        <input type="checkbox" className="playground-input" id="pedestrian" name="transport" value="pedestrian"/>
+                        <input type="checkbox" onChange={changeTransport} className="playground-input" id="pedestrian" name="transport" value="pedestrian"/>
                         <label for="pedestrian">Само пешеходен</label>
                     </div>
                     <br/>
@@ -480,7 +486,7 @@ export const PlaygroundFormPage = () => {
                     <div>
                         <h4>Посочете на картата мястото на площадката</h4>
                         <div id="map">
-                            <Map/>
+                            <Map onCoordinatesChange={changeCoordinates}/>
                         </div>
                     </div>
                     <div className="add-playground-btns" >

@@ -8,7 +8,7 @@ const libraries = ['places'];
 
 const plovdiv = {lat: 42.1354, lng:24.7453};
 
-export const Map = () => {
+export const Map = ({onCoordinatesChange}) => {
 
     const [marker, setMarker] = useState(null);
     const [map, setMap] = useState(null);
@@ -31,6 +31,7 @@ export const Map = () => {
                     console.log("here");
                     console.log(currentLocation);
                     marker.setPosition(currentLocation);
+                    onCoordinatesChange(currentLocation);
                 } else {
                     console.log("there");
                     const newMarker = new window.google.maps.Marker({
@@ -38,7 +39,7 @@ export const Map = () => {
                         title: "Your Location",
                         draggable: true // Ensure the marker is draggable
                     })
-
+                    onCoordinatesChange(currentLocation);
                     setMarker(newMarker);
                     
                 }
@@ -62,6 +63,10 @@ export const Map = () => {
                 }
             })
         }
+    }
+
+    const handleMove = (event) => {
+        onCoordinatesChange({lat: event.latLng.lat(), lng: event.latLng.lng()});
     }
 
     const { isLoaded, loadError } = useLoadScript({
@@ -157,7 +162,7 @@ export const Map = () => {
                         }}
                         position={playground.coordinates}
                     />))}
-                {marker && <Marker draggable={true} icon= {{
+                {marker && <Marker onDrag={handleMove} draggable={true} icon= {{
                             url: (require("../../static/user_location.png")),
                             scaledSize: new window.google.maps.Size(32, 32)
                         }} position={marker.position} />}
