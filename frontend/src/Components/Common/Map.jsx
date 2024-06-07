@@ -15,9 +15,26 @@ export const Map = ({onCoordinatesChange}) => {
     const [markersLoaded, setMarkersLoaded] = useState(false)
     const [selectedMapType, setSelectedMapType] = useState('roadmap');
     const [playgrounds, setPlaygrounds] = useState([])
+    const [currentPosition, setCurrentPosition] = useState({})
     const onMapLoad = (map) => {
         setMap(map);
     };
+
+    const getCurrentPosition = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    const { latitude, longitude } = position.coords;
+                    setCurrentPosition({ lat: latitude, lng: longitude });
+                },
+                error => {
+                    console.error('Error getting current position:', error);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }
 
     const showCurrentLocation = () => {
         if (navigator.geolocation) {
@@ -26,23 +43,15 @@ export const Map = ({onCoordinatesChange}) => {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-    
-                if (marker) {
-                    console.log("here");
-                    console.log(currentLocation);
-                    marker.setPosition(currentLocation);
-                    onCoordinatesChange(currentLocation);
-                } else {
-                    console.log("there");
-                    const newMarker = new window.google.maps.Marker({
-                        position: currentLocation,
-                        title: "Your Location",
-                        draggable: true // Ensure the marker is draggable
-                    })
-                    onCoordinatesChange(currentLocation);
-                    setMarker(newMarker);
+                
+                const newMarker = new window.google.maps.Marker({
+                    position: currentLocation,
+                    title: "Your Location",
+                    draggable: true // Ensure the marker is draggable
+                })
+                onCoordinatesChange(currentLocation);
+                setMarker(newMarker);
                     
-                }
                 map.panTo(currentLocation);
             }, (error) => {
                 switch (error.code) {
@@ -102,6 +111,7 @@ export const Map = ({onCoordinatesChange}) => {
       useEffect(() => {
 
         fetchData();
+        getCurrentPosition();
         setMarkersLoaded(true);
         const handleResize = () => {
           // Update mapContainerStyle based on screen size
@@ -150,7 +160,7 @@ export const Map = ({onCoordinatesChange}) => {
                 options={{controlSize: 0}}
                 mapContainerStyle={mapContainerStyle}
                 zoom={17}
-                center={plovdiv}
+                center={currentPosition}
                 onLoad={onMapLoad}
             >
                 {playgrounds.map((playground) => (
