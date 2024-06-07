@@ -104,7 +104,7 @@
 
 @media only screen and (max-width: 540px) {
   #terrain {
-    top: 5vh;
+    top: 5.5vh;
     right: 3vw;
   }
   #location {

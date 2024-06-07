@@ -75,6 +75,12 @@ export const Map = ({onCoordinatesChange}) => {
     }
 
     const handleMove = (event) => {
+        const newMarker = new window.google.maps.Marker({
+            position: {lat: event.latLng.lat(), lng: event.latLng.lng()},
+            title: "Your Location",
+            draggable: true // Ensure the marker is draggable
+        })
+        setMarker(newMarker);
         onCoordinatesChange({lat: event.latLng.lat(), lng: event.latLng.lng()});
     }
 
@@ -130,8 +136,11 @@ export const Map = ({onCoordinatesChange}) => {
           }
           if (map) {
             window.google.maps.event.trigger(map, 'resize');
-            showCurrentLocation()
+            if(!marker) {
+                showCurrentLocation()
+              }
           }
+          
         };
     
         // Initial setup
@@ -144,7 +153,7 @@ export const Map = ({onCoordinatesChange}) => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-      }, [playgrounds, map, marker, showCurrentLocation])
+      }, [playgrounds, map, marker])
 
     if (loadError) {
         return <div>Error loading maps</div>;
