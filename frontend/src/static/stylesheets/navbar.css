@@ -40,7 +40,7 @@ a:hover {
 
 @media only screen and (max-width: 720px) {
     a {
-        font-size: 13.3px;
+        font-size: 12.5px;
         padding: 0
     }
     .home-wrapper{
