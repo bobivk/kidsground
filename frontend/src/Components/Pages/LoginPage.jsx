@@ -88,6 +88,7 @@ export const LoginPage = () => {
                     document.getElementById("wrong-credentials-msg").style.padding = "15px";
                     //грешен email или парола.
                 } else if(response.status === 200) {
+                    localStorage.setItem("user", JSON.stringify(response.body));
                     //location = 'http://localhost/kidsground/frontend/html/homepage.html';
                 }
             });

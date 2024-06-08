@@ -7,7 +7,7 @@ export const Navbar = () => {
     return (
         <nav>
             <div className="home-wrapper">                
-                    <Link to="/" refresh="true"><div> <a> Начало </a> </div></Link>
+                    <Link to="/" refresh="true"><div> <a onClick={() => {window.scrollTo(0, 0)}}> Начало </a> </div></Link>
             </div>
             <div className="map-wrapper">
                 {/* bug found if on login page clicking this wont take you anywhere */}
@@ -24,7 +24,7 @@ export const Navbar = () => {
                      <Link to="/login"><a> Вход </a></Link>
                 </div>
             </div>
-            <Link to="/"><img className="site-logo" src="logo_site.png" alt="site logo" /></Link>
+            <Link to="/"><img className="site-logo" src="logo_site.png" alt="site logo" onClick={() => {window.scrollTo(0, 0)}} /></Link>
         </nav>
     )
 }

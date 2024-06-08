@@ -1,5 +1,5 @@
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import { useState, useEffect } from 'react';
+import { GoogleMap, useLoadScript, Marker, InfoBox, InfoWindow } from '@react-google-maps/api';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import '../../static/stylesheets/map.css'
 import {ReactComponent as Terrain} from "../../static/icons/layers_8.svg"
 import {ReactComponent as Location} from "../../static/icons/location.svg"
@@ -16,6 +16,8 @@ export const Map = ({onCoordinatesChange}) => {
     const [selectedMapType, setSelectedMapType] = useState('roadmap');
     const [playgrounds, setPlaygrounds] = useState([])
     const [currentPosition, setCurrentPosition] = useState({})
+    const [selectedMarker, setSelectedMarker] = useState()
+    const infoBoxRef = useRef();
     const onMapLoad = (map) => {
         setMap(map);
     };
@@ -84,6 +86,10 @@ export const Map = ({onCoordinatesChange}) => {
         onCoordinatesChange({lat: event.latLng.lat(), lng: event.latLng.lng()});
     }
 
+    const showDetails = (playground) => {
+        setSelectedMarker(playground);
+    }
+
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: 'AIzaSyAbVV04b50sVLWUYtMDVfEIuPnoFPU_mas',
         libraries,
@@ -99,7 +105,13 @@ export const Map = ({onCoordinatesChange}) => {
                 setSelectedMapType('roadmap');
             }
         }
-    };
+    }
+
+    const handleClick = useCallback((event) => {
+        if (infoBoxRef.current && !infoBoxRef.current.contains(event.target)) {
+          setSelectedMarker(null);
+        }
+      }, []);
 
     const [mapContainerStyle, setMapContainerStyle] = useState({
         width: '70vw',
@@ -107,8 +119,8 @@ export const Map = ({onCoordinatesChange}) => {
         // controlSize: '200px'
       });
 
-    
     const fetchData = async () => {
+        setPlaygrounds([{id:1, name: "bla, bla", ageGroup: "three_to_six", coordinates: {lat: 41.6338, lng: 25.3777}}])
         // const receivedItems = await fetch("http://3.79.99.23:8009/v1/playgrounds/all")
         // const receivedItemsJSON = await receivedItems.json()
         // setPlaygrounds(receivedItemsJSON)
@@ -116,7 +128,6 @@ export const Map = ({onCoordinatesChange}) => {
 
       useEffect(() => {
 
-        fetchData();
         getCurrentPosition();
         setMarkersLoaded(true);
         const handleResize = () => {
@@ -137,6 +148,7 @@ export const Map = ({onCoordinatesChange}) => {
           if (map) {
             window.google.maps.event.trigger(map, 'resize');
             if(!marker) {
+                fetchData();
                 showCurrentLocation()
               }
           }
@@ -153,7 +165,7 @@ export const Map = ({onCoordinatesChange}) => {
         return () => {
           window.removeEventListener('resize', handleResize);
         };
-      }, [playgrounds, map])
+      }, [map])
 
     if (loadError) {
         return <div>Error loading maps</div>;
@@ -172,16 +184,31 @@ export const Map = ({onCoordinatesChange}) => {
                 zoom={17}
                 center={currentPosition}
                 onLoad={onMapLoad}
+                // onClick={handleClick}
             >
                 {playgrounds.map((playground) => (
-                    <Marker 
+                    <Marker
+                        onClick={() => {showDetails(playground)}}
                         key={playground.id}
                         icon = {{
                             url: (require(`../../static/${playground.ageGroup}.png`)),
                             scaledSize: new window.google.maps.Size(32, 32)
                         }}
-                        position={playground.coordinates}
-                    />))}
+                        position={new window.google.maps.LatLng(playground.coordinates)}
+                    >
+                        {selectedMarker && 
+                            <InfoWindow
+                                options={{ariaLabel: selectedMarker.ageGroup}}
+                                position={{ lat: selectedMarker.lat, lng: selectedMarker.lng }}
+                                onCloseClick={() => {setSelectedMarker(null)}}
+                            >
+                                <div id="infoWindow">
+                                    <h4>{selectedMarker.ageGroup}</h4>
+                                    <p>Details about this playground</p>
+                                </div>
+                            </InfoWindow>
+                        }
+                    </Marker>))}
                 {marker && <Marker onDrag={handleMove} draggable={true} icon= {{
                             url: (require("../../static/user_location.png")),
                             scaledSize: new window.google.maps.Size(32, 32)
