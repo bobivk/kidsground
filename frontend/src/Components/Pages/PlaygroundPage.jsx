@@ -69,8 +69,8 @@ export const PlaygroundPage = () => {
                         </div>
                     </div>
                 </div>
-                <div id="map">
-                        <Map/>
+                <div id="map" style={{marginBottom: "20px"}}>
+                        <Map onCoordinatesChange={() => {}}/>
                 </div>
             </div>
         </div>

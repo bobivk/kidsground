@@ -64,6 +64,10 @@
   stroke: #333333;
 }
 
+#infoWindow {
+  position: relative;
+  top: -18px
+}
 
 .gm-style-mtc {
   display: none; /* Adjust height as needed */
@@ -83,6 +87,9 @@
   #location, #terrain {
     right: 1vw;
   }
+  .gm-style-iw-d {
+    top: -3.7vh;
+  }
 }
 
 @media only screen and (max-width: 912px) {
@@ -101,6 +108,9 @@
   #location {
     bottom: 20vh;
   }
+  #infoWindow {
+    top: -6vh;
+  }
 }
 
 @media only screen and (max-width: 540px) {
@@ -111,6 +121,10 @@
   #location {
     bottom: 27vh;
     right: 3vw;
+  }
+  #infoWindow {
+    position: relative;
+    top: -18px
   }
 }
 
