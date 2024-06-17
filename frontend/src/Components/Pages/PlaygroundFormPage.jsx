@@ -3,6 +3,7 @@ import '../../static/stylesheets/playgroundForm.css'
 import { Map } from '../Common/Map'
 import { useState, useRef, useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
+import { Modal } from '../Common/CreatedModal'
 
 export const PlaygroundFormPage = () => {
 
@@ -28,7 +29,8 @@ export const PlaygroundFormPage = () => {
     const [otherAgeText, setOtherAgeText] = useState("");
     const [otherLocationText, setOtherLocationText] = useState("");
     const [coordinates, setCoordinates] = useState({});
-    const [add, setAdd] = useState(true)
+    const [add, setAdd] = useState(true);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         // Scroll to the top of the page when the component mounts
@@ -196,7 +198,8 @@ export const PlaygroundFormPage = () => {
         console.log(facilities)
     }
 
-    const createPlayground = async () => {
+    const createPlayground = async (event) => {
+        event.preventDefault();
         if(name === "") {
             setName(`${coordinates[0]}, ${coordinates[1]}`);
         }
@@ -207,6 +210,10 @@ export const PlaygroundFormPage = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
+        }).then((response) => {
+            if(response.status === 200) {
+                setShowModal(true);
+            }
         })
     } 
 
@@ -220,7 +227,7 @@ export const PlaygroundFormPage = () => {
         setCoordinates(newCoords);
     }
 
-    if(localStorage.getItem("user") !== null) {
+    // if(localStorage.getItem("user") !== null) {
         return(
             <div className="page background">
                 <div id="add-playground">
@@ -497,11 +504,12 @@ export const PlaygroundFormPage = () => {
                             </div>
                         </div>
                     </form>
+                    {showModal && <Modal onClose = {() => {setShowModal(false)}}/>}
                 </div>
         </div>
         )
-    } else {
-        return (<Navigate to="/login" />)
-    }
+    // } else {
+    //     return (<Navigate to="/add" />)
+    // }
     
 }
