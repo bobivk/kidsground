@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class PlaygroundController {
 
     @Autowired
