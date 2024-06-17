@@ -1,5 +1,6 @@
 package bg.kidsground;
 
+import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.repository.PlaygroundRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,8 @@ public class KidsgroundApplication {
         return args -> {
 
             Playground playground = new Playground();
-            playground.setName("John");
+            playground.setName("Ploshtadka");
+            playground.setCoordinates(Coordinates.builder().latitude(42.141080).longitude(24.752345).build());
 
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(
