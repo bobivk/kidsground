@@ -1,6 +1,7 @@
 package bg.kidsground.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import bg.kidsground.service.SecretsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -11,11 +12,12 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    @Value("${db.username")
-    private String username;
+    final SecretsService secretsService;
 
-    @Value("${db.password}")
-    private String password;
+    @Autowired
+    public DataSourceConfig(SecretsService secretsService) {
+        this.secretsService = secretsService;
+    }
 
     @Primary
     @Bean
@@ -24,8 +26,8 @@ public class DataSourceConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://your-database-url:3306/your-database-name");
-        dataSource.setUsername(this.username);
-        dataSource.setPassword(this.password);
+        dataSource.setUsername("db.username");
+        dataSource.setPassword("db.password");
         return dataSource;
     }
 }

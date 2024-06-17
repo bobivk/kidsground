@@ -1,19 +1,22 @@
 package bg.kidsground.service;
 
-
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Value;
+import software.amazon.awssdk.services.ssm.SsmClient;
+import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 
 @Service
-@EnableAutoConfiguration
 public class SecretsServiceImpl implements SecretsService {
 
-    @Value("${maps.apiKey}")
-    private String mapsApiKey;
+    @Autowired
+    private SsmClient ssmClient;
 
-    @Override
-    public String getMapsApiKey() {
-        return mapsApiKey;
+    public String getSecret(String secretName) {
+        return this.ssmClient.getParameter(
+                        GetParameterRequest.builder()
+                                .name(secretName)
+                                .build())
+                .parameter()
+                .value();
     }
 }
