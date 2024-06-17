@@ -1,5 +1,6 @@
 package bg.kidsground;
 
+import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.repository.PlaygroundRepository;
@@ -19,11 +20,12 @@ public class KidsgroundApplication {
     @Bean
     CommandLineRunner runner(PlaygroundRepository playgroundRepository) {
         return args -> {
+            playgroundRepository.deleteAll();
 
             Playground playground = new Playground();
             playground.setName("Ploshtadka");
             playground.setCoordinates(Coordinates.builder().latitude(42.141080).longitude(24.752345).build());
-
+            playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(
                     NoSuchElementException::new);
