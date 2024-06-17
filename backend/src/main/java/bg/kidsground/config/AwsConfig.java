@@ -20,8 +20,7 @@ import software.amazon.awssdk.services.ssm.SsmClient;
 @Configuration
 public class AwsConfig {
 
-    @Value("${aws.app.name}")
-    private String appName;
+    private final String appName = "kidsground";
 
     @Lazy(false)
     @Bean
