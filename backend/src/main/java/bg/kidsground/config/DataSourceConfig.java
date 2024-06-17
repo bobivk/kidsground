@@ -24,10 +24,10 @@ public class DataSourceConfig {
     public DataSource dataSource() {
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://your-database-url:3306/your-database-name");
-        dataSource.setUsername("db.username");
-        dataSource.setPassword("db.password");
+        dataSource.setUrl(this.secretsService.getSecret("db.url"));
+        dataSource.setUsername(this.secretsService.getSecret("db.username"));
+        dataSource.setPassword(this.secretsService.getSecret("db.password"));
+
         return dataSource;
     }
 }
