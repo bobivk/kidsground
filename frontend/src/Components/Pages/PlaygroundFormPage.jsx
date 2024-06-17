@@ -2,7 +2,7 @@ import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/playgroundForm.css'
 import { Map } from '../Common/Map'
 import { useState, useRef, useEffect } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Modal } from '../Common/CreatedModal'
 
 export const PlaygroundFormPage = () => {
@@ -30,7 +30,7 @@ export const PlaygroundFormPage = () => {
     const [otherLocationText, setOtherLocationText] = useState("");
     const [coordinates, setCoordinates] = useState({});
     const [add, setAdd] = useState(true);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(true);
 
     useEffect(() => {
         // Scroll to the top of the page when the component mounts
@@ -380,7 +380,7 @@ export const PlaygroundFormPage = () => {
                             <br/>
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="combined" name="swings" value="combined"/>
-                                <label for="combined">Комбинирано съоражение</label>
+                                <label for="combined">Комбинирано съоръжение</label>
                             </div>
                             <br/>
                             <div className="choice">
@@ -420,7 +420,7 @@ export const PlaygroundFormPage = () => {
                             <br/>
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="accessible" name="swings" value="accessible"/>
-                                <label for="accessible">Съораженя, достъпни за деца с ограничени двигателни функции</label>
+                                <label for="accessible">Съоръжения, достъпни за деца с ограничени двигателни функции</label>
                             </div>
                             <br/>
                             <div className="choice">
@@ -500,7 +500,7 @@ export const PlaygroundFormPage = () => {
                             </div>
                             <div className="add-playground-btns" >
                                 <button onclick={createPlayground} disabled={add} id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
-                                <button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button>
+                                <Link to="/"><button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button></Link>
                             </div>
                         </div>
                     </form>
