@@ -14,7 +14,7 @@ public class SecretsServiceImpl implements SecretsService {
     public String getSecret(String secretName) {
         return this.ssmClient.getParameter(
                         GetParameterRequest.builder()
-                                .name(secretName)
+                                .name("/config/kidsground/" + secretName)
                                 .build())
                 .parameter()
                 .value();
