@@ -43,7 +43,7 @@ export const HomePage = () => {
             <div className="subtitle">
                 <h3>Участвай и ти в създаването <br />
                 на единна карта на детските <br />
-                площадки на град <h3 className={fadeClass} style={{color: colors[currentColorIndex]}}>{cities[currentCityIndex]}!</h3></h3>
+                площадки на град <h3 className={fadeClass} style={{color: colors[currentColorIndex]}}>{cities[currentCityIndex]}</h3>!</h3>
             </div>
             <img className="background-img" src="background.jpg" />
             <div id="map-text">
