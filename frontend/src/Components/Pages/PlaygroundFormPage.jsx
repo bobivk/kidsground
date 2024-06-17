@@ -240,17 +240,22 @@ export const PlaygroundFormPage = () => {
                         </div>
         
                         <div className="question" id="age-group-question">
-                            <label className="form-label" for="age-group-question">2. За каква възрастова група е подходяща площадката?</label>
+                            <label className="form-label" for="age-group-question">2. За каква възрастова група е подходяща площадката? *</label>
                             <br/>
                             <br/>
                             <div className="choice">
                                 <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="zero_to_three" name="age_group" value="zero_to_three"/>
-                                <label for="zero_to_three">0-3г.</label>
+                                <label for="zero_to_three">0-3г. (С придружител)</label>
                             </div>
                             <br/>
                             <div className="choice">
                                 <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_six" name="age_group" value="three_to_six"/>
                                 <label for="three_to_six">3-6г.</label>
+                            </div>
+                            <br/>
+                            <div className="choice">
+                                <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_twelve" name="age_group" value="three_to_twelve"/>
+                                <label for="three_to_twelve">3-12г.</label>
                             </div>
                             <br/>
                             <div className="choice">
@@ -261,7 +266,7 @@ export const PlaygroundFormPage = () => {
                         </div>
         
                         <div className="question" id="environment-question">
-                            <label className="form-label" for="environment-question">3. Какво е местоположението на детската площадка?</label>
+                            <label className="form-label" for="environment-question">3. Какво е местоположението на детската площадка? *</label>
                             <br/>
                             <div className="choice">
                                 <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="boulevard" name="environment" value="boulevard"/>
@@ -287,7 +292,7 @@ export const PlaygroundFormPage = () => {
                         </div>
         
                         <div className="question" id="shade-question">
-                            <label className="form-label" for="shade-question">4. Има ли сенчести зони?</label>
+                            <label className="form-label" for="shade-question">4. Има ли сенчести зони? *</label>
                             <br/>
                             <div className="choice">
                                 <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="tree-shade" name="shade" value="tree-shade"/>
@@ -307,7 +312,7 @@ export const PlaygroundFormPage = () => {
                         </div>
         
                         <div className="question" id="transport-question">
-                            <label className="form-label" for="transport-question">5. Какъв е транспортният достъп?</label>
+                            <label className="form-label" for="transport-question">5. Какъв е транспортният достъп? *</label>
                             <br/>
                             <div className="choice">
                                 <input type="checkbox" onChange={changeTransport} className="playground-input" id="free-parking" name="transport" value="free-parking"/>
@@ -332,7 +337,7 @@ export const PlaygroundFormPage = () => {
                         </div>
         
                         <div className="question" id="fence-question">
-                            <label className="form-label" for="fence-question">6. Има ли ограда?</label>
+                            <label className="form-label" for="fence-question">6. Има ли ограда? *</label>
                             <br/>
                             <div className="choice">
                                 <input type="radio" onChange={changeIsFenced} className="playground-input" id="yes" name="fence" value="true"/>
@@ -346,7 +351,7 @@ export const PlaygroundFormPage = () => {
                             <br/>
                         </div>
                         <div className="question" id="floor-question">
-                            <label className="form-label" for="floor-question">7. Каква е настилката</label>
+                            <label className="form-label" for="floor-question">7. Каква е настилката? *</label>
                             <br/>
                             <div className="choice">
                                 <input type="radio" onChange={changeFloor} className="playground-input" id="asphalt" name="floor" value="asphalt"/>
@@ -376,7 +381,7 @@ export const PlaygroundFormPage = () => {
                         </div>
         
                         <div className="question" id="swings-question">
-                            <label className="form-label" for="swings-question">8. С какви катерушки разполага площадката?</label>
+                            <label className="form-label" for="swings-question">8. С какви катерушки разполага площадката? *</label>
                             <br/>
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="combined" name="swings" value="combined"/>
@@ -451,7 +456,7 @@ export const PlaygroundFormPage = () => {
                         </div>
         
                         <div className="question" id="facilities-question">
-                            <label className="form-label" for="facilities-question">9. Други съоръжения?</label>
+                            <label className="form-label" for="facilities-question">9. Други съоръжения? *</label>
                             <br/>
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="wc" name="facilities" value="wc"/>
@@ -476,6 +481,11 @@ export const PlaygroundFormPage = () => {
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="bench" name="facilities" value="bench"/>
                                 <label for="bench">Пейка</label>
+                            </div>
+                            <br/>
+                            <div className="choice">
+                                <input type="checkbox" onChange={changeFacilities} className="playground-input" id="none" name="facilities" value="none"/>
+                                <label for="none">Няма</label>
                             </div>
                             <br/>
                             <div className="choice">

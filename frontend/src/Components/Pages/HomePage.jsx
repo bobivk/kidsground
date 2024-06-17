@@ -2,13 +2,32 @@ import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/main.css'
 import { Map } from '../Common/Map'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const HomePage = () => {
 
+    const cities = ["Пловдив", "Пазарджик", "София", "Бургас", "Стара Загора", "Кърджали", "Асеновград", "Видин", "Варна", "Благоевград", "Хасково", "Враца", "Русе", "Сандански", "Гоце Делчев", "Сливен", "Ямбол"];
+    const colors = ["#F24630", "#FECD1B", "#A3C939", "#4a8f9b"]
+    const [currentCityIndex, setCurrentCityIndex] = useState(0);
+    const [currentColorIndex, setCurrentColorIndex] = useState(0);
+    const [fadeClass, setFadeClass] = useState('');
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0) 
     }, [])
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setFadeClass('fade-out'); // Add the fade-out class
+            setTimeout(() => {
+                setCurrentCityIndex((prevIndex) => (prevIndex + 1) % cities.length)
+                setCurrentColorIndex((prevIndex) => (prevIndex + 1) % colors.length)
+                setFadeClass('fade-in');
+            }, 500)
+
+        }, 1000)
+
+        return () => clearInterval(interval);
+    })
 
     return(
         <div className="page">
@@ -18,13 +37,13 @@ export const HomePage = () => {
                     <h1 className="detskite">Детските </h1> 
                     <h1 className="ploshtadki">площадки </h1>
                 </span>
-                <h2>на Пловдив заедно!</h2>
+                <h2>на <h2 className={fadeClass} style={{color: colors[currentColorIndex]}}>{cities[currentCityIndex]}</h2> заедно!</h2>
             </div>
 
             <div className="subtitle">
                 <h3>Участвай и ти в създаването <br />
                 на единна карта на детските <br />
-                площадки на град Пловдив!</h3>
+                площадки на град <h3 className={fadeClass} style={{color: colors[currentColorIndex]}}>{cities[currentCityIndex]}!</h3></h3>
             </div>
             <img className="background-img" src="background.jpg" />
             <div id="map-text">
