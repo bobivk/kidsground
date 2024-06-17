@@ -133,7 +133,7 @@ export const Map = ({onCoordinatesChange}) => {
 
     const fetchData = async () => {
         setPlaygrounds([{id:1, name: "bla, bla", ageGroup: "three_to_six", coordinates: {lat: 41.6338, lng: 25.3777}}, {id:2, name: "bla, bla2", ageGroup: "three_to_six", coordinates: {lat: 41.6368, lng: 25.3777}}])
-        // const receivedItems = await fetch("http://3.79.99.23:8009/v1/playgrounds/all")
+        const receivedItems = await fetch("https://kidsground.bg/v1/playgrounds/all")
         // const receivedItemsJSON = await receivedItems.json()
         // setPlaygrounds(receivedItemsJSON)
     }
