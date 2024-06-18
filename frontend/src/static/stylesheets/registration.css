@@ -205,9 +205,12 @@ button:hover {
 @media only screen and (max-width: 380px) {
 
     .register-container {
-        width: 98vw;
-        height: 70vh;
         background-position: 0 40vh; 
+    }
+
+    .btn-field button{
+        margin-top: 0vh;
+        font-size: 12px;
     }
 
     .form-box {
