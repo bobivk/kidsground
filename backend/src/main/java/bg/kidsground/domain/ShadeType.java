@@ -1,5 +1,7 @@
 package bg.kidsground.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum ShadeType {
 
     TREES("trees"),
@@ -10,5 +12,10 @@ public enum ShadeType {
 
     ShadeType(String value) {
         this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
     }
 }

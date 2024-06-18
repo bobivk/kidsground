@@ -35,39 +35,30 @@ public class Playground {
     private FloorType floorType;
 
     @JsonProperty("shade_type")
+    @Enumerated(EnumType.STRING)
     private ShadeType shadeType;
 
     @JsonProperty("environment")
-    private String environment;
+    @Enumerated(EnumType.STRING)
+    private Environment environment;
 
     @JsonProperty("transport")
+    @ElementCollection
     private List<String> transport;
 
     @JsonProperty("toys")
+    @ElementCollection
     private List<String> toys;
 
     @JsonProperty("facilities")
+    @ElementCollection
     private List<String> facilities;
 
     @JsonProperty("image_links")
+    @ElementCollection
     private List<String> imageLinks;
 
     @JsonProperty("coordinates")
     private Coordinates coordinates;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -1,5 +1,7 @@
 package bg.kidsground.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum FloorType {
     ASPHALT("asphalt"),
     GRASS("grass"),
@@ -11,5 +13,10 @@ public enum FloorType {
 
     FloorType(String value) {
         this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
     }
 }
