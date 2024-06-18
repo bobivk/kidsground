@@ -182,7 +182,6 @@ button:hover {
     .register-container {
         width: 98vw;
         height: 80vh;
-        background-position: 0 45vh; 
     } 
 
 }
@@ -205,9 +204,10 @@ button:hover {
 
 @media only screen and (max-width: 380px) {
 
-    register-container {
+    .register-container {
         width: 98vw;
         height: 70vh;
+        background-position: 0 40vh; 
     }
 
     .form-box {
