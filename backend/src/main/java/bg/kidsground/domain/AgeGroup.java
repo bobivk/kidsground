@@ -1,5 +1,7 @@
 package bg.kidsground.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum AgeGroup {
 
     ZERO_TO_THREE("zero_to_three"),
@@ -11,5 +13,10 @@ public enum AgeGroup {
 
     AgeGroup(String value) {
         this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
     }
 }

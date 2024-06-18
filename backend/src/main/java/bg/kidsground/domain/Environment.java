@@ -1,5 +1,7 @@
 package bg.kidsground.domain;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Environment {
 
     BOULEVARD("boulevard"),
@@ -10,5 +12,10 @@ public enum Environment {
     public final String value;
     Environment(final String value){
         this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
     }
 }
