@@ -11,7 +11,7 @@ export const Navbar = () => {
             </div>
             <div className="map-wrapper">
                 {/* bug found if on login page clicking this wont take you anywhere */}
-                <div> <HashLink to="/#map"> Карта </HashLink> </div>
+                <div><HashLink to="/#map"> Карта </HashLink></div>
             </div>
             <div className="about-us-wrapper">
                 <div><HashLink to="/#about-us">За проекта</HashLink></div>

@@ -93,7 +93,7 @@ export const Map = ({onCoordinatesChange}) => {
     }
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyAbVV04b50sVLWUYtMDVfEIuPnoFPU_mas',
+        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
         libraries,
     });
 
@@ -224,7 +224,7 @@ export const Map = ({onCoordinatesChange}) => {
                             >
                                 <div id="infoWindow">
                                     <p>Details about this playground</p>
-                                    <Link to="/playground"><a>Виж Повече</a></Link>
+                                    <Link to={`/playground/${selectedMarker.id}`}><a>Виж Повече</a></Link>
                                 </div>
                             </InfoWindow>
                     }

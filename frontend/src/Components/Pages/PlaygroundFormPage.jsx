@@ -201,6 +201,7 @@ export const PlaygroundFormPage = () => {
     const createPlayground = async (event) => {
         event.preventDefault();
         if(name === "") {
+            await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates[0]},${coordinates[1]}?language=bg&key=${process.env.GOOGLE_MAPS_API_KEY}`)
             setName(`${coordinates[0]}, ${coordinates[1]}`);
         }
         const data = {name, ageGroup, location, shaded, floor, isFenced, facilities, transport, toys}

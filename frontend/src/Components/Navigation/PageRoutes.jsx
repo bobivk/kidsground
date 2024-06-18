@@ -8,7 +8,7 @@ export const PageRoutes = () => {
     return(
         <Routes>
             <Route exact path="/" element={<HomePage />} />
-            <Route exact path="/playground" element={<PlaygroundPage />} />
+            <Route exact path="/playground/:id" element={<PlaygroundPage />} />
             <Route exact path="/login" element={<LoginPage />} />
             <Route exact path="/add" element={<PlaygroundFormPage />} />
         </Routes>

@@ -46,13 +46,11 @@ html {
 }
 
 .fade-in {
-  display: inline;
   opacity: 1;
   transition: opacity 0.5s ease-in;
 }
 
 .fade-out {
-  display: inline;
   opacity: 0;
   transition: opacity 0.5s ease-out;
 }

@@ -96,6 +96,7 @@ input {
     outline: 0;
     cursor: pointer;
     transition: background 1s;
+    font-size: 16px;
 }
 
 button:hover {
@@ -164,9 +165,6 @@ button:hover {
         background-position: 0 50vh; 
     } 
 
-    .btn-field {
-        font-size: 20px;
-    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -178,10 +176,6 @@ button:hover {
         top: -5vh;
     }
 
-    .btn-field {
-        font-size: 20px;
-    }
-
 }
 
 @media only screen and (max-width: 560px) {
@@ -191,9 +185,6 @@ button:hover {
         background-position: 0 45vh; 
     } 
 
-    .btn-field {
-        font-size: 30px;
-    }
 }
 
 @media only screen and (max-width: 480px) {
@@ -208,6 +199,7 @@ button:hover {
 
     .btn-field button{
         margin-top: 10vh;
+        font-size: 14px;
     }
 }
 
@@ -224,11 +216,6 @@ button:hover {
 
     .input-field {
         max-height: 45px;
-    }
-
-
-    .btn-field {
-        font-size: 12px;
     }
 
 }

@@ -37,13 +37,13 @@ export const HomePage = () => {
                     <h1 className="detskite">Детските </h1> 
                     <h1 className="ploshtadki">площадки </h1>
                 </span>
-                <h2>на <h2 className={fadeClass} style={{color: colors[currentColorIndex]}}>{cities[currentCityIndex]}</h2> заедно!</h2>
+                <h2>на <h2 className={fadeClass} style={{color: colors[currentColorIndex], display:"inline"}}>{cities[currentCityIndex]}</h2> заедно!</h2>
             </div>
 
             <div className="subtitle">
                 <h3>Участвай и ти в създаването <br />
                 на единна карта на детските <br />
-                площадки на град <h3 className={fadeClass} style={{color: colors[currentColorIndex]}}>{cities[currentCityIndex]}</h3>!</h3>
+                площадки на град <h3 className={fadeClass} style={{color: colors[currentColorIndex], display:"inline"}}>{cities[currentCityIndex]}</h3>!</h3>
             </div>
             <img className="background-img" src="background.jpg" />
             <div id="map-text">
