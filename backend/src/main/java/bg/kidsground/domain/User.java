@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class User {
   @Id
-  //@Column(name = "user_id", length = 45)
+  @Column(name = "user_id", length = 45)
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
@@ -32,7 +32,6 @@ public class User {
   }
 
   public User(Long id, String username, String password, String email) {
-    super();
     this.id = id;
     this.username = username;
     this.password = password;

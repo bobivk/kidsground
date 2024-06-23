@@ -24,7 +24,7 @@ public class KidsgroundApplication {
     CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository) {
         return args -> {
             playgroundRepository.deleteAll();
-            User user = new User(0L, "testUser", "randomPass", "user@test.com");
+            User user = new User(1L, "testUser", "randomPass", "user@test.com");
             userRepository.save(user);
             Playground playground = new Playground();
             playground.setName("Ploshtadka");
