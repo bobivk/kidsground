@@ -61,4 +61,7 @@ public class Playground {
     @JsonProperty("coordinates")
     private Coordinates coordinates;
 
+    @JsonProperty("is_new")
+    private boolean isNew;
+
 }

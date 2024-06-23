@@ -15,12 +15,6 @@ public class AppRestEndpoints {
             }
         }
 
-        public class Secrets {
-            public static final String SECRETS_ROOT = V1_ROOT + "/secrets";
-
-            public static final String MAPS_API_KEY = SECRETS_ROOT + "/mapsApiKey";
-        }
-
         public class Users {
             public static final String USERS_ROOT = V1_ROOT + "/users";
 
