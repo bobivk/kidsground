@@ -25,7 +25,7 @@ public class KidsgroundApplication {
         return args -> {
             playgroundRepository.deleteAll();
             User user = new User(0L, "testUser", "randomPass", "user@test.com");
-            userRepository.save(new UserDto(0L, "testUser", "randomPass", "user@test.com"));
+            userRepository.save(user);
             Playground playground = new Playground();
             playground.setName("Ploshtadka");
             playground.setCoordinates(Coordinates.builder().latitude(42.141080).longitude(24.752345).build());
