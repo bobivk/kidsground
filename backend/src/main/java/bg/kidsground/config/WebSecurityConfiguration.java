@@ -22,11 +22,17 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class WebSecurityConfiguration
 {
+
+        
     @Autowired
     private JWTFilter filter;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .requiresChannel()
+                .anyRequest()
+                .requiresSecure();
                 .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
                         .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
                                 AppRestEndpoints.V1.Playground.COUNT, AppRestEndpoints.V1.Playground.GET_ALL).permitAll()
