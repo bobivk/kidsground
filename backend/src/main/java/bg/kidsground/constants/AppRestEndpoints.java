@@ -14,6 +14,12 @@ public class AppRestEndpoints {
                 public static final String ID = PLAYGROUND_ROOT + "/{id}";
             }
         }
+
+        public class Secrets {
+            public static final String SECRETS_ROOT = V1_ROOT + "/secrets";
+
+            public static final String MAPS_API_KEY = SECRETS_ROOT + "/mapsApiKey";
+        }
     }
 
 }
