@@ -1,14 +1,11 @@
 package bg.kidsground.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-//@Table(name = "users")
+@Table(name = "users")
 @Data
 public class User {
   @Id
@@ -45,7 +42,7 @@ public class User {
 
   @Override
   public String toString() {
-    return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role=" + role + "]";
+    return "User [id=" + id + ", username=" + username + ", email=" + email + ", role=" + role + "]";
   }
 
 }
