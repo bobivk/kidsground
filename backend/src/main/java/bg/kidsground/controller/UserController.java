@@ -1,5 +1,6 @@
 package bg.kidsground.controller;
 
+import bg.kidsground.constants.AppRestEndpoints;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.LoginDto;
 import bg.kidsground.domain.dto.UserDto;
@@ -21,12 +22,12 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-  @PostMapping(path = "/register")
+  @PostMapping(path = AppRestEndpoints.V1.Users.REGISTER)
   public User registerUser(@RequestBody UserDto userDto) {
     return userService.save(userDto);
   }
 
-  @PostMapping(path = "/login")
+  @PostMapping(path = AppRestEndpoints.V1.Users.LOGIN)
   public ResponseEntity<?> loginUser(@RequestBody LoginDto loginDto) {
     LoginMessage loginMessage = userService.loginUser(loginDto);
     return ResponseEntity.ok(loginMessage);
