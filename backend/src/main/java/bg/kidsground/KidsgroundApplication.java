@@ -31,7 +31,7 @@ public class KidsgroundApplication {
             playground.setCoordinates(Coordinates.builder().latitude(42.141080).longitude(24.752345).build());
             playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
             playground.setCreator(user);
-            playground.setIsNew(false);
+            playground.setNew(false);
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(
                     NoSuchElementException::new);
