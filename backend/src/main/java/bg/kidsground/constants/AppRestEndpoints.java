@@ -14,6 +14,13 @@ public class AppRestEndpoints {
                 public static final String ID = PLAYGROUND_ROOT + "/{id}";
             }
         }
+
+        public class Users {
+            public static final String USERS_ROOT = V1_ROOT + "/users";
+
+            public static final String REGISTER = USERS_ROOT + "/register";
+            public static final String LOGIN = USERS_ROOT + "/login";
+        }
     }
 
 }

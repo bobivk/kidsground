@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
+@Table(name = "playgrounds")
 @Data
 @Builder
 @NoArgsConstructor
@@ -60,5 +61,13 @@ public class Playground {
 
     @JsonProperty("coordinates")
     private Coordinates coordinates;
+
+    @JsonProperty("is_new")
+    private boolean isNew;
+
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
+    @JsonProperty("creator_id")
+    private User creator;
 
 }
