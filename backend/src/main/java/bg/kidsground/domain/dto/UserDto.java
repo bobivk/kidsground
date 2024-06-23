@@ -2,25 +2,14 @@ package bg.kidsground.domain.dto;
 
 public class UserDto {
 
-  private Long id;
   private String username;
   private String password;
   private String email;
 
-  public UserDto(Long id, String username, String password, String email) {
-    super();
-    this.id = id;
+  public UserDto(String username, String password, String email) {
     this.username = username;
     this.password = password;
     this.email = email;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
   }
 
   public String getUsername() {
