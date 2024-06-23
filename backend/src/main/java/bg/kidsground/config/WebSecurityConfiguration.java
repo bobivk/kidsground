@@ -30,7 +30,6 @@ public class WebSecurityConfiguration
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .requiresSecure();
                 .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
                         .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
                                 AppRestEndpoints.V1.Playground.COUNT, AppRestEndpoints.V1.Playground.GET_ALL).permitAll()
@@ -41,6 +40,7 @@ public class WebSecurityConfiguration
                 )
                 .formLogin(formLogin -> formLogin.loginPage(AppRestEndpoints.V1.Users.LOGIN).permitAll())
                 .logout(LogoutConfigurer::permitAll)
+                .requiresSecure()
                 .httpBasic(withDefaults());
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
