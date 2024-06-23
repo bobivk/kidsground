@@ -30,8 +30,6 @@ public class WebSecurityConfiguration
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .requiresChannel()
-                .anyRequest()
                 .requiresSecure();
                 .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
                         .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
