@@ -87,7 +87,6 @@ public class PlaygroundServiceTest {
         playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg"));
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
-        //when(playgroundMapper.toDto(playground)).thenReturn(playgroundDto);
 
         // When
         PlaygroundDto result = playgroundService.getById(id);
