@@ -59,7 +59,14 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public LoginMessage loginUser(LoginDto loginDto) {
-    return new LoginMessage("");
+  public UserDto login(LoginDto loginDto) throws UsernameNotFoundException {
+    User user = userRepository.findByUsername(loginDto.getUsername());
+    if (user == null) {
+      throw new UsernameNotFoundException("User not found with username: " + loginDto.getUsername());
+    }
+    if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+      throw new IllegalArgumentException("Invalid password");
+    }
+    return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
   }
 }

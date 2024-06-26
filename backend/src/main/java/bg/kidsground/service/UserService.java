@@ -12,7 +12,7 @@ public interface UserService {
 
   User save(LoginDto loginDto);
 
-  LoginMessage loginUser(LoginDto loginDto);
+  UserDto login(LoginDto loginDto);
 
   UserDetails loadUserDetails(String username);
 }
