@@ -1,25 +1,19 @@
-package bg.kidsground.domain;
+package bg.kidsground.domain.dto;
 
+import bg.kidsground.domain.AgeGroup;
+import bg.kidsground.domain.Coordinates;
+import bg.kidsground.domain.Environment;
+import bg.kidsground.domain.FloorType;
+import bg.kidsground.domain.ShadeType;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "playground")
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Playground {
+public class PlaygroundDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
     private Long id;
 
@@ -27,7 +21,6 @@ public class Playground {
     private String name;
 
     @JsonProperty("age_group")
-    @Enumerated(EnumType.STRING)
     private AgeGroup ageGroup;
 
     @JsonProperty("has_fence")
@@ -37,28 +30,22 @@ public class Playground {
     private FloorType floorType;
 
     @JsonProperty("shade_type")
-    @Enumerated(EnumType.STRING)
     private ShadeType shadeType;
 
     @JsonProperty("environment")
-    @Enumerated(EnumType.STRING)
     private Environment environment;
 
     @JsonProperty("transport")
-    @ElementCollection
     private List<String> transport = new ArrayList<>();
 
     @JsonProperty("toys")
-    @ElementCollection
     private List<String> toys = new ArrayList<>();
 
     @JsonProperty("facilities")
-    @ElementCollection
     private List<String> facilities = new ArrayList<>();
 
-    @JsonProperty("image_s3_keys")
-    @ElementCollection
-    private List<String> imageS3Keys = new ArrayList<>();
+    @JsonProperty("image_links")
+    private List<String> imageLinks = new ArrayList<>(); // presigned URLs for the images to put in web page
 
     @JsonProperty("coordinates")
     private Coordinates coordinates;
@@ -66,9 +53,6 @@ public class Playground {
     @JsonProperty("is_new")
     private boolean isNew;
 
-    @ManyToOne
-    @JoinColumn(name = "creator_id")
-    @JsonProperty("creator_id")
-    private User creator;
-
+    @JsonProperty("creator")
+    private UserDto creator;
 }

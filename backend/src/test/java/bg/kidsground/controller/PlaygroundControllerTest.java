@@ -5,8 +5,8 @@ import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.Environment;
 import bg.kidsground.domain.FloorType;
-import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.ShadeType;
+import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.service.PlaygroundService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -45,7 +45,7 @@ public class PlaygroundControllerTest {
 
     @Test
     public void testSavePlayground() throws Exception {
-        Playground playground = new Playground();
+        PlaygroundDto playground = new PlaygroundDto();
         playground.setName("Test Playground");
         playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -54,17 +54,18 @@ public class PlaygroundControllerTest {
         mockMvc.perform(post(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(playgroundJson))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().json("0"));
 
-        verify(playgroundService).savePlayground(any(Playground.class));
+        verify(playgroundService).savePlayground(any(PlaygroundDto.class));
     }
 
     @Test
     public void testGetPlaygroundById() throws Exception {
-        Long id = 1L; // Sample ID
+        Long id = 1L;
         String name = "TestPlayground";
-        Playground playground = new Playground(); // You need to create a Playground object here with appropriate data
-        playground.setId(id);
+        PlaygroundDto playground = new PlaygroundDto();
+        playground.setId(1L);
         playground.setName(name);
         playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
         playground.setCoordinates(Coordinates.builder().latitude(10.2).longitude(20.1).build());
