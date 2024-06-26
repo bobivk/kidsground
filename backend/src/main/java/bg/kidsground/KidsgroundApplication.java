@@ -4,6 +4,7 @@ import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
+import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.PlaygroundRepository;
 import bg.kidsground.repository.UserRepository;
@@ -24,7 +25,7 @@ public class KidsgroundApplication {
     CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository) {
         return args -> {
             playgroundRepository.deleteAll();
-            User user = new User("testUser", "randomPass", "user@test.com");
+            User user = new User("testUser", "randomPass", "user@test.com", UserRole.USER);
             userRepository.save(user);
             Playground playground = new Playground();
             playground.setName("Ploshtadka");

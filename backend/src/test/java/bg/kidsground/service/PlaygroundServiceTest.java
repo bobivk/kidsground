@@ -2,6 +2,7 @@ package bg.kidsground.service;
 
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
+import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.domain.mapper.PlaygroundMapper;
@@ -57,11 +58,11 @@ public class PlaygroundServiceTest {
         Long id = 1L;
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setName("New Playground");
-        playgroundDto.setCreator(new UserDto("username", "pesho@mail.bg"));
+        playgroundDto.setCreator(new UserDto("username", "pesho@mail.bg", UserRole.USER));
         Playground playground = new Playground();
         playground.setId(id);
         playground.setName("New Playground");
-        playground.setCreator(new User("username", "password", "pesho@mail.bg"));
+        playground.setCreator(new User("username", "password", "pesho@mail.bg", UserRole.USER));
         when(playgroundRepository.save(any())).thenReturn(playground);
 
         // When
@@ -81,10 +82,10 @@ public class PlaygroundServiceTest {
         Long id = 1L;
         Playground playground = new Playground();
         playground.setId(id);
-        playground.setCreator(new User("pesho", "password", "pesho@mail.bg"));
+        playground.setCreator(new User("pesho", "password", "pesho@mail.bg", UserRole.USER));
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
-        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg"));
+        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg", UserRole.USER));
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
 
@@ -111,7 +112,7 @@ public class PlaygroundServiceTest {
     public void testGetAll() {
         // Given
         Playground playground = new Playground();
-        playground.setCreator(new User("pesho", "pass", "pesho@mail.bg"));
+        playground.setCreator(new User("pesho", "pass", "pesho@mail.bg", UserRole.USER));
         when(playgroundRepository.findAll()).thenReturn(Collections.singletonList(playground));
 
         // When
@@ -142,12 +143,12 @@ public class PlaygroundServiceTest {
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
         playgroundDto.setName("Updated Playground");
-        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg"));
+        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg", UserRole.USER));
         playgroundDto.setImageLinks(List.of("image_url"));
 
         Playground existingPlayground = new Playground();
         existingPlayground.setId(id);
-        User user = new User("pesho", "pass", "pesho@mail.bg");
+        User user = new User("pesho", "pass", "pesho@mail.bg", UserRole.USER);
         existingPlayground.setCreator(user);
         List<String> imageS3Keys = List.of("s3Key");
         existingPlayground.setImageS3Keys(imageS3Keys);
@@ -204,13 +205,13 @@ public class PlaygroundServiceTest {
         MultipartFile file = mock(MultipartFile.class);
         Playground playground = new Playground();
         playground.setId(id);
-        playground.setCreator(new User("pesho", "pass", "pesho@mail.bg"));
+        playground.setCreator(new User("pesho", "pass", "pesho@mail.bg", UserRole.USER));
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
         when(s3Service.uploadFile(file)).thenReturn(s3Key);
         when(s3Service.getImageUrl(s3Key)).thenReturn(imageUrl);
         when(playgroundRepository.save(playground)).thenReturn(playground);
         PlaygroundDto playgroundDto = new PlaygroundDto();
-        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg"));
+        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg", UserRole.USER));
         playgroundDto.setId(1L);
         playgroundDto.setImageLinks(List.of(imageUrl));
 

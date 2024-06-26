@@ -43,7 +43,7 @@ public abstract class PlaygroundMapper {
 
     @Named("userToDto")
     protected UserDto userToDto(User user) {
-        return new UserDto(user.getUsername(), user.getEmail());
+        return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
     }
 
 }

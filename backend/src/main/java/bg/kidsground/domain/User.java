@@ -34,10 +34,11 @@ public class User {
   public User() {
   }
 
-  public User(String username, String password, String email) {
+  public User(String username, String password, String email, UserRole userRole) {
     this.username = username;
     this.password = password;
     this.email = email;
+    this.role = userRole;
   }
 
 
