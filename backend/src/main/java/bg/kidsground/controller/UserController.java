@@ -7,7 +7,10 @@ import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.response.LoginMessage;
 import bg.kidsground.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +31,11 @@ public class UserController {
 
   @PostMapping(path = AppRestEndpoints.V1.Users.LOGIN)
   public ResponseEntity<?> loginUser(@RequestBody LoginDto loginDto) {
-    LoginMessage loginMessage = userService.loginUser(loginDto);
-    return ResponseEntity.ok(loginMessage);
+    try {
+      UserDto userDto = userService.login(loginDto);
+      return ResponseEntity.ok(userDto);
+    } catch (UsernameNotFoundException | IllegalArgumentException e) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
   }
 }
