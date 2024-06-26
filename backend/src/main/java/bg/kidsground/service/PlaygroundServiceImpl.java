@@ -27,7 +27,9 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
     @Override
     public Long savePlayground(final PlaygroundDto playgroundDto) {
-        return this.playgroundRepository.save(this.playgroundMapper.toEntity(playgroundDto)).getId();
+        Playground playground = this.playgroundMapper.toEntity(playgroundDto);
+        playground.setNew(true);
+        return this.playgroundRepository.save(playground).getId();
     }
 
     @Override

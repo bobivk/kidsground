@@ -26,11 +26,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    @Override
     public UserDetails loadUserDetails(String username) throws UsernameNotFoundException
     {
         User user = userRepository.findByUsername(username);
@@ -47,13 +42,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(LoginDto loginDto) {
+    public UserDto save(LoginDto loginDto) {
         User user = new User(loginDto.getUsername(),
                             passwordEncoder.encode(loginDto.getPassword()),
                             loginDto.getEmail(),
                             UserRole.USER);
 
-        return userRepository.save(user);
+        userRepository.save(user);
+        return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
     }
 
     @Override
