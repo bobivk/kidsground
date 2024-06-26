@@ -1,12 +1,13 @@
 package bg.kidsground.controller;
 
 import bg.kidsground.constants.AppRestEndpoints;
-import bg.kidsground.domain.Playground;
+import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.service.PlaygroundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,25 +20,29 @@ public class PlaygroundController {
     private PlaygroundService playgroundService;
 
     @PostMapping(path = AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
-    public ResponseEntity<Void> savePlayground(@RequestBody final Playground playground) {
+    public ResponseEntity<Void> savePlayground(@RequestBody final PlaygroundDto playground) {
         this.playgroundService.savePlayground(playground);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(path = AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
-    public ResponseEntity<Void> updatePlayground(@RequestBody final Playground playground) {
-        this.playgroundService.updatePlayground(playground);
-        return ResponseEntity.ok().build();
+    @PutMapping(path = AppRestEndpoints.V1.Playground.By.ID)
+    public ResponseEntity<PlaygroundDto> updatePlayground(@PathVariable final Long id, @RequestBody final PlaygroundDto playground) {
+        return ResponseEntity.ok(this.playgroundService.updatePlayground(id, playground));
+    }
+
+    @PostMapping(AppRestEndpoints.V1.Playground.By.UPLOAD_IMAGE)
+    public ResponseEntity<PlaygroundDto> uploadImage(@RequestParam("file") final MultipartFile file, @PathVariable final Long id) {
+        return ResponseEntity.ok(playgroundService.uploadImage(file, id));
     }
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)
-    public ResponseEntity<Playground> getById(@PathVariable final Long id) {
+    public ResponseEntity<PlaygroundDto> getById(@PathVariable final Long id) {
         return ResponseEntity.ok(this.playgroundService.getById(id));
     }
 
     // provide a list of PlaygroundSummary if this gets too slow due to size
     @GetMapping(path = AppRestEndpoints.V1.Playground.GET_ALL)
-    public ResponseEntity<List<Playground>> getAll() {
+    public ResponseEntity<List<PlaygroundDto>> getAll() {
         return ResponseEntity.ok(this.playgroundService.getAll());
     }
 
@@ -47,8 +52,13 @@ public class PlaygroundController {
     }
 
     @DeleteMapping(path = AppRestEndpoints.V1.Playground.By.ID)
-    public ResponseEntity<Playground> deleteByID(@PathVariable final Long id) {
-        return ResponseEntity.ok(this.playgroundService.deleteById(id));
+    public ResponseEntity<Void> deleteByID(@PathVariable final Long id) {
+        try {
+            playgroundService.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @ResponseBody

@@ -22,8 +22,8 @@ public class UserController {
   private UserService userService;
 
   @PostMapping(path = AppRestEndpoints.V1.Users.REGISTER)
-  public User registerUser(@RequestBody UserDto userDto) {
-    return userService.save(userDto);
+  public User registerUser(@RequestBody LoginDto loginDto) {
+    return userService.save(loginDto);
   }
 
   @PostMapping(path = AppRestEndpoints.V1.Users.LOGIN)

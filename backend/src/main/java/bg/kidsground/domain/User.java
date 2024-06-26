@@ -2,11 +2,14 @@ package bg.kidsground.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "users")
 @Data
+@EqualsAndHashCode
 public class User {
   @Id
   @Column(name = "id", length = 45)
