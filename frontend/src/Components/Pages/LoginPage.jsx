@@ -119,7 +119,10 @@ export const LoginPage = () => {
     }
 
     function isEmailValid(email) {
-        if (email == null || email === "" || !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/.test(email)) {
+
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (email == null || email === "" || regex.test(email)) {
             document.getElementById('email-error').innerHTML = "Моля, въведете валиден имейл адрес.";
             document.getElementById('email-error').style.display = "block";
             return false;
