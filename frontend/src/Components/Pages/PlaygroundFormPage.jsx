@@ -4,6 +4,7 @@ import { Map } from '../Common/Map'
 import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from '../Common/CreatedModal'
+import { AddImage } from '../Common/AddImage'
 
 export const PlaygroundFormPage = () => {
 
@@ -19,6 +20,7 @@ export const PlaygroundFormPage = () => {
     const [floor, setFloor] = useState();
     const [toys, setToys] = useState([]);
     const [facilities, setFacilities] = useState([]);
+    const [photos, setPhotos] = useState([]);
     const [description, setDescription] = useState("");
     const [isNameFocused, setIsNameFocused] = useState(false);
     const [isOtherAgeFocused, setIsOtherAgeFocused] = useState(false);
@@ -198,6 +200,12 @@ export const PlaygroundFormPage = () => {
         console.log(facilities)
     }
 
+    const onChangeImage = (event) => {
+        for(let i = 0; i < event.target.files; ++i) {
+            setPhotos([...photos, event.target.files[i]]);
+        }
+    }
+
     const createPlayground = async (event) => {
         event.preventDefault();
         if(name === "") {
@@ -208,17 +216,30 @@ export const PlaygroundFormPage = () => {
             })
             setName(`${coordinates[0]}, ${coordinates[1]}`);
         }
+
+        const imagePayload = new FormData();
+        let playgroundId;
         const data = {name, ageGroup, location, shaded, floor, isFenced, facilities, transport, toys}
-        await fetch("http://3.79.99.23:8009/v1/playgrounds/add", {
+        await fetch("https://kidsground:8009/v1/playgrounds/add", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
         }).then((response) => {
+            playgroundId = response.content
             if(response.status === 200) {
                 setShowModal(true);
             }
+        })
+
+        for(let i = 0; i < photos.length; ++i) {
+            imagePayload.append(`image${i}`, photos[i]);
+        }
+
+        await fetch (`https://kidsground:8009/v1/playgrounds/${playgroundId}/uploadImages`, {
+            method:'POST',
+            body: imagePayload
         })
     } 
 
@@ -500,7 +521,7 @@ export const PlaygroundFormPage = () => {
                             </div>
                             <br/>
                         </div>
-        
+                        <AddImage onChangeImage={onChangeImage}/>
                         <div className="question" id="description-question">
                         <label className="form-label" for="description">10. Допълнително описание:</label>
                         <br/>

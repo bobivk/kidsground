@@ -27,7 +27,7 @@ export const LoginPage = () => {
         //if enabled, try register
         const data = {username, email, password};
         if (isEmailValid(data.email) && isPasswordValid(data.password)) {
-            await fetch('http://3.79.99.23:8009/kidsground/backend/api/users/register-user.php', {
+            await fetch('https://kidsground.bg:8009/v1/users/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -72,7 +72,7 @@ export const LoginPage = () => {
             data[field.name] = field.value;
         });
 
-        await fetch("http://3.79.99.23:8009/kidsground/backend/api/users/login.php", {
+        await fetch("https://kidsground.bg:8009/v1/users/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

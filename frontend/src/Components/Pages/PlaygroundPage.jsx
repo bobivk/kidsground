@@ -10,10 +10,13 @@ import { ReactComponent as BikeIcon } from '../../static/icons/person-biking-sol
 import ImageGallery from "react-image-gallery";
 
 import { Map } from '../Common/Map'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { AddImage } from '../Common/AddImage'
 
 export const PlaygroundPage = () => {
 
+    const [photos, setPhotos] = useState([]);
+    const [showImage, setShowImage] = useState("none");
     const images = [
         {
             original: "./pictures/stefan_genev.png"
@@ -24,8 +27,17 @@ export const PlaygroundPage = () => {
     ]
 
     useEffect(() => {
+        if(localStorage.getItem("user") !== null) {
+            setShowImage("flex")
+        }
             window.scrollTo(0, 0)
     }, [])
+
+    const onChangeImage = (event) => {
+        for(let i = 0; i < event.target.files.length; ++i) {
+            setPhotos([...photos, event.target.files[i]]);
+        }
+    }
 
     return(
         <div className="page">
@@ -34,15 +46,7 @@ export const PlaygroundPage = () => {
             </div>
 
             <div className="playground-content">
-                <div id="input-upload-wrapper">
-                    <div id="upload-wrapper">
-                        <label className="upload-btn-wrapper">
-                            <button className="btn">+</button>
-                            <p className="btn-label">Добави снимки</p>
-                        </label>
-                        <input id='input-wrapper' type="file" name="myfile" accept="image/*"/>
-                    </div>
-                </div>
+                <AddImage onChangeImage={onChangeImage}/>
                 <div id="info-card">
                     <div className="playground-text">
                         <h1>Площадка "Дъга"</h1>
