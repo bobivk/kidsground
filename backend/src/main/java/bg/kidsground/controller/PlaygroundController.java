@@ -20,9 +20,8 @@ public class PlaygroundController {
     private PlaygroundService playgroundService;
 
     @PostMapping(path = AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
-    public ResponseEntity<Void> savePlayground(@RequestBody final PlaygroundDto playground) {
-        this.playgroundService.savePlayground(playground);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> savePlayground(@RequestBody final PlaygroundDto playground) {
+        return ResponseEntity.ok(this.playgroundService.savePlayground(playground));
     }
 
     @PutMapping(path = AppRestEndpoints.V1.Playground.By.ID)
@@ -30,9 +29,9 @@ public class PlaygroundController {
         return ResponseEntity.ok(this.playgroundService.updatePlayground(id, playground));
     }
 
-    @PostMapping(AppRestEndpoints.V1.Playground.By.UPLOAD_IMAGE)
-    public ResponseEntity<PlaygroundDto> uploadImage(@RequestParam("file") final MultipartFile file, @PathVariable final Long id) {
-        return ResponseEntity.ok(playgroundService.uploadImage(file, id));
+    @PostMapping(AppRestEndpoints.V1.Playground.By.UPLOAD_IMAGES)
+    public ResponseEntity<PlaygroundDto> uploadImage(@PathVariable final Long id, @RequestBody final List<MultipartFile> file) {
+        return ResponseEntity.ok(playgroundService.uploadImages(file, id));
     }
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)

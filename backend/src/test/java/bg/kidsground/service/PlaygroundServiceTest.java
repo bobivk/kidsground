@@ -6,8 +6,6 @@ import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.domain.mapper.PlaygroundMapper;
 import bg.kidsground.repository.PlaygroundRepository;
-import bg.kidsground.service.PlaygroundServiceImpl;
-import bg.kidsground.service.S3Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -16,12 +14,10 @@ import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -63,9 +59,10 @@ public class PlaygroundServiceTest {
         playgroundDto.setName("New Playground");
         playgroundDto.setCreator(new UserDto("username", "pesho@mail.bg"));
         Playground playground = new Playground();
+        playground.setId(id);
         playground.setName("New Playground");
         playground.setCreator(new User("username", "password", "pesho@mail.bg"));
-        when(playgroundRepository.save(playground)).thenReturn(playground);
+        when(playgroundRepository.save(any())).thenReturn(playground);
 
         // When
         playgroundService.savePlayground(playgroundDto);
@@ -219,7 +216,7 @@ public class PlaygroundServiceTest {
         playgroundDto.setImageLinks(List.of(imageUrl));
 
         // When
-        PlaygroundDto result = playgroundService.uploadImage(file, id);
+        PlaygroundDto result = playgroundService.uploadImages(List.of(file), id);
 
         // Then
         assertEquals(playgroundDto, result);

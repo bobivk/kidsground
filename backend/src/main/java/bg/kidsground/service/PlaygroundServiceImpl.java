@@ -26,8 +26,8 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     private PlaygroundMapper playgroundMapper;
 
     @Override
-    public void savePlayground(final PlaygroundDto playgroundDto) {
-        this.playgroundRepository.save(this.playgroundMapper.toEntity(playgroundDto));
+    public Long savePlayground(final PlaygroundDto playgroundDto) {
+        return this.playgroundRepository.save(this.playgroundMapper.toEntity(playgroundDto)).getId();
     }
 
     @Override
@@ -66,16 +66,18 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
-    public PlaygroundDto uploadImage(MultipartFile file, Long id) {
+    public PlaygroundDto uploadImages(List<MultipartFile> files, Long id) {
 
         Playground playground = this.playgroundRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Playground with ID " + id + " not found"));
-        try {
-            String s3Key = this.s3Service.uploadFile(file);
-            playground.getImageS3Keys().add(s3Key);
-        } catch (IOException e) {
-            log.error("Error while uploading file for playground id {}", id);
-        }
+            files.forEach(file -> {
+                try {
+                    String s3Key = this.s3Service.uploadFile(file);
+                    playground.getImageS3Keys().add(s3Key);
+                } catch (IOException e) {
+                    log.error("Error while uploading file for playground id {}", id);
+                }
+            });
         this.playgroundRepository.save(playground);
         return this.playgroundMapper.toDto(playground);
     }

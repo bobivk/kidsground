@@ -54,7 +54,8 @@ public class PlaygroundControllerTest {
         mockMvc.perform(post(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(playgroundJson))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().json("0"));
 
         verify(playgroundService).savePlayground(any(PlaygroundDto.class));
     }
