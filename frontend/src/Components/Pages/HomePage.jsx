@@ -11,11 +11,21 @@ export const HomePage = () => {
     const [currentCityIndex, setCurrentCityIndex] = useState(0);
     const [currentColorIndex, setCurrentColorIndex] = useState(0);
     const [fadeClass, setFadeClass] = useState('');
+    const [playgroundCount, setPlaygroundCount] = useState('');
+
+
+    const fetchPlaygroundNumber = async () => {
+        await fetch("https://kidsground.bg:8009/v1/playgrounds/count").then(response => response.json())
+        .then(data => setPlaygroundCount(data));
+    }
+
     useEffect(() => {
         window.scrollTo(0, 0) 
     }, [])
 
     useEffect(() => {
+
+        fetchPlaygroundNumber()
         const interval = setInterval(() => {
             setFadeClass('fade-out'); // Add the fade-out class
             setTimeout(() => {
@@ -27,7 +37,7 @@ export const HomePage = () => {
         }, 1000)
 
         return () => clearInterval(interval);
-    })
+    }, [playgroundCount])
 
     return(
         <div className="page">
@@ -61,7 +71,7 @@ export const HomePage = () => {
                     </div>
                     <div className="number-of-playgrounds">
                         <div>
-                            <div id="numberOfPlaygrounds">3928</div>
+                            <div id="numberOfPlaygrounds">{playgroundCount}</div>
                             <div className="number-of-playgrounds-text">детски площадки</div>
                         </div>
                     </div>

@@ -12,12 +12,12 @@ export const PlaygroundFormPage = () => {
     const locationRef = useRef(null);
 
     const [name, setName] = useState("");
-    const [ageGroup, setAgeGroup] = useState("");
-    const [location, setLocation] = useState("");
-    const [shaded, setShaded] = useState("");
+    const [age_group, setAgeGroup] = useState("");
+    const [environment, setLocation] = useState("");
+    const [shade_type, setShaded] = useState("");
     const [transport, setTransport] = useState([]);
-    const [isFenced, setIsFenced] = useState(true);
-    const [floor, setFloor] = useState();
+    const [has_fence, setIsFenced] = useState(true);
+    const [floor_type, setFloor] = useState();
     const [toys, setToys] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [photos, setPhotos] = useState([]);
@@ -40,12 +40,12 @@ export const PlaygroundFormPage = () => {
       }, []);
 
     useEffect(() => {
-        if(ageGroup !== "" && location !== "" && shaded  !== null && floor !== "" && isFenced !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0 && coordinates.lat !== undefined) {
+        if(age_group !== "" && environment !== "" && shade_type  !== null && floor_type !== "" && has_fence !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0 && coordinates.lat !== undefined) {
             setAdd(false);
         } else {
             setAdd(true);
         }
-    }, [add, ageGroup, facilities.length, floor, isFenced, location, shaded, toys.length, transport.length, coordinates])
+    }, [add, age_group, facilities.length, floor_type, has_fence, environment, shade_type, toys.length, transport.length, coordinates])
 
     const resetFocus = () => {
         setIsOtherAgeFocused(false);
@@ -60,7 +60,6 @@ export const PlaygroundFormPage = () => {
     const changeAgeGroup = (event) => {
         resetFocus();
         setAgeGroup(event.target.value);
-        console.log(ageGroup);
     }
 
     const changeLocation = (event) => {
@@ -74,7 +73,6 @@ export const PlaygroundFormPage = () => {
         setIsOtherLocationFocused(true)
         locationRef.current.focus();
         setLocation(event.target.value);
-        console.log(location);
     }
 
     const otherChangeLocationText = (event) => {
@@ -219,7 +217,7 @@ export const PlaygroundFormPage = () => {
 
         const imagePayload = new FormData();
         let playgroundId;
-        const data = {name, ageGroup, location, shaded, floor, isFenced, facilities, transport, toys}
+        const data = {name, age_group, environment, shade_type, floor_type, has_fence, facilities, transport, toys}
         await fetch("https://kidsground:8009/v1/playgrounds/add", {
             method: 'POST',
             headers: {
@@ -257,7 +255,7 @@ export const PlaygroundFormPage = () => {
         return(
             <div className="page background">
                 <div id="add-playground">
-                    <form id="playground-form" className="form-container">
+                    <form onSubmit={createPlayground} id="playground-form" className="form-container">
                     <h2 style={{textAlign:"center"}}>Добави площадка</h2>
                         <div className="question" id="name-question">
                             <label className="form-label" for="name-question">1. Име:</label>
@@ -321,17 +319,17 @@ export const PlaygroundFormPage = () => {
                             <label className="form-label" for="shade-question">4. Има ли сенчести зони? *</label>
                             <br/>
                             <div className="choice">
-                                <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="tree-shade" name="shade" value="tree-shade"/>
+                                <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="tree-shade" name="shade" value="trees"/>
                                 <label for="tree-shade">Да, естествена сянка от дървета</label>
                             </div>
                             <br/>
                             <div className="choice">
-                                <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="fake-shade" name="shade" value="fake-shade"/>
+                                <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="fake-shade" name="shade" value="fake"/>
                                 <label for="fake-shade">Да, изкуствена сянка от съоръжение</label>
                             </div>
                             <br/>
                             <div className="choice">
-                                <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="no-shade" name="shade" value="no-shade"/>
+                                <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="no-shade" name="shade" value="none"/>
                                 <label for="no-shade">Не, няма сянка</label>
                             </div>
                             <br/>
