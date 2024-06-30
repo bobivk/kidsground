@@ -27,7 +27,9 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
     @Override
     public Long savePlayground(final PlaygroundDto playgroundDto) {
-        return this.playgroundRepository.save(this.playgroundMapper.toEntity(playgroundDto)).getId();
+        Playground playground = this.playgroundMapper.toEntity(playgroundDto);
+        playground.setNew(true);
+        return this.playgroundRepository.save(playground).getId();
     }
 
     @Override
@@ -84,10 +86,16 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
     @Override
     public void deleteById(Long id) {
-        if (this.playgroundRepository.existsById(id)) {
-            this.playgroundRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Playground with ID " + id + " not found");
-        }
+        Playground playground = playgroundRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Playground with ID " + id + " not found"));
+
+        // Retrieve the list of image keys from the playground entity
+        List<String> imageKeys = playground.getImageS3Keys();
+
+        // Delete images from S3
+        s3Service.deleteImages(imageKeys);
+
+        // Delete the playground entity from the database
+        playgroundRepository.deleteById(id);
     }
 }

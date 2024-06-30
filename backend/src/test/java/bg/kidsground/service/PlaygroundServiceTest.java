@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -223,5 +224,38 @@ public class PlaygroundServiceTest {
         verify(playgroundRepository, times(1)).findById(id);
         verify(playgroundRepository, times(1)).save(playground);
         verify(s3Service, times(1)).uploadFile(file);
+    }
+
+    @Test
+    public void testDeleteById_Success() {
+        // Given
+        Long id = 1L;
+        Playground playground = new Playground();
+        playground.setId(id);
+        List<String> imageS3Keys = List.of("s3Key1", "s3Key2");
+        playground.setImageS3Keys(imageS3Keys);
+
+        when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
+
+        // When
+        playgroundService.deleteById(id);
+
+        // Then
+        verify(playgroundRepository, times(1)).findById(id);
+        verify(s3Service, times(1)).deleteImages(imageS3Keys);
+        verify(playgroundRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    public void testDeleteById_PlaygroundNotFound() {
+        // Given
+        Long id = 1L;
+        when(playgroundRepository.findById(id)).thenReturn(Optional.empty());
+
+        // When & Then
+        assertThrows(NoSuchElementException.class, () -> playgroundService.deleteById(id));
+        verify(playgroundRepository, times(1)).findById(id);
+        verify(s3Service, times(0)).deleteImages(any());
+        verify(playgroundRepository, times(0)).deleteById(id);
     }
 }
