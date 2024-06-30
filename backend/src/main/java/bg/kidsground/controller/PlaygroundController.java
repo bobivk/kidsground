@@ -30,7 +30,7 @@ public class PlaygroundController {
     }
 
     @PostMapping(AppRestEndpoints.V1.Playground.By.UPLOAD_IMAGES)
-    public ResponseEntity<PlaygroundDto> uploadImage(@PathVariable final Long id, @RequestBody final List<MultipartFile> file) {
+    public ResponseEntity<PlaygroundDto> uploadImage(@PathVariable final Long id, @RequestParam final List<MultipartFile> file) {
         return ResponseEntity.ok(playgroundService.uploadImages(file, id));
     }
 
