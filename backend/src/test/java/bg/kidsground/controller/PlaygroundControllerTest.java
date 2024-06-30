@@ -3,7 +3,6 @@ package bg.kidsground.controller;
 import bg.kidsground.constants.AppRestEndpoints;
 import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
-import bg.kidsground.domain.Environment;
 import bg.kidsground.domain.FloorType;
 import bg.kidsground.domain.ShadeType;
 import bg.kidsground.domain.dto.PlaygroundDto;
@@ -71,7 +70,7 @@ public class PlaygroundControllerTest {
         playground.setCoordinates(Coordinates.builder().latitude(10.2).longitude(20.1).build());
         playground.setFacilities(List.of("пързалка", "люлка"));
         playground.setFloorType(FloorType.RUBBER);
-        playground.setEnvironment(Environment.APARTMENTS);
+        playground.setEnvironment("apartments");
         playground.setHasFence(true);
         playground.setToys(List.of("конче"));
         playground.setImageLinks(List.of("https://example.com/image"));

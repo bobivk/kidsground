@@ -2,7 +2,6 @@ package bg.kidsground.domain.dto;
 
 import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
-import bg.kidsground.domain.Environment;
 import bg.kidsground.domain.FloorType;
 import bg.kidsground.domain.ShadeType;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,7 +32,7 @@ public class PlaygroundDto {
     private ShadeType shadeType;
 
     @JsonProperty("environment")
-    private Environment environment;
+    private String environment;
 
     @JsonProperty("transport")
     private List<String> transport = new ArrayList<>();
@@ -50,9 +49,6 @@ public class PlaygroundDto {
     @JsonProperty("coordinates")
     private Coordinates coordinates;
 
-    @JsonProperty("is_new")
-    private boolean isNew;
-
-    @JsonProperty("creator")
-    private UserDto creator;
+    @JsonProperty("user_id")
+    private Long userId;
 }

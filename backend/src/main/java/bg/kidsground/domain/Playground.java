@@ -41,8 +41,7 @@ public class Playground {
     private ShadeType shadeType;
 
     @JsonProperty("environment")
-    @Enumerated(EnumType.STRING)
-    private Environment environment;
+    private String environment;
 
     @JsonProperty("transport")
     @ElementCollection

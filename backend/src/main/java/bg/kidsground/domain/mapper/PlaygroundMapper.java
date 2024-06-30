@@ -5,8 +5,10 @@ import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.service.S3Service;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -44,6 +46,11 @@ public abstract class PlaygroundMapper {
     @Named("userToDto")
     protected UserDto userToDto(User user) {
         return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
+    }
+
+    @AfterMapping
+    protected void setDefaultValues(@MappingTarget Playground playground) {
+        playground.setNew(true);
     }
 
 }
