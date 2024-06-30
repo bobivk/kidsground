@@ -2,7 +2,8 @@
 .DS_Store
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-
+*.pem
+*.p12
 ### STS ###
 .apt_generated
 .classpath
