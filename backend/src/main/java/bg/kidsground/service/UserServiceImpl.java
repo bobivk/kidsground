@@ -5,6 +5,7 @@ import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.LoginDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +40,11 @@ public class UserServiceImpl implements UserService {
                         user.getPassword(),
                         Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
                 );
+    }
+
+    @Override
+    public User findUserById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override

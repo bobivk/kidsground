@@ -37,6 +37,9 @@ public class PlaygroundServiceTest {
     @Mock
     private S3Service s3Service;
 
+    @Mock
+    private UserService userService;
+
     @Captor
     private ArgumentCaptor<Playground> playgroundCaptor;
 
@@ -45,12 +48,17 @@ public class PlaygroundServiceTest {
 
     private PlaygroundMapper playgroundMapper;
 
+    private User user;
+
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
+        user = new User(1L, "username", "password", "pesho@mail.bg", UserRole.USER);
+        when(userService.findUserById(1L)).thenReturn(user);
         this.playgroundMapper = Mappers.getMapper(PlaygroundMapper.class);
-        ReflectionTestUtils.setField(playgroundService, "playgroundMapper", playgroundMapper);
+        ReflectionTestUtils.setField(playgroundMapper, "userService", userService);
         ReflectionTestUtils.setField(playgroundMapper, "s3Service", s3Service);
+        ReflectionTestUtils.setField(playgroundService, "playgroundMapper", playgroundMapper);
     }
 
     @Test
@@ -59,11 +67,11 @@ public class PlaygroundServiceTest {
         Long id = 1L;
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setName("New Playground");
-        playgroundDto.setCreator(new UserDto("username", "pesho@mail.bg", UserRole.USER));
+        playgroundDto.setUserId(1L);
         Playground playground = new Playground();
         playground.setId(id);
         playground.setName("New Playground");
-        playground.setCreator(new User("username", "password", "pesho@mail.bg", UserRole.USER));
+        playground.setCreator(user);
         when(playgroundRepository.save(any())).thenReturn(playground);
 
         // When
@@ -83,10 +91,10 @@ public class PlaygroundServiceTest {
         Long id = 1L;
         Playground playground = new Playground();
         playground.setId(id);
-        playground.setCreator(new User("pesho", "password", "pesho@mail.bg", UserRole.USER));
+        playground.setCreator(user);
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
-        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg", UserRole.USER));
+        playgroundDto.setUserId(1L);
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
 
@@ -113,7 +121,7 @@ public class PlaygroundServiceTest {
     public void testGetAll() {
         // Given
         Playground playground = new Playground();
-        playground.setCreator(new User("pesho", "pass", "pesho@mail.bg", UserRole.USER));
+        playground.setCreator(user);
         when(playgroundRepository.findAll()).thenReturn(Collections.singletonList(playground));
 
         // When
@@ -144,12 +152,11 @@ public class PlaygroundServiceTest {
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
         playgroundDto.setName("Updated Playground");
-        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg", UserRole.USER));
+        playgroundDto.setUserId(1L);
         playgroundDto.setImageLinks(List.of("image_url"));
 
         Playground existingPlayground = new Playground();
         existingPlayground.setId(id);
-        User user = new User("pesho", "pass", "pesho@mail.bg", UserRole.USER);
         existingPlayground.setCreator(user);
         List<String> imageS3Keys = List.of("s3Key");
         existingPlayground.setImageS3Keys(imageS3Keys);
@@ -169,7 +176,6 @@ public class PlaygroundServiceTest {
 
         // Then
         assertEquals(playgroundDto, result);
-        assertEquals(playgroundDto.getCreator().getUsername(), "pesho");
         verify(playgroundRepository, times(1)).findById(id);
         verify(playgroundRepository, times(1)).save(playgroundCaptor.capture());
 
@@ -178,10 +184,6 @@ public class PlaygroundServiceTest {
         assertEquals("Updated Playground", capturedPlayground.getName());
         assertEquals(user.getUsername(), capturedPlayground.getCreator().getUsername());
         assertEquals(imageS3Keys, capturedPlayground.getImageS3Keys());
-
-        assertEquals(playgroundDto.getCreator().getUsername(), result.getCreator().getUsername());
-        assertEquals(playgroundDto.getImageLinks(), result.getImageLinks());
-        assertEquals(playgroundDto.getName(), result.getName());
     }
 
     @Test
@@ -206,13 +208,13 @@ public class PlaygroundServiceTest {
         MultipartFile file = mock(MultipartFile.class);
         Playground playground = new Playground();
         playground.setId(id);
-        playground.setCreator(new User("pesho", "pass", "pesho@mail.bg", UserRole.USER));
+        playground.setCreator(user);
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
         when(s3Service.uploadFile(file)).thenReturn(s3Key);
         when(s3Service.getImageUrl(s3Key)).thenReturn(imageUrl);
         when(playgroundRepository.save(playground)).thenReturn(playground);
         PlaygroundDto playgroundDto = new PlaygroundDto();
-        playgroundDto.setCreator(new UserDto("pesho", "pesho@mail.bg", UserRole.USER));
+        playgroundDto.setUserId(1L);
         playgroundDto.setId(1L);
         playgroundDto.setImageLinks(List.of(imageUrl));
 
