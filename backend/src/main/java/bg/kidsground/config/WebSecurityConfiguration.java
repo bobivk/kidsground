@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -36,6 +37,7 @@ public class WebSecurityConfiguration
 //                        .requestMatchers(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND).authenticated()
                         .anyRequest().permitAll()
                 )
+                .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(formLogin -> formLogin.loginPage(AppRestEndpoints.V1.Users.LOGIN).permitAll())
                 .logout(LogoutConfigurer::permitAll)
                 .requiresChannel(channel -> channel
