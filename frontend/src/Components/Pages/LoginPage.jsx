@@ -27,6 +27,7 @@ export const LoginPage = () => {
         //if enabled, try register
         const data = {username, email, password};
         if (isEmailValid(data.email) && isPasswordValid(data.password)) {
+            console.log(data);
             await fetch('https://kidsground.bg:8009/v1/users/register', {
                     method: 'POST',
                     headers: {
@@ -122,7 +123,7 @@ export const LoginPage = () => {
 
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-        if (email == null || email === "" || regex.test(email)) {
+        if (email == null || email === "" || !regex.test(email)) {
             document.getElementById('email-error').innerHTML = "Моля, въведете валиден имейл адрес.";
             document.getElementById('email-error').style.display = "block";
             return false;
@@ -176,6 +177,14 @@ export const LoginPage = () => {
         setPassword(input);
     }
 
+    const changeEmail = (event) => {
+        setEmail(event.target.value);
+    }
+
+    const changeUsername = (event) => {
+        setUsername(event.target.value);
+    }
+
     // function logout() {
     //     location = "http://localhost/kidsground/frontend/html/register.html";
     // }
@@ -189,13 +198,13 @@ export const LoginPage = () => {
                         <div className="input-group">
                             <div className="input-field">
                                 <i className="fa-solid fa-envelope"></i>
-                                <input type="text" name="email" placeholder="Имейл"/>
+                                <input type="text" name="email" placeholder="Имейл" onChange={changeEmail}/>
                             </div>
                             <div className="error" id="email-error"></div>
     
                             <div className="input-field">
                                 <i className="fa-solid fa-lock"></i>
-                                <input type="password" id="password" name="password" placeholder="Парола" oninput="checkPassword()"/>
+                                <input type="password" id="password" name="password" placeholder="Парола" onChange={checkPassword}/>
                                 <div className="error" id="password-length-error"></div>
                             </div>
                         </div>
@@ -221,12 +230,12 @@ export const LoginPage = () => {
                         <div className="input-group">
                             <div className="input-field" id="nameField">
                                 <i className="fa-solid fa-user"></i>
-                                <input type="text" name="username" placeholder="Потребителско име"/>
+                                <input type="text" name="username" placeholder="Потребителско име" onChange={changeUsername}/>
                             </div>
     
                             <div className="input-field">
                                 <i className="fa-solid fa-envelope"></i>
-                                <input type="text" name="email" placeholder="Имейл"/>
+                                <input type="text" name="email" placeholder="Имейл" onChange={changeEmail}/>
                             </div>
                             <div className="error" id="email-error"></div>
     
