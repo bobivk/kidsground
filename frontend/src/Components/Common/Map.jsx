@@ -223,6 +223,7 @@ export const Map = ({onCoordinatesChange}) => {
                                 position={new window.google.maps.LatLng(selectedMarker.coordinates)}
                             >
                                 <div id="infoWindow">
+                                    <img src= {selectedMarker.image_links[0]} alt="playground_photo" height="50px" style={{marginTop: "20px"}} />
                                     <p>Details about this playground</p>
                                     <Link to={`/playground/${selectedMarker.id}`}><a>Виж Повече</a></Link>
                                 </div>

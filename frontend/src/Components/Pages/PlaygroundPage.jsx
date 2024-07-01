@@ -11,25 +11,25 @@ import ImageGallery from "react-image-gallery";
 
 import { Map } from '../Common/Map'
 import { useEffect, useState } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 import { AddImage } from '../Common/AddImage'
 
 export const PlaygroundPage = () => {
 
+    const id = useParams();
     const [photos, setPhotos] = useState([]);
-    const [showImage, setShowImage] = useState("none");
-    const images = [
-        {
-            original: "./pictures/stefan_genev.png"
-        },
-        {
-            original: "./pictures/stefan_genev.png"
-        }
-    ]
+    const [playgroundInfo, setPlaygroundInfo] = useState({})
+    const [imagesForGallery, setImagesForGallery] = ([]);
+
+    const fetchPlayground = async () => {
+        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json).then(data => setPlaygroundInfo(data));  
+        playgroundInfo.image_links.forEach(image => {
+            setImagesForGallery(...imagesForGallery, {original: image}) 
+        });
+    }
 
     useEffect(() => {
-        if(localStorage.getItem("user") !== null) {
-            setShowImage("flex")
-        }
+        fetchPlayground()
             window.scrollTo(0, 0)
     }, [])
 
@@ -42,7 +42,7 @@ export const PlaygroundPage = () => {
     return(
         <div className="page">
             <div className="picture-slider">
-                <ImageGallery items={images}/>
+                <ImageGallery items={imagesForGallery}/>
             </div>
 
             <div className="playground-content">
