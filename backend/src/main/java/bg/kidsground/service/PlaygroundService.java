@@ -19,5 +19,7 @@ public interface PlaygroundService {
     PlaygroundDto updatePlayground(Long id, PlaygroundDto playground);
     PlaygroundDto uploadImages(List<MultipartFile> file, Long id);
 
+    PlaygroundDto approve(Long id, Boolean isApproved);
+
     void deleteById(Long id);
 }

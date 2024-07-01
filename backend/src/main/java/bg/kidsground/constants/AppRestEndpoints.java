@@ -13,6 +13,7 @@ public class AppRestEndpoints {
             public class By {
                 public static final String ID = PLAYGROUND_ROOT + "/{id}";
                 public static final String UPLOAD_IMAGES = ID + "/uploadImages";
+                public static final String APPROVE = ID + "/approve";
             }
         }
 

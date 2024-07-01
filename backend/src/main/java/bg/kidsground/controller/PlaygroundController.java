@@ -34,6 +34,11 @@ public class PlaygroundController {
         return ResponseEntity.ok(playgroundService.uploadImages(file, id));
     }
 
+    @PostMapping(AppRestEndpoints.V1.Playground.By.APPROVE)
+    public ResponseEntity<PlaygroundDto> approve(@PathVariable final Long id, @RequestParam final Boolean isApproved) {
+        return ResponseEntity.ok(playgroundService.approve(id, isApproved));
+    }
+
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)
     public ResponseEntity<PlaygroundDto> getById(@PathVariable final Long id) {
         return ResponseEntity.ok(this.playgroundService.getById(id));

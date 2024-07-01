@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -227,6 +226,46 @@ public class PlaygroundServiceTest {
         verify(playgroundRepository, times(1)).save(playground);
         verify(s3Service, times(1)).uploadFile(file);
     }
+
+    @Test
+    public void testApprove_WhenPlaygroundIsApproved() {
+        // Arrange
+        Playground playground = new Playground();
+        playground.setId(1L);
+        playground.setNew(true);
+
+        when(playgroundRepository.findById(1L)).thenReturn(Optional.of(playground));
+        when(playgroundRepository.save(any(Playground.class))).thenReturn(playground);
+
+        // Act
+        PlaygroundDto result = playgroundService.approve(1L, true);
+
+        // Assert
+        verify(playgroundRepository, times(1)).findById(1L);
+        verify(playgroundRepository, times(1)).save(playground);
+
+        assertNotNull(result);
+        assertFalse(playground.isNew());
+    }
+
+    @Test
+    public void testApprove_WhenPlaygroundIsNotApproved() {
+        // Arrange
+        Playground playground = new Playground();
+        playground.setId(1L);
+
+        when(playgroundRepository.findById(1L)).thenReturn(Optional.of(playground));
+
+        // Act
+        PlaygroundDto result = playgroundService.approve(1L, false);
+
+        // Assert
+        verify(playgroundRepository, times(1)).findById(1L);
+        verify(playgroundRepository, times(1)).deleteById(1L);
+
+        assertNull(result);
+    }
+
 
     @Test
     public void testDeleteById_Success() {

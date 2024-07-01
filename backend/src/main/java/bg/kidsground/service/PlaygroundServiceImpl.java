@@ -85,6 +85,20 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
+    public PlaygroundDto approve(final Long id, final Boolean isApproved) {
+        Playground playground = playgroundRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Playground with ID " + id + " not found"));
+        if (isApproved) {
+            playground.setNew(false);
+            playgroundRepository.save(playground);
+            return playgroundMapper.toDto(playground);
+        }
+
+        playgroundRepository.deleteById(id);
+        return null;
+    }
+
+    @Override
     public void deleteById(Long id) {
         Playground playground = playgroundRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Playground with ID " + id + " not found"));
