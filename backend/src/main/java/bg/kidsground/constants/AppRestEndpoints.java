@@ -9,6 +9,7 @@ public class AppRestEndpoints {
             public static final String ADD_PLAYGROUND = PLAYGROUND_ROOT + "/add";
             public static final String COUNT = PLAYGROUND_ROOT + "/count";
             public static final String GET_ALL = PLAYGROUND_ROOT + "/all";
+            public static final String TO_APPROVE = PLAYGROUND_ROOT + "/toApprove";
 
             public class By {
                 public static final String ID = PLAYGROUND_ROOT + "/{id}";

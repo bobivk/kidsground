@@ -39,6 +39,11 @@ public class PlaygroundController {
         return ResponseEntity.ok(playgroundService.approve(id, isApproved));
     }
 
+    @GetMapping(path = AppRestEndpoints.V1.Playground.TO_APPROVE)
+    public ResponseEntity<List<PlaygroundDto>> toApprove() {
+        return ResponseEntity.ok(playgroundService.toApprove());
+    }
+
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)
     public ResponseEntity<PlaygroundDto> getById(@PathVariable final Long id) {
         return ResponseEntity.ok(this.playgroundService.getById(id));

@@ -16,6 +16,8 @@ public interface PlaygroundService {
 
     Integer getCount();
 
+    List<PlaygroundDto> toApprove();
+
     PlaygroundDto updatePlayground(Long id, PlaygroundDto playground);
     PlaygroundDto uploadImages(List<MultipartFile> file, Long id);
 

@@ -42,7 +42,15 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
     @Override
     public List<PlaygroundDto> getAll() {
-        return this.playgroundRepository.findAll()
+        return this.playgroundRepository.findByIsNewFalse()
+                .stream()
+                .map(playgroundMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<PlaygroundDto> toApprove() {
+        return this.playgroundRepository.findByIsNewTrue()
                 .stream()
                 .map(playgroundMapper::toDto)
                 .toList();
@@ -52,6 +60,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     public Integer getCount() {
         return Math.toIntExact(this.playgroundRepository.count());
     }
+
 
     @Override
     public PlaygroundDto updatePlayground(final Long id, final PlaygroundDto playgroundDto) {
