@@ -1,6 +1,7 @@
 package bg.kidsground.domain.dto;
 
 import bg.kidsground.domain.UserRole;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,8 +9,12 @@ import lombok.Data;
 @AllArgsConstructor
 public class UserDto {
 
-  private String username;
-  private String email;
-  private UserRole role;
+    @JsonProperty("username")
+    private String username;
+
+    @JsonProperty("email")
+    private String email;
+
+    private UserRole role;
 
 }

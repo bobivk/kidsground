@@ -30,8 +30,18 @@ public class PlaygroundController {
     }
 
     @PostMapping(AppRestEndpoints.V1.Playground.By.UPLOAD_IMAGES)
-    public ResponseEntity<PlaygroundDto> uploadImage(@PathVariable final Long id, @RequestBody final List<MultipartFile> file) {
+    public ResponseEntity<PlaygroundDto> uploadImage(@PathVariable final Long id, @RequestParam final List<MultipartFile> file) {
         return ResponseEntity.ok(playgroundService.uploadImages(file, id));
+    }
+
+    @PostMapping(AppRestEndpoints.V1.Playground.By.APPROVE)
+    public ResponseEntity<PlaygroundDto> approve(@PathVariable final Long id, @RequestParam final Boolean isApproved) {
+        return ResponseEntity.ok(playgroundService.approve(id, isApproved));
+    }
+
+    @GetMapping(path = AppRestEndpoints.V1.Playground.TO_APPROVE)
+    public ResponseEntity<List<PlaygroundDto>> toApprove() {
+        return ResponseEntity.ok(playgroundService.findAllToApprove());
     }
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)
@@ -42,7 +52,7 @@ public class PlaygroundController {
     // provide a list of PlaygroundSummary if this gets too slow due to size
     @GetMapping(path = AppRestEndpoints.V1.Playground.GET_ALL)
     public ResponseEntity<List<PlaygroundDto>> getAll() {
-        return ResponseEntity.ok(this.playgroundService.getAll());
+        return ResponseEntity.ok(this.playgroundService.findAllApproved());
     }
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.COUNT)

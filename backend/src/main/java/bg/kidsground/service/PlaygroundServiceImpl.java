@@ -41,8 +41,16 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
-    public List<PlaygroundDto> getAll() {
-        return this.playgroundRepository.findAll()
+    public List<PlaygroundDto> findAllApproved() {
+        return this.playgroundRepository.findByIsNewFalse()
+                .stream()
+                .map(playgroundMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<PlaygroundDto> findAllToApprove() {
+        return this.playgroundRepository.findByIsNewTrue()
                 .stream()
                 .map(playgroundMapper::toDto)
                 .toList();
@@ -52,6 +60,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     public Integer getCount() {
         return Math.toIntExact(this.playgroundRepository.count());
     }
+
 
     @Override
     public PlaygroundDto updatePlayground(final Long id, final PlaygroundDto playgroundDto) {
@@ -82,6 +91,20 @@ public class PlaygroundServiceImpl implements PlaygroundService {
             });
         this.playgroundRepository.save(playground);
         return this.playgroundMapper.toDto(playground);
+    }
+
+    @Override
+    public PlaygroundDto approve(final Long id, final Boolean isApproved) {
+        Playground playground = playgroundRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Playground with ID " + id + " not found"));
+        if (isApproved) {
+            playground.setNew(false);
+            playgroundRepository.save(playground);
+            return playgroundMapper.toDto(playground);
+        }
+
+        playgroundRepository.deleteById(id);
+        return null;
     }
 
     @Override

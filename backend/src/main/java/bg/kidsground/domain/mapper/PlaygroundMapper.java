@@ -5,6 +5,7 @@ import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.service.S3Service;
+import bg.kidsground.service.UserService;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -20,10 +21,13 @@ public abstract class PlaygroundMapper {
     @Autowired
     private S3Service s3Service;
 
-    @Mapping(target = "creator", source = "creator", qualifiedByName = "dtoToUser")
+    @Autowired
+    private UserService userService;
+
+    @Mapping(target = "creator", source = "userId", qualifiedByName = "dtoToUser")
     public abstract Playground toEntity(PlaygroundDto playgroundDto);
 
-    @Mapping(target = "creator", source = "creator", qualifiedByName = "userToDto")
+    @Mapping(target = "userId", source = "creator.id")
     @Mapping(target = "imageLinks", source = "imageS3Keys", qualifiedByName = "s3KeysToPresignedUrls")
     public abstract PlaygroundDto toDto(Playground playground);
 
@@ -36,16 +40,8 @@ public abstract class PlaygroundMapper {
     }
 
     @Named("dtoToUser")
-    protected User dtoToUser(UserDto dto) {
-        User user = new User();
-        user.setUsername(dto.getUsername());
-        user.setEmail(dto.getEmail());
-        return user;
-    }
-
-    @Named("userToDto")
-    protected UserDto userToDto(User user) {
-        return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
+    protected User dtoToUser(Long userId) {
+        return userService.findUserById(userId);
     }
 
     @AfterMapping
