@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.Duration;
 import java.util.List;
 
@@ -27,6 +26,7 @@ public class S3ServiceImpl implements S3Service {
     private final S3Client s3Client;
     private final S3Presigner presigner;
     private final SecretsService secretsService;
+    private final String bucketName;
 
     private final AwsCredentialsProvider awsCredentialsProvider;
 
@@ -45,11 +45,11 @@ public class S3ServiceImpl implements S3Service {
                 .region(Region.EU_CENTRAL_1)
                 .credentialsProvider(awsCredentialsProvider)
                 .build();
+        this.bucketName = this.secretsService.getSecret("s3.imageBucketName");
     }
 
     public String uploadFile(MultipartFile file) throws IOException {
         String key = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        String bucketName = secretsService.getSecret("s3.imageBucketName");
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
@@ -62,7 +62,6 @@ public class S3ServiceImpl implements S3Service {
     }
 
     public String getImageUrl(String key) {
-        String bucketName = secretsService.getSecret("s3.imageBucketName");
         GetObjectPresignRequest getObjectPresignRequest = GetObjectPresignRequest.builder()
                 .getObjectRequest(b -> b.bucket(bucketName).key(key))
                 .signatureDuration(Duration.ofMinutes(60))
@@ -74,7 +73,6 @@ public class S3ServiceImpl implements S3Service {
 
     public void deleteImages(List<String> keys) {
         if (keys.isEmpty()) return;
-        String bucketName = secretsService.getSecret("s3.imageBucketName");
         DeleteObjectsRequest deleteObjectsRequest = DeleteObjectsRequest.builder()
                 .bucket(bucketName)
                 .delete(Delete.builder()
