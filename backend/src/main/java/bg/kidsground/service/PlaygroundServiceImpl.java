@@ -41,7 +41,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
-    public List<PlaygroundDto> getAll() {
+    public List<PlaygroundDto> findAllApproved() {
         return this.playgroundRepository.findByIsNewFalse()
                 .stream()
                 .map(playgroundMapper::toDto)
@@ -49,7 +49,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
-    public List<PlaygroundDto> toApprove() {
+    public List<PlaygroundDto> findAllToApprove() {
         return this.playgroundRepository.findByIsNewTrue()
                 .stream()
                 .map(playgroundMapper::toDto)

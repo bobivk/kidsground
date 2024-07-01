@@ -4,7 +4,6 @@ import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.PlaygroundDto;
-import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.domain.mapper.PlaygroundMapper;
 import bg.kidsground.repository.PlaygroundRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -117,18 +116,35 @@ public class PlaygroundServiceTest {
     }
 
     @Test
-    public void testGetAll() {
+    public void testFindAllApproved() {
         // Given
         Playground playground = new Playground();
         playground.setCreator(user);
-        when(playgroundRepository.findAll()).thenReturn(Collections.singletonList(playground));
+        playground.setNew(false);
+        when(playgroundRepository.findByIsNewFalse()).thenReturn(Collections.singletonList(playground));
 
         // When
-        List<PlaygroundDto> result = playgroundService.getAll();
+        List<PlaygroundDto> result = playgroundService.findAllApproved();
 
         // Then
         assertEquals(1, result.size());
-        verify(playgroundRepository, times(1)).findAll();
+        verify(playgroundRepository, times(1)).findByIsNewFalse();
+    }
+
+    @Test
+    public void testFindAllToApprove() {
+        // Given
+        Playground playground = new Playground();
+        playground.setCreator(user);
+        playground.setNew(true);
+        when(playgroundRepository.findByIsNewTrue()).thenReturn(Collections.singletonList(playground));
+
+        // When
+        List<PlaygroundDto> result = playgroundService.findAllToApprove();
+
+        // Then
+        assertEquals(1, result.size());
+        verify(playgroundRepository, times(1)).findByIsNewTrue();
     }
 
     @Test

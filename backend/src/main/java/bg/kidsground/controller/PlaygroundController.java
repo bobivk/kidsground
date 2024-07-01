@@ -41,7 +41,7 @@ public class PlaygroundController {
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.TO_APPROVE)
     public ResponseEntity<List<PlaygroundDto>> toApprove() {
-        return ResponseEntity.ok(playgroundService.toApprove());
+        return ResponseEntity.ok(playgroundService.findAllToApprove());
     }
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.By.ID)
@@ -52,7 +52,7 @@ public class PlaygroundController {
     // provide a list of PlaygroundSummary if this gets too slow due to size
     @GetMapping(path = AppRestEndpoints.V1.Playground.GET_ALL)
     public ResponseEntity<List<PlaygroundDto>> getAll() {
-        return ResponseEntity.ok(this.playgroundService.getAll());
+        return ResponseEntity.ok(this.playgroundService.findAllApproved());
     }
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.COUNT)
