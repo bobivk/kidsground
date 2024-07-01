@@ -38,7 +38,7 @@ public class WebSecurityConfiguration
                         .anyRequest().permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(formLogin -> formLogin.loginPage(AppRestEndpoints.V1.Users.LOGIN).permitAll())
+                //.formLogin(formLogin -> formLogin.loginPage(AppRestEndpoints.V1.Users.LOGIN).permitAll())
                 .logout(LogoutConfigurer::permitAll)
                 .requiresChannel(channel -> channel
                         .anyRequest().requiresSecure()
