@@ -1,5 +1,6 @@
 package bg.kidsground.controller;
 
+import bg.kidsground.config.JWTUtil;
 import bg.kidsground.constants.AppRestEndpoints;
 import bg.kidsground.domain.dto.LoginDto;
 import bg.kidsground.domain.dto.UserDto;
@@ -7,7 +8,7 @@ import bg.kidsground.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private JWTUtil jwtUtil;
 
     @PostMapping(path = AppRestEndpoints.V1.Users.REGISTER)
     public ResponseEntity<UserDto> registerUser(@RequestBody LoginDto loginDto) {
@@ -29,8 +32,10 @@ public class UserController {
     public ResponseEntity<UserDto> loginUser(@RequestBody LoginDto loginDto) {
         try {
             UserDto userDto = userService.login(loginDto);
+            String token = jwtUtil.generateToken(userDto.getUsername(), userDto.getRole().getValue());
+            userDto.setToken(token);
             return ResponseEntity.ok(userDto);
-        } catch (UsernameNotFoundException | IllegalArgumentException e) {
+        } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }

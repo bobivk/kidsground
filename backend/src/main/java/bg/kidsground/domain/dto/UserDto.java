@@ -15,6 +15,16 @@ public class UserDto {
     @JsonProperty("email")
     private String email;
 
+    @JsonProperty("role")
     private UserRole role;
+
+    @JsonProperty("token")
+    private String token;
+
+    public UserDto(String username, String email, UserRole role) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
+    }
 
 }

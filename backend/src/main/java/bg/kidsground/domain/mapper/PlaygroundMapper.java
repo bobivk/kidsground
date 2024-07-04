@@ -6,6 +6,7 @@ import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.service.S3Service;
 import bg.kidsground.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -41,7 +42,11 @@ public abstract class PlaygroundMapper {
 
     @Named("dtoToUser")
     protected User dtoToUser(Long userId) {
-        return userService.findUserById(userId);
+        try {
+            return userService.findUserById(userId);
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
     }
 
     @AfterMapping
