@@ -30,7 +30,7 @@ public class WebSecurityConfiguration
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
-                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
+                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER, AppRestEndpoints.V1.Users.LOGIN,
                                 AppRestEndpoints.V1.Playground.COUNT, AppRestEndpoints.V1.Playground.GET_ALL).permitAll()
                         .requestMatchers(HttpMethod.GET, AppRestEndpoints.V1.Playground.By.ID).permitAll()
                         .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Playground.By.ID).hasRole(UserRole.ADMIN.getValue())
@@ -38,7 +38,7 @@ public class WebSecurityConfiguration
                         .anyRequest().permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(formLogin -> formLogin.loginPage(AppRestEndpoints.V1.Users.LOGIN).permitAll())
+                //.formLogin(formLogin -> formLogin.loginPage(AppRestEndpoints.V1.Users.LOGIN).permitAll())
                 .logout(LogoutConfigurer::permitAll)
                 .requiresChannel(channel -> channel
                         .anyRequest().requiresSecure()
