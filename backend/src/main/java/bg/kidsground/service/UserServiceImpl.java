@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
                 (
                         username,
                         user.getPassword(),
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+                        Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getValue()))
                 );
     }
 
