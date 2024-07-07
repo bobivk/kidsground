@@ -26,26 +26,19 @@ public class KidsgroundApplication {
     }
 
     @Bean
-    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository, CommentRepository commentRepository) {
+    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository) {
         return args -> {
             playgroundRepository.deleteAll();
             User user = new User("testUser", "randomPass", "user@test.com", UserRole.USER);
+            User admin = new User("admin", "admin", "admin@test.com", UserRole.ADMIN);
             userRepository.save(user);
+            userRepository.save(admin);
             Playground playground = new Playground();
             playground.setName("Ploshtadka");
             playground.setCoordinates(Coordinates.builder().latitude(42.141080).longitude(24.752345).build());
             playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
             playground.setCreator(user);
             playground.setNew(false);
-            Comment comment = Comment.builder()
-                    .text("Nice playground!")
-                    .playground(playground)
-                    .id(1L)
-                    .creator(user)
-                    .createdAt(new Date())
-                    .build();
-            commentRepository.save(comment);
-            playground.setComments(List.of(comment));
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(
                     NoSuchElementException::new);
