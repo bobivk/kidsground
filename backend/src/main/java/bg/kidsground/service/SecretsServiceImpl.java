@@ -21,7 +21,7 @@ public class SecretsServiceImpl implements SecretsService {
                                 .build())
                 .parameter()
                 .value();
-        log.info("got secret from param store with name {} and value {}", secretName, secret);
+        log.debug("got secret from param store with name {} and value {}", secretName, secret);
         return secret;
     }
 }

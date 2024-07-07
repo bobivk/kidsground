@@ -45,6 +45,7 @@ public class KidsgroundApplication {
                     .createdAt(new Date())
                     .build();
             commentRepository.save(comment);
+            playground.setComments(List.of(comment));
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(
                     NoSuchElementException::new);
