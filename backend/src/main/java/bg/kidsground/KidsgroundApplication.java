@@ -14,6 +14,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 import java.util.List;
@@ -26,11 +27,11 @@ public class KidsgroundApplication {
     }
 
     @Bean
-    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository) {
+    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             playgroundRepository.deleteAll();
             User user = new User("testUser", "randomPass", "user@test.com", UserRole.USER);
-            User admin = new User("admin", "admin", "admin@test.com", UserRole.ADMIN);
+            User admin = new User("admin", passwordEncoder.encode("admin"), "admin@test.com", UserRole.ADMIN);
             userRepository.save(user);
             userRepository.save(admin);
             Playground playground = new Playground();
