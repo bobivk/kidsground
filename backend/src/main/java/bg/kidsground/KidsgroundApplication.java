@@ -7,6 +7,7 @@ import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.UserDto;
+import bg.kidsground.repository.CommentRepository;
 import bg.kidsground.repository.PlaygroundRepository;
 import bg.kidsground.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -25,7 +26,7 @@ public class KidsgroundApplication {
     }
 
     @Bean
-    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository) {
+    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository, CommentRepository commentRepository) {
         return args -> {
             playgroundRepository.deleteAll();
             User user = new User("testUser", "randomPass", "user@test.com", UserRole.USER);
@@ -43,7 +44,7 @@ public class KidsgroundApplication {
                     .creator(user)
                     .createdAt(new Date())
                     .build();
-            playground.setComments(List.of(comment));
+            commentRepository.save(comment);
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(
                     NoSuchElementException::new);
