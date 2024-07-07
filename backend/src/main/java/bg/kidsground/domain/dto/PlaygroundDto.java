@@ -44,10 +44,16 @@ public class PlaygroundDto {
     private List<String> facilities = new ArrayList<>();
 
     @JsonProperty("image_links")
-    private List<String> imageLinks = new ArrayList<>(); // presigned URLs for the images to put in web page
+    private List<String> imageLinks = new ArrayList<>(); // presigned URLs for images
 
     @JsonProperty("coordinates")
     private Coordinates coordinates;
+
+    @JsonProperty("rating")
+    private Double rating;
+
+    @JsonProperty("comments")
+    private List<CommentDto> comments;
 
     @JsonProperty("user_id")
     private Long userId;

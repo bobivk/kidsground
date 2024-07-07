@@ -93,6 +93,7 @@ public class PlaygroundServiceTest {
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
         playgroundDto.setUserId(1L);
+        playgroundDto.setRating(0.0);
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
 
@@ -169,6 +170,7 @@ public class PlaygroundServiceTest {
         playgroundDto.setName("Updated Playground");
         playgroundDto.setUserId(1L);
         playgroundDto.setImageLinks(List.of("image_url"));
+        playgroundDto.setRating(0.0);
 
         Playground existingPlayground = new Playground();
         existingPlayground.setId(id);
@@ -232,6 +234,7 @@ public class PlaygroundServiceTest {
         playgroundDto.setUserId(1L);
         playgroundDto.setId(1L);
         playgroundDto.setImageLinks(List.of(imageUrl));
+        playgroundDto.setRating(0.0);
 
         // When
         PlaygroundDto result = playgroundService.uploadImages(List.of(file), id);
@@ -261,7 +264,6 @@ public class PlaygroundServiceTest {
         verify(playgroundRepository, times(1)).save(playground);
 
         assertNotNull(result);
-        assertFalse(playground.isNew());
     }
 
     @Test

@@ -1,5 +1,13 @@
 package bg.kidsground.service;
 
+import bg.kidsground.domain.dto.CommentDto;
+
+import java.util.List;
+
 public interface CommentService {
 
+    Long saveComment(CommentDto commentDto);
+    CommentDto getById(Long id);
+    List<CommentDto> getByUserId(Long userId);
+    void deleteById(Long id);
 }
