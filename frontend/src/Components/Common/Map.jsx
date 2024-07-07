@@ -9,7 +9,7 @@ const libraries = ['places'];
 
 const plovdiv = {lat: 42.1354, lng:24.7453};
 
-export const Map = (props, {onCoordinatesChange}) => {
+export const Map = ({onCoordinatesChange, currentPlaygroundCords}) => {
 
     const [marker, setMarker] = useState(null);
     const [map, setMap] = useState(null);
@@ -139,8 +139,6 @@ export const Map = (props, {onCoordinatesChange}) => {
     }
 
       useEffect(() => {
-
-        console.log(selectedMarker);
         getCurrentPosition();
         setMarkersLoaded(true);
         const handleResize = () => {
@@ -199,7 +197,7 @@ export const Map = (props, {onCoordinatesChange}) => {
                 options={{controlSize: 0, gestureHandling: "greedy"}}
                 mapContainerStyle={mapContainerStyle}
                 zoom={17}
-                center={currentPosition}
+                center={currentPlaygroundCords ? currentPlaygroundCords : currentPosition}
                 onLoad={onMapLoad}
                 // onClick={handleClick}
             >
@@ -233,6 +231,10 @@ export const Map = (props, {onCoordinatesChange}) => {
                             url: (require("../../static/user_location.png")),
                             scaledSize: new window.google.maps.Size(32, 32)
                         }} position={marker.position} />}
+                {currentPlaygroundCords && <Marker icon= {{
+                            url: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
+                            scaledSize: new window.google.maps.Size(32, 32)
+                        }} position={new window.google.maps.LatLng(currentPlaygroundCords)} />}
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location"/>
         </div>

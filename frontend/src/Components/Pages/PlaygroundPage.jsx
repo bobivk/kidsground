@@ -10,16 +10,20 @@ import { InfoCard } from '../Common/InfoCard';
 
 export const PlaygroundPage = () => {
 
-    const id = useParams();
+    const {id} = useParams();
     const [photos, setPhotos] = useState([]);
     const [playgroundInfo, setPlaygroundInfo] = useState({})
     const [imagesForGallery, setImagesForGallery] = ([]);
 
     const fetchPlayground = async () => {
-        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json).then(data => setPlaygroundInfo(data));  
-        playgroundInfo.image_links.forEach(image => {
-            setImagesForGallery(...imagesForGallery, {original: image}) 
-        });
+        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json()).then(data => setPlaygroundInfo(data)); 
+        if(playgroundInfo.image_links) {
+            playgroundInfo.image_links.forEach(image => {
+                setImagesForGallery(...imagesForGallery, {original: image}) 
+                console.log(imagesForGallery);
+            });
+        }
+        
     }
 
     useEffect(() => {
@@ -36,14 +40,23 @@ export const PlaygroundPage = () => {
     return(
         <div className="page">
             <div className="picture-slider">
-                <ImageGallery items={imagesForGallery}/>
+                {imagesForGallery && <ImageGallery items={imagesForGallery}/>}
             </div>
 
             <div className="playground-content">
                 <AddImage onChangeImage={onChangeImage}/>
-                <InfoCard />
+                <InfoCard ageGroup={playgroundInfo.age_group} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence}/>
                 <div id="map" style={{marginBottom: "20px"}}>
-                        <Map currentCoordinates={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
+                        <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
+                </div>
+                <div id="commentSectionWrapper">
+                    <div id="commentSection">
+                        <h1>Коментари</h1>
+                        <label id="commentFieldLabel" for="comment">Оставете Коментар: </label>
+                        <br />
+                        <input id="commentField" type='textarea' name="comment"/>
+                        <button id="commentButton" type='submit'>Коментирай</button>
+                    </div>
                 </div>
             </div>
         </div>
