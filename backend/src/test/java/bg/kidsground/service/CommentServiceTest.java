@@ -8,7 +8,6 @@ import bg.kidsground.domain.mapper.CommentMapper;
 import bg.kidsground.repository.CommentRepository;
 import bg.kidsground.repository.PlaygroundRepository;
 import bg.kidsground.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -26,7 +24,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class CommentServiceImplTest {
+class CommentServiceTest {
 
     @Mock
     private CommentRepository commentRepository;
@@ -114,7 +112,7 @@ class CommentServiceImplTest {
     void getById_NotFound() {
         when(commentRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        assertThrows(EntityNotFoundException.class, () -> commentService.getById(1L));
+        assertThrows(NoSuchElementException.class, () -> commentService.getById(1L));
     }
 
     @Test
