@@ -1,6 +1,7 @@
 package bg.kidsground;
 
 import bg.kidsground.domain.AgeGroup;
+import bg.kidsground.domain.Comment;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
@@ -13,6 +14,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @SpringBootApplication
@@ -33,6 +36,14 @@ public class KidsgroundApplication {
             playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
             playground.setCreator(user);
             playground.setNew(false);
+            Comment comment = Comment.builder()
+                    .text("Nice playground!")
+                    .playground(playground)
+                    .id(1L)
+                    .creator(user)
+                    .createdAt(new Date())
+                    .build();
+            playground.setComments(List.of(comment));
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(
                     NoSuchElementException::new);
