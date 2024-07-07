@@ -9,7 +9,7 @@ const libraries = ['places'];
 
 const plovdiv = {lat: 42.1354, lng:24.7453};
 
-export const Map = ({onCoordinatesChange}) => {
+export const Map = (props, {onCoordinatesChange}) => {
 
     const [marker, setMarker] = useState(null);
     const [map, setMap] = useState(null);

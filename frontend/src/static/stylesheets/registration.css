@@ -128,7 +128,7 @@ button:hover {
     text-align: justify;
 }
 
-.registration-success {
+#registration-success {
     display:none;
     color:#CDEAEE;
 }

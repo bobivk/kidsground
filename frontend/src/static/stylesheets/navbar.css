@@ -1,6 +1,8 @@
+.login-wrapper,
 .logout-wrapper, 
 .home-wrapper, 
 .map-wrapper, 
+.profile-wrapper,
 .about-us-wrapper {
     font-weight: bold;
     display: flex;
@@ -36,6 +38,7 @@ a {
 
 a:hover {
     color: #62BEC9;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 720px) {
@@ -56,8 +59,10 @@ a:hover {
         padding-top: 22px;
     }
 
-    .logout-wrapper div,
+    .login-wrapper div,
+    .logout-wrapper div
     .home-wrapper div,
+    .profile-wrapper div,
     .about-us-wrapper div, 
     .map-wrapper div {
         font-size: 10.8px;

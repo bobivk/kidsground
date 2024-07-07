@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Modal } from '../Common/CreatedModal'
 import { AddImage } from '../Common/AddImage'
+import { Navigate } from 'react-router-dom'
 
 export const PlaygroundFormPage = () => {
 
@@ -251,7 +252,7 @@ export const PlaygroundFormPage = () => {
         setCoordinates(newCoords);
     }
 
-    // if(localStorage.getItem("user") !== null) {
+    if(localStorage.getItem("user") !== null) {
         return(
             <div className="page background">
                 <div id="add-playground">
@@ -542,8 +543,8 @@ export const PlaygroundFormPage = () => {
                 </div>
         </div>
         )
-    // } else {
-    //     return (<Navigate to="/add" />)
-    // }
+    } else {
+        return (<Navigate to="/add" />)
+    }
     
 }

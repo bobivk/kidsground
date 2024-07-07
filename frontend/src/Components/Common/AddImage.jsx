@@ -2,7 +2,7 @@ import { ReactComponent as WarningIcon } from '../../static/icons/warning-sign.s
 
 export const AddImage = ({onChangeImage}) => {
 
-    if(localStorage.getItem("user") !== null) {
+    if(localStorage.getItem("user")) {
         return (
             <div id="input-upload-wrapper">
                 <div id="upload-wrapper">

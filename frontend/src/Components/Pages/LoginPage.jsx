@@ -1,13 +1,13 @@
 import '../../static/stylesheets/styles.css'
 import '../../static/stylesheets/registration.css'
-import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { ReactComponent as CheckIcon } from '../../static/icons/circle-check-solid.svg'
-import { useEffect } from 'react';
+
 
 export const LoginPage = () => {
 
-    const location = useLocation();
+    const navigate = useNavigate();
     const [switcher, setSwitcher] = useState(true);
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -41,11 +41,11 @@ export const LoginPage = () => {
                         alert("Невалидни данни.");
                     } else if(response.status === 500) {
                         alert("Възникна грешка, моля опитайте отново.");
-                        document.querySelectorAll("input").values = "";
+                        resetInputs();
                         //location.reload();
                     } else if(response.status === 409) {
                         document.getElementById("username-exists-error").style.display="block";
-                    } else if(response.status === 201) {
+                    } else if(response.status === 200) {
                         document.getElementById("registration-success").style.display = "block";
                         document.getElementById('username-exists-error').style.display = "none";
                         document.getElementById('email-exists-error').style.display = "none";
@@ -66,7 +66,7 @@ export const LoginPage = () => {
             switchToSignIn();
             return;
         }
-        const data = {username, password};
+        const data = {username, email, password};
         const fields = document.querySelectorAll('input');
 
         fields.forEach(field => {
@@ -83,13 +83,14 @@ export const LoginPage = () => {
             .then(response => {
                 if (response.status === 404) {
                     document.getElementById("wrong-credentials-msg").style.display = "block";
-                    document.getElementById("wrong-credentials-msg").style.backgroundColor = "#eaeaea";
+                    document.getElementById("wrong-credentials-msg").style.backgroundColor = "#555";
                     document.getElementById("wrong-credentials-msg").style.borderRadius = "15px";
                     document.getElementById("wrong-credentials-msg").style.maxWidth = "50%";
                     document.getElementById("wrong-credentials-msg").style.padding = "15px";
                     //грешен email или парола.
                 } else if(response.status === 200) {
                     localStorage.setItem("user", JSON.stringify(response.body));
+                    navigate("/");
                     //location = 'http://localhost/kidsground/frontend/html/homepage.html';
                 }
             });
@@ -110,13 +111,11 @@ export const LoginPage = () => {
     function switchToSignUp() {
         setSwitcher(false);
         resetInputs();
-        console.log(switcher);
     }
 
     function switchToSignIn() {
         setSwitcher(true);
         resetInputs();
-        console.log(switcher);
     }
 
     function isEmailValid(email) {
@@ -181,6 +180,15 @@ export const LoginPage = () => {
         setEmail(event.target.value);
     }
 
+    const changeLoginCredential = (event) => {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if(regex.test(event.target.value)) {
+            setEmail(event.target.value);
+        } else {
+            setUsername(event.target.value);
+        }
+    }
+
     const changeUsername = (event) => {
         setUsername(event.target.value);
     }
@@ -198,10 +206,8 @@ export const LoginPage = () => {
                         <div className="input-group">
                             <div className="input-field">
                                 <i className="fa-solid fa-envelope"></i>
-                                <input type="text" name="email" placeholder="Имейл" onChange={changeEmail}/>
+                                <input type="text" name="usernameOrEmail" placeholder="Потребителско име или имейл" onChange={changeLoginCredential}/>
                             </div>
-                            <div className="error" id="email-error"></div>
-    
                             <div className="input-field">
                                 <i className="fa-solid fa-lock"></i>
                                 <input type="password" id="password" name="password" placeholder="Парола" onChange={checkPassword}/>
@@ -213,7 +219,7 @@ export const LoginPage = () => {
                             <button type="button" className="disable" id="signUpBtn" onClick={signUp}>Регистрирай ме</button>
                             <button type="button" id="signInBtn" onClick={signIn}>Вход</button>
                         </div>
-                        <h4 className="wrong-credentials" id="wrong-credentials-msg">Грешен имейл или парола.</h4>
+                        <h4 className="wrong-credentials" id="wrong-credentials-msg">Грешно потребителско име, имейл или парола.</h4>
                         <div className="registration-success" id="registration-success">
                             <h4>Успешна регистрация!</h4>
                             <h4>Моля, влезте в профила си.</h4>
