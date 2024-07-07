@@ -1,11 +1,12 @@
 package bg.kidsground.domain.mapper;
 
+import bg.kidsground.domain.Comment;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.PlaygroundDto;
-import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.service.S3Service;
 import bg.kidsground.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = CommentMapper.class)
 public abstract class PlaygroundMapper {
 
     @Autowired
@@ -25,10 +26,12 @@ public abstract class PlaygroundMapper {
     private UserService userService;
 
     @Mapping(target = "creator", source = "userId", qualifiedByName = "dtoToUser")
+    @Mapping(target = "comments", ignore = true)  // To avoid cyclic mapping issues
     public abstract Playground toEntity(PlaygroundDto playgroundDto);
 
     @Mapping(target = "userId", source = "creator.id")
     @Mapping(target = "imageLinks", source = "imageS3Keys", qualifiedByName = "s3KeysToPresignedUrls")
+    @Mapping(target = "comments", source = "comments")
     public abstract PlaygroundDto toDto(Playground playground);
 
 
@@ -41,12 +44,25 @@ public abstract class PlaygroundMapper {
 
     @Named("dtoToUser")
     protected User dtoToUser(Long userId) {
-        return userService.findUserById(userId);
+        try {
+            return userService.findUserById(userId);
+        } catch (EntityNotFoundException e) {
+            return null;
+        }
     }
 
     @AfterMapping
-    protected void setDefaultValues(@MappingTarget Playground playground) {
+    protected void calculateRating(@MappingTarget PlaygroundDto playgroundDto, Playground playground) {
         playground.setNew(true);
+        if (playground.getComments() != null && !playground.getComments().isEmpty()) {
+            double averageRating = playground.getComments().stream()
+                    .mapToDouble(Comment::getRating)
+                    .average()
+                    .orElse(0.0);
+            playgroundDto.setRating(averageRating);
+        } else {
+            playgroundDto.setRating(0.0);
+        }
     }
 
 }

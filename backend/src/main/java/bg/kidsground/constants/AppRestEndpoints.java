@@ -13,16 +13,24 @@ public class AppRestEndpoints {
 
             public class By {
                 public static final String ID = PLAYGROUND_ROOT + "/{id}";
-                public static final String UPLOAD_IMAGES = ID + "/uploadImages";
-                public static final String APPROVE = ID + "/approve";
+
+                public class Id {
+                    public static final String UPLOAD_IMAGES = ID + "/uploadImages";
+                    public static final String APPROVE = ID + "/approve";
+                }
             }
         }
 
         public class Users {
             public static final String USERS_ROOT = V1_ROOT + "/users";
-
             public static final String REGISTER = USERS_ROOT + "/register";
             public static final String LOGIN = USERS_ROOT + "/login";
+        }
+
+        public class Comments {
+            public static final String COMMENTS_ROOT = V1_ROOT + "/comments";
+            public static final String ADD = COMMENTS_ROOT + "/add";
+            public static final String BY_ID = COMMENTS_ROOT + "/{id}";
         }
     }
 

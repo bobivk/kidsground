@@ -29,12 +29,12 @@ public class PlaygroundController {
         return ResponseEntity.ok(this.playgroundService.updatePlayground(id, playground));
     }
 
-    @PostMapping(AppRestEndpoints.V1.Playground.By.UPLOAD_IMAGES)
+    @PostMapping(AppRestEndpoints.V1.Playground.By.Id.UPLOAD_IMAGES)
     public ResponseEntity<PlaygroundDto> uploadImage(@PathVariable final Long id, @RequestParam final List<MultipartFile> file) {
         return ResponseEntity.ok(playgroundService.uploadImages(file, id));
     }
 
-    @PostMapping(AppRestEndpoints.V1.Playground.By.APPROVE)
+    @PostMapping(AppRestEndpoints.V1.Playground.By.Id.APPROVE)
     public ResponseEntity<PlaygroundDto> approve(@PathVariable final Long id, @RequestParam final Boolean isApproved) {
         return ResponseEntity.ok(playgroundService.approve(id, isApproved));
     }

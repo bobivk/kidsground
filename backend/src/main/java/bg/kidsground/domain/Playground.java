@@ -65,9 +65,15 @@ public class Playground {
     @JsonProperty("is_new")
     private boolean isNew;
 
+    @JsonProperty("rating")
+    private Double rating;
+
     @ManyToOne
     @JoinColumn(name = "creator_id")
     @JsonProperty("creator_id")
     private User creator;
+
+    @OneToMany(mappedBy = "playground", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
 }

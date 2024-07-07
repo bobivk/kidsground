@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 @AllArgsConstructor
+@Builder
 public class User {
   @Id
   @Column(name = "id", length = 45)

@@ -1,8 +1,6 @@
 package bg.kidsground.config;
 import bg.kidsground.constants.AppRestEndpoints;
 import bg.kidsground.domain.UserRole;
-import bg.kidsground.repository.UserRepository;
-import bg.kidsground.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,12 +14,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration
 {
-
         
     @Autowired
     private JWTFilter filter;
@@ -30,21 +26,32 @@ public class WebSecurityConfiguration
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
-//                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
-//                                AppRestEndpoints.V1.Playground.COUNT, AppRestEndpoints.V1.Playground.GET_ALL).permitAll()
-//                        .requestMatchers(HttpMethod.GET, AppRestEndpoints.V1.Playground.By.ID).permitAll()
-//                        .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Playground.By.ID).hasRole(UserRole.ADMIN.getValue())
-//                        .requestMatchers(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND).authenticated()
+                        // Allow non-logged-in
+                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER, AppRestEndpoints.V1.Users.LOGIN,
+                                AppRestEndpoints.V1.Playground.COUNT, AppRestEndpoints.V1.Playground.GET_ALL).permitAll()
+                        .requestMatchers(HttpMethod.GET, AppRestEndpoints.V1.Playground.By.ID).permitAll()
+
+                        // restrict to admin only
+                        .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Playground.By.ID).hasRole(UserRole.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Comments.BY_ID).hasRole(UserRole.ADMIN.getValue())
+                        .requestMatchers(AppRestEndpoints.V1.Playground.TO_APPROVE,
+                                        AppRestEndpoints.V1.Playground.By.Id.APPROVE).hasRole(UserRole.ADMIN.getValue())
+
+                        // require user to be logged in
+                        .requestMatchers(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND,
+                                        AppRestEndpoints.V1.Playground.By.Id.UPLOAD_IMAGES,
+                                        AppRestEndpoints.V1.Comments.ADD,
+                                        AppRestEndpoints.V1.Comments.COMMENTS_ROOT
+                            ).authenticated()
                         .anyRequest().permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
-                //.formLogin(formLogin -> formLogin.loginPage(AppRestEndpoints.V1.Users.LOGIN).permitAll())
                 .logout(LogoutConfigurer::permitAll)
                 .requiresChannel(channel -> channel
                         .anyRequest().requiresSecure()
                 )
                 .httpBasic(withDefaults());
-        //http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

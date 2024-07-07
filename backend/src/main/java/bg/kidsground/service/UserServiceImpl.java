@@ -7,16 +7,17 @@ import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+    public static final String INCORRECT_CREDENTIALS_MESSAGE = "Incorrect credentials";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     @Autowired
@@ -29,17 +30,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserDetails(String username) throws UsernameNotFoundException
     {
-        User user = userRepository.findByUsername(username);
-        if (user == null)
-        {
-          throw new UsernameNotFoundException("Could not find user with username");
-        }
-        return new org.springframework.security.core.userdetails.User
-                (
-                        username,
-                        user.getPassword(),
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
-                );
+        User user = userRepository.findByUsername(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("Could not find user with username"));
+
+        return org.springframework.security.core.userdetails.User.builder()
+                .roles(user.getRole().getValue())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .build();
     }
 
     @Override
@@ -60,13 +58,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto login(LoginDto loginDto) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(loginDto.getUsername());
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + loginDto.getUsername());
+        User user;
+        if (loginDto.getUsername() == null) {
+            user = userRepository.findByEmail(loginDto.getEmail())
+                    .orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
+        } else {
+            user = userRepository.findByUsername(loginDto.getUsername())
+                    .orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
         }
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid password");
+            throw new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE);
         }
-            return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
+        return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
     }
 }
