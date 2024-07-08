@@ -1,9 +1,6 @@
 package bg.kidsground.domain.dto;
 
-import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
-import bg.kidsground.domain.FloorType;
-import bg.kidsground.domain.ShadeType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -23,16 +20,16 @@ public class PlaygroundDto {
     private String name;
 
     @JsonProperty("age_group")
-    private AgeGroup ageGroup;
+    private String ageGroup;
 
     @JsonProperty("has_fence")
     private boolean hasFence;
 
     @JsonProperty("floor_type")
-    private FloorType floorType;
+    private List<String> floorType;
 
     @JsonProperty("shade_type")
-    private ShadeType shadeType;
+    private String shadeType;
 
     @JsonProperty("environment")
     private String environment;
