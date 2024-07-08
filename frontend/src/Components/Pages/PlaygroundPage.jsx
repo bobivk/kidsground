@@ -17,13 +17,16 @@ export const PlaygroundPage = () => {
     const [imagesForGallery, setImagesForGallery] = ([]);
 
     const fetchPlayground = async () => {
-        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json()).then(data => setPlaygroundInfo(data)); 
-        if(playgroundInfo.image_links) {
-            playgroundInfo.image_links.forEach(image => {
-                setImagesForGallery(...imagesForGallery, {original: image}) 
-                console.log(imagesForGallery);
-            });
-        }
+        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json()).then((data) => {
+            setPlaygroundInfo(data)
+            if(data.image_links.length !== 0) {
+                data.image_links.forEach(image => {
+                    if(imagesForGallery) {
+                        setImagesForGallery([{original: image}]) 
+                    }
+                });
+            }
+        }); 
         
     }
 

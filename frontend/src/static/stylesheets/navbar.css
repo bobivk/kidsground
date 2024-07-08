@@ -49,6 +49,9 @@ a:hover {
     .home-wrapper{
         padding-top: 11.3px;
     }
+    .profile-wrapper{
+        padding-top: 12px;
+    }
 }
 /*Galaxy fold...*/
 @media only screen and (max-width: 280px) {

@@ -22,7 +22,7 @@ export const Navbar = () => {
                     <div><HashLink to="/#map"> Карта </HashLink></div>
                 </div>
                 <div className="about-us-wrapper">
-                    <div><HashLink to="/#about-us">За проекта</HashLink></div>
+                    <div><HashLink to="/#about-us">За нас</HashLink></div>
                 </div>
                 <div className="profile-wrapper">
                     <Link to="/#about-us">Профил</Link>
@@ -51,7 +51,7 @@ export const Navbar = () => {
                     <div><HashLink to="/#map"> Карта </HashLink></div>
                 </div>
                 <div className="about-us-wrapper">
-                    <div><HashLink to="/#about-us">За проекта</HashLink></div>
+                    <div><HashLink to="/#about-us">За нас</HashLink></div>
                 </div>
                 <div className="login-wrapper">
                     <div>
