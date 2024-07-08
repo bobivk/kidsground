@@ -16,6 +16,9 @@ public class PlaygroundDto {
     @JsonProperty("id")
     private Long id;
 
+    @JsonProperty("description")
+    private String description;
+
     @JsonProperty("name")
     private String name;
 

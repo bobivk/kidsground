@@ -26,6 +26,9 @@ public class Playground {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("description")
+    private String description;
+
     @JsonProperty("age_group")
     @Enumerated(EnumType.STRING)
     private AgeGroup ageGroup;
