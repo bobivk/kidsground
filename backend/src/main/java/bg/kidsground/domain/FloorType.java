@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum FloorType {
     ASPHALT("asphalt"),
-    GRASS("grass"),
+    GRASS("Тревна настилка"),
     RUBBER("rubber"),
     MULCH("mulch"),
     DIRT("dirt");

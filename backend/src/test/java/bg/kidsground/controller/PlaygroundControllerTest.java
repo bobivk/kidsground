@@ -1,10 +1,7 @@
 package bg.kidsground.controller;
 
 import bg.kidsground.constants.AppRestEndpoints;
-import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
-import bg.kidsground.domain.FloorType;
-import bg.kidsground.domain.ShadeType;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.service.PlaygroundService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,7 +43,7 @@ public class PlaygroundControllerTest {
     public void testSavePlayground() throws Exception {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setName("Test Playground");
-        playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
+        playground.setAgeGroup("Three To six");
         ObjectMapper objectMapper = new ObjectMapper();
         String playgroundJson = objectMapper.writeValueAsString(playground);
 
@@ -66,15 +63,15 @@ public class PlaygroundControllerTest {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setId(1L);
         playground.setName(name);
-        playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
+        playground.setAgeGroup("three-to-six");
         playground.setCoordinates(Coordinates.builder().latitude(10.2).longitude(20.1).build());
         playground.setFacilities(List.of("пързалка", "люлка"));
-        playground.setFloorType(FloorType.RUBBER);
+        playground.setFloorType(List.of("rubber"));
         playground.setEnvironment("apartments");
         playground.setHasFence(true);
         playground.setToys(List.of("конче"));
         playground.setImageLinks(List.of("https://example.com/image"));
-        playground.setShadeType(ShadeType.TREES);
+        playground.setShadeType("shade");
 
         when(playgroundService.getById(id)).thenReturn(playground);
 
