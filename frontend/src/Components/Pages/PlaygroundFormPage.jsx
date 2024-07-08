@@ -224,14 +224,16 @@ export const PlaygroundFormPage = () => {
             await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates[0]},${coordinates[1]}?language=bg&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`).then((response) => {
                 if(response.status === 200) {
                     setName(response.body.formatted_address);
+                } else {
+                    setName(`${coordinates[0]}, ${coordinates[1]}`);
                 }
             })
-            setName(`${coordinates[0]}, ${coordinates[1]}`);
+            
         }
 
         const imagePayload = new FormData();
         let playgroundId;
-        const data = {name, age_group, environment, shade_type, floor_type, has_fence, facilities, transport, toys}
+        const data = {name, age_group, environment, shade_type, floor_type, has_fence, facilities, transport, toys, coordinates}
         await fetch("https://kidsground:8009/v1/playgrounds/add", {
             method: 'POST',
             headers: {
