@@ -4,6 +4,7 @@ import { Map } from '../Common/Map'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
+
 export const HomePage = () => {
 
     const cities = ["Пловдив", "Пазарджик", "София", "Бургас", "Стара Загора", "Кърджали", "Асеновград", "Видин", "Варна", "Благоевград", "Хасково", "Враца", "Русе", "Сандански", "Гоце Делчев", "Сливен", "Ямбол", "Добрич", "Шумен", "Плевен", "Велико Търново"];
@@ -24,7 +25,6 @@ export const HomePage = () => {
     }, [])
 
     useEffect(() => {
-
         fetchPlaygroundNumber()
         const interval = setInterval(() => {
             setFadeClass('fade-out'); // Add the fade-out class

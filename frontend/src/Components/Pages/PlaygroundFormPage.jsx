@@ -265,7 +265,7 @@ export const PlaygroundFormPage = () => {
         setCoordinates(newCoords);
     }
 
-    if(Cookies.getItem("user") !== null) {
+    if(Cookies.get("user")) {
         return(
             <div className="page background">
                 <div id="add-playground">

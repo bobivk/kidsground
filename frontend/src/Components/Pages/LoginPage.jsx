@@ -90,10 +90,12 @@ export const LoginPage = () => {
                     document.getElementById("wrong-credentials-msg").style.padding = "15px";
                     //грешен email или парола.
                 } else if(response.status === 200) {
-                    Cookies.set("user", response.body.token, {expires: 7, secure:true})
-                    navigate("/");
-                    //location = 'http://localhost/kidsground/frontend/html/homepage.html';
+                    return response.json()
                 }
+            }).then((data) => {
+                Cookies.set("user", data.token, {expires: 3, secure:true})
+                navigate("/");
+                window.location.reload()
             });
         event.preventDefault();
     };
