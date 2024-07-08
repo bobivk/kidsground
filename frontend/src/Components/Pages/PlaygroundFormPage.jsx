@@ -234,7 +234,7 @@ export const PlaygroundFormPage = () => {
         const imagePayload = new FormData();
         let playgroundId;
         const data = {name, age_group, environment, shade_type, floor_type, has_fence, facilities, transport, toys, coordinates}
-        await fetch("https://kidsground:8009/v1/playgrounds/add", {
+        await fetch("https://kidsground.bg:8009/v1/playgrounds/add", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
