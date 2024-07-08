@@ -1,8 +1,9 @@
 import { ReactComponent as WarningIcon } from '../../static/icons/warning-sign.svg'
+import Cookies from "js-cookie"
 
 export const AddImage = ({onChangeImage}) => {
 
-    if(localStorage.getItem("user")) {
+    if(Cookies.get("user")) {
         return (
             <div id="input-upload-wrapper">
                 <div id="upload-wrapper">

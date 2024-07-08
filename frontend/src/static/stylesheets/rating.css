@@ -1,0 +1,23 @@
+.rating {
+    padding-left: 8px;
+}
+  
+.star {
+    transition: color 200ms;
+    position: absolute;
+}
+  
+.star-container {
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
+  
+.star.left {
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+}
+  
+.star.right {
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}

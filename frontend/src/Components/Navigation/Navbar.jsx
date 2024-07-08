@@ -2,10 +2,11 @@ import '../../static/stylesheets/navbar.css'
 import '../../static/stylesheets/styles.css'
 import { Link } from "react-router-dom"
 import { HashLink } from 'react-router-hash-link';
+import Cookies from 'js-cookie'
 
 export const Navbar = () => {
 
-    if(localStorage.getItem("user")) {
+    if(Cookies.get("user")) {
         return (
             <nav>
                 <div className="home-wrapper">                
@@ -26,7 +27,7 @@ export const Navbar = () => {
                         {/* <!-- when it says "Вход" -> <i class="fa-solid fa-user"></i> ? -->
                         <!-- <i class="fa-solid fa-arrow-right-from-bracket"></i> Изход -->
                         <!-- <button id="logout-btn" onclick="logout()">Вход</button> --> */}
-                         <a onClick={() => {localStorage.removeItem("user"); window.location.reload();}}> Изход </a>
+                         <a onClick={() => {Cookies.remove("user"); window.location.reload();}}> Изход </a>
                     </div>
                 </div>
                 <div>

@@ -1,5 +1,5 @@
-import { GoogleMap, useLoadScript, Marker, InfoBox, InfoWindow } from '@react-google-maps/api';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { GoogleMap, useLoadScript, Marker, InfoWindow, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../../static/stylesheets/map.css'
 import {ReactComponent as Terrain} from "../../static/icons/layers_8.svg"
@@ -18,7 +18,8 @@ export const Map = ({onCoordinatesChange, currentPlaygroundCords}) => {
     const [playgrounds, setPlaygrounds] = useState([])
     const [currentPosition, setCurrentPosition] = useState({})
     const [selectedMarker, setSelectedMarker] = useState()
-    const [AdvancedMarkerElement, setAdvancedMarkerElement] = useState()
+    const [directionsResponse, setDirectionsResponse] = useState(null);
+    const [requestDirections, setRequestDirections] = useState(true);
     const infoBoxRef = useRef();
     const onMapLoad = (map) => {
         setMap(map);
@@ -131,6 +132,19 @@ export const Map = ({onCoordinatesChange, currentPlaygroundCords}) => {
         // controlSize: '200px'
       });
 
+
+      const handleDirectionsCallback = (response) => {
+        if (response !== null) {
+          if (response.status === 'OK') {
+            setDirectionsResponse(response);
+            setRequestDirections(false);
+          } else {
+            console.log('response: ', response);
+          }
+        }
+      };
+    
+
     const fetchData = async () => {
         const receivedItems = await fetch("https://kidsground.bg:8009/v1/playgrounds/all")
         const receivedItemsJSON = await receivedItems.json()
@@ -221,8 +235,8 @@ export const Map = ({onCoordinatesChange, currentPlaygroundCords}) => {
                                 position={new window.google.maps.LatLng(selectedMarker.coordinates)}
                             >
                                 <div id="infoWindow">
-                                    <img src= {selectedMarker.image_links[0]} alt="playground_photo" height="50px" style={{marginTop: "20px"}} />
-                                    <p>Details about this playground</p>
+                                    {selectedMarker.image_links[0] && <img src= {selectedMarker.image_links[0]} alt="playground_photo" height="50px" style={{marginTop: "20px"}} />} 
+                                    <p>{selectedMarker.description}</p>
                                     <Link to={`/playground/${selectedMarker.id}`}><a>Виж Повече</a></Link>
                                 </div>
                             </InfoWindow>
@@ -235,6 +249,15 @@ export const Map = ({onCoordinatesChange, currentPlaygroundCords}) => {
                             url: 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=',
                             scaledSize: new window.google.maps.Size(32, 32)
                         }} position={new window.google.maps.LatLng(currentPlaygroundCords)} />}
+                {currentPlaygroundCords && requestDirections && <DirectionsService options={{
+                            destination: currentPlaygroundCords,
+                            origin: currentPosition,
+                            travelMode: 'DRIVING'                    
+                        }} callback={handleDirectionsCallback} />}     
+                {directionsResponse && <DirectionsRenderer options={{
+                            directions: directionsResponse,
+                            suppressMarkers: true
+                        }} />}                   
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location"/>
         </div>

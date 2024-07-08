@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 
 export const HomePage = () => {
 
-    const cities = ["Пловдив", "Пазарджик", "София", "Бургас", "Стара Загора", "Кърджали", "Асеновград", "Видин", "Варна", "Благоевград", "Хасково", "Враца", "Русе", "Сандански", "Гоце Делчев", "Сливен", "Ямбол"];
+    const cities = ["Пловдив", "Пазарджик", "София", "Бургас", "Стара Загора", "Кърджали", "Асеновград", "Видин", "Варна", "Благоевград", "Хасково", "Враца", "Русе", "Сандански", "Гоце Делчев", "Сливен", "Ямбол", "Добрич", "Шумен", "Плевен", "Велико Търново"];
     const colors = ["#F24630", "#FECD1B", "#A3C939", "#4a8f9b"]
     const [currentCityIndex, setCurrentCityIndex] = useState(0);
     const [currentColorIndex, setCurrentColorIndex] = useState(0);
@@ -34,7 +34,7 @@ export const HomePage = () => {
                 setFadeClass('fade-in');
             }, 500)
 
-        }, 1000)
+        }, 1500)
 
         return () => clearInterval(interval);
     }, [playgroundCount])

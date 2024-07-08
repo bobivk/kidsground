@@ -3,6 +3,7 @@ import '../../static/stylesheets/registration.css'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ReactComponent as CheckIcon } from '../../static/icons/circle-check-solid.svg'
+import Cookies from "js-cookie"
 
 
 export const LoginPage = () => {
@@ -89,7 +90,7 @@ export const LoginPage = () => {
                     document.getElementById("wrong-credentials-msg").style.padding = "15px";
                     //грешен email или парола.
                 } else if(response.status === 200) {
-                    localStorage.setItem("user", JSON.stringify(response.body));
+                    Cookies.set("user", response.body.token, {expires: 7, secure:true})
                     navigate("/");
                     //location = 'http://localhost/kidsground/frontend/html/homepage.html';
                 }
