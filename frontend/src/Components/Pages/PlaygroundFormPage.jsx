@@ -251,10 +251,13 @@ export const PlaygroundFormPage = () => {
             imagePayload.append(`image${i}`, photos[i]);
         }
 
-        await fetch (`https://kidsground:8009/v1/playgrounds/${playgroundId}/uploadImages`, {
-            method:'POST',
-            body: imagePayload
-        })
+        if(imagePayload.entries()) {
+            await fetch (`https://kidsground.bg:8009/v1/playgrounds/${playgroundId}/uploadImages`, {
+                method:'POST',
+                body: imagePayload
+            })
+        }
+        
     } 
 
 
