@@ -71,7 +71,7 @@ public class PlaygroundControllerTest {
         playground.setHasFence(true);
         playground.setToys(List.of("конче"));
         playground.setImageLinks(List.of("https://example.com/image"));
-        playground.setShadeType("shade");
+        playground.setShadeType("trees");
 
         when(playgroundService.getById(id)).thenReturn(playground);
 
@@ -80,7 +80,7 @@ public class PlaygroundControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
-                .andExpect(jsonPath("$.age_group").value("three_to_six"))
+                .andExpect(jsonPath("$.age_group").value("three-to-six"))
                 .andExpect(jsonPath("$.coordinates.lat").value(10.2))
                 .andExpect(jsonPath("$.coordinates.lng").value(20.1))
                 .andExpect(jsonPath("$.facilities[0]").value("пързалка"))

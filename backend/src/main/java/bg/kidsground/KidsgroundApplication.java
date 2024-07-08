@@ -37,7 +37,7 @@ public class KidsgroundApplication {
             Playground playground = new Playground();
             playground.setName("Ploshtadka");
             playground.setCoordinates(Coordinates.builder().latitude(42.141080).longitude(24.752345).build());
-            playground.setAgeGroup("THREE_TO_SIX");
+            playground.setAgeGroup("three_to_six");
             playground.setCreator(user);
             playground.setNew(false);
             playgroundRepository.save(playground);

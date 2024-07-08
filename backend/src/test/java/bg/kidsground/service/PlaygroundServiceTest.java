@@ -90,10 +90,12 @@ public class PlaygroundServiceTest {
         Playground playground = new Playground();
         playground.setId(id);
         playground.setCreator(user);
+        playground.setFloorType(List.of("floor"));
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
         playgroundDto.setUserId(1L);
         playgroundDto.setRating(0.0);
+        playgroundDto.setFloorType(List.of("floor"));
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
 
@@ -171,18 +173,21 @@ public class PlaygroundServiceTest {
         playgroundDto.setUserId(1L);
         playgroundDto.setImageLinks(List.of("image_url"));
         playgroundDto.setRating(0.0);
+        playgroundDto.setFloorType(List.of("floor"));
 
         Playground existingPlayground = new Playground();
         existingPlayground.setId(id);
         existingPlayground.setCreator(user);
         List<String> imageS3Keys = List.of("s3Key");
         existingPlayground.setImageS3Keys(imageS3Keys);
+        existingPlayground.setFloorType(List.of("floor"));
 
         Playground updatedPlayground = new Playground();
         updatedPlayground.setId(id);
         updatedPlayground.setName("Updated Playground");
         updatedPlayground.setCreator(user);
         updatedPlayground.setImageS3Keys(imageS3Keys);
+        updatedPlayground.setFloorType(List.of("floor"));
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(existingPlayground));
         when(playgroundRepository.save(any())).thenReturn(updatedPlayground);
@@ -226,6 +231,7 @@ public class PlaygroundServiceTest {
         Playground playground = new Playground();
         playground.setId(id);
         playground.setCreator(user);
+        playground.setFloorType(List.of("floor"));
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
         when(s3Service.uploadFile(file)).thenReturn(s3Key);
         when(s3Service.getImageUrl(s3Key)).thenReturn(imageUrl);
@@ -235,6 +241,7 @@ public class PlaygroundServiceTest {
         playgroundDto.setId(1L);
         playgroundDto.setImageLinks(List.of(imageUrl));
         playgroundDto.setRating(0.0);
+        playgroundDto.setFloorType(List.of("floor"));
 
         // When
         PlaygroundDto result = playgroundService.uploadImages(List.of(file), id);
