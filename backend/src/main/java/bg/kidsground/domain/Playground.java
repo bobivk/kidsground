@@ -30,7 +30,6 @@ public class Playground {
     private String description;
 
     @JsonProperty("age_group")
-    @Enumerated(EnumType.STRING)
     private String ageGroup;
 
     @JsonProperty("has_fence")
@@ -38,10 +37,9 @@ public class Playground {
 
     @JsonProperty("floor_type")
     @ElementCollection
-    private List<String> floorType = new ArrayList();
+    private List<String> floorType = new ArrayList<>();
 
     @JsonProperty("shade_type")
-    @Enumerated(EnumType.STRING)
     private String shadeType;
 
     @JsonProperty("environment")
