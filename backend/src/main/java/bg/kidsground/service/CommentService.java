@@ -8,6 +8,6 @@ public interface CommentService {
 
     Long saveComment(CommentDto commentDto, String authToken);
     CommentDto getById(Long id);
-    List<CommentDto> getByUserId(Long userId);
+    List<CommentDto> getByAuthToken(String username);
     void deleteById(Long id);
 }

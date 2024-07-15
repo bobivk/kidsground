@@ -61,10 +61,10 @@ public class CommentControllerTest {
                 .build();
         List<CommentDto> comments = List.of(commentDto);
 
-        when(commentService.getByUserId(1L)).thenReturn(comments);
+        when(commentService.getByAuthToken("Bearer <Test Token>")).thenReturn(comments);
 
         mockMvc.perform(get(AppRestEndpoints.V1.Comments.COMMENTS_ROOT)
-                        .param("userId", "1"))
+                    .header("Authorization", "Bearer <Test Token>"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].text").value("Sample Comment"))
                 .andExpect(jsonPath("$[0].rating").value(3.5))

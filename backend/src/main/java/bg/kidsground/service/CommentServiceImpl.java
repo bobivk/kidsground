@@ -1,6 +1,7 @@
 package bg.kidsground.service;
 
 import bg.kidsground.domain.Comment;
+import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.CommentDto;
 import bg.kidsground.domain.mapper.CommentMapper;
 import bg.kidsground.repository.CommentRepository;
@@ -29,10 +30,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Long saveComment(CommentDto commentDto, String authToken) {
+    public Long saveComment(CommentDto commentDto, String authHeader) {
         Comment comment = commentMapper.toEntity(commentDto);
         comment.setPlayground(playgroundService.findById(commentDto.getPlaygroundId()));
-        comment.setCreatedByUser(userService.findUserByToken(authToken));
+        comment.setCreatedByUser(userService.findUserByToken(authHeader));
         comment = commentRepository.save(comment);
         return comment.getId();
     }
@@ -45,8 +46,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDto> getByUserId(Long userId) {
-        List<Comment> comments = commentRepository.findByCreatorId(userId);
+    public List<CommentDto> getByAuthToken(String authToken) {
+        User user = this.userService.findUserByToken(authToken);
+        List<Comment> comments = commentRepository.findByCreatedByUser(user);
         return comments.stream()
                 .map(commentMapper::toDto)
                 .toList();

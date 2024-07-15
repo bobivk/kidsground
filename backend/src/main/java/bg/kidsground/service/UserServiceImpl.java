@@ -48,7 +48,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByToken(String token) {
+    public User findUserByToken(String authHeader) {
+        final String token = authHeader.substring(7);
         DecodedJWT jwt = JWT.decode(token);
         return userRepository.findByUsername(jwt.getClaim("username").asString())
                 .orElseThrow(() -> new UsernameNotFoundException("Could not find user with username"));

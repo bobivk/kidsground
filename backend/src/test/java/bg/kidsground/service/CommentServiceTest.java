@@ -4,11 +4,8 @@ import bg.kidsground.domain.Comment;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.CommentDto;
-import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.mapper.CommentMapper;
 import bg.kidsground.repository.CommentRepository;
-import bg.kidsground.repository.PlaygroundRepository;
-import bg.kidsground.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -80,17 +77,17 @@ class CommentServiceTest {
     void saveComment() {
         when(commentMapper.toEntity(any(CommentDto.class))).thenReturn(comment);
         when(playgroundService.findById(anyLong())).thenReturn(playground);
-        when(userService.findUserByToken(anyString())).thenReturn(user);
+        when(userService.findUserByToken("Bearer <Test token>")).thenReturn(user);
         when(commentRepository.save(any(Comment.class))).thenReturn(comment);
 
-        Long commentId = commentService.saveComment(commentDto, "Test token");
+        Long commentId = commentService.saveComment(commentDto, "Bearer <Test token>");
 
         assertNotNull(commentId);
         assertEquals(comment.getId(), commentId);
 
         verify(commentMapper).toEntity(commentDto);
         verify(playgroundService).findById(commentDto.getPlaygroundId());
-        verify(userService).findUserByToken("Test token");
+        verify(userService).findUserByToken("Bearer <Test token>");
         verify(commentRepository).save(comment);
     }
 
@@ -117,16 +114,17 @@ class CommentServiceTest {
 
     @Test
     void getByUserId() {
-        when(commentRepository.findByCreatorId(anyLong())).thenReturn(List.of(comment));
+        when(commentRepository.findByCreatedByUser(any(User.class))).thenReturn(List.of(comment));
         when(commentMapper.toDto(any(Comment.class))).thenReturn(commentDto);
+        when(userService.findUserByToken("Bearer <Test Token>")).thenReturn(user);
 
-        List<CommentDto> result = commentService.getByUserId(1L);
+        List<CommentDto> result = commentService.getByAuthToken("Bearer <Test Token>");
 
         assertNotNull(result);
         assertFalse(result.isEmpty());
         assertEquals(commentDto.getText(), result.get(0).getText());
 
-        verify(commentRepository).findByCreatorId(1L);
+        verify(commentRepository).findByCreatedByUser(user);
         verify(commentMapper).toDto(comment);
     }
 
