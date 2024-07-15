@@ -44,6 +44,12 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
+    public Playground findById(Long id) {
+        return this.playgroundRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Playground with ID " + id + " not found"));
+    }
+
+    @Override
     public List<PlaygroundDto> findAllApproved() {
         return this.playgroundRepository.findByIsNewFalse()
                 .stream()

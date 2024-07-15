@@ -21,8 +21,8 @@ public class CommentDto {
     @JsonProperty("rating")
     private Integer rating;
 
-    @JsonProperty("creator_id")
-    private Long creatorId;
+    @JsonProperty("username")
+    private String username;
 
     @JsonProperty("createdAt")
     private Date createdAt;

@@ -4,6 +4,7 @@ import bg.kidsground.domain.Comment;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.CommentDto;
+import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.mapper.CommentMapper;
 import bg.kidsground.repository.CommentRepository;
 import bg.kidsground.repository.PlaygroundRepository;
@@ -33,10 +34,10 @@ class CommentServiceTest {
     private CommentMapper commentMapper;
 
     @Mock
-    private PlaygroundRepository playgroundRepository;
+    private PlaygroundService playgroundService;
 
     @Mock
-    private UserRepository userRepository;
+    private UserService userService;
 
     @InjectMocks
     private CommentServiceImpl commentService;
@@ -51,12 +52,12 @@ class CommentServiceTest {
         commentDto = CommentDto.builder()
                 .text("Test Comment")
                 .rating(5)
-                .creatorId(1L)
+                .username("Sample Username")
                 .playgroundId(1L)
                 .build();
 
         user = User.builder()
-                .username("testUser")
+                .username("Sample Username")
                 .email("test@example.com")
                 .build();
 
@@ -69,7 +70,7 @@ class CommentServiceTest {
                 .id(1L)
                 .text("Test Comment")
                 .rating(5)
-                .creator(user)
+                .createdByUser(user)
                 .playground(playground)
                 .build();
 
@@ -78,18 +79,18 @@ class CommentServiceTest {
     @Test
     void saveComment() {
         when(commentMapper.toEntity(any(CommentDto.class))).thenReturn(comment);
-        when(playgroundRepository.findById(anyLong())).thenReturn(Optional.of(playground));
-        when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
+        when(playgroundService.findById(anyLong())).thenReturn(playground);
+        when(userService.findUserByToken(anyString())).thenReturn(user);
         when(commentRepository.save(any(Comment.class))).thenReturn(comment);
 
-        Long commentId = commentService.saveComment(commentDto);
+        Long commentId = commentService.saveComment(commentDto, "Test token");
 
         assertNotNull(commentId);
         assertEquals(comment.getId(), commentId);
 
         verify(commentMapper).toEntity(commentDto);
-        verify(playgroundRepository).findById(commentDto.getPlaygroundId());
-        verify(userRepository).findById(commentDto.getCreatorId());
+        verify(playgroundService).findById(commentDto.getPlaygroundId());
+        verify(userService).findUserByToken("Test token");
         verify(commentRepository).save(comment);
     }
 

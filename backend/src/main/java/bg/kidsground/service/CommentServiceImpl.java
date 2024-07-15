@@ -4,9 +4,6 @@ import bg.kidsground.domain.Comment;
 import bg.kidsground.domain.dto.CommentDto;
 import bg.kidsground.domain.mapper.CommentMapper;
 import bg.kidsground.repository.CommentRepository;
-import bg.kidsground.repository.PlaygroundRepository;
-import bg.kidsground.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,26 +14,25 @@ import java.util.NoSuchElementException;
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final CommentMapper commentMapper;
-
-    private final PlaygroundRepository playgroundRepository;
-
-    private final UserRepository userRepository;
+    private final PlaygroundService playgroundService;
+    private final UserService userService;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository, CommentMapper commentMapper, PlaygroundRepository playgroundRepository, UserRepository userRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository,
+                              CommentMapper commentMapper,
+                              PlaygroundService playgroundService,
+                              UserService userService) {
         this.commentRepository = commentRepository;
         this.commentMapper = commentMapper;
-        this.playgroundRepository = playgroundRepository;
-        this.userRepository = userRepository;
+        this.playgroundService = playgroundService;
+        this.userService = userService;
     }
 
     @Override
-    public Long saveComment(CommentDto commentDto) {
+    public Long saveComment(CommentDto commentDto, String authToken) {
         Comment comment = commentMapper.toEntity(commentDto);
-        comment.setPlayground(playgroundRepository.findById(commentDto.getPlaygroundId())
-                .orElseThrow(() -> new NoSuchElementException("Playground not found")));
-        comment.setCreator(userRepository.findById(commentDto.getCreatorId())
-                .orElseThrow(() -> new NoSuchElementException("User not found")));
+        comment.setPlayground(playgroundService.findById(commentDto.getPlaygroundId()));
+        comment.setCreatedByUser(userService.findUserByToken(authToken));
         comment = commentRepository.save(comment);
         return comment.getId();
     }

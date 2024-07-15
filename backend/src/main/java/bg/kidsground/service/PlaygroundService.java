@@ -1,5 +1,6 @@
 package bg.kidsground.service;
 
+import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,6 +10,7 @@ public interface PlaygroundService {
 
     Long savePlayground(final PlaygroundDto playground, final String authToken);
     PlaygroundDto getById(final Long id);
+    Playground findById(final Long id);
     List<PlaygroundDto> findAllApproved();
     Integer getCount();
     List<PlaygroundDto> findAllToApprove();

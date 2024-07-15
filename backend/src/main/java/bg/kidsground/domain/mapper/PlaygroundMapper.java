@@ -31,6 +31,7 @@ public abstract class PlaygroundMapper {
 
     @Mapping(target = "imageLinks", source = "imageS3Keys", qualifiedByName = "s3KeysToPresignedUrls")
     @Mapping(target = "comments", source = "comments")
+    @Mapping(target = "username", source = "createdByUser.username")
     public abstract PlaygroundDto toDto(Playground playground);
 
 

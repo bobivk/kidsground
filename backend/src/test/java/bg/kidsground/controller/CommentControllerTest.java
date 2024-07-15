@@ -41,11 +41,12 @@ public class CommentControllerTest {
     @Test
     public void testSaveComment() throws Exception {
 
-        when(commentService.saveComment(any(CommentDto.class))).thenReturn(1L);
+        when(commentService.saveComment(any(CommentDto.class), any(String.class))).thenReturn(1L);
 
         mockMvc.perform(post(AppRestEndpoints.V1.Comments.ADD)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"text\":\"Sample Comment\",\"rating\":5,\"creator_id\":1,\"createdAt\":\"2024-06-27T14:00:00.000Z\"}"))
+                        .content("{\"text\":\"Sample Comment\",\"rating\":5,\"username\":\"Sample Username\",\"createdAt\":\"2024-06-27T14:00:00.000Z\"}")
+                        .header("Authorization", "Bearer <Test Token>"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("1"));
     }
@@ -55,7 +56,7 @@ public class CommentControllerTest {
         CommentDto commentDto = CommentDto.builder()
                 .text("Sample Comment")
                 .rating(5)
-                .creatorId(1L)
+                .username("Sample Username")
                 .createdAt(new Date())
                 .build();
         List<CommentDto> comments = List.of(commentDto);
@@ -67,7 +68,7 @@ public class CommentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].text").value("Sample Comment"))
                 .andExpect(jsonPath("$[0].rating").value(5))
-                .andExpect(jsonPath("$[0].creator_id").value(1));
+                .andExpect(jsonPath("$[0].username").value("Sample Username"));
     }
 
     @Test
@@ -75,7 +76,7 @@ public class CommentControllerTest {
         CommentDto commentDto = CommentDto.builder()
                 .text("Sample Comment")
                 .rating(5)
-                .creatorId(1L)
+                .username("Sample Username")
                 .createdAt(new Date())
                 .build();
 
@@ -85,7 +86,7 @@ public class CommentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.text").value("Sample Comment"))
                 .andExpect(jsonPath("$.rating").value(5))
-                .andExpect(jsonPath("$.creator_id").value(1));
+                .andExpect(jsonPath("$.username").value("Sample Username"));
     }
 
     @Test

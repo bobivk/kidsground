@@ -2,7 +2,6 @@ package bg.kidsground.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,12 +37,12 @@ public class Comment {
     private String text;
 
     @JsonProperty("rating")
-    private Integer rating;
+    private Double rating;
 
     @ManyToOne
-    @JoinColumn(name = "creator")
-    @JsonProperty("creator")
-    private User creator;
+    @JoinColumn(name = "createdByUser")
+    @JsonProperty("created_by_user")
+    private User createdByUser;
 
     @JsonProperty("createdAt")
     private Date createdAt;

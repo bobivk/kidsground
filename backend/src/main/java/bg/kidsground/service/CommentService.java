@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommentService {
 
-    Long saveComment(CommentDto commentDto);
+    Long saveComment(CommentDto commentDto, String authToken);
     CommentDto getById(Long id);
     List<CommentDto> getByUserId(Long userId);
     void deleteById(Long id);
