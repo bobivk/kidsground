@@ -32,9 +32,7 @@ public class KidsgroundApplication {
             playgroundRepository.deleteAll();
             User user = new User("user", passwordEncoder.encode("pass"), "user@test.com", UserRole.USER);
             User admin = new User("admin", passwordEncoder.encode("admin"), "admin@test.com", UserRole.ADMIN);
-            System.out.println("save user");
             userRepository.save(user);
-            System.out.println("save admin");
             userRepository.save(admin);
             Playground playground = new Playground();
             playground.setName("The playground");
@@ -50,10 +48,8 @@ public class KidsgroundApplication {
                     .createdByUser(user)
                     .playground(playground)
                     .build();
-            System.out.println("save comment");
-            commentRepository.save(comment);
-            System.out.println("save playground");
             playgroundRepository.save(playground);
+            commentRepository.save(comment);
         };
     }
 }
