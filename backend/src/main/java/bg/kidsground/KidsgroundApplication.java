@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
-import java.util.NoSuchElementException;
 
 @SpringBootApplication
 public class KidsgroundApplication {
@@ -33,7 +32,9 @@ public class KidsgroundApplication {
             playgroundRepository.deleteAll();
             User user = new User("user", passwordEncoder.encode("pass"), "user@test.com", UserRole.USER);
             User admin = new User("admin", passwordEncoder.encode("admin"), "admin@test.com", UserRole.ADMIN);
+            System.out.println("save user");
             userRepository.save(user);
+            System.out.println("save admin");
             userRepository.save(admin);
             Playground playground = new Playground();
             playground.setName("The playground");
@@ -49,7 +50,9 @@ public class KidsgroundApplication {
                     .createdByUser(user)
                     .playground(playground)
                     .build();
+            System.out.println("save comment");
             commentRepository.save(comment);
+            System.out.println("save playground");
             playgroundRepository.save(playground);
         };
     }
