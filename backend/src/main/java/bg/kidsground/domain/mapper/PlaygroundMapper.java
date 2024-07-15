@@ -25,11 +25,10 @@ public abstract class PlaygroundMapper {
     @Autowired
     private UserService userService;
 
-    @Mapping(target = "creator", source = "userId", qualifiedByName = "dtoToUser")
+    @Mapping(target = "createdByUser", source = "username", qualifiedByName = "dtoToUser")
     @Mapping(target = "comments", ignore = true)  // To avoid cyclic mapping issues
     public abstract Playground toEntity(PlaygroundDto playgroundDto);
 
-    @Mapping(target = "userId", source = "creator.id")
     @Mapping(target = "imageLinks", source = "imageS3Keys", qualifiedByName = "s3KeysToPresignedUrls")
     @Mapping(target = "comments", source = "comments")
     public abstract PlaygroundDto toDto(Playground playground);
@@ -43,9 +42,9 @@ public abstract class PlaygroundMapper {
     }
 
     @Named("dtoToUser")
-    protected User dtoToUser(Long userId) {
+    protected User dtoToUser(String username) {
         try {
-            return userService.findUserById(userId);
+            return userService.findByUsername(username);
         } catch (EntityNotFoundException e) {
             return null;
         }

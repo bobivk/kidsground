@@ -56,7 +56,6 @@ class CommentServiceTest {
                 .build();
 
         user = User.builder()
-                .id(1L)
                 .username("testUser")
                 .email("test@example.com")
                 .build();

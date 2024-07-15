@@ -1,7 +1,10 @@
 package bg.kidsground.domain.dto;
 
+import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -20,7 +23,8 @@ public class PlaygroundDto {
     private String name;
 
     @JsonProperty("age_group")
-    private String ageGroup;
+    @Enumerated(EnumType.STRING)
+    private AgeGroup ageGroup;
 
     @JsonProperty("has_fence")
     private boolean hasFence;
@@ -55,6 +59,6 @@ public class PlaygroundDto {
     @JsonProperty("comments")
     private List<CommentDto> comments;
 
-    @JsonProperty("user_id")
-    private Long userId;
+    @JsonProperty("username")
+    private String username;
 }

@@ -1,6 +1,7 @@
 package bg.kidsground.controller;
 
 import bg.kidsground.constants.AppRestEndpoints;
+import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.service.PlaygroundService;
@@ -43,17 +44,20 @@ public class PlaygroundControllerTest {
     public void testSavePlayground() throws Exception {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setName("Test Playground");
-        playground.setAgeGroup("Three To six");
+        playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
+        playground.setUsername("username");
+        playground.setFloorType(List.of("rubber"));
         ObjectMapper objectMapper = new ObjectMapper();
         String playgroundJson = objectMapper.writeValueAsString(playground);
 
         mockMvc.perform(post(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
                         .contentType(MediaType.APPLICATION_JSON)
+                        .header("Authorization", "Bearer <Test Token>")
                         .content(playgroundJson))
                 .andExpect(status().isOk())
                 .andExpect(content().json("0"));
 
-        verify(playgroundService).savePlayground(any(PlaygroundDto.class));
+        verify(playgroundService).savePlayground(any(PlaygroundDto.class), any());
     }
 
     @Test
@@ -63,7 +67,7 @@ public class PlaygroundControllerTest {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setId(1L);
         playground.setName(name);
-        playground.setAgeGroup("three-to-six");
+        playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
         playground.setCoordinates(Coordinates.builder().latitude(10.2).longitude(20.1).build());
         playground.setFacilities(List.of("пързалка", "люлка"));
         playground.setFloorType(List.of("rubber"));
@@ -80,7 +84,7 @@ public class PlaygroundControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
-                .andExpect(jsonPath("$.age_group").value("three-to-six"))
+                .andExpect(jsonPath("$.age_group").value("three_to_six"))
                 .andExpect(jsonPath("$.coordinates.lat").value(10.2))
                 .andExpect(jsonPath("$.coordinates.lng").value(20.1))
                 .andExpect(jsonPath("$.facilities[0]").value("пързалка"))

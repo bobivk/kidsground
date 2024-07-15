@@ -5,6 +5,8 @@ import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.LoginDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -41,8 +43,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserById(Long userId) {
-        return userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(EntityNotFoundException::new);
+    }
+
+    @Override
+    public User findUserByToken(String token) {
+        DecodedJWT jwt = JWT.decode(token);
+        return userRepository.findByUsername(jwt.getClaim("username").asString())
+                .orElseThrow(() -> new UsernameNotFoundException("Could not find user with username"));
+
     }
 
     @Override

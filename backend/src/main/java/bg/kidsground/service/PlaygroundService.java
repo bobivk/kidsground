@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PlaygroundService {
 
-    Long savePlayground(final PlaygroundDto playground);
+    Long savePlayground(final PlaygroundDto playground, final String authToken);
     PlaygroundDto getById(final Long id);
     List<PlaygroundDto> findAllApproved();
     Integer getCount();

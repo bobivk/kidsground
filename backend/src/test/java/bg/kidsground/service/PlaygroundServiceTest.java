@@ -51,8 +51,8 @@ public class PlaygroundServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        user = new User(1L, "username", "password", "pesho@mail.bg", UserRole.USER);
-        when(userService.findUserById(1L)).thenReturn(user);
+        user = new User("username", "password", "pesho@mail.bg", UserRole.USER);
+        when(userService.findByUsername("username")).thenReturn(user);
         this.playgroundMapper = Mappers.getMapper(PlaygroundMapper.class);
         ReflectionTestUtils.setField(playgroundMapper, "userService", userService);
         ReflectionTestUtils.setField(playgroundMapper, "s3Service", s3Service);
@@ -65,21 +65,21 @@ public class PlaygroundServiceTest {
         Long id = 1L;
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setName("New Playground");
-        playgroundDto.setUserId(1L);
         Playground playground = new Playground();
         playground.setId(id);
         playground.setName("New Playground");
-        playground.setCreator(user);
+        playground.setCreatedByUser(user);
         when(playgroundRepository.save(any())).thenReturn(playground);
+        when(userService.findUserByToken("token")).thenReturn(user);
 
         // When
-        playgroundService.savePlayground(playgroundDto);
+        playgroundService.savePlayground(playgroundDto, "token");
 
         // Then
         verify(playgroundRepository, times(1)).save(playgroundCaptor.capture());
         Playground capturedPlayground = playgroundCaptor.getValue();
         assertEquals("New Playground", capturedPlayground.getName());
-        assertEquals("username", capturedPlayground.getCreator().getUsername());
+        assertEquals("username", capturedPlayground.getCreatedByUser().getUsername());
 
     }
 
@@ -89,11 +89,10 @@ public class PlaygroundServiceTest {
         Long id = 1L;
         Playground playground = new Playground();
         playground.setId(id);
-        playground.setCreator(user);
+        playground.setCreatedByUser(user);
         playground.setFloorType(List.of("floor"));
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
-        playgroundDto.setUserId(1L);
         playgroundDto.setRating(0.0);
         playgroundDto.setFloorType(List.of("floor"));
 
@@ -122,7 +121,7 @@ public class PlaygroundServiceTest {
     public void testFindAllApproved() {
         // Given
         Playground playground = new Playground();
-        playground.setCreator(user);
+        playground.setCreatedByUser(user);
         playground.setNew(false);
         when(playgroundRepository.findByIsNewFalse()).thenReturn(Collections.singletonList(playground));
 
@@ -138,7 +137,7 @@ public class PlaygroundServiceTest {
     public void testFindAllToApprove() {
         // Given
         Playground playground = new Playground();
-        playground.setCreator(user);
+        playground.setCreatedByUser(user);
         playground.setNew(true);
         when(playgroundRepository.findByIsNewTrue()).thenReturn(Collections.singletonList(playground));
 
@@ -170,14 +169,13 @@ public class PlaygroundServiceTest {
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
         playgroundDto.setName("Updated Playground");
-        playgroundDto.setUserId(1L);
         playgroundDto.setImageLinks(List.of("image_url"));
         playgroundDto.setRating(0.0);
         playgroundDto.setFloorType(List.of("floor"));
 
         Playground existingPlayground = new Playground();
         existingPlayground.setId(id);
-        existingPlayground.setCreator(user);
+        existingPlayground.setCreatedByUser(user);
         List<String> imageS3Keys = List.of("s3Key");
         existingPlayground.setImageS3Keys(imageS3Keys);
         existingPlayground.setFloorType(List.of("floor"));
@@ -185,7 +183,7 @@ public class PlaygroundServiceTest {
         Playground updatedPlayground = new Playground();
         updatedPlayground.setId(id);
         updatedPlayground.setName("Updated Playground");
-        updatedPlayground.setCreator(user);
+        updatedPlayground.setCreatedByUser(user);
         updatedPlayground.setImageS3Keys(imageS3Keys);
         updatedPlayground.setFloorType(List.of("floor"));
 
@@ -204,7 +202,7 @@ public class PlaygroundServiceTest {
         Playground capturedPlayground = playgroundCaptor.getValue();
         assertEquals(id, capturedPlayground.getId());
         assertEquals("Updated Playground", capturedPlayground.getName());
-        assertEquals(user.getUsername(), capturedPlayground.getCreator().getUsername());
+        assertEquals(user.getUsername(), capturedPlayground.getCreatedByUser().getUsername());
         assertEquals(imageS3Keys, capturedPlayground.getImageS3Keys());
     }
 
@@ -230,14 +228,13 @@ public class PlaygroundServiceTest {
         MultipartFile file = mock(MultipartFile.class);
         Playground playground = new Playground();
         playground.setId(id);
-        playground.setCreator(user);
+        playground.setCreatedByUser(user);
         playground.setFloorType(List.of("floor"));
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
         when(s3Service.uploadFile(file)).thenReturn(s3Key);
         when(s3Service.getImageUrl(s3Key)).thenReturn(imageUrl);
         when(playgroundRepository.save(playground)).thenReturn(playground);
         PlaygroundDto playgroundDto = new PlaygroundDto();
-        playgroundDto.setUserId(1L);
         playgroundDto.setId(1L);
         playgroundDto.setImageLinks(List.of(imageUrl));
         playgroundDto.setRating(0.0);

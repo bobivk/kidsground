@@ -9,10 +9,7 @@ import org.mapstruct.Mapping;
 public interface CommentMapper {
 
     @Mapping(target = "playgroundId", source = "playground.id")
-    @Mapping(source = "creator.id", target = "creatorId")
     CommentDto toDto(Comment comment);
 
-    @Mapping(source = "creatorId", target = "creator.id")
-    @Mapping(target = "playground.id", source = "playgroundId")
     Comment toEntity(CommentDto commentDto);
 }

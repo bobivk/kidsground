@@ -1,13 +1,10 @@
 package bg.kidsground;
 
 import bg.kidsground.domain.AgeGroup;
-import bg.kidsground.domain.Comment;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.UserRole;
-import bg.kidsground.domain.dto.UserDto;
-import bg.kidsground.repository.CommentRepository;
 import bg.kidsground.repository.PlaygroundRepository;
 import bg.kidsground.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -16,8 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Date;
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @SpringBootApplication
@@ -37,8 +32,8 @@ public class KidsgroundApplication {
             Playground playground = new Playground();
             playground.setName("Ploshtadka");
             playground.setCoordinates(Coordinates.builder().latitude(42.141080).longitude(24.752345).build());
-            playground.setAgeGroup("three_to_six");
-            playground.setCreator(user);
+            playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
+            playground.setCreatedByUser(user);
             playground.setNew(false);
             playgroundRepository.save(playground);
             Playground saved = playgroundRepository.findById(playground.getId()).orElseThrow(

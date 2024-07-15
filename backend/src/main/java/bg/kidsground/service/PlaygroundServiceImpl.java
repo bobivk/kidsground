@@ -24,11 +24,14 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     private PlaygroundRepository playgroundRepository;
     @Autowired
     private PlaygroundMapper playgroundMapper;
+    @Autowired
+    private UserService userService;
 
     @Override
-    public Long savePlayground(final PlaygroundDto playgroundDto) {
+    public Long savePlayground(final PlaygroundDto playgroundDto, final String authToken) {
         Playground playground = this.playgroundMapper.toEntity(playgroundDto);
         playground.setNew(true);
+        playground.setCreatedByUser(this.userService.findUserByToken(authToken));
         return this.playgroundRepository.save(playground).getId();
     }
 
@@ -70,6 +73,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
         updatedPlayground.setId(existingPlayground.getId());
         updatedPlayground.setImageS3Keys(existingPlayground.getImageS3Keys());
+        updatedPlayground.setCreatedByUser(existingPlayground.getCreatedByUser());
 
         Playground savedPlayground = playgroundRepository.save(updatedPlayground);
 

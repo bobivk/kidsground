@@ -20,8 +20,8 @@ public class PlaygroundController {
     private PlaygroundService playgroundService;
 
     @PostMapping(path = AppRestEndpoints.V1.Playground.ADD_PLAYGROUND)
-    public ResponseEntity<Long> savePlayground(@RequestBody final PlaygroundDto playground) {
-        return ResponseEntity.ok(this.playgroundService.savePlayground(playground));
+    public ResponseEntity<Long> savePlayground(@RequestBody final PlaygroundDto playground, @RequestHeader("Authorization") String authToken) {
+        return ResponseEntity.ok(this.playgroundService.savePlayground(playground, authToken));
     }
 
     @PutMapping(path = AppRestEndpoints.V1.Playground.By.ID)

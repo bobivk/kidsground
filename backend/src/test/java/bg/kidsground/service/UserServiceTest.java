@@ -60,20 +60,20 @@ public class UserServiceTest {
     }
 
     @Test
-    public void findUserById_UserFound() {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+    public void findUserByUsername_UserFound() {
+        when(userRepository.findByUsername(user.getUsername())).thenReturn(Optional.of(user));
 
-        User foundUser = userService.findUserById(1L);
+        User foundUser = userService.findByUsername(user.getUsername());
 
         assertEquals(user.getUsername(), foundUser.getUsername());
     }
 
     @Test
-    public void findUserById_UserNotFound() {
-        when(userRepository.findById(1L)).thenReturn(Optional.empty());
+    public void findUserByUsername_UserNotFound() {
+        when(userRepository.findByUsername(user.getUsername())).thenReturn(Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> {
-            userService.findUserById(1L);
+            userService.findByUsername(user.getUsername());
         });
     }
 

@@ -30,7 +30,8 @@ public class Playground {
     private String description;
 
     @JsonProperty("age_group")
-    private String ageGroup;
+    @Enumerated(EnumType.STRING)
+    private AgeGroup ageGroup;
 
     @JsonProperty("has_fence")
     private boolean hasFence;
@@ -71,9 +72,9 @@ public class Playground {
     private Double rating;
 
     @ManyToOne
-    @JoinColumn(name = "creator_id")
-    @JsonProperty("creator_id")
-    private User creator;
+    @JoinColumn(name = "createdByUser")
+    @JsonProperty("created_by_user")
+    private User createdByUser;
 
     @OneToMany(mappedBy = "playground", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;

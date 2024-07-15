@@ -13,5 +13,7 @@ public interface UserService {
 
   UserDetails loadUserDetails(String username);
 
-  User findUserById(Long userId);
+  User findByUsername(String username);
+
+  User findUserByToken(String token);
 }
