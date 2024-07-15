@@ -237,7 +237,8 @@ export const PlaygroundFormPage = () => {
         await fetch("https://kidsground.bg:8009/v1/playgrounds/add", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${Cookies.get("user")}` 
             },
             body: JSON.stringify(data)
         }).then((response) => {
@@ -254,6 +255,9 @@ export const PlaygroundFormPage = () => {
         if(imagePayload.entries()) {
             await fetch (`https://kidsground.bg:8009/v1/playgrounds/${playgroundId}/uploadImages`, {
                 method:'POST',
+                headers: {
+                    'Authorization': `Bearer ${Cookies.get("user")}`
+                },
                 body: imagePayload
             })
         }

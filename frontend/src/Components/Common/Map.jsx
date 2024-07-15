@@ -215,7 +215,7 @@ export const Map = ({onCoordinatesChange, currentPlaygroundCords}) => {
                 onLoad={onMapLoad}
                 // onClick={handleClick}
             >
-                {playgrounds.map((playground) => (
+                {playgrounds && playgrounds.map((playground) => (
                     <Marker
                         onClick={() => {showDetails(playground)}}
                         key={playground.id}
@@ -252,7 +252,7 @@ export const Map = ({onCoordinatesChange, currentPlaygroundCords}) => {
                 {currentPlaygroundCords && requestDirections && <DirectionsService options={{
                             destination: currentPlaygroundCords,
                             origin: currentPosition,
-                            travelMode: 'DRIVING'                    
+                            travelMode: 'WALKING'                    
                         }} callback={handleDirectionsCallback} />}     
                 {directionsResponse && <DirectionsRenderer options={{
                             directions: directionsResponse,

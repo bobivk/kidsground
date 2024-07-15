@@ -3,13 +3,8 @@ import '../../static/stylesheets/styles.css'
 import { Link } from "react-router-dom"
 import { HashLink } from 'react-router-hash-link';
 import Cookies from 'js-cookie'
-import { useEffect } from 'react';
 
 export const Navbar = () => {
-
-    useEffect(() => {
-        console.log(Cookies.get("user"));
-    })
 
     if(Cookies.get("user")) {
         return (

@@ -13,18 +13,17 @@ export const PlaygroundPage = () => {
 
     const {id} = useParams();
     const [photos, setPhotos] = useState([]);
+    const [placeholder, setPlaceholder] = useState([])
     const [playgroundInfo, setPlaygroundInfo] = useState({})
-    const [imagesForGallery, setImagesForGallery] = ([]);
+    const [imagesForGallery, setImagesForGallery] = useState([]);
 
     const fetchPlayground = async () => {
+       
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json()).then((data) => {
-            setPlaygroundInfo(data)
+            setPlaygroundInfo(data);
             if(data.image_links.length !== 0) {
-                data.image_links.forEach(image => {
-                    if(imagesForGallery) {
-                        setImagesForGallery([{original: image}]) 
-                    }
-                });
+                const newImages = data.image_links.map(image => ({original: image}));
+                setImagesForGallery(prevImages => [...prevImages, ...newImages]);
             }
         }); 
         
@@ -32,7 +31,7 @@ export const PlaygroundPage = () => {
 
     useEffect(() => {
         fetchPlayground()
-            window.scrollTo(0, 0)
+        window.scrollTo(0, 0)
     }, [])
 
     const onChangeImage = (event) => {
