@@ -19,7 +19,7 @@ public class CommentDto {
     private Long playgroundId;
 
     @JsonProperty("rating")
-    private Integer rating;
+    private Double rating;
 
     @JsonProperty("username")
     private String username;

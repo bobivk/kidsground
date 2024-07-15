@@ -51,7 +51,7 @@ class CommentServiceTest {
     void setUp() {
         commentDto = CommentDto.builder()
                 .text("Test Comment")
-                .rating(5)
+                .rating(3.5)
                 .username("Sample Username")
                 .playgroundId(1L)
                 .build();
@@ -69,7 +69,7 @@ class CommentServiceTest {
         comment = Comment.builder()
                 .id(1L)
                 .text("Test Comment")
-                .rating(5)
+                .rating(3.5)
                 .createdByUser(user)
                 .playground(playground)
                 .build();

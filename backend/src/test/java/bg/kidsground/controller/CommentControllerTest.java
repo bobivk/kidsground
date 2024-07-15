@@ -55,7 +55,7 @@ public class CommentControllerTest {
     public void testGetCommentsByUserId() throws Exception {
         CommentDto commentDto = CommentDto.builder()
                 .text("Sample Comment")
-                .rating(5)
+                .rating(3.5)
                 .username("Sample Username")
                 .createdAt(new Date())
                 .build();
@@ -67,7 +67,7 @@ public class CommentControllerTest {
                         .param("userId", "1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].text").value("Sample Comment"))
-                .andExpect(jsonPath("$[0].rating").value(5))
+                .andExpect(jsonPath("$[0].rating").value(3.5))
                 .andExpect(jsonPath("$[0].username").value("Sample Username"));
     }
 
@@ -75,7 +75,7 @@ public class CommentControllerTest {
     public void testGetComment() throws Exception {
         CommentDto commentDto = CommentDto.builder()
                 .text("Sample Comment")
-                .rating(5)
+                .rating(3.5)
                 .username("Sample Username")
                 .createdAt(new Date())
                 .build();
@@ -85,7 +85,7 @@ public class CommentControllerTest {
         mockMvc.perform(get(AppRestEndpoints.V1.Comments.BY_ID, 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.text").value("Sample Comment"))
-                .andExpect(jsonPath("$.rating").value(5))
+                .andExpect(jsonPath("$.rating").value(3.5))
                 .andExpect(jsonPath("$.username").value("Sample Username"));
     }
 
