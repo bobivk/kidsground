@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "comment")
+@Table(name = "comments")
 @Data
 @Builder
 @NoArgsConstructor
