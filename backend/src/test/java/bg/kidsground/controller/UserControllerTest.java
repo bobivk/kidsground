@@ -6,6 +6,7 @@ import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.LoginDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.service.UserService;
+import jakarta.persistence.EntityExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -34,13 +35,11 @@ public class UserControllerTest {
     private JWTUtil jwtUtil;
 
     private UserDto userDto;
-    private LoginDto loginDto;
 
     @BeforeEach
     public void setup() {
         userDto = new UserDto("testuser", null, UserRole.USER);
 
-        loginDto = new LoginDto("testuser", "password", null);
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(userController).build();
 
@@ -85,5 +84,20 @@ public class UserControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.username").value("pesho"))
                 .andExpect(jsonPath("$.email").value("pesho@mail.bg"));
+    }
+
+    @Test
+    public void testRegisterAlreadyExists() throws Exception {
+
+        when(userService.save(any())).thenThrow(EntityExistsException.class);
+
+        mockMvc.perform(post(AppRestEndpoints.V1.Users.REGISTER)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\n" +
+                                "  \"username\" : \"pesho\",\n" +
+                                "  \"password\" : \"password123\",\n" +
+                                "  \"email\" : \"pesho@mail.bg\"\n" +
+                                "}"))
+                .andExpect(status().isConflict());
     }
 }

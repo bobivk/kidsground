@@ -5,6 +5,7 @@ import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.LoginDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 public class UserServiceTest {
@@ -78,17 +80,29 @@ public class UserServiceTest {
     }
 
     @Test
+
     public void save_UserSaved() {
         LoginDto loginDto = new LoginDto("testuser", "password", "test@example.com");
 
         when(passwordEncoder.encode(any(String.class))).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(user);
+        when(userRepository.existsByEmail(anyString())).thenReturn(false);
 
         UserDto userDto = userService.save(loginDto);
 
         assertEquals("testuser", userDto.getUsername());
         assertEquals("test@example.com", userDto.getEmail());
         assertEquals(UserRole.USER, userDto.getRole());
+    }
+
+    @Test
+    public void save_alreadyExists() {
+        LoginDto loginDto = new LoginDto("testuser", "password", "test@example.com");
+
+        when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
+        when(userRepository.existsByEmail(anyString())).thenReturn(true);
+
+        assertThrows(EntityExistsException.class, () -> userService.save(loginDto));
     }
 
     @Test

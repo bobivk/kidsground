@@ -7,8 +7,10 @@ import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -58,6 +60,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto save(LoginDto loginDto) {
+        if (userRepository.existsByEmail(loginDto.getEmail())) {
+            throw new EntityExistsException("A user with that email already exists.");
+        }
         User user = new User(loginDto.getUsername(),
                             passwordEncoder.encode(loginDto.getPassword()),
                             loginDto.getEmail(),
