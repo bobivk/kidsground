@@ -571,7 +571,9 @@ export const PlaygroundFormPage = () => {
         </div>
         )
     } else {
-        return (<Navigate to="/add" />)
+        return(
+            <Navigate to="/login" />
+        );
     }
     
 }

@@ -48,7 +48,7 @@ export const PlaygroundPage = () => {
 
             <div className="playground-content">
                 <AddImage onChangeImage={onChangeImage}/>
-                <InfoCard ageGroup={playgroundInfo.age_group} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment}/>
+                <InfoCard ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment}/>
                 <div id="map" style={{marginBottom: "20px"}}>
                         <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
                 </div>

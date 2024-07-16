@@ -20,7 +20,7 @@ export const Navbar = () => {
                     <div><HashLink to="/#about-us">За нас</HashLink></div>
                 </div>
                 <div className="profile-wrapper">
-                    <Link to="/#about-us">Профил</Link>
+                    <Link to="/profile">Профил</Link>
                 </div>
                 <div className="logout-wrapper">
                     <div>
