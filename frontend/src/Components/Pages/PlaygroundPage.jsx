@@ -8,14 +8,15 @@ import { useParams } from 'react-router-dom'
 import { AddImage } from '../Common/AddImage'
 import { InfoCard } from '../Common/InfoCard';
 import { Rating } from '../Common/Rating';
+import Cookies from 'js-cookie';
 
 export const PlaygroundPage = () => {
 
     const {id} = useParams();
     const [photos, setPhotos] = useState([]);
-    const [placeholder, setPlaceholder] = useState([])
     const [playgroundInfo, setPlaygroundInfo] = useState({})
     const [imagesForGallery, setImagesForGallery] = useState([]);
+    const [confirmation, setConfirmation] = useState(false)
 
     const fetchPlayground = async () => {
        
@@ -35,9 +36,35 @@ export const PlaygroundPage = () => {
     }, [])
 
     const onChangeImage = (event) => {
-        for(let i = 0; i < event.target.files.length; ++i) {
-            setPhotos([...photos, event.target.files[i]]);
+        event.preventDefault();
+        setConfirmation(true);
+        setPhotos(event.target.files)
+    }
+
+    const sendImages = async () => {
+
+        const imagePayload = new FormData();
+
+        if(photos) {
+            Array.from(photos).forEach((photo) => {
+                imagePayload.append("file", photo);
+            })
+            
         }
+       
+        if(imagePayload.entries()) {
+            await fetch (`https://kidsground.bg:8009/v1/playgrounds/${id}/uploadImages`, {
+                method:'POST',
+                headers: {
+                    'Authorization': `Bearer ${Cookies.get("user")}`
+                },
+                body: imagePayload
+            })
+        }
+    }
+
+    const noButtonEvent = () => {
+        setPhotos([])
     }
 
     return(
@@ -47,8 +74,8 @@ export const PlaygroundPage = () => {
             </div>
 
             <div className="playground-content">
-                <AddImage onChangeImage={onChangeImage}/>
-                <InfoCard ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment}/>
+                <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent}/>
+                <InfoCard description={playgroundInfo.description} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
                 <div id="map" style={{marginBottom: "20px"}}>
                         <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
                 </div>

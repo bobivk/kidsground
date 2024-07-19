@@ -42,6 +42,7 @@ export const InfoCard = (props) => {
         <div id="info-card">
                     <div className="playground-text">
                         <h1>{props.name}</h1>
+                        <div>{props.description}</div>
                         <div id="age" className="card">
                             <span><ChildIcon className="icon"/>Деца между {ageGroups[props.ageGroup]} години.</span>
                         </div>
@@ -120,9 +121,14 @@ export const InfoCard = (props) => {
                                     default: {
                                         <></>
                                     }
-                                }                        
+                                }                      
                             })
                             }
+                            {props.facilities && props.facilities.map((facility) => {
+                                <ul>
+                                    <li>{facility}</li>
+                                </ul>
+                            })}
                         </div>
                     </div>
         </div>

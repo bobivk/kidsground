@@ -1,17 +1,23 @@
 import { ReactComponent as WarningIcon } from '../../static/icons/warning-sign.svg'
 import Cookies from "js-cookie"
 
-export const AddImage = ({onChangeImage}) => {
+export const AddImage = ({onChangeImage, confirmation, sendPhotos, noButtonEvent}) => {
 
     if(Cookies.get("user")) {
         return (
             <div id="input-upload-wrapper">
                 <div id="upload-wrapper">
-                    <label className="upload-btn-wrapper">
+                    {!confirmation && <label className="upload-btn-wrapper">
                         <button className="btn">+</button>
                         <p className="btn-label">Добави снимки</p>
-                    </label>
-                    <input onChange={onChangeImage} id='input-wrapper' type="file" name="myfile" accept="image/*" multiple/>
+                        <input onChange={onChangeImage} id='input-wrapper' type="file" name="myfile" accept="image/*" multiple/>
+                    </label>}
+                    {confirmation && <label className="upload-btn-wrapper">
+                        <button className="btn">?</button>
+                        <p className="btn-label">Сигурни ли сте че искате да качите тези снимки?</p>
+                        <button onClick={sendPhotos}>Да</button>
+                        <button onClick={noButtonEvent}>Не</button>
+                    </label>} 
                 </div>
             </div>
         )

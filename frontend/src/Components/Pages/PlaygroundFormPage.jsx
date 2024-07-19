@@ -209,31 +209,33 @@ export const PlaygroundFormPage = () => {
             setIsOtherFacilityFocused(false);
             setFacilities(newFacilities);
         }
-        console.log(facilities)
     }
 
     const onChangeImage = (event) => {
-        for(let i = 0; i < event.target.files; ++i) {
-            setPhotos([...photos, event.target.files[i]]);
-        }
+        event.preventDefault();
+        setPhotos(event.target.files)
     }
 
     const createPlayground = async (event) => {
         event.preventDefault();
+        let playgroundName = name;
         if(name === "") {
-            await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates[0]},${coordinates[1]}?language=bg&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`).then((response) => {
+            await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates.lat},${coordinates.lng}&language=bg&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`).then((response) => {
                 if(response.status === 200) {
-                    setName(response.body.formatted_address);
+                    return response.json()
                 } else {
-                    setName(`${coordinates[0]}, ${coordinates[1]}`);
+                    playgroundName = `${coordinates.lat}, ${coordinates.lng}`;
                 }
+                
+            }).then((response) => {
+                playgroundName = response.results[0].formatted_address;
             })
             
         }
 
         const imagePayload = new FormData();
         let playgroundId;
-        const data = {name, age_group, environment, shade_type, floor_type, has_fence, facilities, transport, toys, coordinates}
+        const data = {name: playgroundName, age_group, environment, shade_type, floor_type, has_fence, facilities, transport, toys, coordinates}
         await fetch("https://kidsground.bg:8009/v1/playgrounds/add", {
             method: 'POST',
             headers: {
@@ -242,16 +244,21 @@ export const PlaygroundFormPage = () => {
             },
             body: JSON.stringify(data)
         }).then((response) => {
-            playgroundId = response.content
             if(response.status === 200) {
                 setShowModal(true);
+                return response.text()
             }
+        }).then((data) => {
+            playgroundId = data
         })
 
-        for(let i = 0; i < photos.length; ++i) {
-            imagePayload.append(`image${i}`, photos[i]);
+        if(photos) {
+            Array.from(photos).forEach((photo) => {
+                imagePayload.append("file", photo);
+            })
+            
         }
-
+       
         if(imagePayload.entries()) {
             await fetch (`https://kidsground.bg:8009/v1/playgrounds/${playgroundId}/uploadImages`, {
                 method:'POST',
@@ -547,7 +554,7 @@ export const PlaygroundFormPage = () => {
                             </div>
                             <br/>
                         </div>
-                        <AddImage onChangeImage={onChangeImage}/>
+                        <AddImage onChangeImage={onChangeImage} confirmation={false} sendPhotos={{}} noButtonEvent={{}}/>
                         <div className="question" id="description-question">
                         <label className="form-label" for="description">10. Допълнително описание:</label>
                         <br/>
