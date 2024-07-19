@@ -6,19 +6,21 @@ export const AddImage = ({onChangeImage, confirmation, sendPhotos, noButtonEvent
     if(Cookies.get("user")) {
         return (
             <div id="input-upload-wrapper">
-                <div id="upload-wrapper">
-                    {!confirmation && <label className="upload-btn-wrapper">
+                {!confirmation &&<div id="upload-wrapper">
+                     <label className="upload-btn-wrapper">
                         <button className="btn">+</button>
                         <p className="btn-label">Добави снимки</p>
                         <input onChange={onChangeImage} id='input-wrapper' type="file" name="myfile" accept="image/*" multiple/>
-                    </label>}
-                    {confirmation && <label className="upload-btn-wrapper">
-                        <button className="btn">?</button>
+                    </label>
+                    
+                </div>}
+                {confirmation && <div id="confirm-wrapper">
+                     <label className="confirm-btn-wrapper">
                         <p className="btn-label">Сигурни ли сте че искате да качите тези снимки?</p>
-                        <button onClick={sendPhotos}>Да</button>
-                        <button onClick={noButtonEvent}>Не</button>
-                    </label>} 
-                </div>
+                        <button className="btn" onClick={sendPhotos}>✓</button>
+                        <button className="btn" onClick={noButtonEvent}>✗</button>
+                </label>
+                </div>} 
             </div>
         )
     } else {

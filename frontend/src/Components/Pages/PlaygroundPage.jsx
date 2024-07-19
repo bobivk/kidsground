@@ -61,9 +61,11 @@ export const PlaygroundPage = () => {
                 body: imagePayload
             })
         }
+        window.location.reload();
     }
 
     const noButtonEvent = () => {
+        setConfirmation(false)
         setPhotos([])
     }
 

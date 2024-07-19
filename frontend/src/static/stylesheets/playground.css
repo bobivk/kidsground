@@ -47,6 +47,17 @@
     color: var(--text-grey);
 }
 
+.confirm-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid #75a2a8;
+    padding: 20px;
+    border-radius: 12px;
+    filter: drop-shadow(0 0 1rem rgb(178, 178, 178));
+}
+
 
 #input-wrapper {
     opacity: 0;
