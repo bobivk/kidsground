@@ -2,8 +2,7 @@
 import { useState } from 'react';
 import "../../static/stylesheets/rating.css"
 
-export const Rating = ({ totalStars = 5 }) => {
-    const [rating, setRating] = useState(0);
+export const Rating = ({ totalStars = 5, changeRating }) => {
     const [hover, setHover] = useState(0);
   
     return (
@@ -17,7 +16,7 @@ export const Rating = ({ totalStars = 5 }) => {
                   type="radio"
                   name="rating"
                   value={ratingValue - 0.5}
-                  onClick={() => setRating(ratingValue - 0.5)}
+                  onClick={() => changeRating(ratingValue - 0.5)}
                   style={{ display: 'none' }}
                 />
                 <svg
@@ -42,7 +41,7 @@ export const Rating = ({ totalStars = 5 }) => {
                   type="radio"
                   name="rating"
                   value={ratingValue}
-                  onClick={() => setRating(ratingValue)}
+                  onClick={() => changeRating(ratingValue)}
                   style={{ display: 'none' }}
                 />
                 <svg

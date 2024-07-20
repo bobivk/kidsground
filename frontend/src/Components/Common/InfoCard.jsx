@@ -20,6 +20,7 @@ import { ReactComponent as CombinedPlaygroundIcon} from '../../static/icons/play
 import { ReactComponent as TunnelIcon} from '../../static/icons/tunnel.svg'
 import { ReactComponent as WheelchairIcon} from '../../static/icons/wheelchair.svg'
 import { ReactComponent as TrampolineIcon} from '../../static/icons/trampoline.svg'
+import { ReactComponent as FloorTypeIcon} from '../../static/icons/tiles.svg'
 
 
 export const InfoCard = (props) => {
@@ -48,6 +49,9 @@ export const InfoCard = (props) => {
                         </div>
                         <div id="playgroundLocation" className="card">
                             <span><ParkIcon className="icon"/>{props.environment}</span>
+                        </div>
+                        <div id="playgroundLocation" className="card">
+                            <span><FloorTypeIcon className="icon"/>{props.floorType.join(", ")}</span>
                         </div>
                         <div id="shade" className="card">
                             <span><TreeIcon className="icon"/>{shades[props.shadeType]}</span>

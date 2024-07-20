@@ -1,0 +1,43 @@
+table, th, td {
+    border-spacing: 0px;
+}
+
+.table-container {
+    border: 1px solid #75a2a8;
+    border-radius: 12px;
+    overflow: hidden; /* Ensures that the table does not overflow the container */
+}
+
+th, td {
+    border: 1px solid #75a2a8;
+    padding: 8px;
+}
+
+th {
+    font-weight: bold;
+}
+
+td {
+    text-align: center;    
+}
+
+table tr:first-child th:first-child {
+    border-top-left-radius: 12px;
+}
+
+table tr:first-child th:last-child {
+    border-top-right-radius: 12px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+.playground-link {
+    cursor: pointer;
+    color: #62BEC9
+}

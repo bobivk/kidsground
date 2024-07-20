@@ -14,9 +14,12 @@ export const PlaygroundPage = () => {
 
     const {id} = useParams();
     const [photos, setPhotos] = useState([]);
-    const [playgroundInfo, setPlaygroundInfo] = useState({})
+    const [playgroundInfo, setPlaygroundInfo] = useState({});
     const [imagesForGallery, setImagesForGallery] = useState([]);
-    const [confirmation, setConfirmation] = useState(false)
+    const [confirmation, setConfirmation] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([]);
 
     const fetchPlayground = async () => {
        
@@ -26,7 +29,11 @@ export const PlaygroundPage = () => {
                 const newImages = data.image_links.map(image => ({original: image}));
                 setImagesForGallery(prevImages => [...prevImages, ...newImages]);
             }
-        }); 
+        });
+
+        await fetch(`https://kidsground.bg:8009/v1/comments`).then(response => response.json()).then((data) => {
+            setComments(data);
+        })
         
     }
 
@@ -39,6 +46,25 @@ export const PlaygroundPage = () => {
         event.preventDefault();
         setConfirmation(true);
         setPhotos(event.target.files)
+    }
+
+    const handleRatingChange = (stars) => {
+        setRating(stars)
+    }
+
+    const handleCommentChange = (event) => {
+        setComment(event.target.value);
+    }
+
+    const handleCommentSubmit = async (event) => {
+        event.preventDefault();
+        await fetch (`https://kidsground.bg:8009/v1/comments/add`, {
+            method:'POST',
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            },
+            body: {comment, rating}
+        })
     }
 
     const sendImages = async () => {
@@ -77,21 +103,23 @@ export const PlaygroundPage = () => {
 
             <div className="playground-content">
                 <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent}/>
-                <InfoCard description={playgroundInfo.description} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
+                <InfoCard description={playgroundInfo.description} floorType = {playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
                 <div id="map" style={{marginBottom: "20px"}}>
                         <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
                 </div>
                 <div id="commentSectionWrapper">
                     <div id="commentSection">
                         <h1>Коментари</h1>
-                        <div className="comment">
+                        {/* {comments && comments.map((comment) => {
+                            <div className="comment">
                             <p>danny</p>
                             <p className="commentContent">Страхотна площадка всеки ден водя приятелката ми, която е на 6 да си играе тук, Даниел - 24г.</p>
-                        </div>
+                            </div>
+                        })} */}
                         <label id="commentFieldLabel" for="comment">Оставете Рейтинг и Коментар: </label>
-                        <Rating />
-                        <input id="commentField" type='textarea' name="comment"/>
-                        <button id="commentButton" type='submit'>Коментирай</button>
+                        <Rating changeRating={handleRatingChange} />
+                        <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment"/>
+                        <button id="commentButton" onClick={handleCommentSubmit} type='submit'>Коментирай</button>
                     </div>
                 </div>
             </div>
