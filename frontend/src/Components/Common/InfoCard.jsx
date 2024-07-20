@@ -129,9 +129,9 @@ export const InfoCard = (props) => {
                             })
                             }
                             {props.facilities && props.facilities.map((facility) => {
-                                <ul>
+                                return (<ul>
                                     <li>{facility}</li>
-                                </ul>
+                                </ul>)
                             })}
                         </div>
                     </div>
