@@ -55,6 +55,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<CommentDto> getByPlaygroundId(Long id) {
+        return this.commentRepository.findByPlaygroundId(id)
+                .stream().map(commentMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public void deleteById(Long id) {
         commentRepository.deleteById(id);
     }

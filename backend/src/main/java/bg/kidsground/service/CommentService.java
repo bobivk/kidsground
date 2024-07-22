@@ -9,5 +9,6 @@ public interface CommentService {
     Long saveComment(CommentDto commentDto, String authToken);
     CommentDto getById(Long id);
     List<CommentDto> getByAuthToken(String username);
+    List<CommentDto> getByPlaygroundId(Long id);
     void deleteById(Long id);
 }

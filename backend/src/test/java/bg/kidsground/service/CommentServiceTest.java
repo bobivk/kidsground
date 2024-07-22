@@ -129,6 +129,39 @@ class CommentServiceTest {
     }
 
     @Test
+    public void testGetByPlaygroundId() {
+        // Prepare test data
+        Long playgroundId = 1L;
+
+        Comment comment = Comment.builder()
+                .id(1L)
+                .text("Great playground")
+                .rating(5.0)
+                .build();
+
+        CommentDto commentDto = CommentDto.builder()
+                .text("Great playground")
+                .rating(5.0)
+                .build();
+
+        List<Comment> comments = List.of(comment);
+        List<CommentDto> commentDtos = List.of(commentDto);
+
+        // Mock the repository and mapper calls
+        when(commentRepository.findByPlaygroundId(playgroundId)).thenReturn(comments);
+        when(commentMapper.toDto(comment)).thenReturn(commentDto);
+
+        // Call the method under test
+        List<CommentDto> result = commentService.getByPlaygroundId(playgroundId);
+
+        // Verify the results
+        assertEquals(commentDtos, result);
+        verify(commentRepository).findByPlaygroundId(playgroundId);
+        verify(commentMapper).toDto(comment);
+    }
+
+
+    @Test
     void deleteById() {
         doNothing().when(commentRepository).deleteById(anyLong());
 

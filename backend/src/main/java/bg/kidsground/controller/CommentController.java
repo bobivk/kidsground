@@ -39,6 +39,11 @@ public class CommentController {
         return ResponseEntity.ok(this.commentService.getByAuthToken(authToken));
     }
 
+    @GetMapping(AppRestEndpoints.V1.Comments.By.PLAYGROUND)
+    public ResponseEntity<List<CommentDto>> getCommentsByPlaygroundId(final @PathVariable("playground_id") Long playgroundId) {
+        return ResponseEntity.ok(this.commentService.getByPlaygroundId(playgroundId));
+    }
+
     @GetMapping(AppRestEndpoints.V1.Comments.By.ID)
     public ResponseEntity<CommentDto> getComment(final @PathVariable Long id) {
         return ResponseEntity.ok(this.commentService.getById(id));

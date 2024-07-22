@@ -34,6 +34,7 @@ public class AppRestEndpoints {
             public class By {
                 public static final String ID = COMMENTS_ROOT + "/{id}";
                 public static final String USER = COMMENTS_ROOT + "/byUser";
+                public static final String PLAYGROUND = COMMENTS_ROOT + "/playground/{playground_id}";
             }
         }
     }

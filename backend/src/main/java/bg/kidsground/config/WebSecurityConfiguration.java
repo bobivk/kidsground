@@ -26,11 +26,16 @@ public class WebSecurityConfiguration
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
-                        // Allow non-logged-in
-                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER, AppRestEndpoints.V1.Users.LOGIN,
-                                AppRestEndpoints.V1.Playground.COUNT, AppRestEndpoints.V1.Playground.GET_ALL)
+                        // Allow when not logged in
+                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
+                                        AppRestEndpoints.V1.Users.LOGIN,
+                                        AppRestEndpoints.V1.Playground.COUNT,
+                                        AppRestEndpoints.V1.Playground.GET_ALL)
                                     .permitAll()
-                        .requestMatchers(HttpMethod.GET, AppRestEndpoints.V1.Playground.By.ID)
+                        .requestMatchers(HttpMethod.GET,
+                                        AppRestEndpoints.V1.Playground.By.ID,
+                                        AppRestEndpoints.V1.Comments.By.ID,
+                                        AppRestEndpoints.V1.Comments.By.PLAYGROUND)
                                     .permitAll()
 
                         // restrict to admin only

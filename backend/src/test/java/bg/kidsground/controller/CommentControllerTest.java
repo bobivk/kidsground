@@ -73,6 +73,27 @@ public class CommentControllerTest {
     }
 
     @Test
+    public void testGetCommentsByPlaygroundId() throws Exception {
+        Long playgroundId = 1L;
+        CommentDto commentDto = CommentDto.builder()
+                .text("Great playground")
+                .rating(5.0)
+                .createdAt(new Date())
+                .build();
+
+        List<CommentDto> commentDtos = List.of(commentDto);
+
+        when(commentService.getByPlaygroundId(playgroundId)).thenReturn(commentDtos);
+
+        mockMvc.perform(get(AppRestEndpoints.V1.Comments.By.PLAYGROUND, playgroundId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].text").value("Great playground"))
+                .andExpect(jsonPath("$[0].rating").value(5.0))
+                .andExpect(jsonPath("$[0].createdAt").exists());
+    }
+
+
+    @Test
     public void testGetComment() throws Exception {
         CommentDto commentDto = CommentDto.builder()
                 .text("Sample Comment")
