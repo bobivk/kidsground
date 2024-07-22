@@ -53,6 +53,9 @@ public class PlaygroundDto {
     @JsonProperty("coordinates")
     private Coordinates coordinates;
 
+    @JsonProperty("is_new")
+    private boolean isNew;
+
     @JsonProperty("rating")
     private Double rating;
 

@@ -1,6 +1,7 @@
 package bg.kidsground.service;
 
 import bg.kidsground.domain.Playground;
+import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.mapper.PlaygroundMapper;
 import bg.kidsground.repository.PlaygroundRepository;
@@ -115,6 +116,15 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
         playgroundRepository.deleteById(id);
         return null;
+    }
+
+    @Override
+    public List<PlaygroundDto> getByAuthToken(String authToken) {
+        User user = this.userService.findUserByToken(authToken);
+        List<Playground> playgrounds = playgroundRepository.findByCreatedByUser(user);
+        return playgrounds.stream()
+                .map(playgroundMapper::toDto)
+                .toList();
     }
 
     @Override

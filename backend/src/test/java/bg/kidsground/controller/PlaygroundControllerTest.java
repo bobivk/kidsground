@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -97,6 +98,25 @@ public class PlaygroundControllerTest {
                 .andExpect(jsonPath("$.environment").value("apartments"));
 
         verify(playgroundService).getById(id);
+    }
+
+    @Test
+    public void testGetPlaygroundsByUserId() throws Exception {
+        // Prepare test data
+        PlaygroundDto playgroundDto = new PlaygroundDto();
+        playgroundDto.setId(1L);
+        playgroundDto.setName("Test Playground");
+        List<PlaygroundDto> playgrounds = List.of(playgroundDto);
+
+        // Mock the service call
+        when(playgroundService.getByAuthToken("Bearer <Test Token>")).thenReturn(playgrounds);
+
+        // Perform the GET request
+        mockMvc.perform(get(AppRestEndpoints.V1.Playground.By.USER)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer <Test Token>")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("[{'id':1,'name':'Test Playground'}]"));
     }
 
     @Test
