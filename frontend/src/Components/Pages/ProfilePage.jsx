@@ -26,26 +26,38 @@ export const ProfilePage = () => {
 
 
     const fetchMyPlaygrounds = async () => {
-        setMyPlaygrounds();
+        await fetch(`https://kidsground.bg:8009/v1/playgrounds/byUser`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            }
+        }).then(response => response.json()).then((data) => {
+            setMyPlaygrounds(data);  
+        })
     }
 
-    // const fetchMyComments = async () => {
-    //     await fetch(`https://kidsground.bg:8009/v1/comments`).then(response => response.json()).then((data) => {
-    //         setMyComments(data);  
-    //     })
+    const fetchMyComments = async () => {
+        await fetch(`https://kidsground.bg:8009/v1/comments/byUser`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            }
+        }).then(response => response.json()).then((data) => {
+            setMyComments(data);  
+        })
         
-    // }
+    }
 
     const approvePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=true`, {
             method: "POST"
         })
+        window.location.reload();
     }
 
     const disapprovePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=false`, {
             method: "POST"
         })
+        window.location.reload();
     }
 
     const deletePlayground = async (id) => {
@@ -65,10 +77,19 @@ export const ProfilePage = () => {
         })
     }
 
-    useEffect(() => {
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = String(date.getUTCDate()).padStart(2, '0');
+        const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // getUTCMonth() is zero-based
+        const year = date.getUTCFullYear();
+        return `${day}/${month}/${year}`;
+    }
 
-        fetchMyPlaygrounds();
-        // fetchMyComments();
+    useEffect(() => {
+        if(Cookies.get("user")){
+            fetchMyPlaygrounds();
+            fetchMyComments();
+        }
         if(Cookies.get("user") && Cookies.get("role") === "ADMIN") {
             fetchPendingPlaygrounds();
         }
@@ -78,7 +99,6 @@ export const ProfilePage = () => {
         return (
             <div className="page">
                 <h2>Площадки очакващи одобрение: </h2>
-                <div className="table-container">
                     <table>
                         <tr>
                             <th>Име</th>
@@ -94,7 +114,7 @@ export const ProfilePage = () => {
                             <th></th>
                         </tr>
                     {pendingPlaygrounds && pendingPlaygrounds.map((playground) => (
-                        <tr>
+                        <tr key={playground.id}>
                             <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
                             <td>{ageGroups[playground.age_group]}</td>
                             <td>{playground.environment}</td>
@@ -112,17 +132,51 @@ export const ProfilePage = () => {
                         </tr>
                     ))}
                     </table>
-                </div>
                 <h2>Моите Площадки: </h2>
-                {myPlaygrounds && myPlaygrounds.map((playground) => {
-                    
-                })}
+                    <table>
+                        <tr>
+                            <th>Име</th>
+                            <th>Възрастова група</th>
+                            <th>Местоположение</th>
+                            <th>Сенчести зони</th>
+                            <th>Транспорт</th>
+                            <th>Оградена</th>
+                            <th>Настилка</th>
+                            <th>Катерушки</th>
+                            <th>Други съоръжения</th>
+                            <th>Координати</th>
+                        </tr>
+                    {myPlaygrounds && myPlaygrounds.map((playground) => (
+                        <tr key={playground.id}>
+                            <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
+                            <td>{ageGroups[playground.age_group]}</td>
+                            <td>{playground.environment}</td>
+                            <td>{shades[playground.shade_type]}</td>
+                            <td>{playground.transport.join(', ')}</td>
+                            <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
+                            <td>{playground.floor_type.join(', ')}</td>
+                            <td>{playground.toys.join(', ')}</td>
+                            <td>{playground.facilities.join(', ')}</td>
+                            <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                        </tr>
+                    ))}
+                    </table>
                 <h2>Моите Коментари: </h2>
-                {myComments && myComments.map((comment) => {
-                    
-                })}
+                    <table>
+                        <tr>
+                            <th>Текст</th>
+                            <th>Рейтинг</th>
+                            <th>Създаден на</th>
+                        </tr>
+                {myComments && myComments.map((comment) => (
+                    <tr>
+                        <td onClick={() => {navigate(`/playground/${comment.playground_id}`)}} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
+                        <td>{comment.rating}</td>
+                        <td>{formatDate(comment.createdAt)}</td>
+                    </tr>
+                ))}
+                </table>
                 <h2>Съществуващи площадки: </h2>
-                <div className="table-container">
                     <table>
                         <tr>
                             <th>Име</th>
@@ -138,7 +192,7 @@ export const ProfilePage = () => {
                             <th></th>
                         </tr>
                     {existingPlaygrounds && existingPlaygrounds.map((playground) => (
-                        <tr>
+                        <tr key={playground.id}>
                             <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
                             <td>{ageGroups[playground.age_group]}</td>
                             <td>{playground.environment}</td>
@@ -155,7 +209,6 @@ export const ProfilePage = () => {
                         </tr>
                     ))}
                     </table>
-                </div>
             </div>
         );
     }
@@ -163,13 +216,49 @@ export const ProfilePage = () => {
         return( 
             <div className="page">
                 <h2>Моите Площадки: </h2>
-                {myPlaygrounds && myPlaygrounds.map((playground) => {
-                    
-                })}
+                    <table>
+                        <tr>
+                            <th>Име</th>
+                            <th>Възрастова група</th>
+                            <th>Местоположение</th>
+                            <th>Сенчести зони</th>
+                            <th>Транспорт</th>
+                            <th>Оградена</th>
+                            <th>Настилка</th>
+                            <th>Катерушки</th>
+                            <th>Други съоръжения</th>
+                            <th>Координати</th>
+                        </tr>
+                    {myPlaygrounds && myPlaygrounds.map((playground) => (
+                        <tr key={playground.id}>
+                            <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
+                            <td>{ageGroups[playground.age_group]}</td>
+                            <td>{playground.environment}</td>
+                            <td>{shades[playground.shade_type]}</td>
+                            <td>{playground.transport.join(', ')}</td>
+                            <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
+                            <td>{playground.floor_type.join(', ')}</td>
+                            <td>{playground.toys.join(', ')}</td>
+                            <td>{playground.facilities.join(', ')}</td>
+                            <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                        </tr>
+                    ))}
+                    </table>
                 <h2>Моите Коментари: </h2>
-                {/* {myComments && myComments.map((comment) => {
-                    
-                })} */}
+                    <table>
+                        <tr>
+                            <th>Текст</th>
+                            <th>Рейтинг</th>
+                            <th>Създаден на</th>
+                        </tr>
+                {myComments && myComments.map((comment) => (
+                    <tr>
+                        <td onClick={() => {navigate(`/playground/${comment.playground_id}`)}} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
+                        <td>{comment.rating}</td>
+                        <td>{formatDate(comment.createdAt)}</td>
+                    </tr>
+                ))}
+                </table>
             </div>
         );
     }

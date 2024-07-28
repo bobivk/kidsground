@@ -43,6 +43,16 @@ export const InfoCard = (props) => {
         <div id="info-card">
                     <div className="playground-text">
                         <h1>{props.name}</h1>
+                        <p>{props.rating ? Math.round(props.rating * 100) / 100 : 0} <svg
+                className="star"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                width="25"
+                height="25"
+                style={{
+                  color: '#ffc107',
+                }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
                         <div>{props.description}</div>
                         <div id="age" className="card">
                             <span><ChildIcon className="icon"/>Деца между {ageGroups[props.ageGroup]} години.</span>
@@ -51,7 +61,7 @@ export const InfoCard = (props) => {
                             <span><ParkIcon className="icon"/>{props.environment}</span>
                         </div>
                         <div id="playgroundLocation" className="card">
-                            <span><FloorTypeIcon className="icon"/>{props.floorType.join(", ")}</span>
+                            <span><FloorTypeIcon className="icon"/>{Array.isArray(props.floorType) ? props.floorType.join(", ") : props.floorType }</span>
                         </div>
                         <div id="shade" className="card">
                             <span><TreeIcon className="icon"/>{shades[props.shadeType]}</span>
@@ -63,13 +73,13 @@ export const InfoCard = (props) => {
                                     return(<span className="card"><ParkingIcon className="icon"/>{transportType}</span>);
                                 }
                                 if(transportType === "Велоалея") {
-                                    return(<span className="card"><BikeIcon className="icon"/>{transportType}</span>);
+                                    return(<span className="card"><BikeIcon className="icon transportIcon"/>{transportType}</span>);
                                 }
                                 if(transportType === "Градски транспорт") {
-                                    return(<span className="card"><BusIcon className="icon"/>{transportType}</span>);
+                                    return(<span className="card"><BusIcon className="icon transportIcon"/>{transportType}</span>);
                                 }
                                 if(transportType === "Пешеходен") {
-                                    return(<span className="card"><WalkingPersonIcon className="icon"/>{transportType}</span>);
+                                    return(<span className="card"><WalkingPersonIcon className="icon transportIcon"/>{transportType}</span>);
                                 }
                             })}
                         </div>

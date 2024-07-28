@@ -173,7 +173,33 @@ button {
     font-size: 15px;
 }
 
+#commentButton:disabled {
+    cursor: not-allowed;
+    background-color: #cdeaeeb6;
+}
+
 .icon {
     margin-right: 1vw;
 }
 
+.transportIcon {
+    margin-left: 1vw;
+}
+
+.name-rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rating {
+    margin-right: 30px;
+}
+
+@media only screen and (max-width: 912px) {
+    #commentSection {
+        width: 100vw;
+    }
+    #commentField {
+        width: 50%;
+    }
+}

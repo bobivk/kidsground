@@ -1,10 +1,12 @@
 import '../../static/stylesheets/navbar.css'
 import '../../static/stylesheets/styles.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { HashLink } from 'react-router-hash-link';
 import Cookies from 'js-cookie'
 
 export const Navbar = () => {
+
+    const navigate = useNavigate();
 
     if(Cookies.get("user")) {
         return (

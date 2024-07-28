@@ -31,7 +31,7 @@ export const PlaygroundPage = () => {
             }
         });
 
-        await fetch(`https://kidsground.bg:8009/v1/comments`).then(response => response.json()).then((data) => {
+        await fetch(`https://kidsground.bg:8009/v1/comments/playground/${id}`).then(response => response.json()).then((data) => {
             setComments(data);
         })
         
@@ -49,6 +49,7 @@ export const PlaygroundPage = () => {
     }
 
     const handleRatingChange = (stars) => {
+        console.log(stars);
         setRating(stars)
     }
 
@@ -61,10 +62,12 @@ export const PlaygroundPage = () => {
         await fetch (`https://kidsground.bg:8009/v1/comments/add`, {
             method:'POST',
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get("user")}`
             },
-            body: {comment, rating}
+            body: JSON.stringify({text: comment, rating, playground_id: id})
         })
+        window.location.reload();
     }
 
     const sendImages = async () => {
@@ -103,23 +106,35 @@ export const PlaygroundPage = () => {
 
             <div className="playground-content">
                 <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent}/>
-                <InfoCard description={playgroundInfo.description} floorType = {playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
+                <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType = {playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
                 <div id="map" style={{marginBottom: "20px"}}>
                         <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
                 </div>
                 <div id="commentSectionWrapper">
                     <div id="commentSection">
                         <h1>Коментари</h1>
-                        {/* {comments && comments.map((comment) => {
+                        {comments && comments.map((comment) => (
                             <div className="comment">
-                            <p>danny</p>
-                            <p className="commentContent">Страхотна площадка всеки ден водя приятелката ми, която е на 6 да си играе тук, Даниел - 24г.</p>
+                                <div className='name-rating'>
+                                    <p>{comment.username}</p>
+                                    <p className="rating">{comment.rating} <svg
+                className="star"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                width="25"
+                height="25"
+                style={{
+                  color: '#ffc107',
+                }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
+                                </div>
+                            {comment.text !== null && <p className="commentContent">{comment.text}</p>}
                             </div>
-                        })} */}
+                        ))}
                         <label id="commentFieldLabel" for="comment">Оставете Рейтинг и Коментар: </label>
                         <Rating changeRating={handleRatingChange} />
                         <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment"/>
-                        <button id="commentButton" onClick={handleCommentSubmit} type='submit'>Коментирай</button>
+                        <button id="commentButton" disabled={rating===0} onClick={handleCommentSubmit} type='submit'>Коментирай</button>
                     </div>
                 </div>
             </div>
