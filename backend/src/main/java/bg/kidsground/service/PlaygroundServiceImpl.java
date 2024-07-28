@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -33,6 +34,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
         Playground playground = this.playgroundMapper.toEntity(playgroundDto);
         playground.setNew(true);
         playground.setCreatedByUser(this.userService.findUserByToken(authToken));
+        playground.setCreatedAt(new Date());
         return this.playgroundRepository.save(playground).getId();
     }
 

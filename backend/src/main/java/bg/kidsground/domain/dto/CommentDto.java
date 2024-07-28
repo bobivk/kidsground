@@ -12,6 +12,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class CommentDto {
 
+    @JsonProperty("id")
+    private Long id;
+
     @JsonProperty("text")
     private String text;
 
