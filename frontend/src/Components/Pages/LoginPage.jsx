@@ -18,6 +18,7 @@ export const LoginPage = () => {
     const [check2, setCheck2] = useState("#555");
     const [check3, setCheck3] = useState("#555");
     const [check4, setCheck4] = useState("#555");
+    const [wrong, setWrong] = useState(false)
 
         const signUp = async (event) => {
         if (switcher) {
@@ -83,11 +84,7 @@ export const LoginPage = () => {
             })
             .then(response => {
                 if (response.status === 404) {
-                    document.getElementById("wrong-credentials-msg").style.display = "block";
-                    document.getElementById("wrong-credentials-msg").style.backgroundColor = "#555";
-                    document.getElementById("wrong-credentials-msg").style.borderRadius = "15px";
-                    document.getElementById("wrong-credentials-msg").style.maxWidth = "50%";
-                    document.getElementById("wrong-credentials-msg").style.padding = "15px";
+                    setWrong(true)
                     //грешен email или парола.
                 } else if(response.status === 200) {
                     return response.json()
@@ -220,13 +217,14 @@ export const LoginPage = () => {
                                 <input type="password" id="password" name="password" placeholder="Парола" onChange={checkPassword}/>
                                 <div className="error" id="password-length-error"></div>
                             </div>
+                            {wrong && <h4 className="wrong-credentials" id="wrong-credentials-msg">Грешно потребителско име, имейл или парола.</h4>}
                         </div>
     
                         <div className="btn-field">
                             <button type="button" className="disable" id="signUpBtn" onClick={signUp}>Регистрирай ме</button>
                             <button type="button" id="signInBtn" onClick={signIn}>Вход</button>
                         </div>
-                        <h4 className="wrong-credentials" id="wrong-credentials-msg">Грешно потребителско име, имейл или парола.</h4>
+
                         <div className="registration-success" id="registration-success">
                             <h4>Успешна регистрация!</h4>
                             <h4>Моля, влезте в профила си.</h4>

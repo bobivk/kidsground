@@ -134,7 +134,9 @@ button:hover {
 }
 
 #wrong-credentials-msg {
-    display: none;
+    background-color: #1D2231;
+    padding: 12px;
+    border-radius: 12px;
     color: #CDEAEE;
 }
 
