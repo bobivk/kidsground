@@ -13,6 +13,7 @@ public class AppRestEndpoints {
 
             public class By {
                 public static final String ID = PLAYGROUND_ROOT + "/{id}";
+                public static final String USER = PLAYGROUND_ROOT + "/byUser";
 
                 public class Id {
                     public static final String UPLOAD_IMAGES = ID + "/uploadImages";
@@ -30,7 +31,11 @@ public class AppRestEndpoints {
         public class Comments {
             public static final String COMMENTS_ROOT = V1_ROOT + "/comments";
             public static final String ADD = COMMENTS_ROOT + "/add";
-            public static final String BY_ID = COMMENTS_ROOT + "/{id}";
+            public class By {
+                public static final String ID = COMMENTS_ROOT + "/{id}";
+                public static final String USER = COMMENTS_ROOT + "/byUser";
+                public static final String PLAYGROUND = COMMENTS_ROOT + "/playground/{playground_id}";
+            }
         }
     }
 

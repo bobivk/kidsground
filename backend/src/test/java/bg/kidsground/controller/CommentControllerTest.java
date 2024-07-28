@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -63,13 +64,34 @@ public class CommentControllerTest {
 
         when(commentService.getByAuthToken("Bearer <Test Token>")).thenReturn(comments);
 
-        mockMvc.perform(get(AppRestEndpoints.V1.Comments.COMMENTS_ROOT)
-                    .header("Authorization", "Bearer <Test Token>"))
+        mockMvc.perform(get(AppRestEndpoints.V1.Comments.By.USER)
+                    .header(HttpHeaders.AUTHORIZATION, "Bearer <Test Token>"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].text").value("Sample Comment"))
                 .andExpect(jsonPath("$[0].rating").value(3.5))
                 .andExpect(jsonPath("$[0].username").value("Sample Username"));
     }
+
+    @Test
+    public void testGetCommentsByPlaygroundId() throws Exception {
+        Long playgroundId = 1L;
+        CommentDto commentDto = CommentDto.builder()
+                .text("Great playground")
+                .rating(5.0)
+                .createdAt(new Date())
+                .build();
+
+        List<CommentDto> commentDtos = List.of(commentDto);
+
+        when(commentService.getByPlaygroundId(playgroundId)).thenReturn(commentDtos);
+
+        mockMvc.perform(get(AppRestEndpoints.V1.Comments.By.PLAYGROUND, playgroundId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].text").value("Great playground"))
+                .andExpect(jsonPath("$[0].rating").value(5.0))
+                .andExpect(jsonPath("$[0].createdAt").exists());
+    }
+
 
     @Test
     public void testGetComment() throws Exception {
@@ -82,7 +104,7 @@ public class CommentControllerTest {
 
         when(commentService.getById(1L)).thenReturn(commentDto);
 
-        mockMvc.perform(get(AppRestEndpoints.V1.Comments.BY_ID, 1L))
+        mockMvc.perform(get(AppRestEndpoints.V1.Comments.By.ID, 1L))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.text").value("Sample Comment"))
                 .andExpect(jsonPath("$.rating").value(3.5))
@@ -91,7 +113,7 @@ public class CommentControllerTest {
 
     @Test
     public void testDeleteComment() throws Exception {
-        mockMvc.perform(delete(AppRestEndpoints.V1.Comments.BY_ID, 1L))
+        mockMvc.perform(delete(AppRestEndpoints.V1.Comments.By.ID, 1L))
                 .andExpect(status().isNoContent());
     }
 
@@ -99,7 +121,7 @@ public class CommentControllerTest {
     public void testDeleteCommentNotFound() throws Exception {
         doThrow(new RuntimeException()).when(commentService).deleteById(anyLong());
 
-        mockMvc.perform(delete(AppRestEndpoints.V1.Comments.BY_ID, 1L))
+        mockMvc.perform(delete(AppRestEndpoints.V1.Comments.By.ID, 1L))
                 .andExpect(status().isNotFound());
     }
 }

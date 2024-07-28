@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -53,6 +54,9 @@ public class PlaygroundDto {
     @JsonProperty("coordinates")
     private Coordinates coordinates;
 
+    @JsonProperty("is_new")
+    private boolean isNew;
+
     @JsonProperty("rating")
     private Double rating;
 
@@ -61,4 +65,7 @@ public class PlaygroundDto {
 
     @JsonProperty("username")
     private String username;
+
+    @JsonProperty("createdAt")
+    private Date createdAt;
 }

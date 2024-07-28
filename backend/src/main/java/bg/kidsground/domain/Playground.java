@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -78,5 +79,8 @@ public class Playground {
 
     @OneToMany(mappedBy = "playground", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
+
+    @JsonProperty("createdAt")
+    private Date createdAt;
 
 }

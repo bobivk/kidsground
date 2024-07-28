@@ -17,5 +17,6 @@ public interface PlaygroundService {
     PlaygroundDto updatePlayground(Long id, PlaygroundDto playground);
     PlaygroundDto uploadImages(List<MultipartFile> file, Long id);
     PlaygroundDto approve(Long id, Boolean isApproved);
+    List<PlaygroundDto> getByAuthToken(String authToken);
     void deleteById(Long id);
 }

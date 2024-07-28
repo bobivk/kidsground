@@ -1,6 +1,7 @@
 package bg.kidsground.repository;
 
 import bg.kidsground.domain.Playground;
+import bg.kidsground.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface PlaygroundRepository extends JpaRepository<Playground, Long> {
     List<Playground> findByIsNewFalse();
 
     List<Playground> findByIsNewTrue();
+
+    List<Playground> findByCreatedByUser(User user);
 }

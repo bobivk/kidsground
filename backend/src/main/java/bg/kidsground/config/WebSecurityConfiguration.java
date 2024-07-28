@@ -26,24 +26,33 @@ public class WebSecurityConfiguration
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
-//                        // Allow non-logged-in
-//                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER, AppRestEndpoints.V1.Users.LOGIN,
-//                                AppRestEndpoints.V1.Playground.COUNT, AppRestEndpoints.V1.Playground.GET_ALL).permitAll()
-//                        .requestMatchers(HttpMethod.GET, AppRestEndpoints.V1.Playground.By.ID).permitAll()
-//
-//                        // restrict to admin only
-//                        .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Playground.By.ID).hasRole(UserRole.ADMIN.getValue())
-//                        .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Comments.BY_ID).hasRole(UserRole.ADMIN.getValue())
-//                        .requestMatchers(AppRestEndpoints.V1.Playground.TO_APPROVE,
-//                                        AppRestEndpoints.V1.Playground.By.Id.APPROVE).hasRole(UserRole.ADMIN.getValue())
-//
-//                        // require user to be logged in
-//                        .requestMatchers(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND,
-//                                        AppRestEndpoints.V1.Playground.By.Id.UPLOAD_IMAGES,
-//                                        AppRestEndpoints.V1.Comments.ADD,
-//                                        AppRestEndpoints.V1.Comments.COMMENTS_ROOT
-//                            ).authenticated()
-                        .anyRequest().permitAll()
+                        // Allow when not logged in
+                        .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
+                                        AppRestEndpoints.V1.Users.LOGIN,
+                                        AppRestEndpoints.V1.Playground.COUNT,
+                                        AppRestEndpoints.V1.Playground.GET_ALL)
+                                    .permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                        AppRestEndpoints.V1.Playground.By.ID,
+                                        AppRestEndpoints.V1.Comments.By.ID,
+                                        AppRestEndpoints.V1.Comments.By.PLAYGROUND)
+                                    .permitAll()
+
+                        // restrict to admin only
+                        .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Playground.By.ID).hasRole(UserRole.ADMIN.getValue())
+                        .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Comments.By.ID).hasRole(UserRole.ADMIN.getValue())
+                        .requestMatchers(AppRestEndpoints.V1.Playground.TO_APPROVE,
+                                        AppRestEndpoints.V1.Playground.By.Id.APPROVE)
+                                    .hasRole(UserRole.ADMIN.getValue())
+
+                        // require user to be logged in
+                        .requestMatchers(AppRestEndpoints.V1.Playground.ADD_PLAYGROUND,
+                                        AppRestEndpoints.V1.Playground.By.Id.UPLOAD_IMAGES,
+                                        AppRestEndpoints.V1.Playground.By.USER,
+                                        AppRestEndpoints.V1.Comments.ADD,
+                                        AppRestEndpoints.V1.Comments.COMMENTS_ROOT,
+                                        AppRestEndpoints.V1.Comments.By.USER)
+                                    .authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
                 .logout(LogoutConfigurer::permitAll)
@@ -51,7 +60,7 @@ public class WebSecurityConfiguration
                         .anyRequest().requiresSecure()
                 )
                 .httpBasic(withDefaults());
-        //http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

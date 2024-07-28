@@ -60,6 +60,11 @@ public class PlaygroundController {
         return ResponseEntity.ok(this.playgroundService.getCount());
     }
 
+    @GetMapping(AppRestEndpoints.V1.Playground.By.USER)
+    public ResponseEntity<List<PlaygroundDto>> getPlaygroundsByUserId(final @RequestHeader("Authorization") String authToken) {
+        return ResponseEntity.ok(this.playgroundService.getByAuthToken(authToken));
+    }
+
     @DeleteMapping(path = AppRestEndpoints.V1.Playground.By.ID)
     public ResponseEntity<Void> deleteByID(@PathVariable final Long id) {
         try {

@@ -34,17 +34,22 @@ public class CommentController {
         return ResponseEntity.ok(this.commentService.saveComment(commentDto, authToken));
     }
 
-    @GetMapping(AppRestEndpoints.V1.Comments.COMMENTS_ROOT)
+    @GetMapping(AppRestEndpoints.V1.Comments.By.USER)
     public ResponseEntity<List<CommentDto>> getCommentsByUserId(final @RequestHeader("Authorization") String authToken) {
         return ResponseEntity.ok(this.commentService.getByAuthToken(authToken));
     }
 
-    @GetMapping(AppRestEndpoints.V1.Comments.BY_ID)
+    @GetMapping(AppRestEndpoints.V1.Comments.By.PLAYGROUND)
+    public ResponseEntity<List<CommentDto>> getCommentsByPlaygroundId(final @PathVariable("playground_id") Long playgroundId) {
+        return ResponseEntity.ok(this.commentService.getByPlaygroundId(playgroundId));
+    }
+
+    @GetMapping(AppRestEndpoints.V1.Comments.By.ID)
     public ResponseEntity<CommentDto> getComment(final @PathVariable Long id) {
         return ResponseEntity.ok(this.commentService.getById(id));
     }
 
-    @DeleteMapping(AppRestEndpoints.V1.Comments.BY_ID)
+    @DeleteMapping(AppRestEndpoints.V1.Comments.By.ID)
     public ResponseEntity<Void> deleteComment(final @PathVariable Long id) {
         try {
             this.commentService.deleteById(id);

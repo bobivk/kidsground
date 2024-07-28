@@ -1,6 +1,7 @@
 package bg.kidsground.service;
 
 import bg.kidsground.domain.Playground;
+import bg.kidsground.domain.User;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.domain.mapper.PlaygroundMapper;
 import bg.kidsground.repository.PlaygroundRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -32,6 +34,7 @@ public class PlaygroundServiceImpl implements PlaygroundService {
         Playground playground = this.playgroundMapper.toEntity(playgroundDto);
         playground.setNew(true);
         playground.setCreatedByUser(this.userService.findUserByToken(authToken));
+        playground.setCreatedAt(new Date());
         return this.playgroundRepository.save(playground).getId();
     }
 
@@ -115,6 +118,15 @@ public class PlaygroundServiceImpl implements PlaygroundService {
 
         playgroundRepository.deleteById(id);
         return null;
+    }
+
+    @Override
+    public List<PlaygroundDto> getByAuthToken(String authToken) {
+        User user = this.userService.findUserByToken(authToken);
+        List<Playground> playgrounds = playgroundRepository.findByCreatedByUser(user);
+        return playgrounds.stream()
+                .map(playgroundMapper::toDto)
+                .toList();
     }
 
     @Override

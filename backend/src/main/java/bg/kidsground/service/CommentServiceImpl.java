@@ -8,6 +8,7 @@ import bg.kidsground.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -34,6 +35,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = commentMapper.toEntity(commentDto);
         comment.setPlayground(playgroundService.findById(commentDto.getPlaygroundId()));
         comment.setCreatedByUser(userService.findUserByToken(authHeader));
+        comment.setCreatedAt(new Date());
         comment = commentRepository.save(comment);
         return comment.getId();
     }
@@ -51,6 +53,13 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentRepository.findByCreatedByUser(user);
         return comments.stream()
                 .map(commentMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public List<CommentDto> getByPlaygroundId(Long id) {
+        return this.commentRepository.findByPlaygroundId(id)
+                .stream().map(commentMapper::toDto)
                 .toList();
     }
 

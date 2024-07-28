@@ -209,6 +209,43 @@ public class PlaygroundServiceTest {
     }
 
     @Test
+    public void testGetByAuthToken() {
+        // Prepare test data
+        String authToken = "test-token";
+        User user = new User();
+        user.setUsername("testUser");
+
+        Playground playground = new Playground();
+        playground.setId(1L);
+        playground.setName("Test Playground");
+        playground.setCreatedByUser(user);
+        playground.setFloorType(List.of("rubber"));
+
+        PlaygroundDto playgroundDto = new PlaygroundDto();
+        playgroundDto.setId(1L);
+        playgroundDto.setName("Test Playground");
+        playgroundDto.setFloorType(List.of("rubber"));
+        playgroundDto.setRating(0.0);
+        playgroundDto.setUsername("testUser");
+
+        List<Playground> playgrounds = Collections.singletonList(playground);
+        List<PlaygroundDto> playgroundDtos = Collections.singletonList(playgroundDto);
+
+        // Mock the service and repository calls
+        when(userService.findUserByToken(authToken)).thenReturn(user);
+        when(playgroundRepository.findByCreatedByUser(user)).thenReturn(playgrounds);
+
+        // Call the method under test
+        List<PlaygroundDto> result = playgroundService.getByAuthToken(authToken);
+
+        // Verify the results
+        assertEquals(playgroundDtos, result);
+        verify(userService).findUserByToken(authToken);
+        verify(playgroundRepository).findByCreatedByUser(user);
+    }
+
+
+    @Test
     public void testUpdatePlayground_NotFound() {
         // Given
         Long id = 1L;
