@@ -94,6 +94,7 @@ export const LoginPage = () => {
                 }
             }).then((data) => {
                 if(data) {
+                    Cookies.set("username", username, {expires: 3, secure:true})
                     Cookies.set("user", data.token, {expires: 3, secure:true})
                     Cookies.set("role", data.role, {expires: 3, secure:true})
                     navigate("/");

@@ -97,47 +97,51 @@ export const PlaygroundPage = () => {
         setConfirmation(false)
         setPhotos([])
     }
-
-    return(
-        <div className="page">
-            <div className="picture-slider">
-                {imagesForGallery && <ImageGallery items={imagesForGallery}/>}
-            </div>
-
-            <div className="playground-content">
-                <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent}/>
-                <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType = {playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
-                <div id="map" style={{marginBottom: "20px"}}>
-                        <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
+    if(playgroundInfo.is_new && (Cookies.get("username") !== playgroundInfo.username || Cookies.get("role") !== "admin")) {
+        return (<div className="page"><p>Тази площадка все още очаква одобрение</p></div>)
+    } else {
+        return(
+            <div className="page">
+                <div className="picture-slider">
+                    {imagesForGallery && <ImageGallery items={imagesForGallery}/>}
                 </div>
-                <div id="commentSectionWrapper">
-                    <div id="commentSection">
-                        <h1>Коментари</h1>
-                        {comments && comments.map((comment) => (
-                            <div className="comment">
-                                <div className='name-rating'>
-                                    <p>{comment.username}</p>
-                                    <p className="rating">{comment.rating} <svg
-                className="star"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                width="25"
-                height="25"
-                style={{
-                  color: '#ffc107',
-                }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
+    
+                <div className="playground-content">
+                    <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent}/>
+                    <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType = {playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
+                    <div id="map" style={{marginBottom: "20px"}}>
+                            <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
+                    </div>
+                    <div id="commentSectionWrapper">
+                        <div id="commentSection">
+                            <h1>Коментари</h1>
+                            {comments && comments.map((comment) => (
+                                <div className="comment">
+                                    <div className='name-rating'>
+                                        <p>{comment.username}</p>
+                                        <p className="rating">{comment.rating} <svg
+                    className="star"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    width="25"
+                    height="25"
+                    style={{
+                      color: '#ffc107',
+                    }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
+                                    </div>
+                                {comment.text !== null && <p className="commentContent">{comment.text}</p>}
                                 </div>
-                            {comment.text !== null && <p className="commentContent">{comment.text}</p>}
-                            </div>
-                        ))}
-                        <label id="commentFieldLabel" for="comment">Оставете Рейтинг и Коментар: </label>
-                        <Rating changeRating={handleRatingChange} />
-                        <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment"/>
-                        <button id="commentButton" disabled={rating===0} onClick={handleCommentSubmit} type='submit'>Коментирай</button>
+                            ))}
+                            <label id="commentFieldLabel" for="comment">Оставете Рейтинг и Коментар: </label>
+                            <Rating changeRating={handleRatingChange} />
+                            <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment"/>
+                            <button id="commentButton" disabled={rating===0} onClick={handleCommentSubmit} type='submit'>Коментирай</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
+    
 }
