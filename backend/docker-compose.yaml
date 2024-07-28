@@ -6,6 +6,3 @@ services:
     build:
       context: .
     container_name: app
-
-    ports:
-      - "8090"
