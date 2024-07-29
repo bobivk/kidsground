@@ -3,6 +3,7 @@ package bg.kidsground.service;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.LoginDto;
+import bg.kidsground.domain.dto.RegisterDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
 import com.auth0.jwt.JWT;
@@ -10,14 +11,13 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -59,13 +59,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto save(LoginDto loginDto) {
-        if (userRepository.existsByEmail(loginDto.getEmail())) {
+    public UserDto save(RegisterDto registerDto) {
+        if (userRepository.existsByEmail(registerDto.getEmail())) {
             throw new EntityExistsException("A user with that email already exists.");
         }
-        User user = new User(loginDto.getUsername(),
-                            passwordEncoder.encode(loginDto.getPassword()),
-                            loginDto.getEmail(),
+        User user = new User(registerDto.getUsername(),
+                            passwordEncoder.encode(registerDto.getPassword()),
+                            registerDto.getEmail(),
                             UserRole.USER);
 
         userRepository.save(user);
@@ -75,13 +75,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto login(LoginDto loginDto) throws UsernameNotFoundException {
         User user;
-        if (loginDto.getUsername() == null) {
-            user = userRepository.findByEmail(loginDto.getEmail())
-                    .orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
-        } else {
-            user = userRepository.findByUsername(loginDto.getUsername())
-                    .orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
+        Optional<User> userOptional = userRepository.findByEmail(loginDto.getUsernameOrEmail());
+        if (userOptional.isEmpty()) {
+            userOptional = userRepository.findByUsername(loginDto.getUsernameOrEmail());
         }
+        user = userOptional.orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             throw new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE);
         }

@@ -3,6 +3,7 @@ package bg.kidsground.service;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.LoginDto;
+import bg.kidsground.domain.dto.RegisterDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
 import jakarta.persistence.EntityExistsException;
@@ -82,13 +83,17 @@ public class UserServiceTest {
     @Test
 
     public void save_UserSaved() {
-        LoginDto loginDto = new LoginDto("testuser", "password", "test@example.com");
+        RegisterDto registerDto = RegisterDto.builder()
+                .username("testuser")
+                .email("test@example.com")
+                .password("password")
+                .build();
 
         when(passwordEncoder.encode(any(String.class))).thenReturn("encodedPassword");
         when(userRepository.save(any(User.class))).thenReturn(user);
         when(userRepository.existsByEmail(anyString())).thenReturn(false);
 
-        UserDto userDto = userService.save(loginDto);
+        UserDto userDto = userService.save(registerDto);
 
         assertEquals("testuser", userDto.getUsername());
         assertEquals("test@example.com", userDto.getEmail());
@@ -97,18 +102,24 @@ public class UserServiceTest {
 
     @Test
     public void save_alreadyExists() {
-        LoginDto loginDto = new LoginDto("testuser", "password", "test@example.com");
+        RegisterDto registerDto = RegisterDto.builder()
+                .username("testuser")
+                .email("test@example.com")
+                .password("password")
+                .build();
 
         when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
-        assertThrows(EntityExistsException.class, () -> userService.save(loginDto));
+        assertThrows(EntityExistsException.class, () -> userService.save(registerDto));
     }
 
     @Test
     public void login_UserFound() {
-        LoginDto loginDto = new LoginDto("testuser", "password", null);
-
+        LoginDto loginDto = LoginDto.builder()
+                .usernameOrEmail("testuser")
+                .password("password")
+                .build();
 
         when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(any(String.class), any(String.class))).thenReturn(true);
@@ -122,8 +133,10 @@ public class UserServiceTest {
 
     @Test
     public void login_UserFoundByEmail() {
-        LoginDto loginDto = new LoginDto(null, "password", "test@example.com");
-
+        LoginDto loginDto = LoginDto.builder()
+                .usernameOrEmail("test@example.com")
+                .password("password")
+                .build();
 
         when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(any(String.class), any(String.class))).thenReturn(true);
@@ -137,9 +150,10 @@ public class UserServiceTest {
 
     @Test
     public void login_UserNotFound() {
-        LoginDto loginDto = new LoginDto("testuser", "password", null);
-        loginDto.setUsername("testuser");
-        loginDto.setPassword("password");
+        LoginDto loginDto = LoginDto.builder()
+                .usernameOrEmail("testuser")
+                .password("password")
+                .build();
 
         when(userRepository.findByUsername("testuser")).thenReturn(Optional.empty());
 
@@ -150,7 +164,10 @@ public class UserServiceTest {
 
     @Test
     public void login_IncorrectPassword() {
-        LoginDto loginDto = new LoginDto("testuser", "wrongpassword", null);
+        LoginDto loginDto = LoginDto.builder()
+                .usernameOrEmail("testuser")
+                .password("wrongpassword")
+                .build();
 
         when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches(any(String.class), any(String.class))).thenReturn(false);
