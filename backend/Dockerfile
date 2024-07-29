@@ -9,6 +9,8 @@ EXPOSE 8009
 # Copy the JAR file from the build context into the Docker image
 COPY ${JAR_FILE} application.jar
 
+COPY src/main/resources/keystore.p12 keystore.p12
+
 CMD apt-get update -y
 
 # Set the default command to run the Java application
