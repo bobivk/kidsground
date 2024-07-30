@@ -197,10 +197,6 @@ export const LoginPage = () => {
         setUsername(event.target.value);
     }
 
-    // function logout() {
-    //     location = "http://localhost/kidsground/frontend/html/register.html";
-    // }
-
     if(switcher) {
         return(
             <div className="register-container page">
@@ -214,7 +210,7 @@ export const LoginPage = () => {
                             </div>
                             <div className="input-field">
                                 <i className="fa-solid fa-lock"></i>
-                                <input type="password" id="password" name="password" placeholder="Парола" onChange={checkPassword}/>
+                                <input type="password" id="password" name="password" placeholder="Парола" value={password} onChange={checkPassword}/>
                                 <div className="error" id="password-length-error"></div>
                             </div>
                             {wrong && <h4 className="wrong-credentials" id="wrong-credentials-msg">Грешно потребителско име, имейл или парола.</h4>}
@@ -252,7 +248,7 @@ export const LoginPage = () => {
     
                             <div className="input-field">
                                 <i className="fa-solid fa-lock"></i>
-                                <input type="password" id="password" name="password" placeholder="Парола" onChange={checkPassword}/>
+                                <input type="password" id="password" name="password" value={password} placeholder="Парола" onChange={checkPassword}/>
                                 <div className="error" id="password-length-error"></div>
                             </div>
                                 

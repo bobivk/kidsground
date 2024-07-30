@@ -48,21 +48,30 @@ export const ProfilePage = () => {
 
     const approvePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=true`, {
-            method: "POST"
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            }
         })
         window.location.reload();
     }
 
     const disapprovePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=false`, {
-            method: "POST"
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            }
         })
         window.location.reload();
     }
 
     const deletePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            }
         })
     }
 

@@ -41,3 +41,7 @@ table tr:last-child td:last-child {
     cursor: pointer;
     color: #62BEC9
 }
+
+button {
+    cursor: pointer;
+}

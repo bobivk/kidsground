@@ -131,6 +131,7 @@ button:hover {
 #registration-success {
     display:none;
     color:#CDEAEE;
+    background-color: #1D2231;
 }
 
 #wrong-credentials-msg {
