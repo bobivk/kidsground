@@ -37,7 +37,7 @@ public class EmailServiceImpl implements EmailService {
         SendEmailRequest request = SendEmailRequest.builder()
                 .destination(destination)
                 .message(message)
-                .source("registration@kidsground.bg")
+                .source("kidsground.dev@gmail.com")
                 .build();
 
         sesClient.sendEmail(request);

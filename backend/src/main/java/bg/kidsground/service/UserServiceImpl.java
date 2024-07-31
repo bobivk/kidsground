@@ -10,6 +10,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +26,7 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     public static final String INCORRECT_CREDENTIALS_MESSAGE = "Incorrect credentials";
     private final UserRepository userRepository;
@@ -102,6 +104,7 @@ public class UserServiceImpl implements UserService {
             bodyHtml = StreamUtils.copyToString(new ClassPathResource("registration_success_email.html")
                         .getInputStream(), Charset.defaultCharset());
         } catch (IOException e) {
+            log.error("Could not read registration resource");
             throw new RuntimeException(e);
         }
 
