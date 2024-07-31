@@ -1,11 +1,13 @@
 package bg.kidsground.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.services.ses.SesClient;
 import software.amazon.awssdk.services.ses.model.*;
 
 @Service
+@Slf4j
 public class EmailServiceImpl implements EmailService {
 
     @Autowired
@@ -40,6 +42,10 @@ public class EmailServiceImpl implements EmailService {
                 .source("kidsground.dev@gmail.com")
                 .build();
 
-        sesClient.sendEmail(request);
+        try {
+            sesClient.sendEmail(request);
+        } catch (Exception e) {
+            log.error("Could not send email. Exception is", e);
+        }
     }
 }
