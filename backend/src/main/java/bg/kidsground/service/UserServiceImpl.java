@@ -10,15 +10,18 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
 import java.util.Optional;
 
@@ -94,11 +97,19 @@ public class UserServiceImpl implements UserService {
 
     private void sendRegistrationEmail(User user) {
         try {
-            String bodyHtml = new String(Files.readAllBytes(Paths.get("registration_success_email.html")));
+            String bodyHtml = readFileToString("classpath:registration_success_email.html");
             String title = "Успешна регистрация в kidsground.bg!";
             this.emailService.sendEmail(title, user.getEmail(), bodyHtml);
         } catch (IOException e) {
             System.err.println("Failed to read HTML file: " + e.getMessage());
         }
+    }
+
+    public static String readFileToString(String path) throws IOException {
+        ResourceLoader resourceLoader = new DefaultResourceLoader();
+        Resource resource = resourceLoader.getResource(path);
+
+        // Use Apache Commons IO to read the content into a string
+        return IOUtils.toString(resource.getInputStream(), StandardCharsets.UTF_8);
     }
 }
