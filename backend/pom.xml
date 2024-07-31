@@ -117,6 +117,12 @@
 			<artifactId>s3</artifactId>
 			<version>${aws.java.sdk.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>ses</artifactId>
+			<version>${aws.java.sdk.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>

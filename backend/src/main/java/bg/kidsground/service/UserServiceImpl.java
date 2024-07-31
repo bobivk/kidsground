@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import java.util.Optional;
 
@@ -24,11 +27,13 @@ public class UserServiceImpl implements UserService {
     public static final String INCORRECT_CREDENTIALS_MESSAGE = "Incorrect credentials";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
         super();
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     @Override
@@ -69,6 +74,7 @@ public class UserServiceImpl implements UserService {
                             UserRole.USER);
 
         userRepository.save(user);
+        sendRegistrationEmail(user);
         return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
     }
 
@@ -84,5 +90,15 @@ public class UserServiceImpl implements UserService {
             throw new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE);
         }
         return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
+    }
+
+    private void sendRegistrationEmail(User user) {
+        try {
+            String bodyHtml = new String(Files.readAllBytes(Paths.get("registration_success_email.html")));
+            String title = "Успешна регистрация в kidsground.bg!";
+            this.emailService.sendEmail(title, user.getEmail(), bodyHtml);
+        } catch (IOException e) {
+            System.err.println("Failed to read HTML file: " + e.getMessage());
+        }
     }
 }
