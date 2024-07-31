@@ -210,7 +210,7 @@ export const LoginPage = () => {
                             </div>
                             <div className="input-field">
                                 <i className="fa-solid fa-lock"></i>
-                                <input type="password" id="password" name="password" placeholder="Парола" value={password} onChange={checkPassword}/>
+                                <input type="password" id="password" name="password" autoComplete="new-password" placeholder="Парола" value={password} onChange={checkPassword}/>
                                 <div className="error" id="password-length-error"></div>
                             </div>
                             {wrong && <h4 className="wrong-credentials" id="wrong-credentials-msg">Грешно потребителско име, имейл или парола.</h4>}
