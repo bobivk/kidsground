@@ -23,8 +23,10 @@ public class KidsgroundApplication {
         SpringApplication.run(KidsgroundApplication.class, args);
     }
     @Bean
-    CommandLineRunner runner(UserRepository userRepository) {
+    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository, CommentRepository commentRepository) {
         return args -> {
+            playgroundRepository.deleteAll();
+            commentRepository.deleteAll();
             userRepository.deleteAll();
         };
     }
