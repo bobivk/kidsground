@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException(e);
         }
 
-        String title = "Успешна регистрация в kidsground.bg!";
-        this.emailService.sendEmail(title, user.getEmail(), bodyHtml);
+        String subject = "Успешна регистрация в kidsground.bg!";
+        this.emailService.sendEmail(user.getEmail(), subject, bodyHtml);
     }
 }

@@ -22,4 +22,10 @@ public class KidsgroundApplication {
     public static void main(String[] args) {
         SpringApplication.run(KidsgroundApplication.class, args);
     }
+    @Bean
+    CommandLineRunner runner(UserRepository userRepository) {
+        return args -> {
+            userRepository.deleteAll();
+        };
+    }
 }
