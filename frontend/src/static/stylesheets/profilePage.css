@@ -45,3 +45,13 @@ table tr:last-child td:last-child {
 button {
     cursor: pointer;
 }
+
+.tinyButton {
+    border: 1px solid #75a2a8;
+    border-radius: 12px;
+    margin: 5px;
+}
+
+.tinyButton:hover {
+    border-radius: 12px;
+}

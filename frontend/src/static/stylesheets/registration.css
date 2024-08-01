@@ -208,7 +208,8 @@ button:hover {
 @media only screen and (max-width: 380px) {
 
     .register-container {
-        background-position: 0 40vh; 
+        height: 80vh;
+        background-position: 0 45vh; 
     }
 
     .btn-field button{

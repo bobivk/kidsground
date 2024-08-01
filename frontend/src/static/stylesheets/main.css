@@ -235,6 +235,12 @@
     }
   }
   
+
+  @media only screen and (max-height: 800px) {
+    .background-img {
+        margin-top: -18vh;
+    }
+  }
   
   @media only screen and (max-height: 960px) {
     .background-img {
@@ -255,12 +261,6 @@
     }
   }
   
-  @media only screen and (max-height: 800px) {
-    .background-img {
-        margin-top: -18vh;
-    }
-  }
-
   @media only screen and (max-width: 960px) {
     .left-inner-column,
     .middle-inner-column, 

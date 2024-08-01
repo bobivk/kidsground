@@ -135,8 +135,8 @@ export const ProfilePage = () => {
                             <td>{playground.facilities.join(', ')}</td>
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
                             <td>
-                                <button onClick={() => {approvePlayground(playground.id)}}>✓</button>
-                                <button onClick={() => {disapprovePlayground(playground.id)}}>✗</button>
+                                <button className="tinyButton" onClick={() => {approvePlayground(playground.id)}}>✓</button>
+                                <button className="tinyButton" onClick={() => {disapprovePlayground(playground.id)}}>✗</button>
                             </td>
                         </tr>
                     ))}
@@ -213,7 +213,7 @@ export const ProfilePage = () => {
                             <td>{playground.facilities.join(', ')}</td>
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
                             <td>
-                                <button onClick={() => {deletePlayground(playground.id)}}>✗</button>
+                                <button className="tinyButton" onClick={() => {deletePlayground(playground.id)}}>✗</button>
                             </td>
                         </tr>
                     ))}
