@@ -166,6 +166,21 @@
     /* white-space: nowrap; Prevents text from wrapping */
   }
 
+  .social-icons {
+    text-align: center;
+    margin-top: -40px;
+    margin-bottom: 20px;
+}
+.social-icons a {
+    margin: 0 10px;
+    text-decoration: none;
+}
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
   
   @media only screen and (max-width: 1280px) {
     .text-with-counter {
