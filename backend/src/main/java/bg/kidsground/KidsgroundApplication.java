@@ -24,13 +24,13 @@ public class KidsgroundApplication {
         SpringApplication.run(KidsgroundApplication.class, args);
     }
     @Bean
-    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository, CommentRepository commentRepository) {
+    CommandLineRunner runner(PlaygroundRepository playgroundRepository, UserRepository userRepository, CommentRepository commentRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 //            playgroundRepository.deleteAll();
 //            commentRepository.deleteAll();
 //            userRepository.deleteAll();
             User admin = User.builder().username("admin")
-                    .password("admin")
+                    .password(passwordEncoder.encode("admin"))
                     .email("admin@gmail.com")
                     .role(UserRole.ADMIN)
                     .build();
