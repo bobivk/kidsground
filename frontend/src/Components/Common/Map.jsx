@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 import '../../static/stylesheets/map.css';
 import { ReactComponent as Terrain } from "../../static/icons/layers_8.svg";
 import { ReactComponent as Location } from "../../static/icons/location.svg";
+import { ReactComponent as Legend } from "../../static/icons/legend.svg";
 
 const libraries = ['places'];
 
-const plovdiv = { lat: 42.1354, lng: 24.7453 };
 
 export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
     const [marker, setMarker] = useState(null);
@@ -20,6 +20,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
     const [directionsResponse, setDirectionsResponse] = useState(null);
     const [requestDirections, setRequestDirections] = useState(true);
     const [zoomLevel, setZoomLevel] = useState(17);
+    const [showLegend, setShowLegend] = useState(false);
     const infoBoxRef = useRef();
 
     const onMapLoad = (map) => {
@@ -110,6 +111,10 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
             }
         }
     };
+
+    const handleLegendHover = () => {
+        setShowLegend(true);
+    }
 
     const setTitle = () => {
         const infoWindowElement = document.querySelector('.gm-style-iw-ch');
@@ -261,8 +266,34 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                     directions: directionsResponse,
                     suppressMarkers: true
                 }} />}
+                {showLegend &&
+                    <div id="legend-window">
+                        <p>Легенда</p>
+                        <div className='legend-row'>
+                            <img height="35px" src='user_location.png' alt='user_location'/>
+                            <p>Моята локация</p>
+                        </div>
+                        <div className='legend-row'>
+                            <img src='zero_to_three.png' alt='zero_to_three' />
+                            <p>За деца от 0 до 3 години</p>
+                        </div>
+                        <div className='legend-row'>
+                            <img src='three_to_six.png' alt='three_to_six.png'/>
+                            <p>За деца от 3 до 6 години</p>
+                        </div>
+                        <div className='legend-row'>
+                            <img src='three_to_twelve.png' alt='three_to_twelve'/>
+                            <p>За деца от 3 до 12 години</p>
+                        </div >
+                        <div className='legend-row'>
+                            <img src='six_to_twelve.png' alt='six_to_twelve' />
+                            <p>За деца от 6 до 12 години</p>
+                        </div>
+                    </div>}
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location" />
+            <Legend onMouseOver={handleLegendHover} onMouseLeave={() => setShowLegend(false)} id="legend" />
+            
         </div>
     );
 };

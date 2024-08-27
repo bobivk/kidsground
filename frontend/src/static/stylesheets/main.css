@@ -263,6 +263,19 @@
     }
     
   }
+
+  @media only screen and (max-height: 1024px) {
+    .background-img {
+        margin-top: -40vh;
+    }
+
+    .left-outer-column,
+    .middle-outer-column,
+    .right-outer-column {
+      width: 25vw;
+    }
+    
+  }
   
   @media only screen and (max-height: 1368px) and (max-width: 1024px) {
     .background-img {

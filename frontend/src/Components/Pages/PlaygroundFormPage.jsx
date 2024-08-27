@@ -574,7 +574,7 @@ export const PlaygroundFormPage = () => {
                         </div>
                         <div>
                             <div>
-                                <h4>Посочете на картата мястото на площадката</h4>
+                                <h4>Преместете отметката на картата, за да посочите желаното място на площадката:   </h4>
                                 <div id="map">
                                     <Map onCoordinatesChange={changeCoordinates}/>
                                 </div>

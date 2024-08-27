@@ -31,7 +31,7 @@
   align-items: center;
 }
 
-#location, #terrain {
+#location, #terrain, #legend {
   position: absolute;
   z-index: 2;
   cursor: pointer;
@@ -53,6 +53,37 @@
 #location {
   bottom: 4vh;
   right: 2.5vw;
+}
+
+#legend {
+  bottom: 1vh;
+  right: 2.5vw;
+}
+
+#legend-window {
+  padding-left: 10px;
+  position: absolute;
+  width: 20%;
+  bottom: 14vh;
+  right: 0vw;
+  background: rgb(255, 252, 246);
+  border: 1px solid #62BEC9;
+  border-radius:12px;
+  font-weight: bold;
+}
+
+.legend-row {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.legend-row img {
+  padding-right: 20px;
+}
+
+.legend-row p {
+  padding-bottom: 5px;
 }
 
 #terrain:hover {
@@ -81,7 +112,11 @@
 
 @media only screen and (max-width: 2560px) {
   #location {
-    bottom: 4.2vh;
+    bottom: 5.2vh;
+    right: 3vw;
+  }
+  #legend {
+    bottom: 2vh;
     right: 3vw;
   }
 }
@@ -97,7 +132,7 @@
     width: 300px;
   }
 
-  #location, #terrain {
+  #location, #terrain, #legend {
     right: 1vw;
   }
   .gm-style-iw-d {
@@ -138,6 +173,14 @@
   #infoWindow {
     position: relative;
     top: -18px
+  }
+  
+  #legend {
+    bottom: 32vh;
+  }
+
+  #legend-window {
+    width: 100%;
   }
 }
 
