@@ -33,6 +33,8 @@ export const PlaygroundFormPage = () => {
     const [otherAgeText, setOtherAgeText] = useState("");
     const [otherLocationText, setOtherLocationText] = useState("");
     const [coordinates, setCoordinates] = useState({});
+    const [confirmation, setConfirmation] = useState(false);
+    const [sendPhotos, setSendPhotos] = useState(false)
     const [add, setAdd] = useState(true);
     const [showModal, setShowModal] = useState(false);
 
@@ -47,7 +49,13 @@ export const PlaygroundFormPage = () => {
         } else {
             setAdd(true);
         }
-    }, [add, age_group, facilities.length, floor_type, has_fence, environment, shade_type, toys.length, transport.length, coordinates])
+        console.log(photos);
+    }, [add, age_group, facilities.length, floor_type, has_fence, environment, shade_type, toys.length, transport.length, coordinates, photos])
+
+    const noButtonEvent = () => {
+        setConfirmation(false)
+        setPhotos([])
+    }
 
     const resetFocus = () => {
         setIsOtherAgeFocused(false);
@@ -214,6 +222,7 @@ export const PlaygroundFormPage = () => {
     const onChangeImage = (event) => {
         event.preventDefault();
         setPhotos(event.target.files)
+        setConfirmation(true);
     }
 
     const createPlayground = async (event) => {
@@ -554,7 +563,10 @@ export const PlaygroundFormPage = () => {
                             </div>
                             <br/>
                         </div>
-                        <AddImage onChangeImage={onChangeImage} confirmation={false} sendPhotos={{}} noButtonEvent={{}}/>
+                        <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={{}} noButtonEvent={noButtonEvent} />
+                        {photos && Array.from(photos).forEach((photo) => (
+                            <p>{photo.name}</p>
+                        ))}
                         <div className="question" id="description-question">
                         <label className="form-label" for="description">10. Допълнително описание:</label>
                         <br/>

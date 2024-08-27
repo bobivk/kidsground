@@ -131,6 +131,7 @@ button:hover {
 #registration-success {
     display:none;
     color:#CDEAEE;
+    background-color: #1D2231;
 }
 
 #wrong-credentials-msg {
@@ -207,7 +208,8 @@ button:hover {
 @media only screen and (max-width: 380px) {
 
     .register-container {
-        background-position: 0 40vh; 
+        height: 80vh;
+        background-position: 0 45vh; 
     }
 
     .btn-field button{

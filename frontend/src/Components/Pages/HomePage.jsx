@@ -53,7 +53,7 @@ export const HomePage = () => {
             <div className="subtitle">
                 <h3>Участвай и ти в създаването <br />
                 на единна карта на детските <br />
-                площадки на град <h3 className={fadeClass} style={{color: colors[currentColorIndex], display:"inline"}}>{cities[currentCityIndex]}</h3>!</h3>
+                площадки на България!</h3>
             </div>
             <img className="background-img" src="background.jpg" />
             <div id="map-text">
@@ -95,7 +95,7 @@ export const HomePage = () => {
                     за създаване на дигитална 
                     карта на всички известни 
                     и неизвестни детски 
-                    площадки в град Пловдив, 
+                    площадки в България, 
                     като по този начин 
                     стимулира изграждането 
                     на единна онлайн 
@@ -140,6 +140,17 @@ export const HomePage = () => {
                     мобилизация.</p>
                 </div>
               </div>
+              <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=61552317088801" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
+                </a>
+                <a href="https://instagram.com/kidsground.bg" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+                </a>
+                <a href="mailto:support@kidsground.bg" target="_blank">
+                    <img src="https://kidsground-permanent-images-bucket-rtyjfdnfxxdgfrq34231fngdhrz.s3.eu-central-1.amazonaws.com/gmail.png" alt="Email Icon" />
+                </a>
+            </div>
         </div>
         
     )

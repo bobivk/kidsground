@@ -14,7 +14,7 @@ import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.http.urlconnection.UrlConnectionHttpClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.ssm.SsmClient;
-
+import software.amazon.awssdk.services.ses.SesClient;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Configuration
@@ -48,6 +48,17 @@ public class AwsConfig {
     @ConditionalOnBean(value = AwsCredentialsProvider.class)
     public SsmClient ssmClient(AwsCredentialsProvider awsCredentialsProvider) {
         return SsmClient.builder()
+                .credentialsProvider(awsCredentialsProvider)
+                .region(Region.EU_CENTRAL_1)
+                .httpClient(UrlConnectionHttpClient.builder().build())
+                .build();
+    }
+
+    @Lazy(false)
+    @Bean
+    @ConditionalOnBean(value = AwsCredentialsProvider.class)
+    public SesClient sesClient(AwsCredentialsProvider awsCredentialsProvider) {
+        return SesClient.builder()
                 .credentialsProvider(awsCredentialsProvider)
                 .region(Region.EU_CENTRAL_1)
                 .httpClient(UrlConnectionHttpClient.builder().build())

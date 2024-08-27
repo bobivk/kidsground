@@ -3,32 +3,42 @@ package bg.kidsground.service;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.UserRole;
 import bg.kidsground.domain.dto.LoginDto;
+import bg.kidsground.domain.dto.RegisterDto;
 import bg.kidsground.domain.dto.UserDto;
 import bg.kidsground.repository.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
 
-import java.util.List;
+import java.io.IOException;
+
+import java.nio.charset.Charset;
+import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     public static final String INCORRECT_CREDENTIALS_MESSAGE = "Incorrect credentials";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, EmailService emailService) {
         super();
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
     }
 
     @Override
@@ -59,32 +69,46 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto save(LoginDto loginDto) {
-        if (userRepository.existsByEmail(loginDto.getEmail())) {
+    public UserDto save(RegisterDto registerDto) {
+        if (userRepository.existsByEmail(registerDto.getEmail())) {
             throw new EntityExistsException("A user with that email already exists.");
         }
-        User user = new User(loginDto.getUsername(),
-                            passwordEncoder.encode(loginDto.getPassword()),
-                            loginDto.getEmail(),
+        User user = new User(registerDto.getUsername(),
+                            passwordEncoder.encode(registerDto.getPassword()),
+                            registerDto.getEmail(),
                             UserRole.USER);
 
         userRepository.save(user);
+        sendRegistrationEmail(user);
         return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
     }
 
     @Override
     public UserDto login(LoginDto loginDto) throws UsernameNotFoundException {
         User user;
-        if (loginDto.getUsername() == null) {
-            user = userRepository.findByEmail(loginDto.getEmail())
-                    .orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
-        } else {
-            user = userRepository.findByUsername(loginDto.getUsername())
-                    .orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
+        Optional<User> userOptional = userRepository.findByEmail(loginDto.getUsernameOrEmail());
+        if (userOptional.isEmpty()) {
+            userOptional = userRepository.findByUsername(loginDto.getUsernameOrEmail());
         }
+        user = userOptional.orElseThrow(() -> new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE));
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
             throw new BadCredentialsException(INCORRECT_CREDENTIALS_MESSAGE);
         }
         return new UserDto(user.getUsername(), user.getEmail(), user.getRole());
+    }
+
+    private void sendRegistrationEmail(User user) {
+
+        String bodyHtml = null;
+        try {
+            bodyHtml = StreamUtils.copyToString(new ClassPathResource("registration_success_email.html")
+                        .getInputStream(), Charset.defaultCharset());
+        } catch (IOException e) {
+            log.error("Could not read registration resource");
+            throw new RuntimeException(e);
+        }
+
+        String subject = "Успешна регистрация в kidsground.bg!";
+        this.emailService.sendEmail(user.getEmail(), subject, bodyHtml);
     }
 }

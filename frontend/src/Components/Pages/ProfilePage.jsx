@@ -48,7 +48,10 @@ export const ProfilePage = () => {
 
     const approvePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=true`, {
-            method: "POST"
+            method: "POST",
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            }
         })
         window.location.reload();
     }
@@ -133,8 +136,8 @@ export const ProfilePage = () => {
                             <td>{playground.facilities.join(', ')}</td>
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
                             <td>
-                                <button onClick={() => {approvePlayground(playground.id)}}>✓</button>
-                                <button onClick={() => {disapprovePlayground(playground.id)}}>✗</button>
+                                <button className="tinyButton" onClick={() => {approvePlayground(playground.id)}}>✓</button>
+                                <button className="tinyButton" onClick={() => {disapprovePlayground(playground.id)}}>✗</button>
                             </td>
                         </tr>
                     ))}
@@ -211,7 +214,7 @@ export const ProfilePage = () => {
                             <td>{playground.facilities.join(', ')}</td>
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
                             <td>
-                                <button onClick={() => {deletePlayground(playground.id)}}>✗</button>
+                                <button className="tinyButton" onClick={() => {deletePlayground(playground.id)}}>✗</button>
                             </td>
                         </tr>
                     ))}
