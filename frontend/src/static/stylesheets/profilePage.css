@@ -1,3 +1,7 @@
+.table-page {
+    overflow-x: scroll;
+}
+
 table, th, td {
     border-spacing: 0px;
 }
@@ -5,7 +9,13 @@ table, th, td {
 .table-container {
     border: 1px solid #75a2a8;
     border-radius: 12px;
-    overflow: hidden; /* Ensures that the table does not overflow the container */
+   
+}
+
+table button{
+    border: 1px solid #62BEC9;
+    margin: 2px;
+    cursor: pointer;
 }
 
 th, td {

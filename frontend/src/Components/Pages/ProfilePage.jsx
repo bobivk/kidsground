@@ -55,6 +55,9 @@ export const ProfilePage = () => {
 
     const disapprovePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=false`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            },
             method: "POST"
         })
         window.location.reload();
@@ -62,8 +65,12 @@ export const ProfilePage = () => {
 
     const deletePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${Cookies.get("user")}`
+            },
             method: "DELETE"
         })
+        window.location.reload();
     }
 
 
@@ -97,7 +104,7 @@ export const ProfilePage = () => {
 
     if(Cookies.get("user") && Cookies.get("role") === "ADMIN") {
         return (
-            <div className="page">
+            <div className="page table-page">
                 <h2>Площадки очакващи одобрение: </h2>
                     <table>
                         <tr>
@@ -214,7 +221,7 @@ export const ProfilePage = () => {
     }
     else if(Cookies.get("user") && Cookies.get("role") === "USER") {
         return( 
-            <div className="page">
+            <div className="page table-page">
                 <h2>Моите Площадки: </h2>
                     <table>
                         <tr>
