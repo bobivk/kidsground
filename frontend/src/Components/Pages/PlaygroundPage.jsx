@@ -97,7 +97,7 @@ export const PlaygroundPage = () => {
         setConfirmation(false)
         setPhotos([])
     }
-    if(playgroundInfo.is_new && (Cookies.get("username") !== playgroundInfo.username && Cookies.get("role") !== "admin")) {
+    if(playgroundInfo.is_new && (Cookies.get("username") !== playgroundInfo.username && Cookies.get("role") !== "ADMIN")) {
         return (<div className="page"><p>Тази площадка все още очаква одобрение</p></div>)
     } else {
         return(

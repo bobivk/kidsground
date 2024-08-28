@@ -200,7 +200,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
 
     const getIconSize = (zoom) => {
         const baseSize = 32;
-        const scaleFactor = zoom / 17; // Adjust the scale factor as needed
+        const scaleFactor = zoom / 14; // Adjust the scale factor as needed
         const size = baseSize * scaleFactor;
         return new window.google.maps.Size(size, size);
     };
@@ -217,7 +217,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
         <div id="google-map">
             <Terrain id="terrain" onClick={handleMapTypeChange} />
             <GoogleMap
-                options={{ controlSize: 0, gestureHandling: "greedy" }}
+                options={{ controlSize: 0, gestureHandling: "greedy", clickableIcons: false}}
                 mapContainerStyle={mapContainerStyle}
                 zoom={zoomLevel}
                 center={currentPlaygroundCords ? currentPlaygroundCords : currentPosition}

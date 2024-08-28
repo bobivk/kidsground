@@ -61,6 +61,7 @@
 }
 
 #legend-window {
+  z-index: 100;
   padding-left: 10px;
   position: absolute;
   width: 20%;
@@ -144,6 +145,18 @@
   #location, #terrain {
     right: 1.5vw;
   }
+
+  #legend {
+    bottom: 4vh;
+    right: 7vw;
+  }
+
+  #legend-window {
+    bottom: 5vh;
+    right: 2vw;
+    width: 30%;
+    height: 70%;
+  }
 }
 
 @media only screen and (max-width: 820px) {
@@ -177,10 +190,14 @@
   
   #legend {
     bottom: 32vh;
+    right: 3vw
   }
 
   #legend-window {
-    width: 100%;
+    bottom: 5vh;
+    right: 2vw;
+    width: 80%;
+    height: 85%;
   }
 }
 

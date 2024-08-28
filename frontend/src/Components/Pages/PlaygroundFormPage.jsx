@@ -14,7 +14,7 @@ export const PlaygroundFormPage = () => {
     const locationRef = useRef(null);
 
     const [name, setName] = useState("");
-    const [age_group, setAgeGroup] = useState("");
+    const [age_group, setAgeGroup] = useState([]);
     const [environment, setLocation] = useState("");
     const [shade_type, setShaded] = useState("");
     const [transport, setTransport] = useState([]);
@@ -44,7 +44,7 @@ export const PlaygroundFormPage = () => {
       }, []);
 
     useEffect(() => {
-        if(age_group !== "" && environment !== "" && shade_type  !== null && floor_type.length !== 0 && has_fence !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0 && coordinates.lat !== undefined) {
+        if(age_group.length !== 0 && environment !== "" && shade_type  !== null && floor_type.length !== 0 && has_fence !== null && facilities.length !== 0 && transport.length !== 0 && toys.length !== 0 && coordinates.lat !== undefined) {
             setAdd(false);
         } else {
             setAdd(true);
@@ -69,7 +69,19 @@ export const PlaygroundFormPage = () => {
 
     const changeAgeGroup = (event) => {
         resetFocus();
-        setAgeGroup(event.target.value);
+        const value = event.target.value;
+        if (!Array.isArray()) {
+            setAgeGroup([]);
+            return;
+        }
+        const index = age_group.indexOf(value);
+            
+        if (index !== -1) {
+            const ageGroup = age_group.filter(floor => age_group !== value);
+            setAgeGroup(ageGroup);
+        } else {
+            setAgeGroup([...age_group, value]);
+        }
     }
 
     const changeLocation = (event) => {
@@ -121,7 +133,7 @@ export const PlaygroundFormPage = () => {
         resetFocus();
         const value = event.target.value;
         if (!Array.isArray(floor_type)) {
-            setToys([]);
+            setFloor([]);
             return;
         }
         const index = floor_type.indexOf(value);
@@ -307,22 +319,22 @@ export const PlaygroundFormPage = () => {
                             <br/>
                             <br/>
                             <div className="choice">
-                                <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="zero_to_three" name="age_group" value="zero_to_three"/>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="zero_to_three" name="age_group" value="zero_to_three"/>
                                 <label for="zero_to_three">0-3г. (С придружител)</label>
                             </div>
                             <br/>
                             <div className="choice">
-                                <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_six" name="age_group" value="three_to_six"/>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_six" name="age_group" value="three_to_six"/>
                                 <label for="three_to_six">3-6г.</label>
                             </div>
                             <br/>
                             <div className="choice">
-                                <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_twelve" name="age_group" value="three_to_twelve"/>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_twelve" name="age_group" value="three_to_twelve"/>
                                 <label for="three_to_twelve">3-12г.</label>
                             </div>
                             <br/>
                             <div className="choice">
-                                <input type="radio" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="six_to_twelve" name="age_group" value="six_to_twelve"/>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="six_to_twelve" name="age_group" value="six_to_twelve"/>
                                 <label for="six_to_twelve">6-12г.</label>
                             </div>
                             <br/>
