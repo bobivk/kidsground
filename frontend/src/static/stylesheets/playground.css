@@ -58,7 +58,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-}   
+}
 
 .upload-btn-wrapper {
     display: flex;
@@ -126,14 +126,14 @@ input#file-upload-button {
     color: #333;
 }
 
-body
-{
+body {
     /* background-image: url("../../resources/kidsground site proportion_-1.png"); */
     background-size: cover;
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.image-gallery-left-nav, .image-gallery-right-nav {
+.image-gallery-left-nav,
+.image-gallery-right-nav {
     padding: 0;
 }
 
@@ -143,6 +143,27 @@ body
 
 button {
     transition: background 1s;
+}
+
+#edit-playground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #62BEC9;
+    fill: #62BEC9;
+}
+
+#edit-playground:hover {
+    color: #478c94;
+    fill: #478c94;
+}
+
+#edit-playground .icon {
+    margin-right: 5px;
+}
+
+#edit-playground p {
+    margin-right: 5px;
 }
 
 #playground-name {
@@ -184,7 +205,24 @@ button {
     width: 80%;
 }
 
-#commentField, #commentFieldLabel, #commentSection h1, .comment {
+.toy-card {
+    display: flex;
+    margin-bottom: -20px;
+}
+
+.fence-card {
+    display: flex;
+    margin-top: -15px;
+}
+
+.floor-card {
+    display: flex;
+}
+
+#commentField,
+#commentFieldLabel,
+#commentSection h1,
+.comment {
     margin-left: 12px;
 }
 
@@ -227,6 +265,7 @@ button {
     #commentSection {
         width: 100vw;
     }
+
     #commentField {
         width: 50%;
     }

@@ -4,15 +4,16 @@ import ImageGallery from "react-image-gallery";
 
 import { Map } from '../Common/Map'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { AddImage } from '../Common/AddImage'
 import { InfoCard } from '../Common/InfoCard';
 import { Rating } from '../Common/Rating';
 import Cookies from 'js-cookie';
+import { ReactComponent as Pencil } from "../../static/icons/pencil.svg"
+import { Link, useParams } from 'react-router-dom';
 
 export const PlaygroundPage = () => {
 
-    const {id} = useParams();
+    const { id } = useParams();
     const [photos, setPhotos] = useState([]);
     const [playgroundInfo, setPlaygroundInfo] = useState({});
     const [imagesForGallery, setImagesForGallery] = useState([]);
@@ -22,11 +23,11 @@ export const PlaygroundPage = () => {
     const [comments, setComments] = useState([]);
 
     const fetchPlayground = async () => {
-       
+
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json()).then((data) => {
             setPlaygroundInfo(data);
-            if(data.image_links.length !== 0) {
-                const newImages = data.image_links.map(image => ({original: image}));
+            if (data.image_links.length !== 0) {
+                const newImages = data.image_links.map(image => ({ original: image }));
                 setImagesForGallery(prevImages => [...prevImages, ...newImages]);
             }
         });
@@ -34,7 +35,7 @@ export const PlaygroundPage = () => {
         await fetch(`https://kidsground.bg:8009/v1/comments/playground/${id}`).then(response => response.json()).then((data) => {
             setComments(data);
         })
-        
+
     }
 
     useEffect(() => {
@@ -49,7 +50,6 @@ export const PlaygroundPage = () => {
     }
 
     const handleRatingChange = (stars) => {
-        console.log(stars);
         setRating(stars)
     }
 
@@ -59,13 +59,13 @@ export const PlaygroundPage = () => {
 
     const handleCommentSubmit = async (event) => {
         event.preventDefault();
-        await fetch (`https://kidsground.bg:8009/v1/comments/add`, {
-            method:'POST',
+        await fetch(`https://kidsground.bg:8009/v1/comments/add`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${Cookies.get("user")}`
             },
-            body: JSON.stringify({text: comment, rating, playground_id: id})
+            body: JSON.stringify({ text: comment, rating, playground_id: id })
         })
         window.location.reload();
     }
@@ -74,16 +74,16 @@ export const PlaygroundPage = () => {
 
         const imagePayload = new FormData();
 
-        if(photos) {
+        if (photos) {
             Array.from(photos).forEach((photo) => {
                 imagePayload.append("file", photo);
             })
-            
+
         }
-       
-        if(imagePayload.entries()) {
-            await fetch (`https://kidsground.bg:8009/v1/playgrounds/${id}/uploadImages`, {
-                method:'POST',
+
+        if (imagePayload.entries()) {
+            await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/uploadImages`, {
+                method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${Cookies.get("user")}`
                 },
@@ -97,20 +97,24 @@ export const PlaygroundPage = () => {
         setConfirmation(false)
         setPhotos([])
     }
-    if(playgroundInfo.is_new && (Cookies.get("username") !== playgroundInfo.username && Cookies.get("role") !== "ADMIN")) {
+    if (playgroundInfo.is_new && (Cookies.get("username") !== playgroundInfo.username && Cookies.get("role") !== "ADMIN")) {
         return (<div className="page"><p>Тази площадка все още очаква одобрение</p></div>)
     } else {
-        return(
+        return (
             <div className="page">
                 <div className="picture-slider">
-                    {imagesForGallery && <ImageGallery items={imagesForGallery}/>}
+                    {imagesForGallery && <ImageGallery items={imagesForGallery} />}
                 </div>
-    
+
                 <div className="playground-content">
-                    <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent}/>
-                    <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType = {playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
-                    <div id="map" style={{marginBottom: "20px"}}>
-                            <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => {}}/>
+                    <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent} />
+                    <Link to={`/edit/${id}`} id="edit-playground">
+                        <Pencil className="icon" />
+                        <p>Промяна на информация</p>
+                    </Link>
+                    <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType={playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
+                    <div id="map" style={{ marginBottom: "20px" }}>
+                        <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => { }} />
                     </div>
                     <div id="commentSectionWrapper">
                         <div id="commentSection">
@@ -120,28 +124,28 @@ export const PlaygroundPage = () => {
                                     <div className='name-rating'>
                                         <p>{comment.username}</p>
                                         <p className="rating">{comment.rating} <svg
-                    className="star"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    width="25"
-                    height="25"
-                    style={{
-                      color: '#ffc107',
-                    }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
+                                            className="star"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 24 24"
+                                            fill="currentColor"
+                                            width="25"
+                                            height="25"
+                                            style={{
+                                                color: '#ffc107',
+                                            }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
                                     </div>
-                                {comment.text !== null && <p className="commentContent">{comment.text}</p>}
+                                    {comment.text !== null && <p className="commentContent">{comment.text}</p>}
                                 </div>
                             ))}
                             <label id="commentFieldLabel" for="comment">Оставете Рейтинг и Коментар: </label>
                             <Rating changeRating={handleRatingChange} />
-                            <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment"/>
-                            <button id="commentButton" disabled={rating===0} onClick={handleCommentSubmit} type='submit'>Коментирай</button>
+                            <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment" />
+                            <button id="commentButton" disabled={rating === 0} onClick={handleCommentSubmit} type='submit'>Коментирай</button>
                         </div>
                     </div>
                 </div>
             </div>
         )
     }
-    
+
 }

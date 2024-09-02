@@ -149,7 +149,6 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
     const fetchData = async () => {
         const receivedItems = await fetch("https://kidsground.bg:8009/v1/playgrounds/all");
         const receivedItemsJSON = await receivedItems.json();
-        console.log(receivedItemsJSON[0].age_group);
         setPlaygrounds(receivedItemsJSON);
     };
 
@@ -217,7 +216,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
         <div id="google-map">
             <Terrain id="terrain" onClick={handleMapTypeChange} />
             <GoogleMap
-                options={{ controlSize: 0, gestureHandling: "greedy", clickableIcons: false}}
+                options={{ controlSize: 0, gestureHandling: "greedy", clickableIcons: false }}
                 mapContainerStyle={mapContainerStyle}
                 zoom={zoomLevel}
                 center={currentPlaygroundCords ? currentPlaygroundCords : currentPosition}
@@ -270,7 +269,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                     <div id="legend-window">
                         <p>Легенда</p>
                         <div className='legend-row'>
-                            <img height="35px" src='user_location.png' alt='user_location'/>
+                            <img height="35px" src='user_location.png' alt='user_location' />
                             <p>Моята локация</p>
                         </div>
                         <div className='legend-row'>
@@ -278,11 +277,11 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                             <p>За деца от 0 до 3 години</p>
                         </div>
                         <div className='legend-row'>
-                            <img src='three_to_six.png' alt='three_to_six.png'/>
+                            <img src='three_to_six.png' alt='three_to_six.png' />
                             <p>За деца от 3 до 6 години</p>
                         </div>
                         <div className='legend-row'>
-                            <img src='three_to_twelve.png' alt='three_to_twelve'/>
+                            <img src='three_to_twelve.png' alt='three_to_twelve' />
                             <p>За деца от 3 до 12 години</p>
                         </div >
                         <div className='legend-row'>
@@ -293,7 +292,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location" />
             <Legend onMouseOver={handleLegendHover} onMouseLeave={() => setShowLegend(false)} id="legend" />
-            
+
         </div>
     );
 };

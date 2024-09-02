@@ -1,7 +1,7 @@
 .login-wrapper,
-.logout-wrapper, 
-.home-wrapper, 
-.map-wrapper, 
+.logout-wrapper,
+.home-wrapper,
+.map-wrapper,
 .profile-wrapper,
 .about-us-wrapper {
     font-weight: bold;
@@ -10,6 +10,7 @@
     text-align: center;
     padding: 5px;
 }
+
 nav {
     background: #FCFCFC;
     position: fixed;
@@ -43,30 +44,33 @@ a:hover {
 
 @media only screen and (max-width: 720px) {
     a {
-        font-size: 12.5px;
+        font-size: 12px;
         padding: 0
     }
-    .home-wrapper{
+
+    .home-wrapper {
         padding-top: 11.3px;
     }
-    .profile-wrapper{
+
+    .profile-wrapper {
         padding-top: 12px;
     }
 }
+
 /*Galaxy fold...*/
 @media only screen and (max-width: 280px) {
     a {
         font-size: 8px;
     }
-    .home-wrapper{
+
+    .home-wrapper {
         padding-top: 22px;
     }
 
     .login-wrapper div,
-    .logout-wrapper div
-    .home-wrapper div,
+    .logout-wrapper div .home-wrapper div,
     .profile-wrapper div,
-    .about-us-wrapper div, 
+    .about-us-wrapper div,
     .map-wrapper div {
         font-size: 10.5px;
         padding: 0.1rem 0.4rem;

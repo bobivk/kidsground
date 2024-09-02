@@ -18,7 +18,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-} 
+}
 
 .form-box {
     position: relative;
@@ -58,7 +58,7 @@
     margin: 15px 0;
     border-radius: 10px;
     display: flex;
-    align-items: center; 
+    align-items: center;
     max-height: 65px;
     transition: max-height 0.5s;
     overflow: hidden;
@@ -113,7 +113,7 @@ button:hover {
     color: #555;
 }
 
-.error {   
+.error {
     border-radius: 15px;
     background-color: var(--text-grey);
     color: #CDEAEE;
@@ -129,8 +129,8 @@ button:hover {
 }
 
 #registration-success {
-    display:none;
-    color:#CDEAEE;
+    display: none;
+    color: #CDEAEE;
     background-color: #1D2231;
 }
 
@@ -142,38 +142,44 @@ button:hover {
 }
 
 #username-exists-error {
-    display:none;
+    display: none;
     color: #CDEAEE;
     /* color:#62BEC9; */
     margin-top: 2rem;
 }
 
-#logout-btn{
-    border:#CDEAEE 2px solid;
+#logout-btn {
+    border: #CDEAEE 2px solid;
 }
 
 #checkIcon {
     margin-top: 2px;
 }
 
+#forgot-pass {
+    font-size: 15px;
+    color: #62BEC9;
+}
+
 @media only screen and (max-width: 1368px) {
     .register-container {
-        background-position: 0 45vh; 
+        background-position: 0 45vh;
         background-size: contain;
-    } 
+    }
 }
+
 @media only screen and (max-width: 960px) {
     .register-container {
         overflow-y: hidden;
-        background-position: 0 50vh; 
-    } 
+        background-position: 0 50vh;
+    }
 
 }
 
 @media only screen and (max-width: 1024px) {
     .register-container {
-        background-position: 0 50vh; 
-    } 
+        background-position: 0 50vh;
+    }
 
     .form-box {
         top: -5vh;
@@ -185,7 +191,7 @@ button:hover {
     .register-container {
         width: 98vw;
         height: 80vh;
-    } 
+    }
 
 }
 
@@ -193,13 +199,14 @@ button:hover {
     .register-container {
         width: 98vw;
         height: 70vh;
-        background-position: 0 45vh; 
+        background-position: 0 45vh;
     }
+
     .password-check {
         font-size: 14px;
     }
 
-    .btn-field button{
+    .btn-field button {
         margin-top: 10vh;
         font-size: 14px;
     }
@@ -209,10 +216,10 @@ button:hover {
 
     .register-container {
         height: 80vh;
-        background-position: 0 45vh; 
+        background-position: 0 45vh;
     }
 
-    .btn-field button{
+    .btn-field button {
         margin-top: 0vh;
         font-size: 12px;
     }
