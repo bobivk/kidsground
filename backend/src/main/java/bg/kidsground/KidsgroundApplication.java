@@ -36,7 +36,7 @@ public class KidsgroundApplication {
                     .build();
             userRepository.save(admin);
             playgroundRepository.save(Playground.builder()
-                    .ageGroup(AgeGroup.THREE_TO_TWELVE)
+                    .ageGroups(List.of(AgeGroup.THREE_TO_TWELVE))
                     .createdAt(new Date())
                     .coordinates(Coordinates.builder()
                             .longitude(42)

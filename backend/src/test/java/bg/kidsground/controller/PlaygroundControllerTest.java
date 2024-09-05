@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -45,7 +46,7 @@ public class PlaygroundControllerTest {
     public void testSavePlayground() throws Exception {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setName("Test Playground");
-        playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
+        playground.setAgeGroups(List.of(AgeGroup.THREE_TO_SIX));
         playground.setUsername("username");
         playground.setFloorType(List.of("rubber"));
         ObjectMapper objectMapper = new ObjectMapper();
@@ -68,7 +69,7 @@ public class PlaygroundControllerTest {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setId(1L);
         playground.setName(name);
-        playground.setAgeGroup([AgeGroup.THREE_TO_SIX]);
+        playground.setAgeGroups(List.of(AgeGroup.THREE_TO_SIX, AgeGroup.SIX_TO_TWELVE));
         playground.setCoordinates(Coordinates.builder().latitude(10.2).longitude(20.1).build());
         playground.setFacilities(List.of("пързалка", "люлка"));
         playground.setFloorType(List.of("rubber"));
@@ -77,6 +78,9 @@ public class PlaygroundControllerTest {
         playground.setToys(List.of("конче"));
         playground.setImageLinks(List.of("https://example.com/image"));
         playground.setShadeType("trees");
+        List<String> ageGroupList = new ArrayList<>();
+        ageGroupList.add(AgeGroup.THREE_TO_SIX.getValue());
+        ageGroupList.add(AgeGroup.SIX_TO_TWELVE.getValue());
 
         when(playgroundService.getById(id)).thenReturn(playground);
 
@@ -85,7 +89,7 @@ public class PlaygroundControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
-                .andExpect(jsonPath("$.age_group").value(["three_to_six"]))
+                .andExpect(jsonPath("$.age_groups").value(ageGroupList))
                 .andExpect(jsonPath("$.coordinates.lat").value(10.2))
                 .andExpect(jsonPath("$.coordinates.lng").value(20.1))
                 .andExpect(jsonPath("$.facilities[0]").value("пързалка"))

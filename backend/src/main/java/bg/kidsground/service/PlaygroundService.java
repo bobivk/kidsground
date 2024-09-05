@@ -12,7 +12,7 @@ public interface PlaygroundService {
     PlaygroundDto getById(final Long id);
     Playground findById(final Long id);
     List<PlaygroundDto> findAllApproved();
-    Integer getCount();
+    Integer getApprovedCount();
     List<PlaygroundDto> findAllToApprove();
     PlaygroundDto updatePlayground(Long id, PlaygroundDto playground);
     PlaygroundDto uploadImages(List<MultipartFile> file, Long id);

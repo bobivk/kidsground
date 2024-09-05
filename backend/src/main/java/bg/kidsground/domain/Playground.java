@@ -30,9 +30,10 @@ public class Playground {
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("age_group")
+    @JsonProperty("age_groups")
     @ElementCollection
-    private List<String> ageGroup = new ArrayList<>();
+    @Enumerated(EnumType.STRING)
+    private List<AgeGroup> ageGroups = new ArrayList<>();
 
     @JsonProperty("has_fence")
     private boolean hasFence;

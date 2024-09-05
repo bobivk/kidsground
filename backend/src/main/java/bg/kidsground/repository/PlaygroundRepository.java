@@ -17,4 +17,5 @@ public interface PlaygroundRepository extends JpaRepository<Playground, Long> {
     List<Playground> findByIsNewTrue();
 
     List<Playground> findByCreatedByUser(User user);
+    long countByIsNewFalse();
 }

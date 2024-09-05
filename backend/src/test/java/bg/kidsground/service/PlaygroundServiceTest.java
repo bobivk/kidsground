@@ -1,5 +1,6 @@
 package bg.kidsground.service;
 
+import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
 import bg.kidsground.domain.UserRole;
@@ -90,12 +91,14 @@ public class PlaygroundServiceTest {
         Playground playground = new Playground();
         playground.setId(id);
         playground.setCreatedByUser(user);
+        playground.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
         playground.setFloorType(List.of("floor"));
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
         playgroundDto.setRating(0.0);
         playgroundDto.setFloorType(List.of("floor"));
         playgroundDto.setUsername(user.getUsername());
+        playgroundDto.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
 
@@ -153,14 +156,14 @@ public class PlaygroundServiceTest {
     @Test
     public void testGetCount() {
         // Given
-        when(playgroundRepository.count()).thenReturn(10L);
+        when(playgroundRepository.countByIsNewFalse()).thenReturn(10L);
 
         // When
-        Integer result = playgroundService.getCount();
+        Integer result = playgroundService.getApprovedCount();
 
         // Then
         assertEquals(10, result);
-        verify(playgroundRepository, times(1)).count();
+        verify(playgroundRepository, times(1)).countByIsNewFalse();
     }
 
     @Test
@@ -174,6 +177,7 @@ public class PlaygroundServiceTest {
         playgroundDto.setRating(0.0);
         playgroundDto.setFloorType(List.of("floor"));
         playgroundDto.setUsername(user.getUsername());
+        playgroundDto.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
 
         Playground existingPlayground = new Playground();
         existingPlayground.setId(id);
@@ -188,6 +192,7 @@ public class PlaygroundServiceTest {
         updatedPlayground.setCreatedByUser(user);
         updatedPlayground.setImageS3Keys(imageS3Keys);
         updatedPlayground.setFloorType(List.of("floor"));
+        updatedPlayground.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
 
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(existingPlayground));
         when(playgroundRepository.save(any())).thenReturn(updatedPlayground);
@@ -220,6 +225,7 @@ public class PlaygroundServiceTest {
         playground.setName("Test Playground");
         playground.setCreatedByUser(user);
         playground.setFloorType(List.of("rubber"));
+        playground.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
 
         PlaygroundDto playgroundDto = new PlaygroundDto();
         playgroundDto.setId(1L);
@@ -227,6 +233,7 @@ public class PlaygroundServiceTest {
         playgroundDto.setFloorType(List.of("rubber"));
         playgroundDto.setRating(0.0);
         playgroundDto.setUsername("testUser");
+        playgroundDto.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
 
         List<Playground> playgrounds = Collections.singletonList(playground);
         List<PlaygroundDto> playgroundDtos = Collections.singletonList(playgroundDto);
@@ -269,6 +276,7 @@ public class PlaygroundServiceTest {
         playground.setId(id);
         playground.setCreatedByUser(user);
         playground.setFloorType(List.of("floor"));
+        playground.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
         when(playgroundRepository.findById(id)).thenReturn(Optional.of(playground));
         when(s3Service.uploadFile(file)).thenReturn(s3Key);
         when(s3Service.getImageUrl(s3Key)).thenReturn(imageUrl);
@@ -278,6 +286,7 @@ public class PlaygroundServiceTest {
         playgroundDto.setImageLinks(List.of(imageUrl));
         playgroundDto.setRating(0.0);
         playgroundDto.setFloorType(List.of("floor"));
+        playgroundDto.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
         playgroundDto.setUsername(user.getUsername());
 
         // When

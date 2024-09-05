@@ -57,7 +57,7 @@ public class PlaygroundController {
 
     @GetMapping(path = AppRestEndpoints.V1.Playground.COUNT)
     public ResponseEntity<Integer> getCount() {
-        return ResponseEntity.ok(this.playgroundService.getCount());
+        return ResponseEntity.ok(this.playgroundService.getApprovedCount());
     }
 
     @GetMapping(AppRestEndpoints.V1.Playground.By.USER)

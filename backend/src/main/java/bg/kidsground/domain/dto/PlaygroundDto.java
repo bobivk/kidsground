@@ -23,9 +23,8 @@ public class PlaygroundDto {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("age_group")
-    @Enumerated(EnumType.STRING)
-    private AgeGroup ageGroup;
+    @JsonProperty("age_groups")
+    private List<AgeGroup> ageGroups;
 
     @JsonProperty("has_fence")
     private boolean hasFence;

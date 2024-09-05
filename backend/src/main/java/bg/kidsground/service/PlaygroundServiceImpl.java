@@ -69,8 +69,8 @@ public class PlaygroundServiceImpl implements PlaygroundService {
     }
 
     @Override
-    public Integer getCount() {
-        return Math.toIntExact(this.playgroundRepository.count());
+    public Integer getApprovedCount() {
+        return Math.toIntExact(this.playgroundRepository.countByIsNewFalse());
     }
 
 
