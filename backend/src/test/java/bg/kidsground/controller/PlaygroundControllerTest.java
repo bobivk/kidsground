@@ -68,7 +68,7 @@ public class PlaygroundControllerTest {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setId(1L);
         playground.setName(name);
-        playground.setAgeGroup(AgeGroup.THREE_TO_SIX);
+        playground.setAgeGroup([AgeGroup.THREE_TO_SIX]);
         playground.setCoordinates(Coordinates.builder().latitude(10.2).longitude(20.1).build());
         playground.setFacilities(List.of("пързалка", "люлка"));
         playground.setFloorType(List.of("rubber"));
@@ -85,7 +85,7 @@ public class PlaygroundControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
-                .andExpect(jsonPath("$.age_group").value("three_to_six"))
+                .andExpect(jsonPath("$.age_group").value(["three_to_six"]))
                 .andExpect(jsonPath("$.coordinates.lat").value(10.2))
                 .andExpect(jsonPath("$.coordinates.lng").value(20.1))
                 .andExpect(jsonPath("$.facilities[0]").value("пързалка"))
