@@ -21,6 +21,7 @@ public abstract class CommentMapper {
     public abstract CommentDto toDto(Comment comment);
 
     @Mapping(target = "createdByUser", source = "username", qualifiedByName = "commentDtoToUser")
+    @Mapping(target = "playground.id", source = "playgroundId")
     public abstract Comment toEntity(CommentDto commentDto);
 
     @Named("commentDtoToUser")
