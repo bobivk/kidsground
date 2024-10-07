@@ -125,6 +125,7 @@ public class PlaygroundServiceTest {
     public void testFindAllApproved() {
         // Given
         Playground playground = new Playground();
+        playground.setAgeGroups(List.of(AgeGroup.SIX_TO_TWELVE));
         playground.setCreatedByUser(user);
         playground.setNew(false);
         when(playgroundRepository.findByIsNewFalse()).thenReturn(Collections.singletonList(playground));
@@ -134,6 +135,7 @@ public class PlaygroundServiceTest {
 
         // Then
         assertEquals(1, result.size());
+        assertEquals(result.get(0).getAgeGroups(), List.of(AgeGroup.SIX_TO_TWELVE));
         verify(playgroundRepository, times(1)).findByIsNewFalse();
     }
 

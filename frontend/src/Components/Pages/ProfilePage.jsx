@@ -12,10 +12,10 @@ export const ProfilePage = () => {
     const navigate = useNavigate();
 
     const ageGroups = Object.freeze({
-        zero_to_three: "от 0 до 3",
-        three_to_six: "от 3 до 6",
-        three_to_twelve: "от 3 до 12",
-        six_to_twelve: "от 6 до 12"
+        ZERO_TO_THREE: "0 и 3",
+        THREE_TO_SIX: "3 и 6",
+        THREE_TO_TWELVE: "3 и 12",
+        SIX_TO_TWELVE: "6 и 12"
     })
 
     const shades = Object.freeze({

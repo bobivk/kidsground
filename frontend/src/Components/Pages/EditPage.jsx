@@ -337,23 +337,23 @@ export const EditPage = () => {
                             <br />
                             <br />
                             <div className="choice">
-                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="zero_to_three" name="age_group" value="zero_to_three" checked={age_group.includes('zero_to_three')} />
-                                <label for="zero_to_three">0-3г. (С придружител)</label>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="ZERO_TO_THREE" name="age_group" value="ZERO_TO_THREE" checked={age_group.includes('ZERO_TO_THREE')} />
+                                <label for="ZERO_TO_THREE">0-3г. (С придружител)</label>
                             </div>
                             <br />
                             <div className="choice">
-                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_six" name="age_group" value="three_to_six" checked={age_group.includes('three_to_six')} />
-                                <label for="three_to_six">3-6г.</label>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="THREE_TO_SIX" name="age_group" value="THREE_TO_SIX" checked={age_group.includes('THREE_TO_SIX')} />
+                                <label for="THREE_TO_SIX">3-6г.</label>
                             </div>
                             <br />
                             <div className="choice">
-                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="three_to_twelve" name="age_group" value="three_to_twelve" checked={age_group.includes('three_to_twelve')} />
-                                <label for="three_to_twelve">3-12г.</label>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="THREE_TO_TWELVE" name="age_group" value="THREE_TO_TWELVE" checked={age_group.includes('THREE_TO_TWELVE')} />
+                                <label for="THREE_TO_TWELVE">3-12г.</label>
                             </div>
                             <br />
                             <div className="choice">
-                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="six_to_twelve" name="age_group" value="six_to_twelve" checked={age_group.includes('six_to_twelve')} />
-                                <label for="six_to_twelve">6-12г.</label>
+                                <input type="checkbox" onChange={changeAgeGroup} className="playground-input playground-input-radio" id="SIX_TO_TWELVE" name="age_group" value="SIX_TO_TWELVE" checked={age_group.includes('SIX_TO_TWELVE')} />
+                                <label for="SIX_TO_TWELVE">6-12г.</label>
                             </div>
                             <br />
                         </div>
