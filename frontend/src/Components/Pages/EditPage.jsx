@@ -35,6 +35,8 @@ export const EditPage = () => {
     const [confirmation, setConfirmation] = useState(false);
     const [add, setAdd] = useState(true);
     const [showModal, setShowModal] = useState(false);
+    const envs = ["До голям булевард", "В парк или градинка", "В междублоково пространство"];
+    const facils = ["Тоалетна", "Барче / кафене", "Koшче за боклук", "Чешма", "Пейка", "Няма"];
 
 
 
@@ -63,6 +65,9 @@ export const EditPage = () => {
             setToys(data.toys);
             setFacilities(data.facilities);
             setDescription(data.description);
+            if (facilities.filter((value) => !facils.includes(value)).length !== 0) {
+                setIsOtherFacilityChecked(true);
+            }
         })
     }
 
@@ -372,9 +377,9 @@ export const EditPage = () => {
                             </div>
                             <br />
                             <div className="choice">
-                                <input type="radio" onChange={otherChangeLocation} className="playground-input playground-input-radio" id="other-place" name="environment" value={otherLocationText} />
+                                <input type="radio" onChange={otherChangeLocation} className="playground-input playground-input-radio" id="other-place" name="environment" value={otherLocationText} checked={!envs.includes(environment)} />
                                 <label for="other-place">Друго</label>
-                                <input type="text" onClick={otherChangeLocation} onChange={otherChangeLocationText} onFocus={() => { setIsOtherLocationFocused(true) }} className={isOtherLocationFocused ? 'focused' : ''} ref={locationRef} id="other-location-text" />
+                                <input type="text" onClick={otherChangeLocation} onChange={otherChangeLocationText} onFocus={() => { setIsOtherLocationFocused(true) }} className={isOtherLocationFocused ? 'focused' : ''} ref={locationRef} id="other-location-text" value={!envs.includes(environment) ? environment : ""} />
                             </div>
                             <br />
                         </div>
@@ -584,7 +589,7 @@ export const EditPage = () => {
                             <div className="choice">
                                 <input type="checkbox" onChange={otherChangeFacilities} checked={isOtherFacilityChecked} className="playground-input" id="bench" name="facilities" value={otherFacilityText} />
                                 <label for="others">Друго</label>
-                                <input type="text" onChange={otherChangeFacilitiesText} onFocus={() => { setIsOtherFacilityFocused(true) }} className={isOtherFacilityFocused ? 'focused' : ''} ref={facilityRef} id="other-facilities-text" />
+                                <input type="text" onChange={otherChangeFacilitiesText} onFocus={() => { setIsOtherFacilityFocused(true) }} className={isOtherFacilityFocused ? 'focused' : ''} ref={facilityRef} id="other-facilities-text" value={facilities.filter((value) => !facils.includes(value))} />
                             </div>
                             <br />
                         </div>

@@ -227,7 +227,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                         onClick={() => { showDetails(playground); }}
                         key={playground.id}
                         icon={{
-                            url: (require(`../../static/${playground.age_group}.png`)),
+                            url: (playground.age_groups.length > 1 ? require("../../static/mix.png") : require(`../../static/${playground.age_groups[0]}.png`)),
                             scaledSize: getIconSize(zoomLevel)
                         }}
                         position={new window.google.maps.LatLng(playground.coordinates)}

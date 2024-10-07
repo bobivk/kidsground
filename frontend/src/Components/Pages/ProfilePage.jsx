@@ -31,7 +31,7 @@ export const ProfilePage = () => {
                 'Authorization': `Bearer ${Cookies.get("user")}`
             }
         }).then(response => response.json()).then((data) => {
-            setMyPlaygrounds(data);  
+            setMyPlaygrounds(data);
         })
     }
 
@@ -41,9 +41,9 @@ export const ProfilePage = () => {
                 'Authorization': `Bearer ${Cookies.get("user")}`
             }
         }).then(response => response.json()).then((data) => {
-            setMyComments(data);  
+            setMyComments(data);
         })
-        
+
     }
 
     const approvePlayground = async (id) => {
@@ -79,11 +79,11 @@ export const ProfilePage = () => {
 
     const fetchPendingPlaygrounds = async () => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/toApprove`).then(response => response.json()).then((data) => {
-            setPendingPlaygrounds(data);  
+            setPendingPlaygrounds(data);
         })
-        
+
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/all`).then(response => response.json()).then((data) => {
-            setExistingPlaygrounds(data);  
+            setExistingPlaygrounds(data);
         })
     }
 
@@ -96,36 +96,36 @@ export const ProfilePage = () => {
     }
 
     useEffect(() => {
-        if(Cookies.get("user")){
+        if (Cookies.get("user")) {
             fetchMyPlaygrounds();
             fetchMyComments();
         }
-        if(Cookies.get("user") && Cookies.get("role") === "ADMIN") {
+        if (Cookies.get("user") && Cookies.get("role") === "ADMIN") {
             fetchPendingPlaygrounds();
         }
     }, [])
 
-    if(Cookies.get("user") && Cookies.get("role") === "ADMIN") {
+    if (Cookies.get("user") && Cookies.get("role") === "ADMIN") {
         return (
             <div className="page table-page">
                 <h2>Площадки очакващи одобрение: </h2>
-                    <table>
-                        <tr>
-                            <th>Име</th>
-                            <th>Възрастова група</th>
-                            <th>Местоположение</th>
-                            <th>Сенчести зони</th>
-                            <th>Транспорт</th>
-                            <th>Оградена</th>
-                            <th>Настилка</th>
-                            <th>Катерушки</th>
-                            <th>Други съоръжения</th>
-                            <th>Координати</th>
-                            <th></th>
-                        </tr>
+                <table>
+                    <tr>
+                        <th>Име</th>
+                        <th>Възрастова група</th>
+                        <th>Местоположение</th>
+                        <th>Сенчести зони</th>
+                        <th>Транспорт</th>
+                        <th>Оградена</th>
+                        <th>Настилка</th>
+                        <th>Катерушки</th>
+                        <th>Други съоръжения</th>
+                        <th>Координати</th>
+                        <th></th>
+                    </tr>
                     {pendingPlaygrounds && pendingPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
-                            <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
+                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
                             <td>{ageGroups[playground.age_group]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
@@ -136,29 +136,30 @@ export const ProfilePage = () => {
                             <td>{playground.facilities.join(', ')}</td>
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
                             <td>
-                                <button className="tinyButton" onClick={() => {approvePlayground(playground.id)}}>✓</button>
-                                <button className="tinyButton" onClick={() => {disapprovePlayground(playground.id)}}>✗</button>
+                                <button className="tinyButton" onClick={() => { approvePlayground(playground.id) }}>✓</button>
+                                <button className="tinyButton" onClick={() => { disapprovePlayground(playground.id) }}>✗</button>
                             </td>
                         </tr>
                     ))}
-                    </table>
+                </table>
                 <h2>Моите Площадки: </h2>
-                    <table>
-                        <tr>
-                            <th>Име</th>
-                            <th>Възрастова група</th>
-                            <th>Местоположение</th>
-                            <th>Сенчести зони</th>
-                            <th>Транспорт</th>
-                            <th>Оградена</th>
-                            <th>Настилка</th>
-                            <th>Катерушки</th>
-                            <th>Други съоръжения</th>
-                            <th>Координати</th>
-                        </tr>
+                <table>
+                    <tr>
+                        <th>Име</th>
+                        <th>Възрастова група</th>
+                        <th>Местоположение</th>
+                        <th>Сенчести зони</th>
+                        <th>Транспорт</th>
+                        <th>Оградена</th>
+                        <th>Настилка</th>
+                        <th>Катерушки</th>
+                        <th>Други съоръжения</th>
+                        <th>Координати</th>
+                        <th>Статус</th>
+                    </tr>
                     {myPlaygrounds && myPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
-                            <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
+                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
                             <td>{ageGroups[playground.age_group]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
@@ -168,42 +169,43 @@ export const ProfilePage = () => {
                             <td>{playground.toys.join(', ')}</td>
                             <td>{playground.facilities.join(', ')}</td>
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                            <td>{playground.is_new ? "Очаква одобрение" : "Одобрена"}</td>
                         </tr>
                     ))}
-                    </table>
+                </table>
                 <h2>Моите Коментари: </h2>
-                    <table>
-                        <tr>
-                            <th>Текст</th>
-                            <th>Рейтинг</th>
-                            <th>Създаден на</th>
-                        </tr>
-                {myComments && myComments.map((comment) => (
+                <table>
                     <tr>
-                        <td onClick={() => {navigate(`/playground/${comment.playground_id}`)}} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
-                        <td>{comment.rating}</td>
-                        <td>{formatDate(comment.createdAt)}</td>
+                        <th>Текст</th>
+                        <th>Рейтинг</th>
+                        <th>Създаден на</th>
                     </tr>
-                ))}
+                    {myComments && myComments.map((comment) => (
+                        <tr>
+                            <td onClick={() => { navigate(`/playground/${comment.playground_id}`) }} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
+                            <td>{comment.rating}</td>
+                            <td>{formatDate(comment.createdAt)}</td>
+                        </tr>
+                    ))}
                 </table>
                 <h2>Съществуващи площадки: </h2>
-                    <table>
-                        <tr>
-                            <th>Име</th>
-                            <th>Възрастова група</th>
-                            <th>Местоположение</th>
-                            <th>Сенчести зони</th>
-                            <th>Транспорт</th>
-                            <th>Оградена</th>
-                            <th>Настилка</th>
-                            <th>Катерушки</th>
-                            <th>Други съоръжения</th>
-                            <th>Координати</th>
-                            <th></th>
-                        </tr>
+                <table>
+                    <tr>
+                        <th>Име</th>
+                        <th>Възрастова група</th>
+                        <th>Местоположение</th>
+                        <th>Сенчести зони</th>
+                        <th>Транспорт</th>
+                        <th>Оградена</th>
+                        <th>Настилка</th>
+                        <th>Катерушки</th>
+                        <th>Други съоръжения</th>
+                        <th>Координати</th>
+                        <th></th>
+                    </tr>
                     {existingPlaygrounds && existingPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
-                            <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
+                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
                             <td>{ageGroups[playground.age_group]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
@@ -214,34 +216,34 @@ export const ProfilePage = () => {
                             <td>{playground.facilities.join(', ')}</td>
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
                             <td>
-                                <button className="tinyButton" onClick={() => {deletePlayground(playground.id)}}>✗</button>
+                                <button className="tinyButton" onClick={() => { deletePlayground(playground.id) }}>✗</button>
                             </td>
                         </tr>
                     ))}
-                    </table>
+                </table>
             </div>
         );
     }
-    else if(Cookies.get("user") && Cookies.get("role") === "USER") {
-        return( 
+    else if (Cookies.get("user") && Cookies.get("role") === "USER") {
+        return (
             <div className="page table-page">
                 <h2>Моите Площадки: </h2>
-                    <table>
-                        <tr>
-                            <th>Име</th>
-                            <th>Възрастова група</th>
-                            <th>Местоположение</th>
-                            <th>Сенчести зони</th>
-                            <th>Транспорт</th>
-                            <th>Оградена</th>
-                            <th>Настилка</th>
-                            <th>Катерушки</th>
-                            <th>Други съоръжения</th>
-                            <th>Координати</th>
-                        </tr>
+                <table>
+                    <tr>
+                        <th>Име</th>
+                        <th>Възрастова група</th>
+                        <th>Местоположение</th>
+                        <th>Сенчести зони</th>
+                        <th>Транспорт</th>
+                        <th>Оградена</th>
+                        <th>Настилка</th>
+                        <th>Катерушки</th>
+                        <th>Други съоръжения</th>
+                        <th>Координати</th>
+                    </tr>
                     {myPlaygrounds && myPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
-                            <td onClick={() => {navigate(`/playground/${playground.id}`)}} key={playground.id} className="playground-link">{playground.name}</td>
+                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
                             <td>{ageGroups[playground.age_group]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
@@ -253,27 +255,27 @@ export const ProfilePage = () => {
                             <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
                         </tr>
                     ))}
-                    </table>
+                </table>
                 <h2>Моите Коментари: </h2>
-                    <table>
-                        <tr>
-                            <th>Текст</th>
-                            <th>Рейтинг</th>
-                            <th>Създаден на</th>
-                        </tr>
-                {myComments && myComments.map((comment) => (
+                <table>
                     <tr>
-                        <td onClick={() => {navigate(`/playground/${comment.playground_id}`)}} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
-                        <td>{comment.rating}</td>
-                        <td>{formatDate(comment.createdAt)}</td>
+                        <th>Текст</th>
+                        <th>Рейтинг</th>
+                        <th>Създаден на</th>
                     </tr>
-                ))}
+                    {myComments && myComments.map((comment) => (
+                        <tr>
+                            <td onClick={() => { navigate(`/playground/${comment.playground_id}`) }} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
+                            <td>{comment.rating}</td>
+                            <td>{formatDate(comment.createdAt)}</td>
+                        </tr>
+                    ))}
                 </table>
             </div>
         );
     }
     else {
-        return(
+        return (
             <Navigate to="/login" />
         );
     }
