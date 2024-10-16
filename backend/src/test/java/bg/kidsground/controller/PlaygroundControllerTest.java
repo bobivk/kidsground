@@ -46,7 +46,7 @@ public class PlaygroundControllerTest {
     public void testSavePlayground() throws Exception {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setName("Test Playground");
-        playground.setAgeGroups(List.of(AgeGroup.THREE_TO_SIX));
+        playground.setAgeGroups(List.of("THREE_TO_SIX"));
         playground.setUsername("username");
         playground.setFloorType(List.of("rubber"));
         ObjectMapper objectMapper = new ObjectMapper();
@@ -69,7 +69,7 @@ public class PlaygroundControllerTest {
         PlaygroundDto playground = new PlaygroundDto();
         playground.setId(1L);
         playground.setName(name);
-        playground.setAgeGroups(List.of(AgeGroup.THREE_TO_SIX, AgeGroup.SIX_TO_TWELVE));
+        playground.setAgeGroups(List.of("THREE_TO_SIX", "SIX_TO_TWELVE"));
         playground.setCoordinates(Coordinates.builder().latitude(10.2).longitude(20.1).build());
         playground.setFacilities(List.of("пързалка", "люлка"));
         playground.setFloorType(List.of("rubber"));
@@ -79,8 +79,8 @@ public class PlaygroundControllerTest {
         playground.setImageLinks(List.of("https://example.com/image"));
         playground.setShadeType("trees");
         List<String> ageGroupList = new ArrayList<>();
-        ageGroupList.add(AgeGroup.THREE_TO_SIX.getValue());
-        ageGroupList.add(AgeGroup.SIX_TO_TWELVE.getValue());
+        ageGroupList.add("THREE_TO_SIX");
+        ageGroupList.add("SIX_TO_TWELVE");
 
         when(playgroundService.getById(id)).thenReturn(playground);
 

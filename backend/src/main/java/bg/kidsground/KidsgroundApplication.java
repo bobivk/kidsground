@@ -1,7 +1,5 @@
 package bg.kidsground;
 
-import bg.kidsground.domain.AgeGroup;
-import bg.kidsground.domain.Comment;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.Playground;
 import bg.kidsground.domain.User;
@@ -36,7 +34,7 @@ public class KidsgroundApplication {
                     .build();
             userRepository.save(admin);
             playgroundRepository.save(Playground.builder()
-                    .ageGroups(List.of(AgeGroup.THREE_TO_TWELVE))
+                    .ageGroups(List.of("THREE_TO_TWELVE"))
                     .createdAt(new Date())
                     .coordinates(Coordinates.builder()
                             .longitude(42)
