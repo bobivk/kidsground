@@ -112,7 +112,7 @@ export const PlaygroundPage = () => {
                         <Pencil className="icon" />
                         <p>Промяна на информация</p>
                     </Link>
-                    <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType={playgroundInfo.floor_type} ageGroup={playgroundInfo.age_group} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
+                    <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType={playgroundInfo.floor_type} ageGroups={playgroundInfo.age_groups} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
                     <div id="map" style={{ marginBottom: "20px" }}>
                         <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => { }} />
                     </div>

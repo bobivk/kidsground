@@ -55,9 +55,9 @@ export const InfoCard = (props) => {
                     }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
                 <div>{props.description}</div>
                 <div id="age" className="card" style={{ marginBottom: "5px" }}>
-                    <span><ChildIcon className="icon" />Деца между {Array.isArray(props.ageGroup) ? props.ageGroup.forEach((age) => {
-                        return ageGroups[age]
-                    }) : ageGroups[props.ageGroup]} години.</span>
+                    <span><ChildIcon className="icon" />Деца между {
+                         props.ageGroups.forEach((age) => { return ageGroups[age] })
+                    } години.</span>
                 </div>
                 <div id="playgroundLocation" className="card">
                     <span><ParkIcon className="icon" />{props.environment}</span>

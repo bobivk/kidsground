@@ -126,7 +126,7 @@ export const ProfilePage = () => {
                     {pendingPlaygrounds && pendingPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
                             <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_group]}</td>
+                            <td>{ageGroups[playground.age_groups]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
                             <td>{playground.transport.join(', ')}</td>
@@ -160,7 +160,7 @@ export const ProfilePage = () => {
                     {myPlaygrounds && myPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
                             <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_group]}</td>
+                            <td>{ageGroups[playground.age_groups]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
                             <td>{playground.transport.join(', ')}</td>
@@ -206,7 +206,7 @@ export const ProfilePage = () => {
                     {existingPlaygrounds && existingPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
                             <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_group]}</td>
+                            <td>{ageGroups[playground.age_groups]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
                             <td>{playground.transport.join(', ')}</td>
@@ -244,7 +244,7 @@ export const ProfilePage = () => {
                     {myPlaygrounds && myPlaygrounds.map((playground) => (
                         <tr key={playground.id}>
                             <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_group]}</td>
+                            <td>{ageGroups[playground.age_groups]}</td>
                             <td>{playground.environment}</td>
                             <td>{shades[playground.shade_type]}</td>
                             <td>{playground.transport.join(', ')}</td>

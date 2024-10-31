@@ -1,7 +1,6 @@
 package bg.kidsground.controller;
 
 import bg.kidsground.constants.AppRestEndpoints;
-import bg.kidsground.domain.AgeGroup;
 import bg.kidsground.domain.Coordinates;
 import bg.kidsground.domain.dto.PlaygroundDto;
 import bg.kidsground.service.PlaygroundService;

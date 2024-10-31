@@ -237,7 +237,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                     <InfoWindow
                         onDomReady={setTitle}
                         onPositionChanged={changeTitle}
-                        options={{ ariaLabel: selectedMarker.id + selectedMarker.ageGroup, pixelOffset: new window.google.maps.Size(0, -25) }}
+                        options={{ ariaLabel: selectedMarker.id + selectedMarker.ageGroups, pixelOffset: new window.google.maps.Size(0, -25) }}
                         onCloseClick={() => { setSelectedMarker(null); }}
                         position={new window.google.maps.LatLng(selectedMarker.coordinates)}
                     >
