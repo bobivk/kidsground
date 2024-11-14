@@ -24,17 +24,31 @@ export const PlaygroundPage = () => {
 
     const fetchPlayground = async () => {
 
-        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`).then(response => response.json()).then((data) => {
-            setPlaygroundInfo(data);
-            if (data.image_links.length !== 0) {
-                const newImages = data.image_links.map(image => ({ original: image }));
-                setImagesForGallery(prevImages => [...prevImages, ...newImages]);
+        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}}`, {
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
             }
-        });
-
-        await fetch(`https://kidsground.bg:8009/v1/comments/playground/${id}`).then(response => response.json()).then((data) => {
-            setComments(data);
         })
+            .then(response => response.json())
+            .then((data) => {
+                setPlaygroundInfo(data);
+                if (data.image_links.length !== 0) {
+                    const newImages = data.image_links.map(image => ({ original: image }));
+                    setImagesForGallery(prevImages => [...prevImages, ...newImages]);
+                }
+            });
+
+        await fetch(`https://kidsground.bg:8009/v1/comments/playground/${id}`, {
+            headers: {
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
+            }
+        })
+            .then(response => response.json())
+            .then((data) => {
+                setComments(data);
+            });
 
     }
 
