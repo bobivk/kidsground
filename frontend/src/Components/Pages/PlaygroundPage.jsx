@@ -24,10 +24,11 @@ export const PlaygroundPage = () => {
 
     const fetchPlayground = async () => {
 
-        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}}`, {
+        await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`, {
             headers: {
                 'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache'
+                'Pragma': 'no-cache',
+                'Accept': 'application/json'
             }
         })
             .then(response => response.json())
@@ -42,7 +43,8 @@ export const PlaygroundPage = () => {
         await fetch(`https://kidsground.bg:8009/v1/comments/playground/${id}`, {
             headers: {
                 'Cache-Control': 'no-cache',
-                'Pragma': 'no-cache'
+                'Pragma': 'no-cache',
+                'Accept': 'application/json'
             }
         })
             .then(response => response.json())
