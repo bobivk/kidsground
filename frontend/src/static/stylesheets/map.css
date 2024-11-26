@@ -1,9 +1,9 @@
 #google-map {
-    position: relative;
-    display: flex;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
-  
+
 #map {
   display: flex;
   flex-direction: column;
@@ -13,8 +13,8 @@
 #map-type {
   position: absolute;
   z-index: 1;
-  bottom: 68.7vh; 
-  left: 0vw 
+  bottom: 68.7vh;
+  left: 0vw
 }
 
 #selector {
@@ -25,13 +25,16 @@
 
 #map-wrapper {
   flex: 1;
-  padding: 20px; /* Add some padding for better spacing */
+  padding: 20px;
+  /* Add some padding for better spacing */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#location, #terrain, #legend {
+#location,
+#terrain,
+#legend {
   position: absolute;
   z-index: 2;
   cursor: pointer;
@@ -46,8 +49,8 @@
 }
 
 #terrain {
-  top: 5vh;
-  right: 0.5vw;
+  top: 10%;
+  right: 1%;
 }
 
 #location {
@@ -69,7 +72,7 @@
   right: 0vw;
   background: rgb(255, 252, 246);
   border: 1px solid #62BEC9;
-  border-radius:12px;
+  border-radius: 12px;
   font-weight: bold;
 }
 
@@ -101,30 +104,36 @@
   top: -18px
 }
 
-#map a{
+#map a {
   padding: 0;
   font-size: 12px;
   color: #62BEC9;
 }
 
 .gm-style-mtc {
-  display: none; /* Adjust height as needed */
+  display: none;
+  /* Adjust height as needed */
 }
 
 @media only screen and (max-width: 2560px) {
   #location {
-    bottom: 5.2vh;
-    right: 3vw;
+    bottom: 11%;
   }
+
   #legend {
-    bottom: 2vh;
-    right: 3vw;
+    bottom: 4%;
   }
+
+  #legend,
+  #location {
+    right: 5%;
+  }
+
 }
 
 @media only screen and (max-width: 1280px) {
-  #map-wrapper{
-      align-items: center;
+  #map-wrapper {
+    align-items: center;
   }
 
   #selector {
@@ -133,27 +142,50 @@
     width: 300px;
   }
 
-  #location, #terrain, #legend {
-    right: 1vw;
+
+  #terrain {
+    right: 1%;
   }
+
+  #legend {
+    bottom: 5%;
+  }
+
+  #location {
+    bottom: 13%;
+  }
+
   .gm-style-iw-d {
     top: -3.7vh;
   }
 }
 
+@media only screen and (max-width: 1024px) {
+
+  #legend {
+    bottom: 4%;
+  }
+
+  #location {
+    bottom: 10%;
+  }
+}
+
 @media only screen and (max-width: 912px) {
-  #location, #terrain {
-    right: 1.5vw;
+
+  #location,
+  #terrain {
+    right: 1.5%;
   }
 
   #legend {
-    bottom: 4vh;
-    right: 7vw;
+    bottom: 8%;
+    right: 7%;
   }
 
   #legend-window {
-    bottom: 5vh;
-    right: 2vw;
+    bottom: 7%;
+    right: 2%;
     width: 30%;
     height: 70%;
   }
@@ -161,52 +193,47 @@
 
 @media only screen and (max-width: 820px) {
   #location {
-    bottom: 17vh;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  #location {
-    bottom: 20vh;
-  }
-  #infoWindow {
-    top: -6vh;
+    bottom: 22%;
   }
 }
 
 @media only screen and (max-width: 540px) {
-  #terrain {
-    top: 6vh;
-    right: 3vw;
-  }
+
+  #legend,
+  #terrain,
   #location {
-    bottom: 27vh;
-    right: 3vw;
+    right: 3%
   }
+
+  #terrain {
+    top: 12%;
+  }
+
+  #location {
+    bottom: 25%;
+  }
+
   #infoWindow {
     position: relative;
     top: -18px
   }
-  
+
   #legend {
-    bottom: 32vh;
-    right: 3vw
+    bottom: 35%;
   }
 
   #legend-window {
-    bottom: 5vh;
-    right: 2vw;
+    bottom: 5%;
     width: 80%;
     height: 85%;
   }
 }
 
 @media only screen and (max-width: 280px) {
+
+  #location,
+  #legend,
   #terrain {
-    top: 8vh;
-    right: 4vw;
-  }
-  #location {
-    right: 4vw;
+    right: 4%;
   }
 }

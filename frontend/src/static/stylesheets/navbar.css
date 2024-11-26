@@ -8,7 +8,7 @@
     display: flex;
     align-items: center;
     text-align: center;
-    padding: 5px;
+    padding: .5rem 1rem;
 }
 
 nav {
@@ -26,11 +26,13 @@ nav {
 .site-logo {
     margin-right: 3vw;
     margin-left: 7vw;
+}
+
+.site-logo img {
     height: 15vh;
 }
 
 a {
-    padding: .5rem 1rem;
     border: none;
     font-size: 20px;
     text-decoration: none;

@@ -213,7 +213,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
     }
 
     return (
-        <div id="google-map">
+        <section id="google-map">
             <Terrain id="terrain" onClick={handleMapTypeChange} />
             <GoogleMap
                 options={{ controlSize: 0, gestureHandling: "greedy", clickableIcons: false }}
@@ -266,33 +266,33 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                     suppressMarkers: true
                 }} />}
                 {showLegend &&
-                    <div id="legend-window">
+                    <section id="legend-window">
                         <p>Легенда</p>
-                        <div className='legend-row'>
+                        <section className='legend-row'>
                             <img height="35px" src='user_location.png' alt='user_location' />
                             <p>Моята локация</p>
-                        </div>
-                        <div className='legend-row'>
+                        </section>
+                        <section className='legend-row'>
                             <img src='zero_to_three.png' alt='zero_to_three' />
                             <p>За деца от 0 до 3 години</p>
-                        </div>
-                        <div className='legend-row'>
+                        </section>
+                        <section className='legend-row'>
                             <img src='three_to_six.png' alt='three_to_six.png' />
                             <p>За деца от 3 до 6 години</p>
-                        </div>
-                        <div className='legend-row'>
+                        </section>
+                        <section className='legend-row'>
                             <img src='three_to_twelve.png' alt='three_to_twelve' />
                             <p>За деца от 3 до 12 години</p>
-                        </div >
-                        <div className='legend-row'>
+                        </section>
+                        <section className='legend-row'>
                             <img src='six_to_twelve.png' alt='six_to_twelve' />
                             <p>За деца от 6 до 12 години</p>
-                        </div>
-                    </div>}
+                        </section>
+                    </section>}
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location" />
-            <Legend onMouseOver={handleLegendHover} onMouseLeave={() => setShowLegend(false)} id="legend" />
+            <Legend onClick={handleLegendHover} onMouseOver={handleLegendHover} onMouseLeave={() => setShowLegend(false)} id="legend" />
 
-        </div>
+        </section>
     );
 };
