@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000", "https://kidsground.bg"})
 public class EmailController {
 
     @Autowired
