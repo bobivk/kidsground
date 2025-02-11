@@ -37,6 +37,10 @@ public class AppRestEndpoints {
                 public static final String PLAYGROUND = COMMENTS_ROOT + "/playground/{playground_id}";
             }
         }
+        public class Email {
+            public static final String EMAIL_ROOT = V1_ROOT + "/email";
+            public static final String FORWARD = EMAIL_ROOT + "/forward";
+        }
     }
 
 }
