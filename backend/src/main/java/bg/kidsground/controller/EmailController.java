@@ -28,7 +28,7 @@ public class EmailController {
     @PostMapping(AppRestEndpoints.V1.Email.FORWARD)
     public ResponseEntity<String> forwardEmail(
             @RequestParam MultiValueMap<String, String> formData, // Extract form fields
-            @RequestParam("file") MultipartFile file) {
+            @RequestParam(value = "file", required = false) MultipartFile file) {
         // Extract form data (e.g., "from", "subject", etc.)
         String from = formData.getFirst("from");
         String subject = formData.getFirst("subject");
