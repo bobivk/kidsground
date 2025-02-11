@@ -37,6 +37,7 @@ public class WebSecurityConfiguration
                                         AppRestEndpoints.V1.Comments.By.ID,
                                         AppRestEndpoints.V1.Comments.By.PLAYGROUND)
                                     .permitAll()
+                        .requestMatchers(AppRestEndpoints.V1.Email.FORWARD).permitAll()
 
                         // restrict to admin only
                         .requestMatchers(HttpMethod.DELETE, AppRestEndpoints.V1.Playground.By.ID).hasRole(UserRole.ADMIN.getValue())
