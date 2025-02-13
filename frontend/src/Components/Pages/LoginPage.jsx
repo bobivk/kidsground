@@ -38,7 +38,6 @@ export const LoginPage = () => {
                 body: JSON.stringify(data)
             })
                 .then((response) => {
-                    let responseJson = response.json();
                     if (response.status === 400) {
                         alert("Невалидни данни.");
                     } else if (response.status === 500) {

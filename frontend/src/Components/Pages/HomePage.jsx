@@ -17,11 +17,11 @@ export const HomePage = () => {
 
     const fetchPlaygroundNumber = async () => {
         await fetch("https://kidsground.bg:8009/v1/playgrounds/count").then(response => response.json())
-        .then(data => setPlaygroundCount(data));
+            .then(data => setPlaygroundCount(data));
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0) 
+        window.scrollTo(0, 0)
     }, [])
 
     useEffect(() => {
@@ -39,34 +39,34 @@ export const HomePage = () => {
         return () => clearInterval(interval);
     }, [playgroundCount])
 
-    return(
+    return (
         <div className="page">
             <div className="main-text">
                 <h2>Нека открием</h2>
                 <span className="title-text">
-                    <h1 className="detskite">Детските </h1> 
+                    <h1 className="detskite">Детските </h1>
                     <h1 className="ploshtadki">площадки </h1>
                 </span>
-                <h2>на <h2 className={fadeClass} style={{color: colors[currentColorIndex], display:"inline"}}>{cities[currentCityIndex]}</h2> заедно!</h2>
+                <h2>на <h2 className={fadeClass} style={{ color: colors[currentColorIndex], display: "inline" }}>{cities[currentCityIndex]}</h2> заедно!</h2>
             </div>
 
             <div className="subtitle">
                 <h3>Участвай и ти в създаването <br />
-                на единна карта на детските <br />
-                площадки на България!</h3>
+                    на единна карта на детските <br />
+                    площадки на България!</h3>
             </div>
-            <img className="background-img" src="background.jpg" />
+            <img className="background-img" src="background.jpg" alt="background" />
             <div id="map-text">
                 <div className="text-with-counter">
-                        <div id="igrata">
-                            <div id="igrata-inner">
+                    <div id="igrata">
+                        <div id="igrata-inner">
                             <h2 className="map-title">Играта е най-добрият метод за учене!</h2>
                             <p className="map-page-main-text">Детските площадки са места,
-                                                            където децата развиват важни
-                                                            физически и социални умения,
-                                                            необходими за придобиване на
-                                                            самочувствие, координация и
-                                                            развитие на критично мислене.</p>
+                                където децата развиват важни
+                                физически и социални умения,
+                                необходими за придобиване на
+                                самочувствие, координация и
+                                развитие на критично мислене.</p>
                         </div>
                     </div>
                     <div className="number-of-playgrounds">
@@ -78,80 +78,80 @@ export const HomePage = () => {
                 </div>
                 <div id="map-wrapper">
                     <div id="map">
-                        <Map onCoordinatesChange={()=> {}}/>
+                        <Map onCoordinatesChange={() => { }} />
                         <div >
                             <Link to="/add"><button className="add-playground-btn add"> <i className="fa-regular fa-square-plus"></i>Добави детска площадка</button></Link>
                         </div>
+                    </div>
                 </div>
-            </div>
             </div>
             <div id="about-us" className="container">
                 <div className="left-outer-column">
-                  <div className="left-inner-column">
-                    <p>Какво?</p>
-                  </div>
-                  <p className="outer-text"> 
-                    KIDSground е инициатива 
-                    за създаване на дигитална 
-                    карта на всички известни 
-                    и неизвестни детски 
-                    площадки в България, 
-                    като по този начин 
-                    стимулира изграждането 
-                    на единна онлайн 
-                    платформа с вида, 
-                    местоположението и състоянието 
-                    на детските площадки в
-                    града.</p>
+                    <div className="left-inner-column">
+                        <p>Какво?</p>
+                    </div>
+                    <p className="outer-text">
+                        KIDSground е инициатива
+                        за създаване на дигитална
+                        карта на всички известни
+                        и неизвестни детски
+                        площадки в България,
+                        като по този начин
+                        стимулира изграждането
+                        на единна онлайн
+                        платформа с вида,
+                        местоположението и състоянието
+                        на детските площадки в
+                        града.</p>
                 </div>
                 <div className="middle-outer-column">
-                  <div className="middle-inner-column">
-                    <p>Защо?</p>
-                  </div>
-                  <p className="outer-text"> 
-                    Липсва единна карта, която да отразява
-                    всички детски площадки, 
-                    тяхното състояние, 
-                    налични съоръжения и 
-                    проблеми свързани с тях. 
-                    Дигиталното картиране 
-                    на детските площадки ще 
-                    даде ясна представа за 
-                    районите в града, където 
-                    такива липсват или са 
-                    крайно недостатъчни.</p>
+                    <div className="middle-inner-column">
+                        <p>Защо?</p>
+                    </div>
+                    <p className="outer-text">
+                        Липсва единна карта, която да отразява
+                        всички детски площадки,
+                        тяхното състояние,
+                        налични съоръжения и
+                        проблеми свързани с тях.
+                        Дигиталното картиране
+                        на детските площадки ще
+                        даде ясна представа за
+                        районите в града, където
+                        такива липсват или са
+                        крайно недостатъчни.</p>
                 </div>
                 <div className="right-outer-column">
-                  <div className="right-inner-column">
-                    <p>Как?</p>
-                  </div>
-                  <p className="outer-text"> 
-                    Отвори картата, 
-                    отбележи площадка и 
-                    отговори на краткия 
-                    въпросник. Така би 
-                    допринесъл за изграждане 
-                    на подробна и полезна 
-                    информационна 
-                    платформа в реално време
-                    за детските площадки в 
-                    града, благодарение на 
-                    колективната дейност и 
-                    мобилизация.</p>
+                    <div className="right-inner-column">
+                        <p>Как?</p>
+                    </div>
+                    <p className="outer-text">
+                        Отвори картата,
+                        отбележи площадка и
+                        отговори на краткия
+                        въпросник. Така би
+                        допринесъл за изграждане
+                        на подробна и полезна
+                        информационна
+                        платформа в реално време
+                        за детските площадки в
+                        града, благодарение на
+                        колективната дейност и
+                        мобилизация.</p>
                 </div>
-              </div>
-              <div class="social-icons">
+            </div>
+            <div class="social-icons">
                 <a href="https://www.facebook.com/profile.php?id=61552317088801" target="_blank">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
                 </a>
                 <a href="https://instagram.com/kidsground.bg" target="_blank">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
                 </a>
-                <a href="mailto:support@kidsground.bg" target="_blank">
+                <a href="mailto:info@kidsground.bg" target="_blank">
                     <img src="https://kidsground-permanent-images-bucket-rtyjfdnfxxdgfrq34231fngdhrz.s3.eu-central-1.amazonaws.com/gmail.png" alt="Email Icon" />
                 </a>
             </div>
         </div>
-        
+
     )
 }
