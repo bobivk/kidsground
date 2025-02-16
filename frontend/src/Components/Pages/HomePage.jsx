@@ -22,6 +22,7 @@ export const HomePage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        document.title = "Kidsground"
     }, [])
 
     useEffect(() => {
@@ -56,8 +57,8 @@ export const HomePage = () => {
                     площадки на България!</h3>
             </div>
             <img className="background-img" src="background.jpg" alt="background" />
-            <div id="map-text">
-                <div className="text-with-counter">
+            <section id="map-text">
+                <section className="text-with-counter">
                     <div id="igrata">
                         <div id="igrata-inner">
                             <h2 className="map-title">Играта е най-добрият метод за учене!</h2>
@@ -75,18 +76,18 @@ export const HomePage = () => {
                             <div className="number-of-playgrounds-text">детски площадки</div>
                         </div>
                     </div>
-                </div>
+                </section>
                 <div id="map-wrapper">
-                    <div id="map">
+                    <section id="map">
                         <Map onCoordinatesChange={() => { }} />
                         <div >
                             <Link to="/add"><button className="add-playground-btn add"> <i className="fa-regular fa-square-plus"></i>Добави детска площадка</button></Link>
                         </div>
-                    </div>
+                    </section>
                 </div>
-            </div>
-            <div id="about-us" className="container">
-                <div className="left-outer-column">
+            </section>
+            <section id="about-us" className="container">
+                <section className="left-outer-column">
                     <div className="left-inner-column">
                         <p>Какво?</p>
                     </div>
@@ -103,8 +104,8 @@ export const HomePage = () => {
                         местоположението и състоянието
                         на детските площадки в
                         града.</p>
-                </div>
-                <div className="middle-outer-column">
+                </section>
+                <section className="middle-outer-column">
                     <div className="middle-inner-column">
                         <p>Защо?</p>
                     </div>
@@ -120,8 +121,8 @@ export const HomePage = () => {
                         районите в града, където
                         такива липсват или са
                         крайно недостатъчни.</p>
-                </div>
-                <div className="right-outer-column">
+                </section>
+                <section className="right-outer-column">
                     <div className="right-inner-column">
                         <p>Как?</p>
                     </div>
@@ -138,9 +139,9 @@ export const HomePage = () => {
                         града, благодарение на
                         колективната дейност и
                         мобилизация.</p>
-                </div>
-            </div>
-            <div class="social-icons">
+                </section>
+            </section>
+            <section class="social-icons">
                 <a href="https://www.facebook.com/profile.php?id=61552317088801" target="_blank">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
                 </a>
@@ -150,7 +151,7 @@ export const HomePage = () => {
                 <a href="mailto:info@kidsground.bg" target="_blank">
                     <img src="https://kidsground-permanent-images-bucket-rtyjfdnfxxdgfrq34231fngdhrz.s3.eu-central-1.amazonaws.com/gmail.png" alt="Email Icon" />
                 </a>
-            </div>
+            </section>
         </div>
 
     )
