@@ -40,7 +40,7 @@ export const InfoCard = (props) => {
     })
 
     return (
-        <div id="info-card">
+        <section id="info-card">
             <div className="playground-text">
                 <h1>{props.name}</h1>
                 <p>{props.rating ? Math.round(props.rating * 100) / 100 : 0} <svg
@@ -150,6 +150,6 @@ export const InfoCard = (props) => {
                     })}
                 </div>
             </div>
-        </div>
+        </section>
     )
 }

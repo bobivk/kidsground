@@ -18,7 +18,6 @@ export const LoginPage = () => {
     const [check2, setCheck2] = useState("#555");
     const [check3, setCheck3] = useState("#555");
     const [check4, setCheck4] = useState("#555");
-    const [wrong, setWrong] = useState(false)
     const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
 
     const signUp = async (event) => {
@@ -59,6 +58,7 @@ export const LoginPage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
+        document.title = "Kidsground - Login"
     }, [])
 
     const signIn = async (event) => {
@@ -83,8 +83,7 @@ export const LoginPage = () => {
         })
             .then(response => {
                 if (response.status === 404) {
-                    setWrong(true)
-                    //грешен email или парола.
+                    alert("Грешно потребителско име или парола")
                 } else if (response.status === 200) {
                     return response.json()
                 }
@@ -114,11 +113,13 @@ export const LoginPage = () => {
     function switchToSignUp() {
         setSwitcher(false);
         resetInputs();
+        document.title = "Kidsground - Register"
     }
 
     function switchToSignIn() {
         setSwitcher(true);
         resetInputs();
+        document.title = "Kidsground - Login"
     }
 
     function isEmailValid(email) {
@@ -213,7 +214,7 @@ export const LoginPage = () => {
     }
     return (
         <div className="register-container page">
-            <div className="form-box">
+            <section className="form-box">
                 <h1 id="title">
                     {forgotPasswordMode ? "Забравена парола" : switcher ? "Вход" : "Регистрация"}
                 </h1>
@@ -320,7 +321,10 @@ export const LoginPage = () => {
                             </>
                         )}
                         {!forgotPasswordMode && (
-                            <a id="forgot-pass" onClick={() => setForgotPasswordMode(true)}>Забравена парола?</a>
+                            <p id="forgot-pass" onClick={() => {
+                                setForgotPasswordMode(true)
+                                document.title = "Kidsground - Forgot Password"
+                            }}>Забравена парола?</p>
                         )}
                     </div>
                     {!forgotPasswordMode && (
@@ -339,7 +343,7 @@ export const LoginPage = () => {
                         </div>
                     )}
                 </form>
-            </div>
+            </section>
         </div>
 
     )

@@ -300,16 +300,16 @@ export const PlaygroundFormPage = () => {
     if (Cookies.get("user")) {
         return (
             <div className="page background">
-                <div id="add-playground">
+                <section id="add-playground">
                     <form onSubmit={createPlayground} id="playground-form" className="form-container">
                         <h2 style={{ textAlign: "center" }}>Добави площадка</h2>
-                        <div className="question" id="name-question">
+                        <section className="question" id="name-question">
                             <label className="form-label" for="name-question">1. Име:</label>
                             <br />
                             <input onChange={changeName} id="playground-name-input" type="text" onFocus={() => { resetFocus(); setIsNameFocused(true) }} onBlur={() => setIsNameFocused(false)} className={isNameFocused ? 'text-input focused' : 'text-input'} placeholder="Име на площадката, ако има такова." name="name" />
-                        </div>
+                        </section>
 
-                        <div className="question" id="age-group-question">
+                        <section className="question" id="age-group-question">
                             <label className="form-label" for="age-group-question">2. За каква възрастова група е подходяща площадката? *</label>
                             <br />
                             <br />
@@ -333,9 +333,9 @@ export const PlaygroundFormPage = () => {
                                 <label for="SIX_TO_TWELVE">6-12г.</label>
                             </div>
                             <br />
-                        </div>
+                        </section>
 
-                        <div className="question" id="environment-question">
+                        <section className="question" id="environment-question">
                             <label className="form-label" for="environment-question">3. Какво е местоположението на детската площадка? *</label>
                             <br />
                             <div className="choice">
@@ -359,9 +359,9 @@ export const PlaygroundFormPage = () => {
                                 <input type="text" onClick={otherChangeLocation} onChange={otherChangeLocationText} onFocus={() => { setIsOtherLocationFocused(true) }} className={isOtherLocationFocused ? 'focused' : ''} ref={locationRef} id="other-location-text" />
                             </div>
                             <br />
-                        </div>
+                        </section>
 
-                        <div className="question" id="shade-question">
+                        <section className="question" id="shade-question">
                             <label className="form-label" for="shade-question">4. Има ли сенчести зони? *</label>
                             <br />
                             <div className="choice">
@@ -379,9 +379,9 @@ export const PlaygroundFormPage = () => {
                                 <label for="no-shade">Не, няма сянка</label>
                             </div>
                             <br />
-                        </div>
+                        </section>
 
-                        <div className="question" id="transport-question">
+                        <section className="question" id="transport-question">
                             <label className="form-label" for="transport-question">5. Какъв е транспортният достъп? *</label>
                             <br />
                             <div className="choice">
@@ -409,9 +409,9 @@ export const PlaygroundFormPage = () => {
                                 <label for="pedestrian">Пешеходен</label>
                             </div>
                             <br />
-                        </div>
+                        </section>
 
-                        <div className="question" id="fence-question">
+                        <section className="question" id="fence-question">
                             <label className="form-label" for="fence-question">6. Има ли ограда? *</label>
                             <br />
                             <div className="choice">
@@ -424,8 +424,9 @@ export const PlaygroundFormPage = () => {
                                 <label for="no">Не</label>
                             </div>
                             <br />
-                        </div>
-                        <div className="question" id="floor-question">
+                        </section>
+
+                        <section className="question" id="floor-question">
                             <label className="form-label" for="floor-question">7. Каква е настилката? *</label>
                             <br />
                             <div className="choice">
@@ -453,9 +454,9 @@ export const PlaygroundFormPage = () => {
                                 <label for="dirt">Без настилка (пръст)</label>
                             </div>
                             <br />
-                        </div>
+                        </section>
 
-                        <div className="question" id="swings-question">
+                        <section className="question" id="swings-question">
                             <label className="form-label" for="swings-question">8. С какви катерушки разполага площадката? *</label>
                             <br />
                             <div className="choice">
@@ -528,9 +529,9 @@ export const PlaygroundFormPage = () => {
                                 <label for="games">Занимателни игри (ребуси, лабиринт, сметало)</label>
                             </div>
                             <br />
-                        </div>
+                        </section>
 
-                        <div className="question" id="facilities-question">
+                        <section className="question" id="facilities-question">
                             <label className="form-label" for="facilities-question">9. Други съоръжения? *</label>
                             <br />
                             <div className="choice">
@@ -569,17 +570,17 @@ export const PlaygroundFormPage = () => {
                                 <input type="text" onChange={otherChangeFacilitiesText} onFocus={() => { setIsOtherFacilityFocused(true) }} className={isOtherFacilityFocused ? 'focused' : ''} ref={facilityRef} id="other-facilities-text" />
                             </div>
                             <br />
-                        </div>
+                        </section>
                         <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={{}} noButtonEvent={noButtonEvent} />
                         {photos && Array.from(photos).forEach((photo) => (
                             <p>{photo.name}</p>
                         ))}
-                        <div className="question" id="description-question">
+                        <section className="question" id="description-question">
                             <label className="form-label" for="description">10. Допълнително описание:</label>
                             <br />
                             <textarea type="text" onChange={changeDescription} className="text-input" name="description" rows="10" cols="20"></textarea>
-                        </div>
-                        <div>
+                        </section>
+                        <section>
                             <div>
                                 <h4>Преместете отметката на картата, за да посочите желаното място на площадката:   </h4>
                                 <div id="map">
@@ -590,10 +591,10 @@ export const PlaygroundFormPage = () => {
                                 <button onclick={createPlayground} disabled={add} id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
                                 <Link to="/"><button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button></Link>
                             </div>
-                        </div>
+                        </section>
                     </form>
                     {showModal && <Modal onClose={() => { setShowModal(false) }} />}
-                </div>
+                </section>
             </div>
         )
     } else {

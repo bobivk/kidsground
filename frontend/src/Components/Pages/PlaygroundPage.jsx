@@ -118,25 +118,25 @@ export const PlaygroundPage = () => {
     } else {
         return (
             <div className="page">
-                <div className="picture-slider">
+                <section className="picture-slider">
                     {imagesForGallery && <ImageGallery items={imagesForGallery} />}
-                </div>
+                </section>
 
-                <div className="playground-content">
+                <section className="playground-content">
                     <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={sendImages} noButtonEvent={noButtonEvent} />
                     <Link to={`/edit/${id}`} id="edit-playground">
                         <Pencil className="icon" />
                         <p>Промяна на информация</p>
                     </Link>
                     <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType={playgroundInfo.floor_type} ageGroups={playgroundInfo.age_groups} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
-                    <div id="map" style={{ marginBottom: "20px" }}>
+                    <section id="map" style={{ marginBottom: "20px" }}>
                         <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => { }} />
-                    </div>
+                    </section>
                     <div id="commentSectionWrapper">
-                        <div id="commentSection">
+                        <section id="commentSection">
                             <h1>Коментари</h1>
                             {comments && comments.map((comment) => (
-                                <div className="comment">
+                                <section className="comment">
                                     <div className='name-rating'>
                                         <p>{comment.username}</p>
                                         <p className="rating">{comment.rating} <svg
@@ -151,15 +151,15 @@ export const PlaygroundPage = () => {
                                             }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
                                     </div>
                                     {comment.text !== null && <p className="commentContent">{comment.text}</p>}
-                                </div>
+                                </section>
                             ))}
                             <label id="commentFieldLabel" for="comment">Оставете Рейтинг и Коментар: </label>
                             <Rating changeRating={handleRatingChange} />
                             <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment" />
                             <button id="commentButton" disabled={rating === 0} onClick={handleCommentSubmit} type='submit'>Коментирай</button>
-                        </div>
+                        </section>
                     </div>
-                </div>
+                </section>
             </div>
         )
     }

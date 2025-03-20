@@ -12,8 +12,6 @@ const libraries = ['places'];
 export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
     const [marker, setMarker] = useState(null);
     const [map, setMap] = useState(null);
-    const [markersLoaded, setMarkersLoaded] = useState(false);
-    const [selectedMapType, setSelectedMapType] = useState('roadmap');
     const [playgrounds, setPlaygrounds] = useState([]);
     const [currentPosition, setCurrentPosition] = useState({});
     const [selectedMarker, setSelectedMarker] = useState(null);
@@ -21,7 +19,6 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
     const [requestDirections, setRequestDirections] = useState(true);
     const [zoomLevel, setZoomLevel] = useState(17);
     const [showLegend, setShowLegend] = useState(false);
-    const infoBoxRef = useRef();
 
     const onMapLoad = (map) => {
         setMap(map);
@@ -104,10 +101,9 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
         if (map) {
             if (map.getMapTypeId() === 'roadmap') {
                 map.setMapTypeId('satellite');
-                setSelectedMapType('satellite');
             } else {
                 map.setMapTypeId('roadmap');
-                setSelectedMapType('roadmap');
+
             }
         }
     };
@@ -154,7 +150,6 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
 
     useEffect(() => {
         getCurrentPosition();
-        setMarkersLoaded(true);
         const handleResize = () => {
             if (window.innerWidth <= 1280) {
                 setMapContainerStyle({

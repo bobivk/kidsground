@@ -157,8 +157,14 @@ button:hover {
 }
 
 #forgot-pass {
+    display: inline;
     font-size: 15px;
     color: #62BEC9;
+}
+
+#forgot-pass:hover {
+    cursor: pointer;
+    color: #75a2a8;
 }
 
 @media only screen and (max-width: 1368px) {
