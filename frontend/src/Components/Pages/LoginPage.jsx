@@ -285,6 +285,7 @@ export const LoginPage = () => {
                                         name="email"
                                         placeholder="Имейл"
                                         autoComplete="email"
+                                        value={email}
                                         onChange={changeEmail}
                                     />
                                 </div>
