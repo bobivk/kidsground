@@ -19,6 +19,9 @@ export const LoginPage = () => {
     const [check3, setCheck3] = useState("#555");
     const [check4, setCheck4] = useState("#555");
     const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
+    const [isEmailInvalid, setIsEmailInvalid] = useState(true);
+    const [isUsernameValid, setIsUsernameValid] = useState(false);
+    const [success, setSuccess] = useState(false);
 
     const signUp = async (event) => {
         if (switcher) {
@@ -28,7 +31,8 @@ export const LoginPage = () => {
         }
         //if enabled, try register
         const data = { username, email, password };
-        if (isEmailValid(data.email) && isPasswordValid(data.password)) {
+        setIsEmailInvalid(checkEmailValidity(data.email))
+        if (isEmailInvalid && checkPasswordValidity(data.password)) {
             await fetch('https://kidsground.bg:8009/v1/users/register', {
                 method: 'POST',
                 headers: {
@@ -42,13 +46,10 @@ export const LoginPage = () => {
                     } else if (response.status === 500) {
                         alert("Възникна грешка, моля опитайте отново.");
                         resetInputs();
-                        //location.reload();
                     } else if (response.status === 409) {
-                        document.getElementById("username-exists-error").style.display = "block";
+                        setIsUsernameValid(false);
                     } else if (response.status === 200) {
-                        document.getElementById("registration-success").style.display = "block";
-                        document.getElementById('username-exists-error').style.display = "none";
-                        document.getElementById('email-exists-error').style.display = "none";
+                        setSuccess(true);
                         switchToSignIn();
                     }
                 });
@@ -122,20 +123,15 @@ export const LoginPage = () => {
         document.title = "Kidsground - Login"
     }
 
-    function isEmailValid(email) {
-
+    function checkEmailValidity(email) {
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
         if (email == null || email === "" || !regex.test(email)) {
-            document.getElementById('email-error').innerHTML = "Моля, въведете валиден имейл адрес.";
-            document.getElementById('email-error').style.display = "block";
             return false;
         }
-        document.getElementById('email-error').style.display = "none";
         return true;
     }
 
-    function isPasswordValid() {
+    function checkPasswordValidity() {
         let valid = true
         document.querySelectorAll(".password-check-field").forEach((element) => {
             if (check0 !== "green" && check1 !== "green" && check2 !== "green" && check3 !== "green" && check4 !== "green") {
@@ -176,8 +172,8 @@ export const LoginPage = () => {
 
     const resetPassword = async (event) => {
         event.preventDefault();
-
-        if (isEmailValid(email)) {
+        setIsEmailInvalid(checkEmailValidity(email))
+        if (isEmailInvalid) {
             await fetch('https://your-backend-url/v1/users/reset-password', {
                 method: 'POST',
                 headers: {
@@ -269,6 +265,9 @@ export const LoginPage = () => {
                             </>
                         ) : (
                             <>
+                                {!isUsernameValid ? <div className="error" id="username-exists-error">Потребителското име вече съществува.</div> : null}
+                                {!isEmailInvalid ? <div className="error" id="email-error">Имейлът вече съществува или е невалиден.</div> : null}
+                                {success ? <div className="message" id="registration-success">Успешна регистрация!</div> : null}
                                 <div className="input-field" id="nameField">
                                     <i className="fa-solid fa-user"></i>
                                     <input

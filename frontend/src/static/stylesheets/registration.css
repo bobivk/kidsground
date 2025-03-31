@@ -22,7 +22,7 @@
 
 .form-box {
     position: relative;
-    top: -20vh;
+    top: -5vh;
     border-radius: 20px;
     width: 90%;
     max-width: 450px;
@@ -34,7 +34,7 @@
 .form-box h1 {
     font-size: 30px;
     margin-bottom: 60px;
-    background-color: #CDEAEE;
+    background-color: var(--main-color);
     color: var(--text-grey);
     border-radius: 15px;
     padding: 1%;
@@ -81,13 +81,13 @@ input {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 }
 
 .btn-field button {
-    margin-top: 12vh;
     flex-basis: 48%;
     background-color: var(--text-grey);
-    color: #CDEAEE;
+    color: var(--main-color);
     border: 1px solid #75a2a8;
     filter: drop-shadow(0 0 1rem rgb(178, 178, 178));
     height: 50px;
@@ -100,12 +100,8 @@ input {
 }
 
 button:hover {
-    background-color: #CDEAEE;
+    background-color: var(--main-color);
     color: var(--text-grey);
-}
-
-.input-group {
-    height: 240px;
 }
 
 .btn-field button.disable {
@@ -113,10 +109,11 @@ button:hover {
     color: #555;
 }
 
-.error {
+.error,
+.message {
     border-radius: 15px;
     background-color: var(--text-grey);
-    color: #CDEAEE;
+    color: var(--main-color);
 }
 
 .password-check {
@@ -125,31 +122,35 @@ button:hover {
     padding-top: 1vh;
     padding-bottom: 1vh;
     margin: 0.1% 5.5% 0.1% 5.5%;
+    background-color: var(--main-color);
+    border: 1px solid #75a2a8;
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
     text-align: justify;
 }
 
 #registration-success {
     display: none;
-    color: #CDEAEE;
-    background-color: #1D2231;
+    color: var(--main-color);
+    background-color: var(--color-dark);
 }
 
 #wrong-credentials-msg {
-    background-color: #1D2231;
+    background-color: var(--color-dark);
     padding: 12px;
     border-radius: 12px;
-    color: #CDEAEE;
+    color: var(--main-color);
 }
 
 #username-exists-error {
     display: none;
-    color: #CDEAEE;
+    color: var(--main-color);
     /* color:#62BEC9; */
     margin-top: 2rem;
 }
 
 #logout-btn {
-    border: #CDEAEE 2px solid;
+    border: var(--main-color) 2px solid;
 }
 
 #checkIcon {
@@ -160,6 +161,8 @@ button:hover {
     display: inline;
     font-size: 15px;
     color: #62BEC9;
+    margin-bottom: 20%;
+    text-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.3);
 }
 
 #forgot-pass:hover {
@@ -171,13 +174,6 @@ button:hover {
     .register-container {
         background-size: contain;
     }
-}
-
-@media only screen and (max-width: 960px) {
-    .register-container {
-        overflow-y: hidden;
-    }
-
 }
 
 @media only screen and (max-width: 1024px) {
@@ -200,22 +196,12 @@ button:hover {
     .password-check {
         font-size: 14px;
     }
-
-    .btn-field button {
-        margin-top: 10vh;
-        font-size: 14px;
-    }
 }
 
 @media only screen and (max-width: 380px) {
 
     .register-container {
         height: 80vh;
-    }
-
-    .btn-field button {
-        margin-top: 0vh;
-        font-size: 12px;
     }
 
     .form-box {
