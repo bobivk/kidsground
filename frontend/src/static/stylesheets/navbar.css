@@ -20,7 +20,8 @@ nav {
     top: 0;
     width: 100vw;
     height: 10vh;
-    font-size: 20px
+    font-size: 20px;
+    text-wrap: nowrap;
 }
 
 .site-logo {
@@ -47,11 +48,10 @@ a:hover {
 @media only screen and (max-width: 720px) {
     a {
         font-size: 12px;
-        padding: 0
     }
 
     .home-wrapper {
-        padding-top: 11.3px;
+        padding-top: 15.5px;
     }
 
     .profile-wrapper {
