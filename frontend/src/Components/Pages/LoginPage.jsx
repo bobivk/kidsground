@@ -170,11 +170,11 @@ export const LoginPage = () => {
         setPassword(input);
     }
 
-    const resetPassword = async (event) => {
+        const requestPasswordReset = async (event) => {
         event.preventDefault();
         setIsEmailInvalid(checkEmailValidity(email))
         if (isEmailInvalid) {
-            await fetch('https://your-backend-url/v1/users/reset-password', {
+            await fetch('https://kidsground.bg:8009/v1/users/request-password-reset', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -232,7 +232,7 @@ export const LoginPage = () => {
                                     <button type="button" onClick={() => setForgotPasswordMode(false)}>
                                         Назад
                                     </button>
-                                    <button type="button" onClick={resetPassword}>
+                                    <button type="button" onClick={requestPasswordReset}>
                                         Забравена Парола
                                     </button>
                                 </div>

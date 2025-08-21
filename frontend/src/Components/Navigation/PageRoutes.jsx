@@ -5,6 +5,7 @@ import { LoginPage } from "../Pages/LoginPage"
 import { PlaygroundFormPage } from "../Pages/PlaygroundFormPage"
 import { ProfilePage } from "../Pages/ProfilePage"
 import { EditPage } from "../Pages/EditPage"
+import { ResetPasswordPage } from "../Pages/ResetPasswordPage"
 
 export const PageRoutes = () => {
     return (
@@ -15,6 +16,7 @@ export const PageRoutes = () => {
             <Route exact path="/add" element={<PlaygroundFormPage />} />
             <Route exact path="/profile" element={<ProfilePage />} />
             <Route exact path="/edit/:id" element={<EditPage />} />
+            <Route exact path="/reset-password" element={<ResetPasswordPage />} />
         </Routes>
     )
 }

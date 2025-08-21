@@ -12,6 +12,10 @@ public interface UserService {
 
   UserDto login(LoginDto loginDto);
 
+  void requestPasswordReset(String email);
+
+  void resetPassword(String token, String newPassword);
+
   UserDetails loadUserDetails(String username);
 
   User findByUsername(String username);
