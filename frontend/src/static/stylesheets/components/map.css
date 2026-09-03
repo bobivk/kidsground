@@ -38,7 +38,7 @@
   position: absolute;
   z-index: 2;
   cursor: pointer;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  box-shadow: var(--shadow-card);
   fill: #666666;
   stroke: #666666;
   background: none rgb(255, 255, 255);
@@ -71,9 +71,16 @@
   bottom: 14vh;
   right: 0vw;
   background: rgb(255, 252, 246);
-  border: 1px solid #62BEC9;
-  border-radius: 12px;
+  border: 1px solid var(--accent-teal);
+  border-radius: var(--radius);
   font-weight: bold;
+}
+
+/* Legend rows are a list in the semantic markup — strip default list styling. */
+.legend-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .legend-row {
@@ -107,7 +114,7 @@
 #map a {
   padding: 0;
   font-size: 12px;
-  color: #62BEC9;
+  color: var(--accent-teal);
 }
 
 .gm-style-mtc {

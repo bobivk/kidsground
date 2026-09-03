@@ -1,5 +1,3 @@
-import '../../static/stylesheets/styles.css'
-import '../../static/stylesheets/playground.css'
 import ImageGallery from "react-image-gallery";
 
 import { Map } from '../Common/Map'
@@ -114,10 +112,10 @@ export const PlaygroundPage = () => {
         setPhotos([])
     }
     if (playgroundInfo.is_new && (Cookies.get("username") !== playgroundInfo.username && Cookies.get("role") !== "ADMIN")) {
-        return (<div className="page"><p>Тази площадка все още очаква одобрение</p></div>)
+        return (<main className="page"><p>Тази площадка все още очаква одобрение</p></main>)
     } else {
         return (
-            <div className="page">
+            <main className="page">
                 <section className="picture-slider">
                     {imagesForGallery && <ImageGallery items={imagesForGallery} />}
                 </section>
@@ -129,14 +127,14 @@ export const PlaygroundPage = () => {
                         <p>Промяна на информация</p>
                     </Link>
                     <InfoCard rating={playgroundInfo.rating} description={playgroundInfo.description} floorType={playgroundInfo.floor_type} ageGroups={playgroundInfo.age_groups} transport={playgroundInfo.transport} name={playgroundInfo.name} toys={playgroundInfo.toys} facilities={playgroundInfo.facilities} hasFence={playgroundInfo.hasFence} shadeType={playgroundInfo.shade_type} environment={playgroundInfo.environment} />
-                    <section id="map" style={{ marginBottom: "20px" }}>
+                    <section id="map" className="map-section-mb">
                         <Map currentPlaygroundCords={playgroundInfo.coordinates} onCoordinatesChange={() => { }} />
                     </section>
                     <div id="commentSectionWrapper">
                         <section id="commentSection">
-                            <h1>Коментари</h1>
+                            <h2>Коментари</h2>
                             {comments && comments.map((comment) => (
-                                <section className="comment">
+                                <article key={comment.id ?? comment.username} className="comment">
                                     <div className='name-rating'>
                                         <p>{comment.username}</p>
                                         <p className="rating">{comment.rating} <svg
@@ -151,16 +149,16 @@ export const PlaygroundPage = () => {
                                             }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
                                     </div>
                                     {comment.text !== null && <p className="commentContent">{comment.text}</p>}
-                                </section>
+                                </article>
                             ))}
-                            <label id="commentFieldLabel" for="comment">Оставете Рейтинг и Коментар: </label>
+                            <label id="commentFieldLabel" htmlFor="commentField">Оставете Рейтинг и Коментар: </label>
                             <Rating changeRating={handleRatingChange} />
-                            <input id="commentField" type='textarea' onChange={handleCommentChange} name="comment" />
+                            <textarea id="commentField" onChange={handleCommentChange} name="comment"></textarea>
                             <button id="commentButton" disabled={rating === 0} onClick={handleCommentSubmit} type='submit'>Коментирай</button>
                         </section>
                     </div>
                 </section>
-            </div>
+            </main>
         )
     }
 

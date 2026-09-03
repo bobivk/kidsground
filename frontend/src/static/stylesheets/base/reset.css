@@ -1,0 +1,76 @@
+@font-face {
+    font-family: 'Plovdiv Sans';
+    src: local('Plovdiv Sans'), url('../../fonts/PlovdivTypeface-Fonts/PlovdivTypeface-Fonts/OTF/PlovdivSans.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  font-family: 'Plovdiv Sans';
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Reset for semantic elements introduced during the markup refactor, so that
+   swapping <div>/<span> for <main>/<section>/<article>/<header>/<footer>/<nav>/
+   <ul>/<li>/<h1..h6>/<figure>/<fieldset>/<legend> does not change appearance.
+   These previously-generic containers carried no default margins/padding. */
+main,
+section,
+article,
+header,
+footer,
+aside,
+figure,
+figcaption {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Lists that replace <div>/<span>+<br> layouts must not add bullets or indentation. */
+ul.reset-list,
+ol.reset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.reset-list > li,
+ol.reset-list > li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings that replace styled <div>/<p>/<span> must not add their own spacing;
+   sizing/weight comes from the element's existing class. */
+.heading-reset {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Buttons that replace clickable <div>/<a>/<p>/<td> or wrap SVG controls must be
+   visually transparent unless a component class styles them. */
+.button-reset {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+/* Fieldset/legend replacing form question <div>/<section> carry UA borders — remove. */
+fieldset.question {
+  min-inline-size: auto;
+}
+
+legend {
+  padding: 0;
+}

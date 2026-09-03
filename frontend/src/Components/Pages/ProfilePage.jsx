@@ -1,7 +1,6 @@
 import Cookies from "js-cookie"
 import { useEffect, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import '../../static/stylesheets/profilePage.css'
 
 export const ProfilePage = () => {
 
@@ -107,171 +106,195 @@ export const ProfilePage = () => {
 
     if (Cookies.get("user") && Cookies.get("role") === "ADMIN") {
         return (
-            <div className="page table-page">
+            <main className="page table-page">
                 <h2>Площадки очакващи одобрение: </h2>
                 <table>
-                    <tr>
-                        <th>Име</th>
-                        <th>Възрастова група</th>
-                        <th>Местоположение</th>
-                        <th>Сенчести зони</th>
-                        <th>Транспорт</th>
-                        <th>Оградена</th>
-                        <th>Настилка</th>
-                        <th>Катерушки</th>
-                        <th>Други съоръжения</th>
-                        <th>Координати</th>
-                        <th></th>
-                    </tr>
-                    {pendingPlaygrounds && pendingPlaygrounds.map((playground) => (
-                        <tr key={playground.id}>
-                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_groups]}</td>
-                            <td>{playground.environment}</td>
-                            <td>{shades[playground.shade_type]}</td>
-                            <td>{playground.transport.join(', ')}</td>
-                            <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
-                            <td>{playground.floor_type.join(', ')}</td>
-                            <td>{playground.toys.join(', ')}</td>
-                            <td>{playground.facilities.join(', ')}</td>
-                            <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
-                            <td>
-                                <button className="tinyButton" onClick={() => { approvePlayground(playground.id) }}>✓</button>
-                                <button className="tinyButton" onClick={() => { disapprovePlayground(playground.id) }}>✗</button>
-                            </td>
+                    <thead>
+                        <tr>
+                            <th>Име</th>
+                            <th>Възрастова група</th>
+                            <th>Местоположение</th>
+                            <th>Сенчести зони</th>
+                            <th>Транспорт</th>
+                            <th>Оградена</th>
+                            <th>Настилка</th>
+                            <th>Катерушки</th>
+                            <th>Други съоръжения</th>
+                            <th>Координати</th>
+                            <th></th>
                         </tr>
-                    ))}
+                    </thead>
+                    <tbody>
+                        {pendingPlaygrounds && pendingPlaygrounds.map((playground) => (
+                            <tr key={playground.id}>
+                                <td><button className="playground-link" onClick={() => { navigate(`/playground/${playground.id}`) }}>{playground.name}</button></td>
+                                <td>{ageGroups[playground.age_groups]}</td>
+                                <td>{playground.environment}</td>
+                                <td>{shades[playground.shade_type]}</td>
+                                <td>{playground.transport.join(', ')}</td>
+                                <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
+                                <td>{playground.floor_type.join(', ')}</td>
+                                <td>{playground.toys.join(', ')}</td>
+                                <td>{playground.facilities.join(', ')}</td>
+                                <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                                <td>
+                                    <button className="tinyButton" onClick={() => { approvePlayground(playground.id) }}>✓</button>
+                                    <button className="tinyButton" onClick={() => { disapprovePlayground(playground.id) }}>✗</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
                 <h2>Моите Площадки: </h2>
                 <table>
-                    <tr>
-                        <th>Име</th>
-                        <th>Възрастова група</th>
-                        <th>Местоположение</th>
-                        <th>Сенчести зони</th>
-                        <th>Транспорт</th>
-                        <th>Оградена</th>
-                        <th>Настилка</th>
-                        <th>Катерушки</th>
-                        <th>Други съоръжения</th>
-                        <th>Координати</th>
-                        <th>Статус</th>
-                    </tr>
-                    {myPlaygrounds && myPlaygrounds.map((playground) => (
-                        <tr key={playground.id}>
-                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_groups]}</td>
-                            <td>{playground.environment}</td>
-                            <td>{shades[playground.shade_type]}</td>
-                            <td>{playground.transport.join(', ')}</td>
-                            <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
-                            <td>{playground.floor_type.join(', ')}</td>
-                            <td>{playground.toys.join(', ')}</td>
-                            <td>{playground.facilities.join(', ')}</td>
-                            <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
-                            <td>{playground.is_new ? "Очаква одобрение" : "Одобрена"}</td>
+                    <thead>
+                        <tr>
+                            <th>Име</th>
+                            <th>Възрастова група</th>
+                            <th>Местоположение</th>
+                            <th>Сенчести зони</th>
+                            <th>Транспорт</th>
+                            <th>Оградена</th>
+                            <th>Настилка</th>
+                            <th>Катерушки</th>
+                            <th>Други съоръжения</th>
+                            <th>Координати</th>
+                            <th>Статус</th>
                         </tr>
-                    ))}
+                    </thead>
+                    <tbody>
+                        {myPlaygrounds && myPlaygrounds.map((playground) => (
+                            <tr key={playground.id}>
+                                <td><button className="playground-link" onClick={() => { navigate(`/playground/${playground.id}`) }}>{playground.name}</button></td>
+                                <td>{ageGroups[playground.age_groups]}</td>
+                                <td>{playground.environment}</td>
+                                <td>{shades[playground.shade_type]}</td>
+                                <td>{playground.transport.join(', ')}</td>
+                                <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
+                                <td>{playground.floor_type.join(', ')}</td>
+                                <td>{playground.toys.join(', ')}</td>
+                                <td>{playground.facilities.join(', ')}</td>
+                                <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                                <td>{playground.is_new ? "Очаква одобрение" : "Одобрена"}</td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
                 <h2>Моите Коментари: </h2>
                 <table>
-                    <tr>
-                        <th>Текст</th>
-                        <th>Рейтинг</th>
-                        <th>Създаден на</th>
-                    </tr>
-                    {myComments && myComments.map((comment) => (
+                    <thead>
                         <tr>
-                            <td onClick={() => { navigate(`/playground/${comment.playground_id}`) }} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
-                            <td>{comment.rating}</td>
-                            <td>{formatDate(comment.createdAt)}</td>
+                            <th>Текст</th>
+                            <th>Рейтинг</th>
+                            <th>Създаден на</th>
                         </tr>
-                    ))}
+                    </thead>
+                    <tbody>
+                        {myComments && myComments.map((comment) => (
+                            <tr key={comment.id ?? comment.createdAt}>
+                                <td><button className="playground-link" onClick={() => { navigate(`/playground/${comment.playground_id}`) }}>{comment.text ? comment.text : "Оставили сте само рейтинг"}</button></td>
+                                <td>{comment.rating}</td>
+                                <td>{formatDate(comment.createdAt)}</td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
                 <h2>Съществуващи площадки: </h2>
                 <table>
-                    <tr>
-                        <th>Име</th>
-                        <th>Възрастова група</th>
-                        <th>Местоположение</th>
-                        <th>Сенчести зони</th>
-                        <th>Транспорт</th>
-                        <th>Оградена</th>
-                        <th>Настилка</th>
-                        <th>Катерушки</th>
-                        <th>Други съоръжения</th>
-                        <th>Координати</th>
-                        <th></th>
-                    </tr>
-                    {existingPlaygrounds && existingPlaygrounds.map((playground) => (
-                        <tr key={playground.id}>
-                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_groups]}</td>
-                            <td>{playground.environment}</td>
-                            <td>{shades[playground.shade_type]}</td>
-                            <td>{playground.transport.join(', ')}</td>
-                            <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
-                            <td>{playground.floor_type.join(', ')}</td>
-                            <td>{playground.toys.join(', ')}</td>
-                            <td>{playground.facilities.join(', ')}</td>
-                            <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
-                            <td>
-                                <button className="tinyButton" onClick={() => { deletePlayground(playground.id) }}>✗</button>
-                            </td>
+                    <thead>
+                        <tr>
+                            <th>Име</th>
+                            <th>Възрастова група</th>
+                            <th>Местоположение</th>
+                            <th>Сенчести зони</th>
+                            <th>Транспорт</th>
+                            <th>Оградена</th>
+                            <th>Настилка</th>
+                            <th>Катерушки</th>
+                            <th>Други съоръжения</th>
+                            <th>Координати</th>
+                            <th></th>
                         </tr>
-                    ))}
+                    </thead>
+                    <tbody>
+                        {existingPlaygrounds && existingPlaygrounds.map((playground) => (
+                            <tr key={playground.id}>
+                                <td><button className="playground-link" onClick={() => { navigate(`/playground/${playground.id}`) }}>{playground.name}</button></td>
+                                <td>{ageGroups[playground.age_groups]}</td>
+                                <td>{playground.environment}</td>
+                                <td>{shades[playground.shade_type]}</td>
+                                <td>{playground.transport.join(', ')}</td>
+                                <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
+                                <td>{playground.floor_type.join(', ')}</td>
+                                <td>{playground.toys.join(', ')}</td>
+                                <td>{playground.facilities.join(', ')}</td>
+                                <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                                <td>
+                                    <button className="tinyButton" onClick={() => { deletePlayground(playground.id) }}>✗</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
-            </div>
+            </main>
         );
     }
     else if (Cookies.get("user") && Cookies.get("role") === "USER") {
         return (
-            <div className="page table-page">
+            <main className="page table-page">
                 <h2>Моите Площадки: </h2>
                 <table>
-                    <tr>
-                        <th>Име</th>
-                        <th>Възрастова група</th>
-                        <th>Местоположение</th>
-                        <th>Сенчести зони</th>
-                        <th>Транспорт</th>
-                        <th>Оградена</th>
-                        <th>Настилка</th>
-                        <th>Катерушки</th>
-                        <th>Други съоръжения</th>
-                        <th>Координати</th>
-                    </tr>
-                    {myPlaygrounds && myPlaygrounds.map((playground) => (
-                        <tr key={playground.id}>
-                            <td onClick={() => { navigate(`/playground/${playground.id}`) }} key={playground.id} className="playground-link">{playground.name}</td>
-                            <td>{ageGroups[playground.age_groups]}</td>
-                            <td>{playground.environment}</td>
-                            <td>{shades[playground.shade_type]}</td>
-                            <td>{playground.transport.join(', ')}</td>
-                            <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
-                            <td>{playground.floor_type.join(', ')}</td>
-                            <td>{playground.toys.join(', ')}</td>
-                            <td>{playground.facilities.join(', ')}</td>
-                            <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                    <thead>
+                        <tr>
+                            <th>Име</th>
+                            <th>Възрастова група</th>
+                            <th>Местоположение</th>
+                            <th>Сенчести зони</th>
+                            <th>Транспорт</th>
+                            <th>Оградена</th>
+                            <th>Настилка</th>
+                            <th>Катерушки</th>
+                            <th>Други съоръжения</th>
+                            <th>Координати</th>
                         </tr>
-                    ))}
+                    </thead>
+                    <tbody>
+                        {myPlaygrounds && myPlaygrounds.map((playground) => (
+                            <tr key={playground.id}>
+                                <td><button className="playground-link" onClick={() => { navigate(`/playground/${playground.id}`) }}>{playground.name}</button></td>
+                                <td>{ageGroups[playground.age_groups]}</td>
+                                <td>{playground.environment}</td>
+                                <td>{shades[playground.shade_type]}</td>
+                                <td>{playground.transport.join(', ')}</td>
+                                <td>{playground.hasFence ? "Оградена" : "Неоградена"}</td>
+                                <td>{playground.floor_type.join(', ')}</td>
+                                <td>{playground.toys.join(', ')}</td>
+                                <td>{playground.facilities.join(', ')}</td>
+                                <td>{playground.coordinates.lat}, {playground.coordinates.lng}</td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
                 <h2>Моите Коментари: </h2>
                 <table>
-                    <tr>
-                        <th>Текст</th>
-                        <th>Рейтинг</th>
-                        <th>Създаден на</th>
-                    </tr>
-                    {myComments && myComments.map((comment) => (
+                    <thead>
                         <tr>
-                            <td onClick={() => { navigate(`/playground/${comment.playground_id}`) }} className="playground-link">{comment.text ? comment.text : "Оставили сте само рейтинг"}</td>
-                            <td>{comment.rating}</td>
-                            <td>{formatDate(comment.createdAt)}</td>
+                            <th>Текст</th>
+                            <th>Рейтинг</th>
+                            <th>Създаден на</th>
                         </tr>
-                    ))}
+                    </thead>
+                    <tbody>
+                        {myComments && myComments.map((comment) => (
+                            <tr key={comment.id ?? comment.createdAt}>
+                                <td><button className="playground-link" onClick={() => { navigate(`/playground/${comment.playground_id}`) }}>{comment.text ? comment.text : "Оставили сте само рейтинг"}</button></td>
+                                <td>{comment.rating}</td>
+                                <td>{formatDate(comment.createdAt)}</td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
-            </div>
+            </main>
         );
     }
     else {

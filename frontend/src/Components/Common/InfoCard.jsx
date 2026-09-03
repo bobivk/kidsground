@@ -41,7 +41,7 @@ export const InfoCard = (props) => {
 
     return (
         <section id="info-card">
-            <div className="playground-text">
+            <article className="playground-text">
                 <h1>{props.name}</h1>
                 <p>{props.rating ? Math.round(props.rating * 100) / 100 : 0} <svg
                     className="star"
@@ -53,103 +53,105 @@ export const InfoCard = (props) => {
                     style={{
                         color: '#ffc107',
                     }}><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.787 1.615 8.162-7.551-4.008L4.449 23.255 6.064 15.093 0 9.305l8.332-1.15z" /></svg></p>
-                <div>{props.description}</div>
-                {console.log(props.ageGroups)}
-                <div id="age" className="card" style={{ marginBottom: "5px" }}>
-                    <span>
-                        <ChildIcon className="icon" />
-                        Деца между {props.ageGroups?.map((age) => ageGroups[age] ?? "N/A").join(", ")} години.
-                    </span>
-                </div>
+                <p className="playground-description">{props.description}</p>
+                <ul className="card-list">
+                    <li id="age" className="card">
+                        <span>
+                            <ChildIcon className="icon" />
+                            Деца между {props.ageGroups?.map((age) => ageGroups[age] ?? "N/A").join(", ")} години.
+                        </span>
+                    </li>
 
-                <div id="playgroundLocation" className="card">
-                    <span><ParkIcon className="icon" />{props.environment}</span>
-                </div>
-                <div id="floorType" className="card" style={{ marginBottom: "-15px", marginTop: "-10px" }}>
-                    <span className="floor-card"><FloorTypeIcon className="icon" style={{ marginTop: "20px" }} />{Array.isArray(props.floorType) ? <p>{props.floorType.join(", ")}</p> : <p>{props.floorType}</p>}</span>
-                </div>
-                <div id="shade" className="card" style={{ marginBottom: "5px" }}>
-                    <span><TreeIcon className="icon" />{shades[props.shadeType]}</span>
-                </div>
-                <div id="transport" className="card">
-                    <span className="card" >Видове Транспорт: </span> <br />
-                    {props.transport && props.transport.map((transportType) => {
-                        if (transportType.includes("паркиране")) {
-                            return (<span className="card"><ParkingIcon className="icon" />{transportType}</span>);
-                        }
-                        if (transportType === "Велоалея") {
-                            return (<span className="card"><BikeIcon className="icon transportIcon" />{transportType}</span>);
-                        }
-                        if (transportType === "Градски транспорт") {
-                            return (<span className="card"><BusIcon className="icon transportIcon" />{transportType}</span>);
-                        }
-                        if (transportType === "Пешеходен") {
-                            return (<span className="card"><WalkingPersonIcon className="icon transportIcon" />{transportType}</span>);
-                        }
-                    })}
-                </div>
-                <div id="fence" className="card">
-                    <span className="fence-card"><FenceIcon id="fence-icon" className="icon" style={{ marginTop: "22px" }} /><p>{hasFenceResults}</p></span>
-                </div>
+                    <li id="playgroundLocation" className="card">
+                        <span><ParkIcon className="icon" />{props.environment}</span>
+                    </li>
+                    <li id="floorType" className="card">
+                        <span className="floor-card"><FloorTypeIcon className="icon icon-mt-20" />{Array.isArray(props.floorType) ? <p>{props.floorType.join(", ")}</p> : <p>{props.floorType}</p>}</span>
+                    </li>
+                    <li id="shade" className="card">
+                        <span><TreeIcon className="icon" />{shades[props.shadeType]}</span>
+                    </li>
+                    <li id="transport" className="card">
+                        <span className="card">Видове Транспорт: </span> <br />
+                        {props.transport && props.transport.map((transportType) => {
+                            if (transportType.includes("паркиране")) {
+                                return (<span className="card"><ParkingIcon className="icon" />{transportType}</span>);
+                            }
+                            if (transportType === "Велоалея") {
+                                return (<span className="card"><BikeIcon className="icon transportIcon" />{transportType}</span>);
+                            }
+                            if (transportType === "Градски транспорт") {
+                                return (<span className="card"><BusIcon className="icon transportIcon" />{transportType}</span>);
+                            }
+                            if (transportType === "Пешеходен") {
+                                return (<span className="card"><WalkingPersonIcon className="icon transportIcon" />{transportType}</span>);
+                            }
+                            return null;
+                        })}
+                    </li>
+                    <li id="fence" className="card">
+                        <span className="fence-card"><FenceIcon id="fence-icon" className="icon icon-mt-22" /><p>{hasFenceResults}</p></span>
+                    </li>
+                </ul>
                 <div id="description">
-                    <p style={{ marginBottom: "-5px" }}>Площадката има: </p>
+                    <p className="facilities-intro">Площадката има: </p>
                     {props.toys && props.toys.map((toy) => {
                         switch (toy) {
                             case "Комбинирано съоръжение": {
-                                return (<span className="toy-card"><CombinedPlaygroundIcon className="icon" style={{ marginTop: "16px" }} /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><CombinedPlaygroundIcon className="icon icon-mt-16" /><p>{toy}</p><br /></span>);
                             }
                             case "Пързалка": {
-                                return (<span className="toy-card"><SlideIcon className="icon" style={{ marginTop: "20px" }} /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><SlideIcon className="icon icon-mt-20" /><p>{toy}</p><br /></span>);
                             }
                             case "Люлка": {
-                                return (<span className="toy-card"><SwingIcon className="icon" style={{ marginTop: "22px" }} /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><SwingIcon className="icon icon-mt-22" /><p>{toy}</p><br /></span>);
                             }
                             case "Люлка-везна": {
-                                return (<span className="toy-card"><SeesawIcon className="icon" style={{ marginTop: "22px" }} /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><SeesawIcon className="icon icon-mt-22" /><p>{toy}</p><br /></span>);
                             }
                             case "Пружинни клатушки": {
-                                return (<span className="toy-card"><SpringRiderIcon className="icon" style={{ marginTop: "22px" }} /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><SpringRiderIcon className="icon icon-mt-22" /><p>{toy}</p><br /></span>);
                             }
                             case "Съоръжение за катерене и баланс": {
-                                return (<span className="toy-card"><BalanceBeamIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><BalanceBeamIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             case "Стена за катерене": {
-                                return (<span className="toy-card"><ClimbingWallIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><ClimbingWallIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             case 'Динамични съоръжения за игра (батут, въжен "тролей")': {
-                                return (<span className="toy-card"><TrampolineIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><TrampolineIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             case "Съоръжения, достъпни за деца с ограничени двигателни функции": {
-                                return (<span className="toy-card"><WheelchairIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><WheelchairIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             case "Детски къщичка и беседка": {
-                                return (<span className="toy-card"><HouseIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><HouseIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             case "Въртележка": {
-                                return (<span className="toy-card"><GoRoundIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><GoRoundIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             case "Тунел": {
-                                return (<span className="toy-card"><TunnelIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><TunnelIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             case "Пясъчник и съоръжения за игра с пясък": {
-                                return (<span className="toy-card"><SandBoxIcon className="icon" style={{ marginTop: "22px" }} /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><SandBoxIcon className="icon icon-mt-22" /><p>{toy}</p><br /></span>);
                             }
                             case "Занимателни игри (ребуси, лабиринт, сметало)": {
-                                return (<span className="toy-card"><LabyrinthIcon className="icon" /><p>{toy}</p><br /></span>);
+                                return (<span className="toy-card" key={toy}><LabyrinthIcon className="icon" /><p>{toy}</p><br /></span>);
                             }
                             default: {
-                                <></>
+                                return null;
                             }
                         }
-                    })
-                    }
-                    {props.facilities && props.facilities.map((facility) => {
-                        return (<ul>
-                            <li>{facility}</li>
-                        </ul>)
                     })}
+                    {props.facilities && props.facilities.length > 0 &&
+                        <ul className="facilities-list">
+                            {props.facilities.map((facility) => (
+                                <li key={facility}>{facility}</li>
+                            ))}
+                        </ul>}
                 </div>
-            </div>
+            </article>
         </section>
     )
 }

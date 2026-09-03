@@ -1,12 +1,11 @@
-import '../../static/stylesheets/styles.css'
-import '../../static/stylesheets/main.css'
 import { Map } from '../Common/Map'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 
 export const HomePage = () => {
 
+    const navigate = useNavigate();
     const cities = ["Пловдив", "Пазарджик", "София", "Бургас", "Стара Загора", "Кърджали", "Асеновград", "Видин", "Варна", "Благоевград", "Хасково", "Враца", "Русе", "Сандански", "Гоце Делчев", "Сливен", "Ямбол", "Добрич", "Шумен", "Плевен", "Велико Търново", "Монтана", "Ловеч", "Габрово", "Разград", "Силистра", "Кюстендил", "Смолян"];
     const colors = ["#F24630", "#FECD1B", "#A3C939", "#4a8f9b"]
     const [currentCityIndex, setCurrentCityIndex] = useState(0);
@@ -41,15 +40,15 @@ export const HomePage = () => {
     }, [playgroundCount])
 
     return (
-        <div className="page">
-            <div className="main-text">
+        <main className="page">
+            <header className="main-text">
                 <h2>Нека открием</h2>
-                <span className="title-text">
-                    <h1 className="detskite">Детските </h1>
-                    <h1 className="ploshtadki">площадки </h1>
-                </span>
-                <h2>на <h2 className={fadeClass} style={{ color: colors[currentColorIndex], display: "inline" }}>{cities[currentCityIndex]}</h2> заедно!</h2>
-            </div>
+                <h1 className="title-text">
+                    <span className="detskite">Детските </span>
+                    <span className="ploshtadki">площадки </span>
+                </h1>
+                <h2>на <span className={fadeClass} style={{ color: colors[currentColorIndex], display: "inline" }}>{cities[currentCityIndex]}</span> заедно!</h2>
+            </header>
 
             <div className="subtitle">
                 <h3>Участвай и ти в създаването <br />
@@ -73,15 +72,15 @@ export const HomePage = () => {
                     <div className="number-of-playgrounds">
                         <div>
                             <div id="numberOfPlaygrounds">{playgroundCount}</div>
-                            <div className="number-of-playgrounds-text">детски площадки</div>
+                            <p className="number-of-playgrounds-text">детски площадки</p>
                         </div>
                     </div>
                 </section>
                 <div id="map-wrapper">
                     <section id="map">
                         <Map onCoordinatesChange={() => { }} />
-                        <div >
-                            <Link to="/add"><button className="add-playground-btn add"> <i className="fa-regular fa-square-plus"></i>Добави детска площадка</button></Link>
+                        <div>
+                            <button className="add-playground-btn add" onClick={() => navigate('/add')}> <i className="fa-regular fa-square-plus"></i>Добави детска площадка</button>
                         </div>
                     </section>
                 </div>
@@ -89,7 +88,7 @@ export const HomePage = () => {
             <section id="about-us" className="container">
                 <section className="left-outer-column">
                     <div className="left-inner-column">
-                        <p>Какво?</p>
+                        <h2>Какво?</h2>
                     </div>
                     <p className="outer-text">
                         KIDSground е инициатива
@@ -107,7 +106,7 @@ export const HomePage = () => {
                 </section>
                 <section className="middle-outer-column">
                     <div className="middle-inner-column">
-                        <p>Защо?</p>
+                        <h2>Защо?</h2>
                     </div>
                     <p className="outer-text">
                         Липсва единна карта, която да отразява
@@ -124,7 +123,7 @@ export const HomePage = () => {
                 </section>
                 <section className="right-outer-column">
                     <div className="right-inner-column">
-                        <p>Как?</p>
+                        <h2>Как?</h2>
                     </div>
                     <p className="outer-text">
                         Отвори картата,
@@ -141,18 +140,26 @@ export const HomePage = () => {
                         мобилизация.</p>
                 </section>
             </section>
-            <section class="social-icons">
-                <a href="https://www.facebook.com/profile.php?id=61552317088801" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
-                </a>
-                <a href="https://instagram.com/kidsground.bg" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
-                </a>
-                <a href="mailto:info@kidsground.bg" target="_blank">
-                    <img src="https://kidsground-permanent-images-bucket-rtyjfdnfxxdgfrq34231fngdhrz.s3.eu-central-1.amazonaws.com/gmail.png" alt="Email Icon" />
-                </a>
-            </section>
-        </div>
+            <footer className="social-icons">
+                <ul>
+                    <li>
+                        <a href="https://www.facebook.com/profile.php?id=61552317088801" target="_blank" rel="noreferrer">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://instagram.com/kidsground.bg" target="_blank" rel="noreferrer">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:info@kidsground.bg" target="_blank" rel="noreferrer">
+                            <img src="https://kidsground-permanent-images-bucket-rtyjfdnfxxdgfrq34231fngdhrz.s3.eu-central-1.amazonaws.com/gmail.png" alt="Email Icon" />
+                        </a>
+                    </li>
+                </ul>
+            </footer>
+        </main>
 
     )
 }

@@ -1,14 +1,13 @@
-import '../../static/stylesheets/styles.css'
-import '../../static/stylesheets/playgroundForm.css'
 import { Map } from '../Common/Map'
 import { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { Modal } from '../Common/CreatedModal'
 import { AddImage } from '../Common/AddImage'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import Cookies from "js-cookie"
 
 export const PlaygroundFormPage = () => {
+
+    const navigate = useNavigate();
 
     const facilityRef = useRef(null);
     const locationRef = useRef(null);
@@ -236,7 +235,7 @@ export const PlaygroundFormPage = () => {
         event.preventDefault();
         let playgroundName = name;
         if (name === "") {
-            await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates.lat},${coordinates.lng}&language=bg&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`).then((response) => {
+            await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates.lat},${coordinates.lng}&language=bg&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`).then((response) => {
                 if (response.status === 200) {
                     return response.json()
                 } else {
@@ -299,287 +298,287 @@ export const PlaygroundFormPage = () => {
 
     if (Cookies.get("user")) {
         return (
-            <div className="page background">
+            <main className="page background">
                 <section id="add-playground">
                     <form onSubmit={createPlayground} id="playground-form" className="form-container">
-                        <h2 style={{ textAlign: "center" }}>Добави площадка</h2>
-                        <section className="question" id="name-question">
-                            <label className="form-label" for="name-question">1. Име:</label>
+                        <h1 className="form-title">Добави площадка</h1>
+                        <fieldset className="question" id="name-question">
+                            <legend className="form-label">1. Име:</legend>
                             <br />
                             <input onChange={changeName} id="playground-name-input" type="text" onFocus={() => { resetFocus(); setIsNameFocused(true) }} onBlur={() => setIsNameFocused(false)} className={isNameFocused ? 'text-input focused' : 'text-input'} placeholder="Име на площадката, ако има такова." name="name" />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="age-group-question">
-                            <label className="form-label" for="age-group-question">2. За каква възрастова група е подходяща площадката? *</label>
+                        <fieldset className="question" id="age-group-question">
+                            <legend className="form-label">2. За каква възрастова група е подходяща площадката? *</legend>
                             <br />
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeAgeGroups} className="playground-input playground-input-radio" id="ZERO_TO_THREE" name="age_groups" value="ZERO_TO_THREE" />
-                                <label for="ZERO_TO_THREE">0-3г. (С придружител)</label>
+                                <label htmlFor="ZERO_TO_THREE">0-3г. (С придружител)</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeAgeGroups} className="playground-input playground-input-radio" id="THREE_TO_SIX" name="age_groups" value="THREE_TO_SIX" />
-                                <label for="THREE_TO_SIX">3-6г.</label>
+                                <label htmlFor="THREE_TO_SIX">3-6г.</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeAgeGroups} className="playground-input playground-input-radio" id="THREE_TO_TWELVE" name="age_groups" value="THREE_TO_TWELVE" />
-                                <label for="THREE_TO_TWELVE">3-12г.</label>
+                                <label htmlFor="THREE_TO_TWELVE">3-12г.</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeAgeGroups} className="playground-input playground-input-radio" id="SIX_TO_TWELVE" name="age_groups" value="SIX_TO_TWELVE" />
-                                <label for="SIX_TO_TWELVE">6-12г.</label>
+                                <label htmlFor="SIX_TO_TWELVE">6-12г.</label>
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="environment-question">
-                            <label className="form-label" for="environment-question">3. Какво е местоположението на детската площадка? *</label>
+                        <fieldset className="question" id="environment-question">
+                            <legend className="form-label">3. Какво е местоположението на детската площадка? *</legend>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="boulevard" name="environment" value="До голям булевард" />
-                                <label for="boulevard">До голям булевард</label>
+                                <label htmlFor="boulevard">До голям булевард</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="park" name="environment" value="В парк или градинка" />
-                                <label for="park">В парк или градинка</label>
+                                <label htmlFor="park">В парк или градинка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeLocation} className="playground-input playground-input-radio" id="apartments" name="environment" value="В междублоково пространство" />
-                                <label for="apartments">В междублоково пространство</label>
+                                <label htmlFor="apartments">В междублоково пространство</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={otherChangeLocation} className="playground-input playground-input-radio" id="other-place" name="environment" value={otherLocationText} />
-                                <label for="other-place">Друго</label>
+                                <label htmlFor="other-place">Друго</label>
                                 <input type="text" onClick={otherChangeLocation} onChange={otherChangeLocationText} onFocus={() => { setIsOtherLocationFocused(true) }} className={isOtherLocationFocused ? 'focused' : ''} ref={locationRef} id="other-location-text" />
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="shade-question">
-                            <label className="form-label" for="shade-question">4. Има ли сенчести зони? *</label>
+                        <fieldset className="question" id="shade-question">
+                            <legend className="form-label">4. Има ли сенчести зони? *</legend>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="tree-shade" name="shade" value="trees" />
-                                <label for="tree-shade">Да, естествена сянка от дървета</label>
+                                <label htmlFor="tree-shade">Да, естествена сянка от дървета</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="fake-shade" name="shade" value="fake" />
-                                <label for="fake-shade">Да, изкуствена сянка от съоръжение</label>
+                                <label htmlFor="fake-shade">Да, изкуствена сянка от съоръжение</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeShaded} className="playground-input playground-input-radio" id="no-shade" name="shade" value="none" />
-                                <label for="no-shade">Не, няма сянка</label>
+                                <label htmlFor="no-shade">Не, няма сянка</label>
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="transport-question">
-                            <label className="form-label" for="transport-question">5. Какъв е транспортният достъп? *</label>
+                        <fieldset className="question" id="transport-question">
+                            <legend className="form-label">5. Какъв е транспортният достъп? *</legend>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeTransport} className="playground-input" id="free-parking" name="transport" value="Свободно паркиране" />
-                                <label for="free-parking">Свободно паркиране</label>
+                                <label htmlFor="free-parking">Свободно паркиране</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeTransport} className="playground-input" id="paid-parking" name="transport" value="Платено паркиране" />
-                                <label for="paid-parking">Платено паркиране</label>
+                                <label htmlFor="paid-parking">Платено паркиране</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeTransport} className="playground-input" id="bike-lane" name="transport" value="Велоалея" />
-                                <label for="bike-lane">Велоалея</label>
+                                <label htmlFor="bike-lane">Велоалея</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeTransport} className="playground-input" id="public_transport" name="transport" value="Градски Транспорт" />
-                                <label for="public_transport">Градски Транспорт</label>
+                                <label htmlFor="public_transport">Градски Транспорт</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeTransport} className="playground-input" id="pedestrian" name="transport" value="Пешеходен" />
-                                <label for="pedestrian">Пешеходен</label>
+                                <label htmlFor="pedestrian">Пешеходен</label>
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="fence-question">
-                            <label className="form-label" for="fence-question">6. Има ли ограда? *</label>
+                        <fieldset className="question" id="fence-question">
+                            <legend className="form-label">6. Има ли ограда? *</legend>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeIsFenced} className="playground-input" id="yes" name="fence" value="true" />
-                                <label for="yes">Да</label>
+                                <label htmlFor="yes">Да</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="radio" onChange={changeIsFenced} className="playground-input" id="no" name="fence" value="false" />
-                                <label for="no">Не</label>
+                                <label htmlFor="no">Не</label>
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="floor-question">
-                            <label className="form-label" for="floor-question">7. Каква е настилката? *</label>
+                        <fieldset className="question" id="floor-question">
+                            <legend className="form-label">7. Каква е настилката? *</legend>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFloor} className="playground-input" id="asphalt" name="floor" value="Асфалт / бетонни плочи" />
-                                <label for="asphalt">Асфалт / бетонни плочи</label>
+                                <label htmlFor="asphalt">Асфалт / бетонни плочи</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFloor} className="playground-input" id="grass" name="floor" value="Тревна настилка" />
-                                <label for="grass">Тревна настилка</label>
+                                <label htmlFor="grass">Тревна настилка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFloor} className="playground-input" id="rubber" name="floor" value="Ударопоглъщаща гумена настилка" />
-                                <label for="rubber">Ударопоглъщаща гумена настилка</label>
+                                <label htmlFor="rubber">Ударопоглъщаща гумена настилка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFloor} className="playground-input" id="mulch" name="floor" value="Стърготини (мулч)" />
-                                <label for="mulch">Стърготини (мулч)</label>
+                                <label htmlFor="mulch">Стърготини (мулч)</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFloor} className="playground-input" id="dirt" name="floor" value="Без настилка (пръст)" />
-                                <label for="dirt">Без настилка (пръст)</label>
+                                <label htmlFor="dirt">Без настилка (пръст)</label>
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="swings-question">
-                            <label className="form-label" for="swings-question">8. С какви катерушки разполага площадката? *</label>
+                        <fieldset className="question" id="swings-question">
+                            <legend className="form-label">8. С какви катерушки разполага площадката? *</legend>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="combined" name="swings" value="Комбинирано съоръжение" />
-                                <label for="combined">Комбинирано съоръжение</label>
+                                <label htmlFor="combined">Комбинирано съоръжение</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="slide" name="swings" value="Пързалка" />
-                                <label for="slide">Пързалка</label>
+                                <label htmlFor="slide">Пързалка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="swing" name="swings" value="Люлка" />
-                                <label for="swing">Люлка</label>
+                                <label htmlFor="swing">Люлка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="seesaw" name="swings" value="Люлка-везна" />
-                                <label for="seesaw">Люлка-везна</label>
+                                <label htmlFor="seesaw">Люлка-везна</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="spring-riders" name="swings" value="Пружинни клатушки" />
-                                <label for="spring-riders">Пружинни клатушки</label>
+                                <label htmlFor="spring-riders">Пружинни клатушки</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="balance-beam" name="swings" value="Съоръжение за катерене и баланс" />
-                                <label for="balance-beam">Съоръжение за катерене и баланс</label>
+                                <label htmlFor="balance-beam">Съоръжение за катерене и баланс</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="climbing-wall" name="swings" value="Стена за катерене" />
-                                <label for="climbing-wall">Стена за катерене</label>
+                                <label htmlFor="climbing-wall">Стена за катерене</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="dynamic" name="swings" value='Динамични съоръжения за игра (батут, въжен "тролей")' />
-                                <label for="dynamic">Динамични съоръжения за игра (батут, въжен "тролей")</label>
+                                <label htmlFor="dynamic">Динамични съоръжения за игра (батут, въжен "тролей")</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="accessible" name="swings" value="Съоръжения, достъпни за деца с ограничени двигателни функции" />
-                                <label for="accessible">Съоръжения, достъпни за деца с ограничени двигателни функции</label>
+                                <label htmlFor="accessible">Съоръжения, достъпни за деца с ограничени двигателни функции</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="house" name="swings" value="Детски къщичка и беседка" />
-                                <label for="house">Детски къщичка и беседка</label>
+                                <label htmlFor="house">Детски къщичка и беседка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="go-round" name="swings" value="Въртележка" />
-                                <label for="go-round">Въртележка</label>
+                                <label htmlFor="go-round">Въртележка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="tunnel" name="swings" value="Тунел" />
-                                <label for="tunnel">Тунел</label>
+                                <label htmlFor="tunnel">Тунел</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="sandbox" name="swings" value="Пясъчник и съоръжения за игра с пясък" />
-                                <label for="sandbox">Пясъчник и съоръжения за игра с пясък</label>
+                                <label htmlFor="sandbox">Пясъчник и съоръжения за игра с пясък</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeToys} className="playground-input" id="games" name="swings" value="Занимателни игри (ребуси, лабиринт, сметало)" />
-                                <label for="games">Занимателни игри (ребуси, лабиринт, сметало)</label>
+                                <label htmlFor="games">Занимателни игри (ребуси, лабиринт, сметало)</label>
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
 
-                        <section className="question" id="facilities-question">
-                            <label className="form-label" for="facilities-question">9. Други съоръжения? *</label>
+                        <fieldset className="question" id="facilities-question">
+                            <legend className="form-label">9. Други съоръжения? *</legend>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="wc" name="facilities" value="Тоалетна" />
-                                <label for="wc">Тоалетна</label>
+                                <label htmlFor="wc">Тоалетна</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="cafe" name="facilities" value="Барче / кафене" />
-                                <label for="cafe">Барче / кафене</label>
+                                <label htmlFor="cafe">Барче / кафене</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="bin" name="facilities" value="Koшче за боклук" />
-                                <label for="bin">Koшче за боклук</label>
+                                <label htmlFor="bin">Koшче за боклук</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="fountain" name="facilities" value="Чешма" />
-                                <label for="fountain">Чешма</label>
+                                <label htmlFor="fountain">Чешма</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="bench" name="facilities" value="Пейка" />
-                                <label for="bench">Пейка</label>
+                                <label htmlFor="bench">Пейка</label>
                             </div>
                             <br />
                             <div className="choice">
                                 <input type="checkbox" onChange={changeFacilities} className="playground-input" id="none" name="facilities" value="Няма" />
-                                <label for="none">Няма</label>
+                                <label htmlFor="none">Няма</label>
                             </div>
                             <br />
                             <div className="choice">
-                                <input type="checkbox" onChange={otherChangeFacilities} checked={isOtherFacilityChecked} className="playground-input" id="bench" name="facilities" value={otherFacilityText} />
-                                <label for="others">Друго</label>
+                                <input type="checkbox" onChange={otherChangeFacilities} checked={isOtherFacilityChecked} className="playground-input" id="others" name="facilities" value={otherFacilityText} />
+                                <label htmlFor="others">Друго</label>
                                 <input type="text" onChange={otherChangeFacilitiesText} onFocus={() => { setIsOtherFacilityFocused(true) }} className={isOtherFacilityFocused ? 'focused' : ''} ref={facilityRef} id="other-facilities-text" />
                             </div>
                             <br />
-                        </section>
+                        </fieldset>
                         <AddImage onChangeImage={onChangeImage} confirmation={confirmation} sendPhotos={{}} noButtonEvent={noButtonEvent} />
-                        {photos && Array.from(photos).forEach((photo) => (
-                            <p>{photo.name}</p>
+                        {photos && Array.from(photos).map((photo) => (
+                            <p key={photo.name}>{photo.name}</p>
                         ))}
-                        <section className="question" id="description-question">
-                            <label className="form-label" for="description">10. Допълнително описание:</label>
+                        <fieldset className="question" id="description-question">
+                            <legend className="form-label">10. Допълнително описание:</legend>
                             <br />
-                            <textarea type="text" onChange={changeDescription} className="text-input" name="description" rows="10" cols="20"></textarea>
-                        </section>
+                            <textarea onChange={changeDescription} className="text-input" name="description" rows="10" cols="20"></textarea>
+                        </fieldset>
                         <section>
                             <div>
                                 <h4>Преместете отметката на картата, за да посочите желаното място на площадката:   </h4>
@@ -588,14 +587,14 @@ export const PlaygroundFormPage = () => {
                                 </div>
                             </div>
                             <div className="add-playground-btns" >
-                                <button onclick={createPlayground} disabled={add} id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
-                                <Link to="/"><button id="cancel-add-playground-btn" type="button" onclick="closeForm()"><i className="fa-solid fa-xmark"></i> Назад</button></Link>
+                                <button disabled={add} id="add-playground-btn" type="submit"><i className="fa-solid fa-plus"></i> Добави</button>
+                                <button id="cancel-add-playground-btn" type="button" onClick={() => navigate("/")}><i className="fa-solid fa-xmark"></i> Назад</button>
                             </div>
                         </section>
                     </form>
                     {showModal && <Modal onClose={() => { setShowModal(false) }} />}
                 </section>
-            </div>
+            </main>
         )
     } else {
         return (

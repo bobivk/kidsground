@@ -1,0 +1,113 @@
+@import "react-image-gallery/styles/image-gallery.css";
+
+.image-gallery-left-nav,
+.image-gallery-right-nav {
+    padding: 0;
+}
+
+.image-gallery-play-button {
+    display: none;
+}
+
+#edit-playground {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-teal);
+    fill: var(--accent-teal);
+}
+
+#edit-playground:hover {
+    color: var(--accent-teal-darker);
+    fill: var(--accent-teal-darker);
+}
+
+#edit-playground .icon {
+    margin-right: 5px;
+}
+
+#edit-playground p {
+    margin-right: 5px;
+}
+
+#commentSectionWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#commentSection {
+    flex-direction: column;
+    border: 1px solid var(--accent-teal-dark);
+    width: 50vw;
+    border-radius: var(--radius);
+    margin-bottom: 40px;
+}
+
+#commentField {
+    border: 1.5px solid var(--main-color);
+    border-radius: var(--radius);
+    margin-bottom: 5px;
+    width: 80%;
+    margin-right: 20px;
+}
+
+.commentContent {
+    border: 1.5px solid var(--main-color);
+    border-radius: var(--radius);
+    margin-bottom: 5px;
+    padding: 20px;
+    padding-left: 5px;
+    width: 80%;
+}
+
+#commentField,
+#commentFieldLabel,
+#commentSection h2,
+.comment {
+    margin-left: 12px;
+}
+
+#commentField:focus {
+    border-width: 3px;
+}
+
+#commentButton {
+    color: var(--text-grey);
+    background-color: var(--main-color);
+    border: 1px solid var(--border-teal);
+    cursor: pointer;
+    border-radius: var(--radius-lg);
+    font-size: 15px;
+}
+
+#commentButton:disabled {
+    cursor: not-allowed;
+    background-color: var(--main-color-translucent);
+}
+
+.name-rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* PlaygroundPage-specific rating spacing (was a bare `.rating` rule in
+   playground.css, layered on top of the base `.rating` padding from rating.css;
+   both applied on this page). Kept as a bare selector to preserve behavior. */
+.rating {
+    margin-right: 30px;
+}
+
+/* Comment cards are <article> in the semantic markup. */
+.comment {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 912px) {
+    #commentSection {
+        width: 100vw;
+    }
+
+    #commentField {
+        width: 50%;
+    }
+}

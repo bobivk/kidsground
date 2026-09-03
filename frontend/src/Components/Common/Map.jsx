@@ -1,7 +1,6 @@
 import { GoogleMap, useLoadScript, Marker, InfoWindow, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import '../../static/stylesheets/map.css';
 import { ReactComponent as Terrain } from "../../static/icons/layers_8.svg";
 import { ReactComponent as Location } from "../../static/icons/location.svg";
 import { ReactComponent as Legend } from "../../static/icons/legend.svg";
@@ -93,7 +92,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
     };
 
     const { isLoaded, loadError } = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
         libraries,
     });
 
@@ -239,7 +238,7 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                         <div id="infoWindow">
                             {selectedMarker.image_links[0] && <img src={selectedMarker.image_links[0]} alt="playground_photo" height="50px" style={{ marginTop: "20px" }} />}
                             <p>{selectedMarker.description}</p>
-                            <Link to={`/playground/${selectedMarker.id}`}><a>Виж Повече</a></Link>
+                            <Link to={`/playground/${selectedMarker.id}`}>Виж Повече</Link>
                         </div>
                     </InfoWindow>
                 }
@@ -263,26 +262,28 @@ export const Map = ({ onCoordinatesChange, currentPlaygroundCords }) => {
                 {showLegend &&
                     <section id="legend-window">
                         <p>Легенда</p>
-                        <section className='legend-row'>
-                            <img height="35px" src='user_location.png' alt='user_location' />
-                            <p>Моята локация</p>
-                        </section>
-                        <section className='legend-row'>
-                            <img src='zero_to_three.png' alt='zero_to_three' />
-                            <p>За деца от 0 до 3 години</p>
-                        </section>
-                        <section className='legend-row'>
-                            <img src='three_to_six.png' alt='three_to_six.png' />
-                            <p>За деца от 3 до 6 години</p>
-                        </section>
-                        <section className='legend-row'>
-                            <img src='three_to_twelve.png' alt='three_to_twelve' />
-                            <p>За деца от 3 до 12 години</p>
-                        </section>
-                        <section className='legend-row'>
-                            <img src='six_to_twelve.png' alt='six_to_twelve' />
-                            <p>За деца от 6 до 12 години</p>
-                        </section>
+                        <ul className="legend-list">
+                            <li className='legend-row'>
+                                <img height="35px" src='user_location.png' alt='user_location' />
+                                <p>Моята локация</p>
+                            </li>
+                            <li className='legend-row'>
+                                <img src='zero_to_three.png' alt='zero_to_three' />
+                                <p>За деца от 0 до 3 години</p>
+                            </li>
+                            <li className='legend-row'>
+                                <img src='three_to_six.png' alt='three_to_six.png' />
+                                <p>За деца от 3 до 6 години</p>
+                            </li>
+                            <li className='legend-row'>
+                                <img src='three_to_twelve.png' alt='three_to_twelve' />
+                                <p>За деца от 3 до 12 години</p>
+                            </li>
+                            <li className='legend-row'>
+                                <img src='six_to_twelve.png' alt='six_to_twelve' />
+                                <p>За деца от 6 до 12 години</p>
+                            </li>
+                        </ul>
                     </section>}
             </GoogleMap>
             <Location onClick={showCurrentLocation} id="location" />

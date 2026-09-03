@@ -1,0 +1,39 @@
+.star {
+    transition: color 200ms;
+    position: absolute;
+}
+
+.star-container {
+    display: inline-block;
+    position: relative;
+    width: 25px;
+    height: 25px;
+}
+
+.star.left {
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+}
+
+.star.right {
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+/* Rating group is a <fieldset> in the semantic markup; hide UA chrome + the legend. */
+.rating {
+    border: none;
+    margin: 0;
+    padding-left: 8px;
+    min-inline-size: auto;
+}
+
+.rating-legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

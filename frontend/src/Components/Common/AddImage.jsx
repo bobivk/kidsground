@@ -36,7 +36,7 @@ export const AddImage = ({ onChangeImage, confirmation, sendPhotos, noButtonEven
         return (
             <section id="warning-wrapper">
                 <div id="warning">
-                    <WarningIcon id="warning-icon" style={{ fill: "#FECD1B", marginTop: "17px", marginRight: "20px" }} />
+                    <WarningIcon id="warning-icon" />
                     <p id="warning-text">За да добавите снимки, трябва да сте влезли профила си.</p>
                 </div>
             </section>

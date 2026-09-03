@@ -1,0 +1,109 @@
+/* Global base rules shared across all pages. In the original code these lived
+   scattered across styles.css and several page stylesheets but applied globally
+   because there are no CSS Modules. Consolidated here; order preserved. */
+
+.page {
+  z-index: 2;
+  position: relative;
+  top: 15vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.background {
+  overflow-x: hidden;
+  margin-left: -1vw;
+  width: 102vw;
+  background-image: url("../../playgroundFormBackground.png");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: contain;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+/* Warning box (AddImage logged-out state). */
+#warning-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#warning {
+  border: 2px solid var(--warning-yellow);
+  padding: 10px;
+  border-radius: var(--radius);
+  display: inline-flex;
+  background-color: rgb(255, 255, 240);
+}
+
+#warning-text {
+  text-align: center;
+  font-size: 24px;
+}
+
+#warning-icon {
+  fill: var(--warning-yellow);
+  margin-top: 17px;
+  margin-right: 20px;
+}
+
+@media only screen and (max-width: 540px) {
+  #warning-text {
+    font-size: 14px;
+  }
+
+  #warning-icon {
+    height: 35px;
+  }
+}
+
+/* ---- Global element rules (previously leaked from page stylesheets) ---- */
+
+/* Body background (was in playground.css, applied globally). */
+body {
+  background-size: cover;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Global button transition + cursor (was in playground.css and profilePage.css). */
+button {
+  transition: background 1s;
+  cursor: pointer;
+}
+
+/* Global button hover recolor (was in registration.css). */
+button:hover {
+  background-color: var(--main-color);
+  color: var(--text-grey);
+}
+
+/* Global anchor styling (was in navbar.css). */
+a {
+  border: none;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--text-grey);
+}
+
+a:hover {
+  color: var(--accent-teal);
+  cursor: pointer;
+}
+
+/* Global input styling (was in registration.css). */
+input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 18px 15px;
+}

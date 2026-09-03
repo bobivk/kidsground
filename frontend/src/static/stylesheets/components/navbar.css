@@ -12,7 +12,7 @@
 }
 
 nav {
-    background: #FCFCFC;
+    background: var(--text-on-dark-background);
     position: fixed;
     display: inline-flex;
     justify-content: right;
@@ -24,6 +24,15 @@ nav {
     text-wrap: nowrap;
 }
 
+/* Nav link list introduced by the semantic refactor — no bullets/indentation. */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
 .site-logo {
     margin-right: 3vw;
     margin-left: 7vw;
@@ -33,20 +42,29 @@ nav {
     height: 15vh;
 }
 
-a {
+/* Logout is an action button styled to look like the other nav links. */
+.logout-btn {
     border: none;
+    background: none;
     font-size: 20px;
+    font-family: inherit;
     text-decoration: none;
     color: var(--text-grey);
+    padding: 0;
+    cursor: pointer;
 }
 
-a:hover {
-    color: #62BEC9;
-    cursor: pointer;
+.logout-btn:hover {
+    color: var(--accent-teal);
+    background: none;
 }
 
 @media only screen and (max-width: 720px) {
     a {
+        font-size: 12px;
+    }
+
+    .logout-btn {
         font-size: 12px;
     }
 
@@ -62,6 +80,10 @@ a:hover {
 /*Galaxy fold...*/
 @media only screen and (max-width: 280px) {
     a {
+        font-size: 8px;
+    }
+
+    .logout-btn {
         font-size: 8px;
     }
 

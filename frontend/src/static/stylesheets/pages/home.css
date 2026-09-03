@@ -1,0 +1,371 @@
+.background-img {
+  margin-top: -60vh;
+  width: 100vw;
+  object-fit: contain;
+  z-index: 1;
+  margin-left: -0.4vw;
+}
+
+.main-text,
+.subtitle {
+  font-weight: normal;
+  position: relative;
+  z-index: 2;
+  padding-left: 3%;
+}
+
+.subtitle {
+  font-size: 20px;
+}
+
+.title-text {
+  display: inline-flex;
+}
+
+.title-text .detskite {
+  color: #F24630;
+  padding-right: 0.5vw;
+}
+
+.title-text .ploshtadki {
+  color: var(--warning-yellow);
+}
+
+.main-text h2,
+.main-text h1 {
+  margin: 0;
+  /* or padding: 0; */
+}
+
+/* .title-text is now an <h1>; keep its original bottom spacing, which the
+     generic .main-text h1 { margin: 0 } above would otherwise cancel. */
+.main-text h1.title-text {
+  margin-bottom: 10px;
+  /* Adjust the value as needed */
+}
+
+button i {
+  background-color: var(--main-color);
+  color: var(--text-grey);
+}
+
+#map-text {
+  display: flex;
+  padding: 20px;
+  justify-content: start;
+}
+
+.map-page-main-text,
+.number-of-playgrounds-text {
+  font-size: 20px;
+}
+
+/* Was a <div>; keep it flush now that it is a <p>. */
+.number-of-playgrounds-text {
+  margin: 0;
+}
+
+.add-playground-btn {
+  display: flex;
+  width: 39.8vw;
+  color: var(--text-grey);
+  justify-content: center;
+  margin-top: 10px;
+  /* Add some margin if needed */
+  font-size: 30px;
+  align-items: center;
+  background-color: var(--main-color);
+  border: 1px solid var(--border-teal);
+  filter: var(--shadow-soft);
+  cursor: pointer;
+  transition: background 1s;
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: var(--radius-lg);
+  outline: 0;
+  margin-bottom: 20px;
+}
+
+.map-title {
+  font-size: 32px;
+  color: #F24630;
+}
+
+#numberOfPlaygrounds {
+  font-size: 100px;
+  font-weight: bold;
+}
+
+.text-with-counter {
+  text-align: end;
+  width: 30vw;
+  margin-right: 3vw;
+}
+
+/* Style for the container */
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 15%;
+  background-color: #EDEDED;
+  padding: 5%;
+}
+
+/* Style for the outer rectangle */
+.left-outer-column,
+.middle-outer-column,
+.right-outer-column {
+  width: 18vw;
+  position: relative;
+  margin-top: 0;
+  color: black;
+  border-radius: 20px;
+  margin-bottom: 2vh;
+}
+
+.left-outer-column {
+  background-color: #D0DEAE;
+}
+
+.middle-outer-column {
+  background-color: #EFB39B;
+}
+
+.right-outer-column {
+  background-color: #F3DFAC;
+}
+
+.left-inner-column,
+.middle-inner-column,
+.right-inner-column {
+  width: 65%;
+  /* Adjusted size for the inner rectangle */
+  height: 30%;
+  /* Adjusted size for the inner rectangle */
+  position: relative;
+  top: 0;
+  /* Aligns the inner rectangle at the top */
+  left: 50%;
+  padding-top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 30px;
+  border-radius: 10px;
+}
+
+/* Column headings are now <h2>; keep the exact look the styled container gave
+   them (30px white, centered) with no default heading margins. */
+.left-inner-column h2,
+.middle-inner-column h2,
+.right-inner-column h2 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: normal;
+  color: inherit;
+}
+
+.left-inner-column {
+  background-color: #A3C939;
+}
+
+.middle-inner-column {
+  background-color: #EF452D;
+}
+
+.right-inner-column {
+  background-color: #FEC91B;
+}
+
+/* Text style for the outer paragraphs */
+.outer-text {
+  height: 22rem;
+  margin-top: 20px;
+  /* Margin below the inner rectangle */
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  max-width: 100%;
+  /* Ensures text doesn't exceed the outer rectangle */
+  /* overflow: hidden; Hides text that exceeds the max width */
+  /* text-overflow: ellipsis; Shows ellipsis for overflowed text */
+  /* white-space: nowrap; Prevents text from wrapping */
+}
+
+.social-icons {
+  text-align: center;
+  margin-top: -40px;
+  margin-bottom: 20px;
+}
+
+/* Social links are a <ul> inside a <footer> — strip default list styling so the
+   inline centered row is unchanged. */
+.social-icons ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.social-icons li {
+  display: inline;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.social-icons img {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+}
+
+
+@media only screen and (max-width: 1280px) {
+  .text-with-counter {
+    width: 95vw;
+    margin-left: 0vw;
+    order: 2;
+    text-align: center;
+  }
+
+  #map-text {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #map-wrapper {
+    order: 1;
+  }
+
+  .add-playground-btn {
+    width: 60vw;
+  }
+
+  .detskite {
+    margin-right: 10px !important;
+  }
+}
+
+
+@media only screen and (max-width: 912px) {
+  .add-playground-btn {
+    font-size: 14px;
+  }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    font-size: 9px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}
+
+
+@media only screen and (max-height: 800px) {
+  .background-img {
+    margin-top: -18vh;
+  }
+}
+
+@media only screen and (max-height: 960px) {
+  .background-img {
+    margin-top: -60vh;
+  }
+
+}
+
+@media only screen and (max-height: 1024px) {
+  .background-img {
+    margin-top: -40vh;
+  }
+
+  .left-outer-column,
+  .middle-outer-column,
+  .right-outer-column {
+    width: 25vw;
+  }
+
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-inner-column,
+  .middle-inner-column,
+  .right-inner-column {
+    width: 85vw;
+    /* Adjusted size for the inner rectangle */
+  }
+
+  .left-outer-column,
+  .middle-outer-column,
+  .right-outer-column {
+    width: 85vw;
+  }
+
+  .outer-text {
+    height: auto;
+  }
+
+}
+
+@media only screen and (max-height: 1368px) and (max-width: 1024px) {
+  .background-img {
+    margin-top: -20vh;
+  }
+}
+
+@media only screen and (max-height: 800px) and (max-width: 1024px) {
+  .background-img {
+    margin-top: -48vh;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+
+  .left-inner-column,
+  .middle-inner-column,
+  .right-inner-column {
+    width: 45vw;
+    /* Adjusted size for the inner rectangle */
+  }
+}
+
+
+@media only screen and (max-width: 430px) {
+  .background-img {
+    margin-top: -12vh;
+  }
+}
+
+/*Galaxy fold...*/
+@media only screen and (max-width: 280px) {
+  .background-img {
+    margin-top: -10vh;
+  }
+
+  .main-text {
+    font-size: 10px;
+  }
+
+  .subtitle {
+    font-size: 8px;
+  }
+
+  button {
+    font-size: 6px;
+  }
+}

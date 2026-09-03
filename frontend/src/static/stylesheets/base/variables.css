@@ -1,0 +1,29 @@
+/* Design tokens — single source of truth.
+   Values match the previously hardcoded literals exactly (visual-neutral). */
+:root {
+    /* Brand / theme colors */
+    --main-color: #CDEAEE;
+    --main-color-translucent: #cdeaeeb6;
+    --color-dark: #1D2231;
+    --text-grey: #506463;
+    --text-on-dark-background: #FCFCFC;
+
+    /* Teal accents */
+    --border-teal: #75a2a8;
+    --accent-teal: #62BEC9;
+    --accent-teal-dark: #4a8f9b;
+    --accent-teal-darker: #478c94;
+
+    /* Misc accents */
+    --btn-blue: #3498db;
+    --warning-yellow: #FECD1B;
+
+    /* Effects & radii */
+    --shadow-soft: drop-shadow(0 0 1rem rgb(178, 178, 178));
+    --shadow-card: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+    --radius: 12px;
+    --radius-lg: 15px;
+
+    font-family: 'Plovdiv Sans';
+    color: var(--text-grey);
+}

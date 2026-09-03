@@ -1,7 +1,16 @@
 .form-label {
     font-weight: bold;
 }
-  
+
+/* Form title is now the page's single <h1>; keep the exact look the old
+   centered <h2> had (UA <h2> font-size and vertical margins). */
+.form-title {
+    text-align: center;
+    font-size: 1.5em;
+    margin-block: 0.83em;
+    margin-inline: 0;
+}
+
 .text-input {
     padding:10px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.09);
@@ -17,17 +26,30 @@
 #playground-form {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .question {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--text-grey);
-    border-radius: 12px;
+    border-radius: var(--radius);
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 10px;
+}
+
+/* Questions are <fieldset> in the semantic markup — normalize UA sizing. */
+fieldset.question {
+    min-inline-size: auto;
+}
+
+/* The question label is a <legend> — keep its bold look, drop UA padding, and
+   make it span the row like the block <label> it replaced. */
+legend.form-label {
+    padding: 0;
+    display: block;
+    width: 100%;
 }
 
 input[type="radio"] {
@@ -48,7 +70,7 @@ input[type="radio"]:checked::before {
     content: '';
     width: 10px; /* Adjust size of inner circle */
     height: 10px; /* Adjust size of inner circle */
-    background-color: #4a8f9b; /* Change color of inner circle */
+    background-color: var(--accent-teal-dark); /* Change color of inner circle */
     border-radius: 50%;
     position: absolute;
     top: 50%;
@@ -74,7 +96,7 @@ input[type="checkbox"]:checked::before {
     content: '';
     width: 10px; /* Adjust size of inner circle */
     height: 10px; /* Adjust size of inner circle */
-    background-color: #4a8f9b; /* Change color of inner circle */
+    background-color: var(--accent-teal-dark); /* Change color of inner circle */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -93,7 +115,7 @@ input[type="checkbox"]:checked::before {
     padding: 3px;
     width: 70%;
     height: 30px;
-    border-bottom: 1px solid #CDEAEE;
+    border-bottom: 1px solid var(--main-color);
     transition: border-bottom-width 0.3s;
     margin-top: -2.5px;
 }
@@ -107,7 +129,7 @@ input[type="checkbox"]:checked::before {
     padding: 3px;
     width: 70%;
     height: 30px;
-    border-bottom: 1px solid #CDEAEE;
+    border-bottom: 1px solid var(--main-color);
     transition: border-bottom-width 0.3s;
     margin-top: -2.5px;
 }
@@ -121,19 +143,19 @@ input[type="checkbox"]:checked::before {
     padding: 3px;
     width: 70%;
     height: 30px;
-    border-bottom: 1px solid #CDEAEE;
+    border-bottom: 1px solid var(--main-color);
     transition: border-bottom-width 0.3s;
     margin-top: -2.5px;
 }
 
 #playground-name-input{
     width: 85%;
-    border: 0px solid #CDEAEE;;
+    border: 0px solid var(--main-color);;
     transition: border-width 0.2s;
 }
 
 #playground-name-input.focused {
-    border-width: 2px; 
+    border-width: 2px;
 }
 
 #other-location-text.focused {
@@ -151,19 +173,23 @@ input[type="checkbox"]:checked::before {
 #cancel-add-playground-btn {
     margin-top: 12px;
     margin-bottom: 12px;
-    background-color: #CDEAEE;
-    border: 1px solid #75a2a8;
-    filter: drop-shadow(0 0 1rem rgb(178, 178, 178));
+    background-color: var(--main-color);
+    border: 1px solid var(--border-teal);
+    filter: var(--shadow-soft);
     font-size: 18px;
     color: var(--text-grey);
     height: 7vh;
     width: 20vw;
-    border-radius: 15px;
+    border-radius: var(--radius-lg);
     outline: 0;
     cursor: pointer;
     transition: background 1s;
 }
 
+#add-playground-btn:disabled {
+    cursor: not-allowed;
+    background-color: var(--main-color-translucent);
+}
 
 @media only screen and (max-width: 1280px) {
     #playground-form {

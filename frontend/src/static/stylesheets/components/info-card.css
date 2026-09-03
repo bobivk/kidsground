@@ -1,0 +1,108 @@
+#info-card {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    align-items: center;
+    margin-top: 20px;
+    font-size: large;
+    margin-bottom: 20px;
+}
+
+.playground-text {
+    background-color: var(--main-color);
+    padding: 12px;
+    border-radius: var(--radius);
+}
+
+/* Card name heading keeps its default <h1> appearance. */
+
+/* Description was a <div>; as a <p> it must not gain default vertical margins. */
+.playground-description {
+    margin: 0;
+}
+
+#playground-name {
+    width: 50%
+}
+
+.fence-icon {
+    height: 1%;
+    width: 1%;
+}
+
+.toy-card {
+    display: flex;
+    margin-bottom: -20px;
+}
+
+.fence-card {
+    display: flex;
+    margin-top: -15px;
+}
+
+.floor-card {
+    display: flex;
+}
+
+.icon {
+    margin-right: 1vw;
+}
+
+.transportIcon {
+    margin-left: 1vw;
+}
+
+/* Attribute-row list introduced by the semantic refactor. Each row previously a
+   <div className="card">; margins that were inline styles now live here. */
+.card-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Rows were <div>s; render list items as plain blocks so nothing shifts. */
+.card-list > li {
+    display: block;
+}
+
+#age.card,
+#shade.card {
+    margin-bottom: 5px;
+}
+
+#floorType.card {
+    margin-bottom: -15px;
+    margin-top: -10px;
+}
+
+/* Toys list (was spans + <br>). */
+.toy-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Facilities list (was one <ul> per item — now a single list). */
+.facilities-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Static icon-alignment offsets that were inline styles on individual icons. */
+.icon-mt-16 {
+    margin-top: 16px;
+}
+
+.icon-mt-20 {
+    margin-top: 20px;
+}
+
+.icon-mt-22 {
+    margin-top: 22px;
+}
+
+.facilities-intro {
+    margin-bottom: -5px;
+}

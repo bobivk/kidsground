@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import "../../static/stylesheets/rating.css"
 
 export const Rating = ({ totalStars = 5, changeRating }) => {
   const [hover, setHover] = useState(0);
@@ -11,7 +10,8 @@ export const Rating = ({ totalStars = 5, changeRating }) => {
   };
 
   return (
-    <div className="rating">
+    <fieldset className="rating">
+      <legend className="rating-legend">Оценка</legend>
       {[...Array(totalStars)].map((_, index) => {
         const ratingValue = index + 1;
         return (
@@ -69,6 +69,6 @@ export const Rating = ({ totalStars = 5, changeRating }) => {
           </div>
         );
       })}
-    </div>
+    </fieldset>
   );
 };

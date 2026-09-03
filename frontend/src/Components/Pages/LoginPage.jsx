@@ -1,5 +1,3 @@
-import '../../static/stylesheets/styles.css'
-import '../../static/stylesheets/registration.css'
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ReactComponent as CheckIcon } from '../../static/icons/circle-check-solid.svg'
@@ -208,7 +206,7 @@ export const LoginPage = () => {
         setUsername(event.target.value);
     }
     return (
-        <div className="register-container page">
+        <main className="register-container page">
             <section className="form-box">
                 <h1 id="title">
                     {forgotPasswordMode ? "Забравена парола" : switcher ? "Вход" : "Регистрация"}
@@ -259,14 +257,14 @@ export const LoginPage = () => {
                                         value={password}
                                         onChange={checkPassword}
                                     />
-                                    <div className="error" id="password-length-error"></div>
+                                    <p className="error" id="password-length-error"></p>
                                 </div>
                             </>
                         ) : (
                             <>
-                                {!isUsernameValid ? <div className="error" id="username-exists-error">Потребителското име вече съществува.</div> : null}
-                                {!isEmailInvalid ? <div className="error" id="email-error">Имейлът вече съществува или е невалиден.</div> : null}
-                                {success ? <div className="message" id="registration-success">Успешна регистрация!</div> : null}
+                                {!isUsernameValid ? <p className="error" id="username-exists-error">Потребителското име вече съществува.</p> : null}
+                                {!isEmailInvalid ? <p className="error" id="email-error">Имейлът вече съществува или е невалиден.</p> : null}
+                                {success ? <p className="message" id="registration-success">Успешна регистрация!</p> : null}
                                 <div className="input-field" id="nameField">
                                     <i className="fa-solid fa-user"></i>
                                     <input
@@ -299,30 +297,30 @@ export const LoginPage = () => {
                                         value={password}
                                         onChange={checkPassword}
                                     />
-                                    <div className="error" id="password-length-error"></div>
+                                    <p className="error" id="password-length-error"></p>
                                 </div>
                                 {/* Password Strength Checks */}
-                                <div className="password-check">
-                                    <div id="check0" style={{ color: check0 }} className="password-check-field">
+                                <ul className="password-check">
+                                    <li id="check0" style={{ color: check0 }} className="password-check-field">
                                         <CheckIcon style={{ fill: check0 }} id="checkIcon" /><span> Дължина поне 6 символа.</span>
-                                    </div>
-                                    <div id="check2" style={{ color: check2 }} className="password-check-field">
+                                    </li>
+                                    <li id="check2" style={{ color: check2 }} className="password-check-field">
                                         <CheckIcon style={{ fill: check2 }} id="checkIcon" /><span> Съдържа малки букви.</span>
-                                    </div>
-                                    <div id="check3" style={{ color: check3 }} className="password-check-field">
+                                    </li>
+                                    <li id="check3" style={{ color: check3 }} className="password-check-field">
                                         <CheckIcon style={{ fill: check3 }} id="checkIcon" /><span> Съдържа главни букви.</span>
-                                    </div>
-                                    <div id="check4" style={{ color: check4 }} className="password-check-field">
+                                    </li>
+                                    <li id="check4" style={{ color: check4 }} className="password-check-field">
                                         <CheckIcon style={{ fill: check4 }} id="checkIcon" /><span> Съдържа цифри.</span>
-                                    </div>
-                                </div>
+                                    </li>
+                                </ul>
                             </>
                         )}
                         {!forgotPasswordMode && (
-                            <p id="forgot-pass" onClick={() => {
+                            <button id="forgot-pass" onClick={() => {
                                 setForgotPasswordMode(true)
                                 document.title = "Kidsground - Forgot Password"
-                            }}>Забравена парола?</p>
+                            }}>Забравена парола?</button>
                         )}
                     </div>
                     {!forgotPasswordMode && (
@@ -342,8 +340,7 @@ export const LoginPage = () => {
                     )}
                 </form>
             </section>
-        </div>
-
+        </main>
     )
 }
 

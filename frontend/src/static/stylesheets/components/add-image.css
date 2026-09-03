@@ -1,0 +1,97 @@
+/* Consolidated circular action button.
+   Previously three near-identical blocks (.btn, .confirm-btn, .confirm) that
+   differed only in border-radius and cursor. Kept those exact differences. */
+.btn,
+.confirm-btn,
+.confirm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: var(--btn-blue);
+    color: white;
+    width: 50px;
+    height: 50px;
+    font-size: 32px;
+    text-align: center;
+}
+
+.btn {
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.confirm {
+    border-radius: 50%;
+}
+
+#input-upload-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    align-self: center;
+}
+
+#upload-wrapper {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--radius);
+}
+
+.upload-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid var(--border-teal);
+    padding: 20px;
+    border-radius: var(--radius);
+    filter: var(--shadow-soft);
+}
+
+#upload-wrapper:hover .btn {
+    background-color: var(--main-color);
+    color: var(--text-grey);
+}
+
+.confirm-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 1px solid var(--border-teal);
+    padding: 20px;
+    border-radius: var(--radius);
+    filter: var(--shadow-soft);
+}
+
+#input-wrapper {
+    opacity: 0;
+    position: absolute;
+    height: 100%;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+#upload-wrapper:hover {
+    /* background-color: rgb(213, 213, 213); */
+    cursor: pointer;
+}
+
+input#file-upload-button {
+    cursor: pointer;
+}
+
+.btn-label {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}

@@ -1,0 +1,23 @@
+/* Single global stylesheet entry point. Imported once from src/index.jsx.
+   Order matters: variables and base first, then components, then pages —
+   preserving the effective cascade the per-page imports produced before. */
+
+/* Base layer */
+@import "./base/variables.css";
+@import "./base/reset.css";
+@import "./base/base.css";
+
+/* Component layer */
+@import "./components/navbar.css";
+@import "./components/map.css";
+@import "./components/rating.css";
+@import "./components/modal.css";
+@import "./components/add-image.css";
+@import "./components/info-card.css";
+
+/* Page layer */
+@import "./pages/home.css";
+@import "./pages/login.css";
+@import "./pages/playground.css";
+@import "./pages/playground-form.css";
+@import "./pages/profile.css";

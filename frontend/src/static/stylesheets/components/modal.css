@@ -13,8 +13,8 @@
 
 #modal {
     background-color: white;
-    border: 3px solid #75a2a8;
-    border-radius: 12px;
+    border: 3px solid var(--border-teal);
+    border-radius: var(--radius);
     padding: 12px;
     text-align: center;
     z-index: 1001;
@@ -22,11 +22,11 @@
 }
 
 #modal button {
-    background-color: #CDEAEE;
-    border: 1px solid #75a2a8;
+    background-color: var(--main-color);
+    border: 1px solid var(--border-teal);
     font-size: 14px;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: var(--radius-lg);
     color: var(--text-grey);
     cursor: pointer;
 }
