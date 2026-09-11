@@ -26,8 +26,8 @@
 }
 
 .fence-icon {
-    height: 1%;
-    width: 1%;
+    height: 20px;
+    width: 20px;
 }
 
 .toy-card {
@@ -76,14 +76,8 @@
     margin-top: -10px;
 }
 
-/* Toys list (was spans + <br>). */
-.toy-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-/* Facilities list (was one <ul> per item — now a single list). */
+/* Toys and facilities lists share identical reset. */
+.toy-list,
 .facilities-list {
     list-style: none;
     margin: 0;

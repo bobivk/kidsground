@@ -68,10 +68,8 @@
 
 /* ---- Global element rules (previously leaked from page stylesheets) ---- */
 
-/* Body background (was in playground.css, applied globally). */
 body {
   background-size: cover;
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Global button transition + cursor (was in playground.css and profilePage.css). */

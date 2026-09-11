@@ -3,19 +3,12 @@
 }
 
 table, th, td {
-    border-spacing: 0px;
+    border-spacing: 0;
 }
 
-.table-container {
-    border: 1px solid var(--border-teal);
-    border-radius: var(--radius);
-
-}
-
-table button{
+table button {
     border: 1px solid var(--accent-teal);
     margin: 2px;
-    cursor: pointer;
 }
 
 th, td {
@@ -31,8 +24,7 @@ td {
     text-align: center;
 }
 
-/* Corner rounding — tables now use <thead>/<tbody>, so the first/last rows are
-   nested one level deeper than before. Selectors updated to match. */
+/* Corner rounding — tables use <thead>/<tbody>. */
 table thead tr:first-child th:first-child {
     border-top-left-radius: var(--radius);
 }
@@ -49,8 +41,7 @@ table tbody tr:last-child td:last-child {
     border-bottom-right-radius: var(--radius);
 }
 
-/* Clickable cell content is a <button> in the semantic markup; strip UA/global
-   button chrome so it looks like the plain teal link text it replaced. */
+/* Clickable cell content is a <button> — strip UA/global button chrome. */
 .playground-link {
     cursor: pointer;
     color: var(--accent-teal);
@@ -62,17 +53,8 @@ table tbody tr:last-child td:last-child {
     height: 100%;
 }
 
-.playground-link:hover {
-    background: none;
-    color: var(--accent-teal);
-}
-
 .tinyButton {
     border: 1px solid var(--border-teal);
     border-radius: var(--radius);
     margin: 5px;
-}
-
-.tinyButton:hover {
-    border-radius: var(--radius);
 }

@@ -14,11 +14,11 @@
   position: absolute;
   z-index: 1;
   bottom: 68.7vh;
-  left: 0vw
+  left: 0;
 }
 
 #selector {
-  border-radius: 0px;
+  border-radius: 0;
   font-family: sans-serif;
   width: 300px;
 }
@@ -54,13 +54,13 @@
 }
 
 #location {
-  bottom: 4vh;
-  right: 2.5vw;
+  bottom: 11%;
+  right: 5%;
 }
 
 #legend {
-  bottom: 1vh;
-  right: 2.5vw;
+  bottom: 4%;
+  right: 5%;
 }
 
 #legend-window {
@@ -69,7 +69,7 @@
   position: absolute;
   width: 20%;
   bottom: 14vh;
-  right: 0vw;
+  right: 0;
   background: rgb(255, 252, 246);
   border: 1px solid var(--accent-teal);
   border-radius: var(--radius);
@@ -108,7 +108,7 @@
 
 #infoWindow {
   position: relative;
-  top: -18px
+  top: -18px;
 }
 
 #map a {
@@ -119,37 +119,9 @@
 
 .gm-style-mtc {
   display: none;
-  /* Adjust height as needed */
-}
-
-@media only screen and (max-width: 2560px) {
-  #location {
-    bottom: 11%;
-  }
-
-  #legend {
-    bottom: 4%;
-  }
-
-  #legend,
-  #location {
-    right: 5%;
-  }
-
 }
 
 @media only screen and (max-width: 1280px) {
-  #map-wrapper {
-    align-items: center;
-  }
-
-  #selector {
-    border-radius: 0px;
-    font-family: sans-serif;
-    width: 300px;
-  }
-
-
   #terrain {
     right: 1%;
   }
@@ -218,11 +190,6 @@
 
   #location {
     bottom: 25%;
-  }
-
-  #infoWindow {
-    position: relative;
-    top: -18px
   }
 
   #legend {

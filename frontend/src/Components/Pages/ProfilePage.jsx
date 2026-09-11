@@ -1,6 +1,6 @@
-import Cookies from "js-cookie"
 import { useEffect, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
+import { useAuth } from '../../AuthContext';
 
 export const ProfilePage = () => {
 
@@ -9,6 +9,7 @@ export const ProfilePage = () => {
     const [pendingPlaygrounds, setPendingPlaygrounds] = useState([]);
     const [existingPlaygrounds, setExistingPlaygrounds] = useState([]);
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const ageGroups = Object.freeze({
         ZERO_TO_THREE: "0 и 3",
@@ -26,9 +27,7 @@ export const ProfilePage = () => {
 
     const fetchMyPlaygrounds = async () => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/byUser`, {
-            headers: {
-                'Authorization': `Bearer ${Cookies.get("user")}`
-            }
+            credentials: 'include'
         }).then(response => response.json()).then((data) => {
             setMyPlaygrounds(data);
         })
@@ -36,9 +35,7 @@ export const ProfilePage = () => {
 
     const fetchMyComments = async () => {
         await fetch(`https://kidsground.bg:8009/v1/comments/byUser`, {
-            headers: {
-                'Authorization': `Bearer ${Cookies.get("user")}`
-            }
+            credentials: 'include'
         }).then(response => response.json()).then((data) => {
             setMyComments(data);
         })
@@ -48,29 +45,23 @@ export const ProfilePage = () => {
     const approvePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=true`, {
             method: "POST",
-            headers: {
-                'Authorization': `Bearer ${Cookies.get("user")}`
-            }
+            credentials: 'include'
         })
         window.location.reload();
     }
 
     const disapprovePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/approve?isApproved=false`, {
-            headers: {
-                'Authorization': `Bearer ${Cookies.get("user")}`
-            },
-            method: "POST"
+            method: "POST",
+            credentials: 'include'
         })
         window.location.reload();
     }
 
     const deletePlayground = async (id) => {
         await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}`, {
-            headers: {
-                'Authorization': `Bearer ${Cookies.get("user")}`
-            },
-            method: "DELETE"
+            method: "DELETE",
+            credentials: 'include'
         })
         window.location.reload();
     }
@@ -95,16 +86,16 @@ export const ProfilePage = () => {
     }
 
     useEffect(() => {
-        if (Cookies.get("user")) {
+        if (user) {
             fetchMyPlaygrounds();
             fetchMyComments();
         }
-        if (Cookies.get("user") && Cookies.get("role") === "ADMIN") {
+        if (user?.role === "ADMIN") {
             fetchPendingPlaygrounds();
         }
-    }, [])
+    }, [user])
 
-    if (Cookies.get("user") && Cookies.get("role") === "ADMIN") {
+    if (user?.role === "ADMIN") {
         return (
             <main className="page table-page">
                 <h2>Площадки очакващи одобрение: </h2>
@@ -239,7 +230,7 @@ export const ProfilePage = () => {
             </main>
         );
     }
-    else if (Cookies.get("user") && Cookies.get("role") === "USER") {
+    else if (user?.role === "USER") {
         return (
             <main className="page table-page">
                 <h2>Моите Площадки: </h2>

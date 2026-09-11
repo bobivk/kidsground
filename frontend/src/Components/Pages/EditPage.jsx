@@ -3,9 +3,10 @@ import { useState, useRef, useEffect } from 'react'
 import { useParams, Navigate, useNavigate } from 'react-router-dom'
 import { Modal } from '../Common/EditedModal'
 import { AddImage } from '../Common/AddImage'
-import Cookies from "js-cookie"
+import { useAuth } from '../../AuthContext'
 
 export const EditPage = () => {
+    const { user } = useAuth();
 
     const navigate = useNavigate();
 
@@ -276,9 +277,9 @@ export const EditPage = () => {
         const data = { name: playgroundName, age_groups, environment, shade_type, floor_type, has_fence, facilities, transport, toys, coordinates, description }
         await fetch("https://kidsground.bg:8009/v1/playgrounds/add", {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${Cookies.get("user")}`
             },
             body: JSON.stringify(data)
         }).then((response) => {
@@ -300,9 +301,7 @@ export const EditPage = () => {
         if (imagePayload.entries()) {
             await fetch(`https://kidsground.bg:8009/v1/playgrounds/${playgroundId}/uploadImages`, {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${Cookies.get("user")}`
-                },
+                credentials: 'include',
                 body: imagePayload
             })
         }
@@ -319,7 +318,7 @@ export const EditPage = () => {
         setCoordinates(newCoords);
     }
 
-    if (Cookies.get("user")) {
+    if (user) {
         return (
             <main className="page background">
                 <section id="add-playground">

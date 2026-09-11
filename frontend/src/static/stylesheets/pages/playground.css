@@ -36,6 +36,7 @@
 }
 
 #commentSection {
+    display: flex;
     flex-direction: column;
     border: 1px solid var(--accent-teal-dark);
     width: 50vw;
@@ -99,6 +100,10 @@
 
 /* Comment cards are <article> in the semantic markup. */
 .comment {
+    margin-bottom: 20px;
+}
+
+.map-section-mb {
     margin-bottom: 20px;
 }
 

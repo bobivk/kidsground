@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { HashLink } from 'react-router-hash-link';
-import Cookies from 'js-cookie'
+import { useAuth } from '../../AuthContext';
 
 export const Navbar = () => {
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
-    if (Cookies.get("user")) {
+    const handleLogout = async () => {
+        await logout();
+        navigate("/");
+    };
+
+    if (user) {
         return (
             <nav>
                 <ul className="nav-links">
@@ -21,7 +28,7 @@ export const Navbar = () => {
                         <Link to="/profile">Профил</Link>
                     </li>
                     <li className="logout-wrapper">
-                        <button className="logout-btn" onClick={() => { Cookies.remove("user"); window.location.reload(); }}> Изход </button>
+                        <button className="logout-btn" onClick={handleLogout}> Изход </button>
                     </li>
                 </ul>
                 <div className="site-logo">
@@ -37,7 +44,6 @@ export const Navbar = () => {
                         <Link to="/" refresh="true" onClick={() => { window.scrollTo(0, 0) }}> Начало </Link>
                     </li>
                     <li className="map-wrapper">
-                        {/* bug found if on login page clicking this wont take you anywhere */}
                         <HashLink to="/#map"> Карта </HashLink>
                     </li>
                     <li className="about-us-wrapper">

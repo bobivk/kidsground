@@ -1,6 +1,4 @@
-/* Consolidated circular action button.
-   Previously three near-identical blocks (.btn, .confirm-btn, .confirm) that
-   differed only in border-radius and cursor. Kept those exact differences. */
+/* Consolidated circular action button. */
 .btn,
 .confirm-btn,
 .confirm {
@@ -14,20 +12,12 @@
     height: 50px;
     font-size: 32px;
     text-align: center;
+    border-radius: 50%;
 }
 
-.btn {
-    border-radius: 100%;
-    cursor: pointer;
-}
-
+.btn,
 .confirm-btn {
-    border-radius: 50%;
     cursor: pointer;
-}
-
-.confirm {
-    border-radius: 50%;
 }
 
 #input-upload-wrapper {
@@ -46,7 +36,8 @@
     border-radius: var(--radius);
 }
 
-.upload-btn-wrapper {
+.upload-btn-wrapper,
+.confirm-btn-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,17 +53,6 @@
     color: var(--text-grey);
 }
 
-.confirm-btn-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 1px solid var(--border-teal);
-    padding: 20px;
-    border-radius: var(--radius);
-    filter: var(--shadow-soft);
-}
-
 #input-wrapper {
     opacity: 0;
     position: absolute;
@@ -82,11 +62,6 @@
 }
 
 #upload-wrapper:hover {
-    /* background-color: rgb(213, 213, 213); */
-    cursor: pointer;
-}
-
-input#file-upload-button {
     cursor: pointer;
 }
 

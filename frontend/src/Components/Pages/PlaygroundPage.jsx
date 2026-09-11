@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react'
 import { AddImage } from '../Common/AddImage'
 import { InfoCard } from '../Common/InfoCard';
 import { Rating } from '../Common/Rating';
-import Cookies from 'js-cookie';
 import { ReactComponent as Pencil } from "../../static/icons/pencil.svg"
 import { Link, useParams } from 'react-router-dom';
+import { useAuth } from '../../AuthContext';
 
 export const PlaygroundPage = () => {
 
@@ -75,9 +75,9 @@ export const PlaygroundPage = () => {
         event.preventDefault();
         await fetch(`https://kidsground.bg:8009/v1/comments/add`, {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${Cookies.get("user")}`
             },
             body: JSON.stringify({ text: comment, rating, playground_id: id })
         })
@@ -98,9 +98,7 @@ export const PlaygroundPage = () => {
         if (imagePayload.entries()) {
             await fetch(`https://kidsground.bg:8009/v1/playgrounds/${id}/uploadImages`, {
                 method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${Cookies.get("user")}`
-                },
+                credentials: 'include',
                 body: imagePayload
             })
         }
@@ -111,7 +109,8 @@ export const PlaygroundPage = () => {
         setConfirmation(false)
         setPhotos([])
     }
-    if (playgroundInfo.is_new && (Cookies.get("username") !== playgroundInfo.username && Cookies.get("role") !== "ADMIN")) {
+    const { user } = useAuth();
+    if (playgroundInfo.is_new && (user?.username !== playgroundInfo.username && user?.role !== "ADMIN")) {
         return (<main className="page"><p>Тази площадка все още очаква одобрение</p></main>)
     } else {
         return (

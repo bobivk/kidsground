@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { ReactComponent as CheckIcon } from '../../static/icons/circle-check-solid.svg'
-import Cookies from "js-cookie"
+import { useAuth } from '../../AuthContext';
 
 
 export const LoginPage = () => {
 
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [switcher, setSwitcher] = useState(true);
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -18,7 +19,7 @@ export const LoginPage = () => {
     const [check4, setCheck4] = useState("#555");
     const [forgotPasswordMode, setForgotPasswordMode] = useState(false);
     const [isEmailInvalid, setIsEmailInvalid] = useState(true);
-    const [isUsernameValid, setIsUsernameValid] = useState(false);
+    const [isUsernameTaken, setIsUsernameTaken] = useState(false);
     const [success, setSuccess] = useState(false);
 
     const signUp = async (event) => {
@@ -45,7 +46,7 @@ export const LoginPage = () => {
                         alert("Възникна грешка, моля опитайте отново.");
                         resetInputs();
                     } else if (response.status === 409) {
-                        setIsUsernameValid(false);
+                        setIsUsernameTaken(true);
                     } else if (response.status === 200) {
                         setSuccess(true);
                         switchToSignIn();
@@ -61,24 +62,19 @@ export const LoginPage = () => {
     }, [])
 
     const signIn = async (event) => {
+        event.preventDefault();
         if (!switcher) {
-            //if clicked while disabled, enable
             switchToSignIn();
             return;
         }
-        const data = { username, email, password };
-        const fields = document.querySelectorAll('input');
-
-        fields.forEach(field => {
-            data[field.name] = field.value;
-        });
 
         await fetch("https://kidsground.bg:8009/v1/users/login", {
             method: 'POST',
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify({ username, email, password })
         })
             .then(response => {
                 if (response.status === 404) {
@@ -88,19 +84,17 @@ export const LoginPage = () => {
                 }
             }).then((data) => {
                 if (data) {
-                    Cookies.set("username", username, { expires: 3, secure: true })
-                    Cookies.set("user", data.token, { expires: 3, secure: true })
-                    Cookies.set("role", data.role, { expires: 3, secure: true })
+                    login({ username: data.username, role: data.role });
                     navigate("/");
                 }
             });
-        event.preventDefault();
     };
 
     function resetInputs() {
         setEmail("");
         setPassword("");
         setUsername("");
+        setIsUsernameTaken(false);
         setCheck0("#555");
         setCheck1("#555");
         setCheck2("#555");
@@ -262,7 +256,7 @@ export const LoginPage = () => {
                             </>
                         ) : (
                             <>
-                                {!isUsernameValid ? <p className="error" id="username-exists-error">Потребителското име вече съществува.</p> : null}
+                                {isUsernameTaken ? <p className="error" id="username-exists-error">Потребителското име вече съществува.</p> : null}
                                 {!isEmailInvalid ? <p className="error" id="email-error">Имейлът вече съществува или е невалиден.</p> : null}
                                 {success ? <p className="message" id="registration-success">Успешна регистрация!</p> : null}
                                 <div className="input-field" id="nameField">

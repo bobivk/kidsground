@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { ReactComponent as WarningIcon } from '../../static/icons/warning-sign.svg'
-import Cookies from "js-cookie"
+import { useAuth } from '../../AuthContext';
 
 export const AddImage = ({ onChangeImage, confirmation, sendPhotos, noButtonEvent }) => {
 
     const [upload, setUpload] = useState(false);
+    const { user } = useAuth();
 
-    if (Cookies.get("user")) {
+    if (user) {
         return (
             <section id="input-upload-wrapper">
                 {!confirmation && <div id="upload-wrapper">

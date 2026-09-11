@@ -15,7 +15,7 @@ nav {
     background: var(--text-on-dark-background);
     position: fixed;
     display: inline-flex;
-    justify-content: right;
+    justify-content: flex-end;
     z-index: 100;
     top: 0;
     width: 100vw;
@@ -48,7 +48,6 @@ nav {
     background: none;
     font-size: 20px;
     font-family: inherit;
-    text-decoration: none;
     color: var(--text-grey);
     padding: 0;
     cursor: pointer;
@@ -60,7 +59,7 @@ nav {
 }
 
 @media only screen and (max-width: 720px) {
-    a {
+    nav a {
         font-size: 12px;
     }
 
@@ -79,7 +78,7 @@ nav {
 
 /*Galaxy fold...*/
 @media only screen and (max-width: 280px) {
-    a {
+    nav a {
         font-size: 8px;
     }
 
@@ -92,7 +91,8 @@ nav {
     }
 
     .login-wrapper div,
-    .logout-wrapper div .home-wrapper div,
+    .logout-wrapper div,
+    .home-wrapper div,
     .profile-wrapper div,
     .about-us-wrapper div,
     .map-wrapper div {

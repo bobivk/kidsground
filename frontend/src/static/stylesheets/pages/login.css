@@ -94,11 +94,6 @@
     border-radius: var(--radius-lg);
     background-color: var(--text-grey);
     color: var(--main-color);
-}
-
-/* Status messages are <p role="alert"> in the semantic markup — no default margin. */
-.error,
-.message {
     margin: 0;
 }
 
@@ -123,30 +118,7 @@
 .password-check-field {
     display: flex;
     align-items: center;
-}
-
-#registration-success {
-    display: none;
-    color: var(--main-color);
-    background-color: var(--color-dark);
-}
-
-#wrong-credentials-msg {
-    background-color: var(--color-dark);
-    padding: 12px;
-    border-radius: var(--radius);
-    color: var(--main-color);
-}
-
-#username-exists-error {
-    display: none;
-    color: var(--main-color);
-    /* color:#62BEC9; */
-    margin-top: 2rem;
-}
-
-#logout-btn {
-    border: var(--main-color) 2px solid;
+    gap: 6px;
 }
 
 #checkIcon {
@@ -177,13 +149,6 @@
     .register-container {
         background-size: contain;
     }
-}
-
-@media only screen and (max-width: 1024px) {
-    .form-box {
-        top: -5vh;
-    }
-
 }
 
 @media only screen and (max-width: 560px) {
