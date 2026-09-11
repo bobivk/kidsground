@@ -26,6 +26,8 @@ public class AppRestEndpoints {
             public static final String USERS_ROOT = V1_ROOT + "/users";
             public static final String REGISTER = USERS_ROOT + "/register";
             public static final String LOGIN = USERS_ROOT + "/login";
+            public static final String LOGOUT = USERS_ROOT + "/logout";
+            public static final String ME = USERS_ROOT + "/me";
         }
 
         public class Comments {

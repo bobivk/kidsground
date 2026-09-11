@@ -12,23 +12,24 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration
 {
-        
+
     @Autowired
     private JWTFilter filter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authorizeRequests ) -> authorizeRequests
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests((authorizeRequests) -> authorizeRequests
                         // Allow when not logged in
                         .requestMatchers(AppRestEndpoints.V1.Users.REGISTER,
                                         AppRestEndpoints.V1.Users.LOGIN,
+                                        AppRestEndpoints.V1.Users.LOGOUT,
+                                        AppRestEndpoints.V1.Users.ME,
                                         AppRestEndpoints.V1.Playground.COUNT,
                                         AppRestEndpoints.V1.Playground.GET_ALL)
                                     .permitAll()
@@ -55,12 +56,12 @@ public class WebSecurityConfiguration
                                         AppRestEndpoints.V1.Comments.By.USER)
                                     .authenticated()
                 )
-                .csrf(AbstractHttpConfigurer::disable)
                 .logout(LogoutConfigurer::permitAll)
                 .requiresChannel(channel -> channel
                         .anyRequest().requiresSecure()
                 )
-                .httpBasic(withDefaults());
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable);
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
